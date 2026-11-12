@@ -1,0 +1,50 @@
+{
+ "shoppers_a": { "people": [
+  {"name": "vest", "role": "shopper", "front": 1, "height": 1.76},
+  {"name": "fitter", "drop": [[1660, 2640, 1715, 2820]], "role": "shopper", "front": 1, "height": 1.72},
+  {"name": "headphones", "role": "shopper", "front": -1, "height": 1.7},
+  {"name": "headscarf", "role": "shopper", "front": -1, "height": 1.5},
+  {"name": "poncho", "role": "shopper", "front": -1, "height": 1.76} ] },
+ "shoppers_b": { "people": [
+  {"name": "coins", "role": "shopper", "front": -1, "height": 1.6},
+  {"name": "turban", "role": "shopper", "front": -1, "height": 1.92},
+  {"name": "mohawk", "role": "shopper", "front": -1, "height": 1.78},
+  {"name": "fish", "role": "shopper", "front": -1, "height": 1.75},
+  {"name": "moustache", "role": "shopper", "front": -1, "height": 1.62} ] },
+ "backs_a": { "people": [
+  {"name": "duster", "role": "shopper", "front": -1, "height": 1.9},
+  {"name": "braid", "role": "shopper", "front": -1},
+  {"name": "docker", "role": "shopper", "front": -1, "height": 1.85},
+  {"name": "camcorder", "role": "shopper", "front": -1, "height": 1.66},
+  {"name": "backpack", "role": "shopper", "front": -1} ] },
+ "backs_b": { "people": [
+  {"name": "shoulders", "role": "shopper", "front": 1},
+  {"name": "radio", "role": "shopper", "front": 1},
+  {"name": "walker", "role": "shopper", "front": 1, "height": 1.6},
+  {"name": "parasol", "role": "shopper", "front": 1, "height": 1.78},
+  {"name": "snacks", "role": "shopper", "front": 1} ] },
+ "mixed_c": { "people": [
+  {"name": "merchant", "role": "shopper", "front": 1, "height": 1.75},
+  {"name": "keytar", "role": "shopper", "front": -1, "height": 1.7},
+  {"name": "cable", "drop": [[3060, 2650, 3190, 2945]], "role": "shopper", "front": 1, "height": 1.82},
+  {"name": "monk", "role": "shopper", "front": 1, "height": 1.74},
+  {"name": "twins", "role": "shopper", "front": 1} ] },
+ "specials_b": { "people": [
+  {"name": "porter", "role": "special", "front": 1, "height": 1.8},
+  {"name": "sleeper", "role": "special", "front": 1},
+  {"name": "robot", "role": "shopper", "front": 1},
+  {"name": "couple", "role": "shopper", "front": -1, "height": 1.68},
+  {"name": "courier", "drop": [[5300, 1670, 5352, 1820]], "role": "shopper", "front": 1, "height": 1.75} ] },
+ "keepers_a": { "people": [
+  {"name": "cook", "drop": [[1100, 390, 1340, 665]], "role": "keeper", "front": 1},
+  {"name": "tapes", "role": "keeper", "front": 1, "height": 1.66},
+  {"name": "fruit", "role": "keeper", "front": 1, "height": 1.62},
+  {"name": "mechanic", "role": "keeper", "front": 1, "height": 1.78},
+  {"name": "tea", "role": "keeper", "front": -1, "height": 1.8} ] },
+ "keepers_c": { "people": [
+  {"name": "solder", "role": "keeper", "front": -1, "height": 1.7},
+  {"name": "dumplings", "role": "keeper", "front": -1, "height": 1.72},
+  {"name": "cassettes", "role": "keeper", "front": -1, "height": 1.6},
+  {"name": "spacer", "role": "shopper", "front": -1, "height": 1.78},
+  {"name": "father", "role": "shopper", "front": -1, "height": 1.8} ] }
+}

@@ -1,0 +1,1405 @@
+{
+ "name": "crowd",
+ "people": [
+  {
+   "name": "vest",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "shoppers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "vest/0.webp",
+     "w": 494,
+     "h": 1145,
+     "ground": [
+      270.0,
+      1140.8
+     ],
+     "feet": [
+      136.3,
+      421.9
+     ]
+    },
+    {
+     "img": "vest/1.webp",
+     "w": 495,
+     "h": 1031,
+     "ground": [
+      335.8,
+      1026.7
+     ],
+     "feet": [
+      94.9,
+      490.0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "fitter",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "shoppers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "fitter/0.webp",
+     "w": 564,
+     "h": 1087,
+     "ground": [
+      194.6,
+      1082.6
+     ],
+     "feet": [
+      45.2,
+      387.4
+     ]
+    },
+    {
+     "img": "fitter/1.webp",
+     "w": 587,
+     "h": 1085,
+     "ground": [
+      293.2,
+      1078.8
+     ],
+     "feet": [
+      7.7,
+      581.9
+     ]
+    }
+   ]
+  },
+  {
+   "name": "headphones",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "shoppers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "headphones/0.webp",
+     "w": 417,
+     "h": 1097,
+     "ground": [
+      202.7,
+      1092.6
+     ],
+     "feet": [
+      45.9,
+      340.7
+     ]
+    },
+    {
+     "img": "headphones/1.webp",
+     "w": 908,
+     "h": 1066,
+     "ground": [
+      481.2,
+      1058.1
+     ],
+     "feet": [
+      434.9,
+      533.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "headscarf",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "shoppers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "headscarf/0.webp",
+     "w": 590,
+     "h": 979,
+     "ground": [
+      389.1,
+      974.7
+     ],
+     "feet": [
+      249.6,
+      496.9
+     ]
+    },
+    {
+     "img": "headscarf/1.webp",
+     "w": 511,
+     "h": 913,
+     "ground": [
+      343.2,
+      907.3
+     ],
+     "feet": [
+      99.5,
+      464.8
+     ]
+    }
+   ]
+  },
+  {
+   "name": "poncho",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "shoppers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "poncho/0.webp",
+     "w": 475,
+     "h": 1135,
+     "ground": [
+      238.2,
+      1130.9
+     ],
+     "feet": [
+      62.8,
+      396.6
+     ]
+    },
+    {
+     "img": "poncho/1.webp",
+     "w": 616,
+     "h": 1057,
+     "ground": [
+      266.4,
+      1054.3
+     ],
+     "feet": [
+      50.5,
+      541.3
+     ]
+    }
+   ]
+  },
+  {
+   "name": "coins",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "shoppers_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "coins/0.webp",
+     "w": 484,
+     "h": 1073,
+     "ground": [
+      258.5,
+      1068.8
+     ],
+     "feet": [
+      107.7,
+      414.8
+     ]
+    },
+    {
+     "img": "coins/1.webp",
+     "w": 710,
+     "h": 1072,
+     "ground": [
+      389.6,
+      1075.7
+     ],
+     "feet": [
+      194.8,
+      607.4
+     ]
+    }
+   ]
+  },
+  {
+   "name": "turban",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "shoppers_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "turban/0.webp",
+     "w": 463,
+     "h": 1175,
+     "ground": [
+      283.1,
+      1170.4
+     ],
+     "feet": [
+      136.8,
+      400.3
+     ]
+    },
+    {
+     "img": "turban/1.webp",
+     "w": 435,
+     "h": 1113,
+     "ground": [
+      247.4,
+      1107.8
+     ],
+     "feet": [
+      22.2,
+      430.1
+     ]
+    }
+   ]
+  },
+  {
+   "name": "mohawk",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "shoppers_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "mohawk/0.webp",
+     "w": 445,
+     "h": 1146,
+     "ground": [
+      227.2,
+      1136.8
+     ],
+     "feet": [
+      46.6,
+      352.2
+     ]
+    },
+    {
+     "img": "mohawk/1.webp",
+     "w": 655,
+     "h": 1047,
+     "ground": [
+      435.7,
+      1041.3
+     ],
+     "feet": [
+      38.2,
+      649.4
+     ]
+    }
+   ]
+  },
+  {
+   "name": "fish",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "shoppers_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "fish/0.webp",
+     "w": 617,
+     "h": 1131,
+     "ground": [
+      278.1,
+      1124.6
+     ],
+     "feet": [
+      43.5,
+      411.8
+     ]
+    },
+    {
+     "img": "fish/1.webp",
+     "w": 741,
+     "h": 1130,
+     "ground": [
+      339.5,
+      1125.3
+     ],
+     "feet": [
+      4.6,
+      629.5
+     ]
+    }
+   ]
+  },
+  {
+   "name": "moustache",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "shoppers_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "moustache/0.webp",
+     "w": 335,
+     "h": 1070,
+     "ground": [
+      146.1,
+      1065.8
+     ],
+     "feet": [
+      20.6,
+      250.6
+     ]
+    },
+    {
+     "img": "moustache/1.webp",
+     "w": 713,
+     "h": 1101,
+     "ground": [
+      443.2,
+      1100.9
+     ],
+     "feet": [
+      224.6,
+      479.0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "duster",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "backs_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "duster/0.webp",
+     "w": 530,
+     "h": 1185,
+     "ground": [
+      345.5,
+      1180.0
+     ],
+     "feet": [
+      181.7,
+      492.0
+     ]
+    },
+    {
+     "img": "duster/1.webp",
+     "w": 694,
+     "h": 1151,
+     "ground": [
+      338.4,
+      1146.7
+     ],
+     "feet": [
+      4.8,
+      593.6
+     ]
+    }
+   ]
+  },
+  {
+   "name": "braid",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "backs_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "braid/0.webp",
+     "w": 705,
+     "h": 978,
+     "ground": [
+      367.2,
+      972.9
+     ],
+     "feet": [
+      72.2,
+      692.8
+     ]
+    },
+    {
+     "img": "braid/1.webp",
+     "w": 767,
+     "h": 906,
+     "ground": [
+      407.3,
+      901.5
+     ],
+     "feet": [
+      42.9,
+      753.9
+     ]
+    }
+   ]
+  },
+  {
+   "name": "docker",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "backs_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "docker/0.webp",
+     "w": 440,
+     "h": 1195,
+     "ground": [
+      247.9,
+      1188.8
+     ],
+     "feet": [
+      30.2,
+      420.6
+     ]
+    },
+    {
+     "img": "docker/1.webp",
+     "w": 596,
+     "h": 1150,
+     "ground": [
+      273.5,
+      1145.1
+     ],
+     "feet": [
+      4.8,
+      590.4
+     ]
+    }
+   ]
+  },
+  {
+   "name": "camcorder",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "backs_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "camcorder/0.webp",
+     "w": 436,
+     "h": 1093,
+     "ground": [
+      212.8,
+      1085.6
+     ],
+     "feet": [
+      92.1,
+      332.5
+     ]
+    },
+    {
+     "img": "camcorder/1.webp",
+     "w": 474,
+     "h": 1101,
+     "ground": [
+      242.9,
+      1091.2
+     ],
+     "feet": [
+      75.4,
+      442.8
+     ]
+    }
+   ]
+  },
+  {
+   "name": "backpack",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "backs_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "backpack/0.webp",
+     "w": 355,
+     "h": 937,
+     "ground": [
+      153.3,
+      932.4
+     ],
+     "feet": [
+      35.7,
+      294.4
+     ]
+    },
+    {
+     "img": "backpack/1.webp",
+     "w": 629,
+     "h": 1005,
+     "ground": [
+      343.6,
+      998.3
+     ],
+     "feet": [
+      107.9,
+      602.3
+     ]
+    }
+   ]
+  },
+  {
+   "name": "shoulders",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "backs_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "shoulders/0.webp",
+     "w": 434,
+     "h": 1152,
+     "ground": [
+      239.2,
+      1146.4
+     ],
+     "feet": [
+      50.3,
+      379.5
+     ]
+    },
+    {
+     "img": "shoulders/1.webp",
+     "w": 559,
+     "h": 1098,
+     "ground": [
+      324.8,
+      1092.9
+     ],
+     "feet": [
+      45.7,
+      553.8
+     ]
+    }
+   ]
+  },
+  {
+   "name": "radio",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "backs_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "radio/0.webp",
+     "w": 405,
+     "h": 1148,
+     "ground": [
+      243.5,
+      1142.5
+     ],
+     "feet": [
+      60.4,
+      384.2
+     ]
+    },
+    {
+     "img": "radio/1.webp",
+     "w": 626,
+     "h": 1117,
+     "ground": [
+      319.7,
+      1130.1
+     ],
+     "feet": [
+      261.8,
+      360.2
+     ]
+    }
+   ]
+  },
+  {
+   "name": "walker",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "backs_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "walker/0.webp",
+     "w": 587,
+     "h": 1035,
+     "ground": [
+      260.4,
+      1030.2
+     ],
+     "feet": [
+      61.2,
+      581.7
+     ]
+    },
+    {
+     "img": "walker/1.webp",
+     "w": 631,
+     "h": 1053,
+     "ground": [
+      278.1,
+      1048.0
+     ],
+     "feet": [
+      90.6,
+      625.9
+     ]
+    }
+   ]
+  },
+  {
+   "name": "parasol",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "backs_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "parasol/0.webp",
+     "w": 417,
+     "h": 1136,
+     "ground": [
+      207.5,
+      1131.6
+     ],
+     "feet": [
+      58.9,
+      405.1
+     ]
+    },
+    {
+     "img": "parasol/1.webp",
+     "w": 600,
+     "h": 1087,
+     "ground": [
+      406.4,
+      1080.5
+     ],
+     "feet": [
+      172.7,
+      576.3
+     ]
+    }
+   ]
+  },
+  {
+   "name": "snacks",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "backs_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "snacks/0.webp",
+     "w": 404,
+     "h": 972,
+     "ground": [
+      191.6,
+      967.4
+     ],
+     "feet": [
+      37.2,
+      320.7
+     ]
+    },
+    {
+     "img": "snacks/1.webp",
+     "w": 613,
+     "h": 1005,
+     "ground": [
+      428.9,
+      1006.2
+     ],
+     "feet": [
+      102.2,
+      598.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "merchant",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "mixed_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "merchant/0.webp",
+     "w": 723,
+     "h": 1131,
+     "ground": [
+      294.9,
+      1125.2
+     ],
+     "feet": [
+      129.4,
+      516.7
+     ]
+    },
+    {
+     "img": "merchant/1.webp",
+     "w": 834,
+     "h": 1066,
+     "ground": [
+      442.6,
+      1066.3
+     ],
+     "feet": [
+      152.3,
+      799.1
+     ]
+    }
+   ]
+  },
+  {
+   "name": "keytar",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "mixed_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "keytar/0.webp",
+     "w": 623,
+     "h": 1118,
+     "ground": [
+      228.3,
+      1113.0
+     ],
+     "feet": [
+      4.6,
+      526.6
+     ]
+    },
+    {
+     "img": "keytar/1.webp",
+     "w": 673,
+     "h": 1049,
+     "ground": [
+      272.4,
+      1044.8
+     ],
+     "feet": [
+      4.6,
+      650.6
+     ]
+    }
+   ]
+  },
+  {
+   "name": "cable",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "mixed_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "cable/0.webp",
+     "w": 465,
+     "h": 1132,
+     "ground": [
+      213.5,
+      1126.8
+     ],
+     "feet": [
+      84.2,
+      383.5
+     ]
+    },
+    {
+     "img": "cable/1.webp",
+     "w": 665,
+     "h": 1109,
+     "ground": [
+      375.6,
+      1100.0
+     ],
+     "feet": [
+      36.7,
+      620.0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "monk",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "mixed_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "monk/0.webp",
+     "w": 480,
+     "h": 1121,
+     "ground": [
+      233.4,
+      1116.0
+     ],
+     "feet": [
+      86.5,
+      382.0
+     ]
+    },
+    {
+     "img": "monk/1.webp",
+     "w": 547,
+     "h": 1098,
+     "ground": [
+      289.6,
+      1088.5
+     ],
+     "feet": [
+      143.1,
+      465.4
+     ]
+    }
+   ]
+  },
+  {
+   "name": "twins",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "mixed_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "twins/0.webp",
+     "w": 801,
+     "h": 907,
+     "ground": [
+      356.9,
+      902.5
+     ],
+     "feet": [
+      67.4,
+      647.6
+     ]
+    },
+    {
+     "img": "twins/1.webp",
+     "w": 882,
+     "h": 1007,
+     "ground": [
+      352.1,
+      1019.6
+     ],
+     "feet": [
+      92.6,
+      759.3
+     ]
+    }
+   ]
+  },
+  {
+   "name": "porter",
+   "role": "special",
+   "front": 1,
+   "sheet": "specials_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "porter/0.webp",
+     "w": 944,
+     "h": 1151,
+     "ground": [
+      455.6,
+      1140.4
+     ],
+     "feet": [
+      4.7,
+      938.3
+     ]
+    },
+    {
+     "img": "porter/1.webp",
+     "w": 1026,
+     "h": 1106,
+     "ground": [
+      505.3,
+      1101.2
+     ],
+     "feet": [
+      83.8,
+      976.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "sleeper",
+   "role": "special",
+   "front": 1,
+   "sheet": "specials_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "sleeper/0.webp",
+     "w": 758,
+     "h": 861,
+     "ground": [
+      320.2,
+      856.1
+     ],
+     "feet": [
+      10.2,
+      710.4
+     ]
+    },
+    {
+     "img": "sleeper/1.webp",
+     "w": 851,
+     "h": 991,
+     "ground": [
+      460.8,
+      982.9
+     ],
+     "feet": [
+      118.3,
+      818.5
+     ]
+    }
+   ]
+  },
+  {
+   "name": "robot",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "specials_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "robot/0.webp",
+     "w": 464,
+     "h": 983,
+     "ground": [
+      223.5,
+      976.7
+     ],
+     "feet": [
+      96.3,
+      365.8
+     ]
+    },
+    {
+     "img": "robot/1.webp",
+     "w": 668,
+     "h": 1012,
+     "ground": [
+      188.5,
+      1074.6
+     ],
+     "feet": [
+      149.6,
+      413.5
+     ]
+    }
+   ]
+  },
+  {
+   "name": "couple",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "specials_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "couple/0.webp",
+     "w": 872,
+     "h": 1093,
+     "ground": [
+      387.7,
+      1088.7
+     ],
+     "feet": [
+      53.3,
+      701.0
+     ]
+    },
+    {
+     "img": "couple/1.webp",
+     "w": 789,
+     "h": 1011,
+     "ground": [
+      404.6,
+      1004.1
+     ],
+     "feet": [
+      21.9,
+      707.2
+     ]
+    }
+   ]
+  },
+  {
+   "name": "courier",
+   "role": "shopper",
+   "front": 1,
+   "sheet": "specials_b",
+   "k": 640,
+   "cels": [
+    {
+     "img": "courier/0.webp",
+     "w": 502,
+     "h": 1129,
+     "ground": [
+      215.7,
+      1124.7
+     ],
+     "feet": [
+      4.7,
+      415.1
+     ]
+    },
+    {
+     "img": "courier/1.webp",
+     "w": 629,
+     "h": 1083,
+     "ground": [
+      157.3,
+      1080.1
+     ],
+     "feet": [
+      77.5,
+      567.0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "cook",
+   "role": "keeper",
+   "front": 1,
+   "sheet": "keepers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "cook/0.webp",
+     "w": 895,
+     "h": 1100,
+     "ground": [
+      408.3,
+      1094.9
+     ],
+     "feet": [
+      198.7,
+      649.9
+     ]
+    },
+    {
+     "img": "cook/1.webp",
+     "w": 886,
+     "h": 1157,
+     "ground": [
+      356.4,
+      1151.0
+     ],
+     "feet": [
+      76.0,
+      702.9
+     ]
+    }
+   ]
+  },
+  {
+   "name": "tapes",
+   "role": "keeper",
+   "front": 1,
+   "sheet": "keepers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "tapes/0.webp",
+     "w": 465,
+     "h": 1070,
+     "ground": [
+      291.7,
+      1065.0
+     ],
+     "feet": [
+      162.7,
+      459.6
+     ]
+    },
+    {
+     "img": "tapes/1.webp",
+     "w": 512,
+     "h": 1001,
+     "ground": [
+      246.0,
+      999.0
+     ],
+     "feet": [
+      14.6,
+      506.4
+     ]
+    }
+   ]
+  },
+  {
+   "name": "fruit",
+   "role": "keeper",
+   "front": 1,
+   "sheet": "keepers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "fruit/0.webp",
+     "w": 691,
+     "h": 1161,
+     "ground": [
+      289.2,
+      1081.1
+     ],
+     "feet": [
+      126.6,
+      480.3
+     ]
+    },
+    {
+     "img": "fruit/1.webp",
+     "w": 755,
+     "h": 1144,
+     "ground": [
+      363.1,
+      1140.2
+     ],
+     "feet": [
+      142.7,
+      633.8
+     ]
+    }
+   ]
+  },
+  {
+   "name": "mechanic",
+   "role": "keeper",
+   "front": 1,
+   "sheet": "keepers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "mechanic/0.webp",
+     "w": 537,
+     "h": 1150,
+     "ground": [
+      300.6,
+      1145.6
+     ],
+     "feet": [
+      94.4,
+      483.4
+     ]
+    },
+    {
+     "img": "mechanic/1.webp",
+     "w": 661,
+     "h": 1110,
+     "ground": [
+      363.4,
+      1105.7
+     ],
+     "feet": [
+      59.8,
+      655.3
+     ]
+    }
+   ]
+  },
+  {
+   "name": "tea",
+   "role": "keeper",
+   "front": -1,
+   "sheet": "keepers_a",
+   "k": 640,
+   "cels": [
+    {
+     "img": "tea/0.webp",
+     "w": 593,
+     "h": 1165,
+     "ground": [
+      315.2,
+      1154.8
+     ],
+     "feet": [
+      123.5,
+      455.8
+     ]
+    },
+    {
+     "img": "tea/1.webp",
+     "w": 717,
+     "h": 1068,
+     "ground": [
+      452.0,
+      1062.7
+     ],
+     "feet": [
+      216.4,
+      630.0
+     ]
+    }
+   ]
+  },
+  {
+   "name": "solder",
+   "role": "keeper",
+   "front": -1,
+   "sheet": "keepers_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "solder/0.webp",
+     "w": 640,
+     "h": 1105,
+     "ground": [
+      321.5,
+      1100.8
+     ],
+     "feet": [
+      183.2,
+      424.5
+     ]
+    },
+    {
+     "img": "solder/1.webp",
+     "w": 638,
+     "h": 1083,
+     "ground": [
+      316.2,
+      1073.2
+     ],
+     "feet": [
+      85.7,
+      512.4
+     ]
+    }
+   ]
+  },
+  {
+   "name": "dumplings",
+   "role": "keeper",
+   "front": -1,
+   "sheet": "keepers_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "dumplings/0.webp",
+     "w": 611,
+     "h": 1099,
+     "ground": [
+      309.8,
+      1094.8
+     ],
+     "feet": [
+      91.6,
+      528.8
+     ]
+    },
+    {
+     "img": "dumplings/1.webp",
+     "w": 789,
+     "h": 1114,
+     "ground": [
+      374.5,
+      1113.5
+     ],
+     "feet": [
+      69.3,
+      716.5
+     ]
+    }
+   ]
+  },
+  {
+   "name": "cassettes",
+   "role": "keeper",
+   "front": -1,
+   "sheet": "keepers_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "cassettes/0.webp",
+     "w": 574,
+     "h": 1070,
+     "ground": [
+      286.8,
+      1057.6
+     ],
+     "feet": [
+      118.4,
+      423.0
+     ]
+    },
+    {
+     "img": "cassettes/1.webp",
+     "w": 443,
+     "h": 1017,
+     "ground": [
+      315.3,
+      1011.4
+     ],
+     "feet": [
+      54.4,
+      437.9
+     ]
+    }
+   ]
+  },
+  {
+   "name": "spacer",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "keepers_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "spacer/0.webp",
+     "w": 530,
+     "h": 1127,
+     "ground": [
+      278.2,
+      1115.7
+     ],
+     "feet": [
+      61.1,
+      490.8
+     ]
+    },
+    {
+     "img": "spacer/1.webp",
+     "w": 698,
+     "h": 1068,
+     "ground": [
+      347.1,
+      1067.3
+     ],
+     "feet": [
+      4.5,
+      692.7
+     ]
+    }
+   ]
+  },
+  {
+   "name": "father",
+   "role": "shopper",
+   "front": -1,
+   "sheet": "keepers_c",
+   "k": 640,
+   "cels": [
+    {
+     "img": "father/0.webp",
+     "w": 541,
+     "h": 1128,
+     "ground": [
+      248.7,
+      1123.9
+     ],
+     "feet": [
+      56.6,
+      441.7
+     ]
+    },
+    {
+     "img": "father/1.webp",
+     "w": 522,
+     "h": 1096,
+     "ground": [
+      132.3,
+      1091.1
+     ],
+     "feet": [
+      4.5,
+      516.9
+     ]
+    }
+   ]
+  }
+ ]
+}

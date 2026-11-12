@@ -1,5 +1,5 @@
 // The market deck: a street of stalls under the station's housing stacks, along Z. Warm amber and red lantern light
-// low down, teal shadow above; awnings, noren, blade signs, banners, lantern strings, steam, a crowd of cut-outs, and at
+// low down, teal shadow above; awnings, noren, blade signs, banners, lantern strings, steam, a drawn crowd, and at
 // GAP the deck is gone: a shaft down through the lower levels, with a buckled plate for a ramp on the near side.
 // Built once from a seed (it does not repeat); z runs from Z0 to Z1.
 //
@@ -10,9 +10,11 @@
 // Cue options:
 //   drones     [...]              machines/drones.js specs
 //   alert      0..1               beacons on the gantries and a red sweep on the street
-//   crowd      true | false | { flee: [x, z] }   the shoppers at the stalls (default true). They shift their weight on
-//                                 a slow beat; given what to flee (a rider coming down the street), those it is
-//                                 about to reach throw their arms up and jump back toward the stalls
+//   crowd      true | false | { flee: [x, z] }   the people of the market (default true): kits/crowd's drawings, each
+//                                 a cel stood on the deck at the kerb or behind a stall's counter, held on its
+//                                 calm drawing; given what to flee (a rider coming down the street), those it is
+//                                 about to reach are on their startled drawing, with a hop as it happens. No one
+//                                 is there twice between CAST.z0 and CAST.z1 (the ride and the leap)
 //   steam      0..2               how hard the pots, the vents and the shaft steam (default 1; the `steam` wire adds on drum hits)
 //   wiring     { name: wire }     replace wires of WIRING for this frame
 //   markers    [[x, y, z], ...]   camera-agreement markers
@@ -27,7 +29,7 @@ import { driveAll } from "../engine/sync.js";
 import { createDrones } from "../machines/drones.js";
 import { createMarkers } from "./markers.js";
 
-export const Z0 = -28, Z1 = 132, GAP = { z0: 66, z1: 76 }, WX = 3.4, RAMP = { z0: 62.4, h: 0.85 };
+export const Z0 = -28, Z1 = 132, GAP = { z0: 66, z1: 76 }, WX = 3.4, RAMP = { z0: 62.4, h: 0.85 }, CAST = { z0: 0, z1: 66 };
 // The height of what a figure stands on at (x, z): the deck, the ramp's plate, or nothing over the gap.
 export const floorAt = (x, z) => z > GAP.z0 && z < GAP.z1 ? null : z > RAMP.z0 && z <= GAP.z0 && Math.abs(x) < 2.2 ? RAMP.h * (z - RAMP.z0) / (GAP.z0 - RAMP.z0) : 0;
 export const WIRING = {
@@ -110,7 +112,7 @@ vec3 setSpecial(vec3 W, vec3 d, vec2 uv){
   return col;
 }`;
 
-const PAPER = "#e9e0c8", INK = "#1a1420";
+const PAPER = "#e9e0c8", INK = "#1a1420", RIM = { value: 0.7 };      // RIM: how much of the lanterns' rim light the crowd's drawings take (the cast take all of it)
 const WORDS = ["ソバ", "メシ", "ヤミイチ", "カセット", "テープ", "デンキ", "ネジ", "キカイ", "ホシ", "サケ", "クスリ", "トケイ", "ラジオ", "ミセ", "タコ", "カニ", "ニク", "コメ", "アメ", "ハナ", "ノクス", "マーケット"];
 const LATIN = ["NOX MARKET", "DECK 4", "OPEN 25H", "TAPES", "PARTS", "NOODLE", "RADIO", "24", "No.7", "KEY CUT", "REPAIR"];
 const NEON = [["#ff5a3c", "#240604"], ["#ffc23c", "#211503"], ["#5fe8d8", "#03191a"], ["#ff5fa8", "#22051a"], ["#f4f0d8", "#141418"], ["#8dff6a", "#081a04"]];
@@ -148,41 +150,6 @@ function textures() {
     const [fg, bg] = NEON[n], size = Math.min(150, 940 / ([...w].length * 1.08)); c.fillStyle = bg; c.fillRect(0, 0, 1024, 256); c.strokeStyle = fg; c.lineWidth = 8; c.strokeRect(12, 12, 1000, 232);
     kana(c, w, 512 - kanaWidth(w, size) / 2, 28, size, size * 0.15, fg); latin(c, sub, 512, 226, 34, fg, { align: "center" }); scanlines(c, 1024, 256, 0.3);
   }));
-  // shoppers: flat figures in two tones, seen from behind; no faces, the way a background crowd is painted
-  // each is two drawings: at the stall, and startled (arms thrown up, leaning away)
-  // Each is drawn like a background character: an ink outline, a coat in two tones with the stall's warm light down the
-  // side that faces it, hair with a shine, a collar or scarf, the nape of the neck, trousers and shoes, sometimes a
-  // bag, a hat or a hood. Twice the size they are seen at, so the line stays a line.
-  T.crowd = Array.from({ length: 8 }, (_, i) => [false, true].map((startled) => canvasTex(320, 512, (c) => {
-    c.scale(2, 2); c.translate(16, 0); if (startled) { c.translate(64, 256); c.rotate(i % 2 ? 0.16 : -0.16); c.translate(-64, -256); }
-    const r = rng(i * 91 + 7), coat = ["#5d7896", "#b45a48", "#8a8a5c", "#4a6f8c", "#c49a52", "#7a5a9a", "#6f9a86", "#d0623c"][i], shade = ["#3a4c66", "#7a3430", "#5a5a3c", "#2e4a62", "#8a6a34", "#4c3868", "#466a5c", "#8e3c26"][i], hair = ["#2a2434", "#4a2c22", "#5a4a58", "#1e1a28"][i % 4];
-    const INK = "#17111f", hgt = 216 + r() * 34, top = 256 - hgt, cx = 64, sw = 25 + r() * 7, hem = top + hgt * (0.5 + r() * 0.22), lean = (r() - 0.5) * 6;
-    c.lineJoin = "round"; c.lineCap = "round";
-    const path = (pts) => { c.beginPath(); pts.forEach((p, k) => k ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); };
-    const fill = (pts, col, ink = 2.2) => { path(pts); if (ink) { c.strokeStyle = INK; c.lineWidth = ink * 2; c.stroke(); } c.fillStyle = col; c.fill(); };
-    const trousers = ["#3a3850", "#4a4038", "#2e3444", "#54463e"][i % 4];
-    fill([[cx - 11, hem - 6], [cx - 12, 250], [cx - 2, 250], [cx - 1, hem - 6]], trousers); fill([[cx + 1, hem - 6], [cx + 3, 250], [cx + 13, 250], [cx + 11, hem - 6]], trousers);
-    fill([[cx - 16, 255], [cx - 1, 255], [cx - 1, 248], [cx - 13, 248]], "#241c28"); fill([[cx + 2, 255], [cx + 17, 255], [cx + 14, 248], [cx + 2, 248]], "#241c28");
-    const t0 = top + 30;
-    fill([[cx - 5 + lean, t0 - 12], [cx + 5 + lean, t0 - 12], [cx + 6 + lean, t0], [cx - 6 + lean, t0]], "#c89a78");      // the nape
-    const body = startled ? [[cx - 7 + lean, t0 - 4], [cx + 7 + lean, t0 - 4], [cx + sw, t0 + 8], [cx + sw - 4, hem], [cx - sw + 4, hem], [cx - sw, t0 + 8]]
-      : [[cx - 7 + lean, t0 - 4], [cx + 7 + lean, t0 - 4], [cx + sw, t0 + 8], [cx + sw + 5, t0 + 70], [cx + sw - 3, t0 + 74], [cx + sw - 4, hem], [cx - sw + 4, hem], [cx - sw + 3, t0 + 74], [cx - sw - 5, t0 + 70], [cx - sw, t0 + 8]];
-    if (startled) for (const sg of [1, -1]) { fill([[cx + sg * (sw - 9), t0 + 4], [cx + sg * sw, t0 + 16], [cx + sg * (sw + 24), t0 - 30], [cx + sg * (sw + 14), t0 - 38]], coat); fill([[cx + sg * (sw + 13), t0 - 36], [cx + sg * (sw + 25), t0 - 30], [cx + sg * (sw + 30), t0 - 46], [cx + sg * (sw + 19), t0 - 50]], "#c89a78"); }
-    fill(body, coat);
-    c.save(); path(body); c.clip();      // the coat's shade tone and the stall's light, inside its outline
-    fill([[cx + 2, t0 - 6], [cx + sw + 8, t0], [cx + sw + 8, hem + 4], [cx + 9, hem + 4]], shade, 0);
-    fill([[cx - sw - 6, t0], [cx - sw + 9, t0 + 4], [cx - sw + 12, hem + 2], [cx - sw - 6, hem + 2]], "#ffc47a", 0);
-    c.strokeStyle = INK; c.lineWidth = 1.4; c.beginPath(); c.moveTo(cx + lean * 0.5, t0 + 6); c.lineTo(cx, hem - 8); c.stroke();      // the back seam
-    c.restore();
-    if (!startled) for (const sg of [1, -1]) { c.strokeStyle = INK; c.lineWidth = 1.4; c.beginPath(); c.moveTo(cx + sg * (sw - 7), t0 + 22); c.lineTo(cx + sg * (sw - 4), t0 + 70); c.stroke(); fill([[cx + sg * (sw - 2), t0 + 70], [cx + sg * (sw + 5), t0 + 70], [cx + sg * (sw + 4), t0 + 81], [cx + sg * (sw - 2), t0 + 80]], "#c89a78", 1.5); }      // sleeves and hands
-    fill([[cx - 9 + lean, t0 - 5], [cx + 9 + lean, t0 - 5], [cx + 11 + lean, t0 + 2], [cx - 11 + lean, t0 + 2]], i % 2 ? "#e8dcc0" : shade, 1.6);      // collar or scarf
-    c.beginPath(); c.ellipse(cx + lean, top + 14, 11, 14, 0, 0, 7); c.strokeStyle = INK; c.lineWidth = 4.4; c.stroke(); c.fillStyle = hair; c.fill();
-    c.strokeStyle = "#8a7a96"; c.lineWidth = 2; c.beginPath(); c.arc(cx + lean, top + 14, 7, 3.6, 4.9); c.stroke();      // the shine on the hair
-    if (i % 4 === 1) fill([[cx - 22 + lean, top + 8], [cx + 22 + lean, top + 8], [cx + 10 + lean, top - 1], [cx - 10 + lean, top - 1]], "#d8b04a");
-    if (i % 4 === 2) { c.beginPath(); c.ellipse(cx + lean, top + 16, 15, 17, 0, 0, 7); c.strokeStyle = INK; c.lineWidth = 4.4; c.stroke(); c.fillStyle = coat; c.fill(); }
-    if (i % 4 === 3) { c.beginPath(); c.arc(cx + lean, top + 2, 6, 0, 7); c.strokeStyle = INK; c.lineWidth = 4.4; c.stroke(); c.fillStyle = hair; c.fill(); }
-    if (i % 3 === 0) fill(startled ? [[cx + sw + 18, t0 - 20], [cx + sw + 38, t0 - 12], [cx + sw + 30, t0 + 18], [cx + sw + 10, t0 + 10]] : [[cx + sw + 1, t0 + 62], [cx + sw + 19, t0 + 64], [cx + sw + 17, t0 + 96], [cx + sw - 1, t0 + 94]], "#e0b24a");
-  })));
   return T;
 }
 
@@ -194,7 +161,7 @@ export async function createMarket(renderer, o = {}) {
   sh.uTintLit.value.setRGB(1.3, 1.02, 0.7); sh.uTintMid.value.setRGB(0.78, 0.56, 0.6); sh.uTintShade.value.setRGB(0.24, 0.4, 0.5); sh.uRim.value.setRGB(1.0, 0.7, 0.35);
   sh.uKey.value.set(0.1, 0.8, -0.5).normalize();
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(50, W / H, 0.08, 500), G = { screens: { value: 1 } };
-  const b = kit.builder(), people = [], steamAt = [];
+  const b = kit.builder(), spots = [], kerb = [], steamAt = [];      // kerb: [side, z, half-length] of what stands where a shopper might
   const wood = mat("#9a6a44"), steel = mat("#7d8790"), darkm = mat("#2c2a36"), paper = mat(PAPER), red = mat("#b3261e"), tealm = mat("#3a7a78"), rust = mat("#9a4a2a"), crate = mat("#a8854e", { seam: [0.4, 0.2], seamMode: 2 });
   const bulb = mat("#ffe2a0", { kind: 1, flag: 5 }), lanternR = mat("#ff4a26", { kind: 1, flag: 4 }), lanternA = mat("#ffb23c", { kind: 1, flag: 4 });
   const neon = (i) => mat("#fff", { kind: 2, map: T.fascia[i % T.fascia.length], gain: G.screens }), bladeM = (i) => mat("#fff", { kind: 2, map: T.blade[i % T.blade.length], gain: G.screens });
@@ -242,7 +209,7 @@ export async function createMarket(renderer, o = {}) {
     }
     if (v === "noodle") {
       b.box(0.7, 1.0, 3.3, s * 4.0, 0.66, zc, wood); b.box(0.86, 0.06, 3.4, s * 3.96, 1.19, zc, mat("#c9a878"));
-      for (let i = 0; i < 3; i++) { b.cyl(0.035, 0.55, s * 3.05, 0.28, z0 + 0.9 + i * 1.1, darkm, "y", 6); b.cyl(0.19, 0.07, s * 3.05, 0.59, z0 + 0.9 + i * 1.1, red, "y", 12); }
+      for (let i = 0; i < 3; i++) { b.cyl(0.035, 0.55, s * 3.05, 0.28, z0 + 0.9 + i * 1.1, darkm, "y", 6); b.cyl(0.19, 0.07, s * 3.05, 0.59, z0 + 0.9 + i * 1.1, red, "y", 12); kerb.push([s, z0 + 0.9 + i * 1.1, 0.2]); }
       b.quad([s * 3.47, 2.52, zc], u, up, 3.4, 0.62, mat("#fff", { kind: 10, map: T.noren[n % 3] }));
       b.cyl(0.3, 0.42, s * 4.7, 1.43, z0 + 1.1, steel, "y", 14); b.cyl(0.33, 0.05, s * 4.7, 1.66, z0 + 1.1, darkm, "y", 14); steamAt.push([s * 4.7, 1.75, z0 + 1.1]);
       b.box(0.6, 0.06, 3.4, s * 5.85, 1.7, zc, wood); for (let i = 0; i < 9; i++) b.box(0.1, 0.24 + 0.1 * hash(i, k), 0.1, s * 5.85, 1.87, z0 + 0.5 + i * 0.36, mat(["#2a6a5e", "#b3261e", "#c9a23a", "#e9e0c8"][i % 4]));
@@ -269,15 +236,16 @@ export async function createMarket(renderer, o = {}) {
       b.box(0.5, 0.7, 0.5, s * 3.85, 0.5, z0 + 3.5, crate);
     } else {
       b.quad([s * 3.7, 1.52, zc], u, up, 3.8, 2.76, mat("#fff", { kind: 10, map: T.shutter[n % 2] }));
+      kerb.push([s, z0 + 3.2, 0.6]); if (!near) kerb.push([s, z0 + 1.2, 0.95]);
       if (!near) for (let i = 0; i < 2; i++) { b.box(0.7, 1.9, 0.9, s * 3.25, 1.1, z0 + 0.7 + i * 1.0, mat(i ? "#b3261e" : "#2a6a5e")); b.quad([s * 2.89, 1.2, z0 + 0.7 + i * 1.0], u, up, 0.74, 1.5, mat("#fff", { kind: 2, map: T.vend[(n + i) % 2], gain: G.screens })); }
       for (let i = 0; i < 3; i++) b.box(0.55, 0.42, 0.6, s * 3.2, 0.36 + (i === 2 ? 0.42 : 0), z0 + 2.9 + (i === 1 ? 0.62 : 0.05), crate);
     }
-    // shoppers
-    if (v !== "shut") { const cnt = 1 + Math.floor(r() * 3); for (let i = 0; i < cnt; i++) { const x = s * (2.6 + r() * 0.6), z = z0 + 0.5 + r() * 3; people.push({ x, z, hgt: 1.5 + r() * 0.25, who: Math.floor(r() * T.crowd.length), turn: (r() - 0.5) * 0.5, seed: Math.floor(r() * 97) }); } }
+    // where people may stand: the stallholder behind the counter, and one to three at the kerb in front
+    if (v !== "shut") { spots.push({ keeper: true, s, x: { noodle: 4.8, tapes: 5.15, produce: 5.35, parts: 5.4 }[v], z: z0 + 2.9 }); const cnt = 1 + Math.floor(r() * 3); for (let i = 0; i < cnt; i++) spots.push({ s, i, x: r(), z: z0 + 0.5 + r() * 3, pick: r(), nerve: r(), turn: r(), seed: Math.floor(r() * 97) }); }
     // street clutter at the kerb
-    if (r() > 0.55) { const z = z0 + r() * 4; b.box(0.5, 0.5, 0.5, s * 2.95, 0.25, z, crate, { ry: r() }); if (r() > 0.5) b.box(0.4, 0.36, 0.4, s * 2.95, 0.68, z, crate, { ry: r() }); }
-    if (r() > 0.7) { const z = z0 + r() * 4; b.box(0.5, 0.9, 0.05, s * 2.7, 0.45, z, paper, { rx: 0.25 }); b.box(0.5, 0.9, 0.05, s * 2.7, 0.45, z + 0.3, darkm, { rx: -0.25 }); }
-    if (r() > 0.8) { const z = z0 + r() * 4; b.cyl(0.07, 0.2, s * 2.6, 0.05, z, steel, "y", 8); steamAt.push([s * 2.6, 0.15, z]); }
+    if (r() > 0.55) { const z = z0 + r() * 4; kerb.push([s, z, 0.35]); b.box(0.5, 0.5, 0.5, s * 2.95, 0.25, z, crate, { ry: r() }); if (r() > 0.5) b.box(0.4, 0.36, 0.4, s * 2.95, 0.68, z, crate, { ry: r() }); }
+    if (r() > 0.7) { const z = z0 + r() * 4; kerb.push([s, z + 0.15, 0.3]); b.box(0.5, 0.9, 0.05, s * 2.7, 0.45, z, paper, { rx: 0.25 }); b.box(0.5, 0.9, 0.05, s * 2.7, 0.45, z + 0.3, darkm, { rx: -0.25 }); }
+    if (r() > 0.8) { const z = z0 + r() * 4; kerb.push([s, z, 0.1]); b.cyl(0.07, 0.2, s * 2.6, 0.05, z, steel, "y", 8); steamAt.push([s * 2.6, 0.15, z]); }
   }
   // ---- the housing stacks above the stalls ------------------------------------------------------------------------------
   function facade(s, k) {
@@ -334,31 +302,61 @@ export async function createMarket(renderer, o = {}) {
   b.quad([0, 7.7, Z1], [-1, 0, 0], [0, 1, 0], 7.3, 15.4, mat("#6a4a44")); b.add(new THREE.RingGeometry(1.9, 2.5, 40), mat("#ffb23c", { kind: 1, fog: 0.3 }), new THREE.Matrix4().makeTranslation(0, 6, Z1 - 0.1).multiply(new THREE.Matrix4().makeRotationY(Math.PI)));
   b.quad([0, 7.7, Z0], [1, 0, 0], [0, 1, 0], 7.3, 15.4, mat("#6a4a44"));
   const world = b.build(), crowd = new THREE.Group(); scene.add(world); scene.add(crowd);
-  // ---- the shoppers: flat figures, each its own cel so that it can be held, shifted and swapped ----------------------------------
-  const cardG = new THREE.PlaneGeometry(1, 1), cardM = T.crowd.map((pair) => pair.map((map) => mat("#fff", { kind: 10, flag: 1, map, noInk: true })));
-  for (const p of people) { p.mesh = new THREE.Mesh(cardG, cardM[p.who][0]); p.mesh.layers.set(FX); p.mesh.frustumCulled = false; crowd.add(p.mesh); }
+  // ---- the people: kits/crowd's drawings, each a cel stood on a card at its ground point --------------------------------------
+  // A shopper faces their stall and a stallholder the street (the kit says which way each was drawn facing; the card
+  // is mirrored to suit the side of the street), turned a little toward the middle of the street, where the camera is.
+  // Between CAST.z0 and CAST.z1 everyone is someone else; beyond, where a shot only sees them far off, they come round again.
+  const base = new URL("../kits/crowd/", import.meta.url), cast = (await (await fetch(new URL("kit.json", base))).json()).people, cardG = new THREE.PlaneGeometry(1, 1), people = [];
+  await Promise.all(cast.flatMap((p) => p.cels.map(async (c) => { const im = new Image(); im.src = new URL(c.img, base).href; await im.decode(); c.map = new THREE.Texture(im); c.map.premultiplyAlpha = true; c.map.anisotropy = 8; c.map.needsUpdate = true; })));
+  {
+    const shuffled = (list, seed) => { const r = rng(seed); return list.map((p) => [r(), p]).sort((a, c) => a[0] - c[0]).map((x) => x[1]); };
+    const wide = (p) => p.cels[0].w / p.k > 1.1, inCast = (q) => q.z >= CAST.z0 && q.z < CAST.z1, byZ = (a, c) => a.z - c.z;
+    const keepers = cast.filter((p) => p.role === "keeper"), street = cast.filter((p) => p.role !== "keeper");
+    const stand = (list, at) => at.forEach((q, n) => { q.who = list[n % list.length]; people.push(q); });
+    // the cast's stretch of street: every stallholder, spread over its stalls; everyone else at the kerbs, a stall's first place before anyone's second
+    const ks = spots.filter((q) => q.keeper && inCast(q)).sort(byZ), ss = spots.filter((q) => !q.keeper && inCast(q)).sort((a, c) => a.i + a.pick - c.i - c.pick).slice(0, street.length).sort(byZ);
+    stand(shuffled(keepers, 4117), keepers.map((_, n) => ks[Math.floor((n + 0.5) * ks.length / keepers.length)]).filter((q, n, l) => q && l.indexOf(q) === n));
+    stand(shuffled(street, 2203), ss);
+    // a hand truck or a cart is too wide for the side the ride's camera hugs: it changes places with someone across the street
+    for (const q of people) if (q.s > 0 && !q.keeper && wide(q.who)) { const o = people.find((c) => c.s < 0 && !c.keeper && !wide(c.who) && !c.swapped); if (o) { [q.who, o.who] = [o.who, q.who]; o.swapped = true; } }
+    // the rest of the street, thinner
+    stand(shuffled(keepers, 977), spots.filter((q, n) => q.keeper && !inCast(q) && n % 3 === 0)); stand(shuffled(street, 613), spots.filter((q) => !q.keeper && !inCast(q) && q.i === 0));
+    const tones = (z, keeper) => keeper || Math.abs(((z / 4) % 1 + 1) % 1 - 0.5) * 4 < 1.4 ? "#fff2cf" : "#dcc0c4";      // under a stall's bulbs or a lantern row, or in the dusk between
+    for (const q of people) {
+      const { who: p, s } = q, m = p.front === (q.keeper ? s : -s) ? 1 : -1, reach = Math.max(...p.cels.map((c) => (s * m > 0 ? c.ground[0] - c.feet[0] : c.feet[1] - c.ground[0]) / p.k));      // how far its feet go toward the stall
+      if (!q.keeper) {
+        // room at the kerb: clear of the stools, crates and signs there and of whoever already stands near, as close to the place as there is
+        const room = 0.3 + 0.25 * p.cels[0].w / p.k, free = (z) => kerb.every((c) => c[0] !== s || Math.abs(c[1] - z) > c[2] + room);
+        q.z += [0, ...Array.from({ length: 30 }, (_, n) => (n % 2 ? -1 : 1) * 0.15 * (1 + (n >> 1)))].find((d) => free(q.z + d)) ?? 0; kerb.push([s, q.z, room]);
+        q.x = s * Math.min(wide(p) ? 2.7 : 2.85 + 0.2 * q.x, 3.3 - reach);      // on the deck, feet short of the kerb
+      }
+      else q.x *= s;
+      q.y = q.keeper ? 0.16 : 0; q.yaw = s * (q.keeper ? 0.6 : 0.2 + 0.3 * (q.turn ?? 0.5)); q.rx = Math.min(0.8, Math.max(0.3, 0.45 * p.cels[0].w / p.k));
+      q.node = new THREE.Group(); q.node.rotation.y = Math.PI + q.yaw; crowd.add(q.node);
+      q.cels = p.cels.map((c) => { const o = new THREE.Mesh(cardG, mat(tones(q.z, q.keeper), { kind: 11, map: c.map, seam: [0, 5 / c.h], gain: RIM })); o.layers.set(FX); o.scale.set(m * c.w / p.k, c.h / p.k, 1); o.position.set(m * (c.w / 2 - c.ground[0]) / p.k, (c.ground[1] - c.h / 2) / p.k, 0); q.node.add(o); return o; });
+    }
+  }
   // ---- steam: flat puffs on twos ---------------------------------------------------------------------------------------------
   // a puff is painted like a cel of smoke: a hard-edged cluster in a shade tone with its lit tone laid over, up and to one side
   const puffT = canvasTex(256, 256, (c) => { const blob = (col, k, dx, dy) => { c.fillStyle = col; for (let i = 0; i < 7; i++) { c.beginPath(); c.arc(128 + dx + Math.cos(i * 0.9) * 52 * (i ? 1 : 0), 128 + dy + Math.sin(i * 0.9) * 46 * (i ? 1 : 0), (i ? 44 + (i * 37 % 22) : 70) * k, 0, 7); c.fill(); } }; blob("#8e6c6e", 1, 0, 0); blob("#c4aa96", 0.8, -9, -13); c.globalCompositeOperation = "destination-out"; c.fillStyle = "#000"; for (let i = 0; i < 5; i++) { c.beginPath(); c.arc(128 + Math.cos(i * 1.9 + 0.6) * 96, 128 + Math.sin(i * 1.9 + 0.6) * 92, 15 + (i * 7) % 9, 0, 7); c.fill(); } c.globalCompositeOperation = "source-over"; });      // two tones that stay under the bloom (steam is lit, not a lamp), bites out of the rim
   const puffG = new THREE.PlaneGeometry(1, 1), puffM = mat("#ffffff", { kind: 7, flag: 2, map: puffT, alpha: 0.92, fog: 0.6 }), puffs = [];
   for (let k = 0; k < 4; k++) steamAt.push([-2.4 + k * 1.6, -1.5, GAP.z0 + 1.5 + (k * 2.7) % 7]);      // the shaft breathes
   for (let i = 0; i < 72; i++) { const m = new THREE.Mesh(puffG, puffM); m.layers.set(FX); m.renderOrder = 9; m.frustumCulled = false; scene.add(m); puffs.push(m); }
-  const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#2a1420");
+  const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#2a1420"), under = createShadows(kit, scene, "#2a1420");
 
   function update(cam, frame, sync, opt = {}) {
     const w = driveAll(sync, WIRING, frame, opt.wiring), t = frame / sync.fps, alert = opt.alert ?? 0;
     aim(camera, cam, W / H); sh.uCam.value.copy(camera.position); sh.uFrame.value = frame;
     U.uLamp.value = clamp(w.lamps, 0, 1.3); U.uBlink.value = w.blink; U.uFlood.value = w.floods; U.uAlarm.value = clamp(alert * 0.8 + w.klaxon * (alert > 0 ? 1 : 0.6), 0, 1.2); U.uAlarmAng.value = t * 5.2; G.screens.value = w.screens;
-    // the shoppers, on twos: a slow shift of weight; those the rider is about to reach (or has just passed) are on
-    // their startled drawing, jumped back toward the stalls, with a hop as it happens
+    // the people, each held on one drawing: those the rider is about to reach (or has just passed) are on their startled
+    // one, with a hop as it happens and a shiver on twos while it lasts; a contact shadow under each at the kerb
     const f2 = Math.floor(frame / 2), flee = opt.crowd?.flee;
     crowd.visible = (opt.crowd ?? true) !== false;
     for (const p of people) {
-      const ahead = flee ? p.z - flee[1] : 1e9, scared = ahead > -2 && ahead < 10, fresh = scared ? Math.max(0, 1 - (10 - ahead) / 2.5) : 0, sway = Math.floor((f2 + p.seed) / 6) % 2, sx = Math.sign(p.x);
-      p.mesh.material = cardM[p.who][scared ? 1 : 0];
-      p.mesh.position.set(p.x + (scared ? sx * 0.45 : 0) + (sway ? 0.02 : 0), p.hgt / 2 + (Math.abs(p.x) > 3.45 ? 0.16 : 0) + (scared ? 0.16 * fresh + 0.02 * ((f2 + p.seed) % 2) : 0), p.z);
-      p.mesh.rotation.set(0, Math.PI + p.turn, (sway ? 0.02 : -0.02) + (scared ? -sx * 0.1 : 0)); p.mesh.scale.set(p.hgt * 0.625, p.hgt, 1);
+      const ahead = flee ? p.z - flee[1] : 1e9, far = 10 - 1.2 * (p.nerve ?? 0), scared = ahead > -2 && ahead < far, fresh = scared ? Math.max(0, 1 - (far - ahead) / 2.5) : 0;
+      p.cels[0].visible = !scared; p.cels[1].visible = scared; p.node.position.set(p.x, p.y + (scared ? 0.12 * fresh + 0.012 * ((f2 + (p.seed ?? 0)) % 2) : 0), p.z);
     }
+    under.update(crowd.visible ? people.filter((p) => !p.keeper && p.z > cam.pos[2] - 4 && p.z < cam.pos[2] + 70).map((p) => ({ at: [p.x, p.y, p.z], rx: p.rx, rz: 0.32, yaw: p.yaw * 180 / Math.PI, alpha: 0.6 })) : []);
     // the nearest emitters ahead of the camera get the puffs
     const amt = (opt.steam ?? 1), near = steamAt.filter((p) => p[2] > cam.pos[2] - 6 && p[2] < cam.pos[2] + 70).slice(0, 12); let n = 0;
     near.forEach((p, e) => { for (let j = 0; j < 6; j++) { const m = puffs[n++], sd = hash(p[0], p[2], j), age = ((f2 * 0.045 + j / 6 + sd) % 1 + 1) % 1, born = f2 - Math.floor(age / 0.045), big = 1 + 0.5 * hash(born, e, j), shaft = p[1] < 0 ? 1.8 : 1;

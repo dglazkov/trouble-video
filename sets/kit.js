@@ -25,6 +25,9 @@ void main(){ vec4 w = modelMatrix*vec4(position,1.0); vW = w.xyz; vL = position;
 //  7 flat translucent (beams, steam): colour x gain, alpha = uAlpha (flag 1: x the map's alpha; flag 2: and the
 //    colour x the map's, for a puff painted in two tones)
 //  8 a level meter: columns of cells lit up to gain    9 tape reels turning
+// 11 a drawn figure standing in the set (a cel on a card; map: premultiplied alpha): its own paint in the light of its
+//    place (the base colour), darker toward the feet, the set's rim light hard along the edges that face up (seam: how
+//    far, in uv; gain: how much), soft-edged, and no ink line over it
 const FRAG = (chunk) => `
 uniform int uKind, uSeamMode, uFlag, uNoInk; uniform vec3 uBase; uniform vec2 uSeam; uniform sampler2D uMap; uniform float uGain, uFogMul, uAlpha, uPaint;
 uniform vec3 uCam, uFogCol, uFogTop, uFogDeep, uKey, uTintLit, uTintMid, uTintShade, uRim; uniform float uFogK, uFrame; uniform vec2 uFogH;
@@ -79,6 +82,13 @@ void main(){
   } else if(uKind==7){
     alpha = uAlpha*(1.0-clamp(fog, 0.0, 1.0)); col = uBase*uGain; fog = 0.0;
     if(uFlag >= 1){ vec4 t = texture2D(uMap, vUv); alpha *= t.a; if(uFlag == 2) col *= t.rgb; }
+  } else if(uKind==11){
+    vec4 t = texture2D(uMap, vUv); if(t.a < 0.02) discard;
+    alpha = t.a; col = t.rgb/t.a;
+    float paint = smoothstep(0.1, 0.3, dot(col, vec3(0.299,0.587,0.114)));
+    col *= uBase*(1.0-0.18*(1.0-smoothstep(0.0, 0.75, vUv.y)));
+    col = mix(col, max(col, uRim)+uRim*0.25, step(0.5, 1.0-texture2D(uMap, vUv+uSeam).a)*paint*uGain);
+    col = setExtra(col, vW, N, 1.0);
   } else if(uKind==8){
     vec2 g = vUv*uSeam; vec2 c = floor(g), f = fract(g);
     float lvl = uGain*(0.45+0.75*hash(vec2(c.x, floor(uFrame*0.5)+floor(vW.z*0.25+vW.x*0.25))));
@@ -98,7 +108,7 @@ void main(){
   col = mix(col, vW.y < -0.5 ? uFogDeep : mix(uFogCol, uFogTop, smoothstep(uFogH.x, uFogH.y, vW.y)), clamp(fog, 0.0, 1.0));
   // a free-standing cut-out is not in the ink buffer, and says so in the colour buffer's alpha: the photography pass
   // draws no ink line over it from whatever is behind
-  gl_FragColor = vec4(col, uNoInk == 1 ? 0.0 : alpha);
+  gl_FragColor = uKind == 11 ? vec4(col*alpha, alpha) : vec4(col, uNoInk == 1 ? 0.0 : alpha);
 }`;
 
 // Normal and one over the view depth (so nothing at all, cleared to zero, is infinitely far), for the ink lines the
@@ -133,7 +143,10 @@ export function createKit(chunk, uniforms = {}) {
         uAlpha: { value: o.alpha ?? 1 }, uFlag: { value: o.flag ?? 0 }, uNoInk: { value: o.noInk && kind !== 7 ? 1 : 0 }, uPaint: { value: o.paint ?? (kind === 0 ? 1 : 0) } } });
     if (kind === 4 || o.offset) { m.polygonOffset = true; m.polygonOffsetFactor = -2 * (o.offset ?? 1); m.polygonOffsetUnits = -2 * (o.offset ?? 1); }
     if (kind === 7) { m.transparent = true; m.depthWrite = false; if (o.additive) m.blending = THREE.AdditiveBlending; }
-    m.userData.fx = kind === 7 || !!o.noInk;
+    if (kind === 11) {      // laid over what is behind by its own alpha, and the buffer's alpha (ink or no ink) goes to none under it
+      m.transparent = true; m.blending = THREE.CustomBlending; m.blendSrc = THREE.OneFactor; m.blendDst = THREE.OneMinusSrcAlphaFactor; m.blendSrcAlpha = THREE.ZeroFactor; m.blendDstAlpha = THREE.OneMinusSrcAlphaFactor;
+    }
+    m.userData.fx = kind === 7 || kind === 11 || !!o.noInk;
     mats.set(key, m); return m;
   }
   return { shared, mat, builder: () => new Builder() };
