@@ -14,6 +14,14 @@
 //   clearStruts [z0, z1]          no struts of a cut wall between these z (where the shot's business is)
 //   doors      { [k]: 0..1 }      how far shut the bulkhead shutter at z = k * 24 is (1 = shut), or [top, bottom] for
 //                                 its two leaves apart. Unlisted shutters rest open and twitch with the `doorChomp` wire.
+//   holes      { [k]: { outline: [[x, y], ...], age, toward = 1, seed = 1 } }   something went THROUGH the shutter at
+//                                 z = k * 24: it is shut (whatever `doors` says of it), one plate, with a hole of that outline
+//                                 (metres: x across, y up from the floor) cut through it, the torn metal curled out on the side
+//                                 it left by (toward: +1 the +Z side) and the pieces knocked out of it thrown that way, falling
+//                                 and lying where they land (age: seconds since it happened; none: long ago, all at rest).
+//                                 haze: { back = 2, x: [x0, x1], color }: the dust it left hanging on the side it came from,
+//                                 lit: a flat pale card across the corridor that far behind the plate, so that from the other
+//                                 side the hole is a clean bright shape and whatever comes at it is dark against it
 //   slabs      { [k]: 0..1 }      a blast door at the bulkhead z = k * 24: one slab the shape of the corridor's section that
 //                                 comes down out of the ceiling (0 up and out of sight, 1 on the floor). Unlisted: there is none.
 //   hubDoors   { A, B, C, D }     the shutters at the hub's mouths: A is the +Z arm, B +X, C -Z, D -X.
@@ -27,7 +35,7 @@
 //   post       { ... }            engine/post.js parameters
 //   clear      colour             what is outside the structure (cutaways)
 import * as THREE from "three";
-import { createKit, createShadows, Pool, canvasTex, aim, hash, clamp } from "./kit.js";
+import { createKit, createShadows, Pool, canvasTex, aim, hash, clamp, FX } from "./kit.js";
 import { kana, latin, scanlines, hazard, chevrons, kanaWidth } from "./sign.js";
 import { driveAll } from "../engine/sync.js";
 import { createDrones } from "../machines/drones.js";
@@ -357,6 +365,58 @@ export async function createCorridor(renderer, o = {}) {
   const slabProto = new THREE.Mesh(leafGeom([[-2.2, 0], [2.2, 0], [2.7, 0.9], [2.7, 2.5], [1.7, 3.4], [1.7, 7.0], [-1.7, 7.0], [-1.7, 3.4], [-2.7, 2.5], [-2.7, 0.9]]).scale(1, 1, 1.24), mat("#fff", { kind: 10, map: T.slab })); slabProto.frustumCulled = false;
   const setShutter = (g, c) => { const [a, b] = Array.isArray(c) ? c : [c, c]; g.children[0].position.y = 1.52 * (1 - clamp(a)); g.children[1].position.y = -1.98 * (1 - clamp(b)); };
 
+  // ---- a shutter with a hole through it (opt.holes): the shut plate as one piece, the hole cut out of it; round the hole
+  // on the side whatever it was left by, the plate's torn edge bent outward in bare metal; and the pieces it knocked out
+  const SECTION = [[-2.2, 0], [2.2, 0], [2.7, 0.9], [2.7, 2.5], [1.7, 3.4], [-1.7, 3.4], [-2.7, 2.5], [-2.7, 0.9]], holed = new Map();
+  const bareMat = mat("#dfe6ff", { kind: 1, fog: 0.4 }), bareDark = mat("#7f89c4", { kind: 1, fog: 0.4 }), lipMat = mat("#98a4e2", { kind: 1, fog: 0.4 });      // bare metal catching the light: flat, as an effects animator would leave it
+  function holedProto(h) {
+    const key = JSON.stringify([h.outline, h.toward ?? 1, h.seed ?? 1, h.haze ?? 0]); if (holed.has(key)) return holed.get(key);
+    const side = (h.toward ?? 1) < 0 ? -1 : 1, seed = h.seed ?? 1, O = h.outline, n = O.length, V2 = (p) => new THREE.Vector2(p[0], p[1]);
+    const shape = new THREE.Shape(SECTION.map(V2)); shape.holes.push(new THREE.Path(O.map(V2)));
+    const plate = new THREE.ExtrudeGeometry(shape, { depth: 0.36, bevelEnabled: false }).toNonIndexed();
+    { const p = plate.attributes.position, uv = plate.attributes.uv, nz = plate.attributes.normal; for (let i = 0; i < p.count; i++) { const u = (p.getX(i) + 2.7) / 5.4; uv.setXY(i, nz.getZ(i) < -0.5 ? 1 - u : u, p.getY(i) / 3.4); } plate.translate(0, 0, -0.18); }
+    const g = new THREE.Group(), add = (geom, m) => { const o = new THREE.Mesh(geom, m); o.frustumCulled = false; g.add(o); return o; };
+    add(plate, leafMat);
+    // the torn edge: a tongue of metal on every stretch of the outline, bent out and away from the hole, uneven
+    let area = 0; for (let i = 0; i < n; i++) { const a = O[i], b = O[(i + 1) % n]; area += a[0] * b[1] - b[0] * a[1]; }
+    const out = area > 0 ? 1 : -1, tri = [], back = [], wall = [], z0 = side * 0.18;
+    for (let i = 0; i < n; i++) {
+      const a = O[i], b = O[(i + 1) % n], dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy); if (L < 1e-4) continue;
+      const nx = out * dy / L, ny = -out * dx / L, r1 = hash(i, seed, 1), r2 = hash(i, seed, 2), r3 = hash(i, seed, 3), len = 0.07 + 0.14 * r1 * r1;
+      { const ax = a[0] - nx * 0.006, ay = a[1] - ny * 0.006, bx = b[0] - nx * 0.006, by = b[1] - ny * 0.006; wall.push(ax, ay, -0.181, bx, by, -0.181, bx, by, 0.181, ax, ay, -0.181, bx, by, 0.181, ax, ay, 0.181); }      // the cut through the plate's thickness: sheared metal, bright
+      const k = 0.25 + 0.5 * r2, mx = a[0] + dx * k, my = a[1] + dy * k, curl = 0.5 + 0.9 * r3;      // how far it has bent over: out along the plate as well as off it
+      if (hash(i, seed, 4) > 0.45) continue;      // not every stretch tears into a tongue
+      const tip = [mx + nx * len * Math.sin(curl), my + ny * len * Math.sin(curl), z0 + side * len * Math.cos(curl) * 0.9 + side * 0.03];
+      tri.push(a[0], a[1], z0, b[0], b[1], z0, ...tip); back.push(a[0] - nx * 0.012, a[1] - ny * 0.012, z0 - side * 0.004, b[0] - nx * 0.012, b[1] - ny * 0.012, z0 - side * 0.004, tip[0] - nx * 0.012, tip[1] - ny * 0.012, tip[2] - side * 0.012);
+    }
+    const flat = (arr) => { const q = new THREE.BufferGeometry(); q.setAttribute("position", new THREE.Float32BufferAttribute(arr, 3)); q.setAttribute("uv", new THREE.Float32BufferAttribute(new Array(arr.length / 3 * 2).fill(0), 2)); q.computeVertexNormals(); return q; };
+    add(flat(wall), bareMat).layers.set(FX); add(flat(tri), lipMat); add(flat(back), bareDark);
+    // the pieces: flat scraps of the plate's own paint from inside the outline, each with where it started and how it was thrown
+    const xs = O.map((p) => p[0]), ys = O.map((p) => p[1]), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+    const inside = (x, y) => { let c = false; for (let i = 0, j = n - 1; i < n; j = i++) if ((O[i][1] > y) !== (O[j][1] > y) && x < (O[j][0] - O[i][0]) * (y - O[i][1]) / (O[j][1] - O[i][1]) + O[i][0]) c = !c; return c; };
+    const bits = new THREE.Group(); bits.name = "bits"; g.add(bits);
+    for (let i = 0, tries = 0; bits.children.length < 18 && tries < 400; tries++) {
+      const r = (k) => hash(tries, seed, k), x = x0 + (x1 - x0) * r(1), y = y0 + (y1 - y0) * r(2); if (!inside(x, y)) continue;
+      const m = 3 + Math.floor(r(3) * 3), R = 0.05 + 0.15 * r(4) * r(4), pts = Array.from({ length: m }, (_, j) => { const a = (j + 0.6 * r(5 + j)) / m * 2 * Math.PI, q = R * (0.55 + 0.6 * r(11 + j)); return new THREE.Vector2(Math.cos(a) * q, Math.sin(a) * q); });
+      const bg = new THREE.ExtrudeGeometry(new THREE.Shape(pts), { depth: 0.05, bevelEnabled: false }).toNonIndexed(), p = bg.attributes.position, uv = bg.attributes.uv;
+      for (let j = 0; j < p.count; j++) uv.setXY(j, (x + p.getX(j) + 2.7) / 5.4, (y + p.getY(j)) / 3.4);
+      bg.translate(0, 0, -0.025);
+      const b = add(bg, leafMat); g.remove(b); bits.add(b);
+      b.userData = { at: [x, y], v: [(x - (x0 + x1) / 2) * 4.5 + (r(20) - 0.5) * 2.5, (y - (y0 + y1) / 2) * 3 + 0.6 + 2.6 * r(21), side * (5 + 7 * r(22))], spin: [(r(23) - 0.5) * 16, (r(24) - 0.5) * 16, (r(25) - 0.5) * 10], R, lie: r(26) * 6.28 }; i++;
+    }
+    if (h.haze) { const z = h.haze, xa = z.x?.[0] ?? -2.7, xb = z.x?.[1] ?? 2.7, c = add(new THREE.PlaneGeometry(xb - xa, 3.4).translate((xa + xb) / 2, 1.7, -side * (z.back ?? 2)), mat(z.color ?? "#c4e6fa", { kind: 1, fog: 0.3 })); }
+    holed.set(key, g); return g;
+  }
+  // where the pieces are `age` seconds on: thrown, tumbling, down; each lies flat where it lands (a short slide)
+  function strew(g, age) {
+    const t = age ?? 1e3;
+    for (const b of g.getObjectByName("bits").children) {
+      const u = b.userData, fl = 0.03 - u.at[1], tHit = (u.v[1] + Math.sqrt(u.v[1] * u.v[1] - 2 * 9.8 * fl)) / 9.8, tt = Math.min(Math.max(t, 0), tHit), sl = (1 - Math.exp(-Math.max(0, t - tHit) * 5)) * 0.1;
+      b.position.set(u.at[0] + u.v[0] * (tt + sl), u.at[1] + u.v[1] * tt - 4.9 * tt * tt, u.v[2] * (tt + sl));
+      if (t >= tHit) b.rotation.set(Math.PI / 2, 0, u.lie); else b.rotation.set(u.spin[0] * tt, u.spin[1] * tt, u.spin[2] * tt);
+    }
+  }
+
   // ---- the hub ----------------------------------------------------------------------------------------------------
   const hub = new THREE.Group(), hubRoof = new THREE.Group(), hubShutters = [];
   {
@@ -423,7 +483,7 @@ export async function createCorridor(renderer, o = {}) {
     say.group.position.set(0, 0, o.z); say.walls[1].visible = cut !== "right"; say.walls[-1].visible = cut !== "left";
   }
 
-  function module(pl, i, z, cut, doors, chomp, arm, clear, slabs) {
+  function module(pl, i, z, cut, doors, chomp, arm, clear, slabs, holes) {
     const bulk = ((i % BULK) + BULK) % BULK === 0 ? 1 : 0, put = (proto) => { const g = pl.use(proto); g.position.z = z; return g; };
     put(P.floor[bulk]); if (hash(i, arm, 9) > 0.5) put(floorArrow);
     if (cut !== "top") put(P.ceil[bulk]);
@@ -434,7 +494,8 @@ export async function createCorridor(renderer, o = {}) {
       put(P.wall[s][bulk]);
       const v = variantOf(i, s, arm), n = Math.floor(hash(i, s, arm, 77) * 5); put(P.vari[s][v][n] ?? P.vari[s][v][0]);
     }
-    if (bulk) { const g = put(shutterProto); setShutter(g, doors?.[i / BULK] ?? chomp); }
+    if (bulk && holes?.[i / BULK]) { const h = holes[i / BULK]; strew(put(holedProto(h)), h.age); }
+    else if (bulk) { const g = put(shutterProto); setShutter(g, doors?.[i / BULK] ?? chomp); }
     if (bulk && slabs && slabs[i / BULK] !== undefined) put(slabProto).position.y = 3.46 * (1 - clamp(slabs[i / BULK]));
   }
 
@@ -450,7 +511,7 @@ export async function createCorridor(renderer, o = {}) {
     G.screens.value = w.screens; G.meters.value = w.meters; G.stars.value = clamp(w.stars, 0, 1.6); G.beam.value = 0.6 + w.hull; G.reels.value = (G.reelAngle = t * 2 + sync.drive({ stem: "keyboard", mode: "count" }, frame) * 0.7);
     pool.begin(); poolX.begin();
     const i0 = Math.floor(cam.pos[2] / M), span = opt.span ?? 24;
-    for (let i = i0 - span; i <= i0 + span; i++) { const z = i * M; if (J && Math.abs(z + M / 2 - J.z) < HUB) continue; module(pool, i, z, opt.cut, opt.doors, w.doorChomp, 0, opt.clearStruts, opt.slabs); }
+    for (let i = i0 - span; i <= i0 + span; i++) { const z = i * M; if (J && Math.abs(z + M / 2 - J.z) < HUB) continue; module(pool, i, z, opt.cut, opt.doors, w.doorChomp, 0, opt.clearStruts, opt.slabs, opt.holes); }
     if (J) { armX.position.set(0, 0, J.z); for (let k = 2; k < 16; k++) for (const sgn of [1, -1]) { const i = sgn > 0 ? k : -k - 1; module(poolX, i, i * M, opt.cut === "top" ? "top" : null, null, w.doorChomp, 1); } }
     pool.end(); poolX.end();
     hub.visible = !!J; if (J) { hub.position.set(0, 0, J.z); hubRoof.visible = opt.cut !== "top"; ["A", "B", "C", "D"].forEach((n, k) => setShutter(hubShutters[k], opt.hubDoors?.[n] ?? w.doorChomp)); }

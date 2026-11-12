@@ -1140,6 +1140,90 @@
     "yaw": -22.2,
     "elev": 2.1
    }
+  },
+  "burst": {
+   "img": "hero/burst.webp",
+   "w": 1447,
+   "h": 1839,
+   "k": 1000.0,
+   "ground": [
+    546.2,
+    1922.0
+   ],
+   "bottom": 1829,
+   "hips": [
+    546.8,
+    976.0
+   ],
+   "head": [
+    492.8,
+    324.9
+   ],
+   "source": "kits/tane/source/hero/slice_hole/take_1.jpg",
+   "shot": "shots/slice_tane.js",
+   "frame": 55,
+   "action": "slice_burst",
+   "cel": 0,
+   "from": {
+    "yaw": 34.4,
+    "elev": 2.3
+   }
+  },
+  "land": {
+   "img": "hero/land.webp",
+   "w": 1652,
+   "h": 1941,
+   "k": 1000.0,
+   "ground": [
+    599.5,
+    1930.7
+   ],
+   "bottom": 1931,
+   "hips": [
+    814.0,
+    1206.1
+   ],
+   "head": [
+    984.1,
+    566.3
+   ],
+   "source": "kits/tane/source/hero/slice_hole/take_1.jpg",
+   "shot": "shots/slice_tane.js",
+   "frame": 59,
+   "action": "slice_burst",
+   "cel": 1,
+   "from": {
+    "yaw": 0.1,
+    "elev": 4.9
+   }
+  },
+  "look": {
+   "img": "hero/look.webp",
+   "w": 1013,
+   "h": 2183,
+   "k": 1167.0,
+   "ground": [
+    455.9,
+    2150.0
+   ],
+   "bottom": 2173,
+   "hips": [
+    540.0,
+    1019.1
+   ],
+   "head": [
+    579.4,
+    352.4
+   ],
+   "source": "kits/tane/source/hero/slice_hole/take_1.jpg",
+   "shot": "shots/slice_tane.js",
+   "frame": 65,
+   "action": "slice_burst",
+   "cel": 2,
+   "from": {
+    "yaw": 5.1,
+    "elev": 5.2
+   }
   }
  }
 }

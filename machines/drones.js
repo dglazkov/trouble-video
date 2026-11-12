@@ -11,7 +11,9 @@
 //       scale = 1, eye = 1 (how hard the eye burns, 0..2; 0: shut, under a dark lid), thrust = the caller's wire, beam = 0..1 (enforcer's searchlight),
 //       sway = 0 (arms and blades), broken = null | seconds since it was destroyed, seed = 0,
 //       fold = 0 (a chaser's blades: 1 folded back along its body, as it hangs in a rack with its thrusters out),
-//       smoke: false (no balls of smoke when it is destroyed: the shot draws its own) }
+//       smoke: false (no balls of smoke when it is destroyed: the shot draws its own),
+//       burst: false (nor the burst: the shot draws that too),
+//       snap: null | seconds since its blades were torn off (it lives on without them: they fly as a wreck's parts do, with `carry`) }
 //   chase(frame, sync, o) -> list    a pack following a lead point, lurching on drum hits; see below
 //
 // Destroyed: at broken = 0 a burst (four frames, hard shapes), then the parts fly apart, fall, and lie where they land.
@@ -144,7 +146,8 @@ export function createDrones(kit, scene) {
       const thrust = s.thrust ?? wires.thrust ?? 0, eye = s.eye ?? 1, sway = s.sway ?? 0, fold = Math.min(1, Math.max(0, s.fold ?? 0));
       o.parts.forEach((p, i) => {
         const u = p.userData, h = u.home;
-        if (alive) { p.position.set(h[0], h[1], h[2]); p.rotation.set(u.sway && s.type !== "chaser" ? Math.sin(frame * 0.35 + seed) * 0.12 * (1 + sway) : 0, u.dihedral ? Math.sign(h[0]) * fold * 0.98 : 0, u.dihedral ? (u.dihedral + u.sway * 0.14 * thrust) * (1 - fold) : 0); return; }
+        const br = alive ? (u.name === "blade" && s.snap != null && s.snap >= 0 ? s.snap : null) : s.broken;      // this part's own time since it was thrown
+        if (br === null) { p.position.set(h[0], h[1], h[2]); p.rotation.set(u.sway && s.type !== "chaser" ? Math.sin(frame * 0.35 + seed) * 0.12 * (1 + sway) : 0, u.dihedral ? Math.sign(h[0]) * fold * 0.98 : 0, u.dihedral ? (u.dihedral + u.sway * 0.14 * thrust) * (1 - fold) : 0); return; }
         // thrown: out along its kick, tumbling, then down; it lies where it lands
         const r = rng(seed * 131 + i * 17 + 5), k = u.kick ?? [0, 1, 0], v = [k[0] * (0.8 + r() * 0.8) + (r() - 0.5) * 1.5, k[1] * (0.7 + r()) + 1.2, k[2] * (0.8 + r() * 0.8) + (r() - 0.5) * 1.5 + (s.carry ?? 0)];
         const floor = (0.12 - s.pos[1]) / sc - h[1] + (u.heavy ? 0.35 : 0), gA = 9.8 / sc;
@@ -164,7 +167,7 @@ export function createDrones(kit, scene) {
       }
       // burst and smoke
       const bf = alive ? -1 : Math.floor(br * sync.fps);
-      o.burst.forEach((b, i) => { b.visible = bf >= i * 2 && bf < i * 2 + 2 + i; if (b.visible) { b.scale.setScalar(P.radius * (1.1 + bf * 0.5)); b.rotation.set(seed + bf * 1.3, seed * 2 + bf, 0); } });
+      o.burst.forEach((b, i) => { b.visible = bf >= i * 2 && bf < i * 2 + 2 + i && s.burst !== false; if (b.visible) { b.scale.setScalar(P.radius * (1.1 + bf * 0.5)); b.rotation.set(seed + bf * 1.3, seed * 2 + bf, 0); } });
       o.smoke.forEach((b, i) => {
         b.visible = bf >= 2 && br < 1.1 && s.smoke !== false; if (!b.visible) return; const r = rng(seed * 7 + i * 3 + 1), a = r() * 6.28, d = P.radius * (0.4 + r() * 0.7), life = clamp(br / 1.1);
         b.position.set(Math.cos(a) * d * (1 + br), 0.2 + r() * 0.5 + br * 0.9, Math.sin(a) * d * (1 + br)); b.scale.setScalar(P.radius * (0.35 + r() * 0.3) * (0.4 + life * 1.2) * (life > 0.6 ? (1 - life) / 0.4 : 1));

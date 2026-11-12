@@ -56,7 +56,7 @@ const LEAP = [
 const leg = (swing, knee, out = 6, foot = 0) => ({ swing, knee, out, foot }), arm = (swing, out, elbow) => ({ swing, out, elbow });
 const CAUGHT = {
   tane: [
-    pose({ lean: -7, twist: -24, head: { yaw: -52, pitch: 0, roll: 5 }, arm: { L: arm(38, 18, 104), R: arm(30, 26, 112) }, leg: { L: leg(-16, 10, 6, 30), R: leg(64, 84, 8, 22) } }),
+    pose({ lean: -7, twist: -24, head: { yaw: 14, pitch: -10, roll: 5 }, arm: { L: arm(38, 18, 104), R: arm(30, 26, 112) }, leg: { L: leg(-16, 10, 6, 30), R: leg(64, 84, 8, 22) } }),
     pose({ lean: -4, twist: -8, head: { yaw: -30, pitch: -14, roll: -4 }, arm: { L: arm(18, 26, 92), R: arm(26, 30, 100) }, leg: { L: leg(7, 14, 15), R: leg(-7, 10, 15) } }),
     pose({ lean: -6, twist: 8, head: { yaw: 24, pitch: -10, roll: 3 }, arm: { L: arm(48, 20, 112), R: arm(30, 26, 120) }, leg: { L: leg(20, 20, 10), R: leg(-26, 30, 10, 30) } }),
     pose({ lean: 4, twist: 6, head: { yaw: 28, pitch: -8, roll: 4 }, arm: { L: arm(70, 24, 122), R: arm(44, 30, 126) }, leg: { L: leg(17, 24, 17), R: leg(-12, 22, 17) } }),
@@ -71,7 +71,7 @@ const CAUGHT = {
     pose({ lean: 0, twist: -8, head: { yaw: -36, pitch: 2, roll: 0 }, arm: { L: arm(-6, 8, 28), R: arm(6, 9, 30) }, leg: { L: leg(-14, 8, 4, 18), R: leg(20, 16, 4, -6) } }),
     pose({ lean: -3, twist: -6, head: { yaw: -30, pitch: -24, roll: 4 }, arm: { L: arm(-4, 8, 28), R: arm(4, 9, 30) }, leg: { L: leg(-4, 2, 4), R: leg(5, 6, 6) } }),
     pose({ lean: -2, twist: -10, head: { yaw: -70, pitch: -8, roll: 3 }, arm: { L: arm(26, -4, 112), R: arm(24, -4, 116) }, leg: { L: leg(12, 10, 4), R: leg(-14, 44, 4, 10) } }),
-    pose({ lean: -5, twist: -12, head: { yaw: -78, pitch: -12, roll: 5 }, arm: { L: arm(26, -4, 114), R: arm(24, -4, 118) }, leg: { L: leg(2, 2, 4), R: leg(9, 16, 7) } }),
+    pose({ lean: -5, twist: -12, head: { yaw: 14, pitch: -10, roll: 5 }, arm: { L: arm(26, -4, 114), R: arm(24, -4, 118) }, leg: { L: leg(2, 2, 4), R: leg(9, 16, 7) } }),
   ],
   juno: [
     pose({ lean: 4, twist: -38, pelvisTwist: -10, head: { yaw: -66, pitch: 0, roll: 8 }, arm: { L: arm(20, 50, 62), R: arm(-14, 56, 72) }, leg: { L: leg(-20, 12, 6, 34), R: leg(52, 72, 8, 10) } }),
@@ -224,6 +224,24 @@ Object.assign(ACTIONS, {
   core_step: { cels: 2, loop: false, half: false, loose: true, pose: (i) => CORE_STEP[i] },
   core_land: { cels: 3, loop: false, half: false, loose: true, pose: (i) => CORE_LAND[i] },
 });
+
+// ---- the slice's shutter (shots/slice_tane.js): Tane goes through the shut plate and leaves his shape in it -----------
+// Seen from ahead of him and to his left: (0) the burst: through the plate upright and whole, left shoulder first, the
+// left knee driven up, the right arm and leg thrown back, chin up over the shoulder; (1) the landing: a wide low skid
+// across his line (the shot turns him side-on to it), braced on the leading leg, arms out; (2) stopped: straightening
+// up, a fist on his hip, looking back over his left shoulder at the hole.
+const SLICE_BURST = [
+  pose({ lean: 16, twist: -30, pelvisTwist: 8, lift: 0.3, head: { yaw: 26, pitch: -22, roll: 0 },
+    arm: { L: { swing: -4, out: 34, elbow: 104 }, R: { swing: -24, out: 76, elbow: 34 } },
+    leg: { L: { swing: 62, out: 10, knee: 92, foot: 10 }, R: { swing: -40, out: 18, knee: 26, foot: 50 } } }),
+  pose({ lean: 6, roll: 16, twist: 6, head: { yaw: 20, pitch: -12, roll: 4 },
+    arm: { L: { swing: -10, out: 46, elbow: 36 }, R: { swing: 12, out: 58, elbow: 44 } },
+    leg: { L: { swing: 34, out: 16, knee: 86, foot: 0 }, R: { swing: 6, out: 50, knee: 8, foot: -10 } } }),
+  pose({ lean: 7, roll: 5, twist: 14, head: { yaw: 14, pitch: -10, roll: 5 },
+    arm: { L: { swing: -6, out: 30, elbow: 96 }, R: { swing: 6, out: 16, elbow: 22 } },
+    leg: { L: { swing: 6, out: 10, knee: 10, foot: 0 }, R: { swing: 4, out: 26, knee: 4, foot: -6 } } }),
+];
+Object.assign(ACTIONS, { slice_burst: { cels: 3, loop: false, half: false, loose: true, float: true, pose: (i) => SLICE_BURST[i] } });
 
 // Which drawing of an action a phase (0..1 through the action) is on. A held action of n drawings splits the phase
 // into n equal parts (ride: below 1/3 leaning left, to 2/3 centred, then leaning right; 0, 0.5 and 1 pick them).
