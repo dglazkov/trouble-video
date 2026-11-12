@@ -88,5 +88,7 @@ export function tail(g, x, y, t, len = 300, dir = [0.3, 1], seed = 0) {
 // The sign-off, small in the lower right corner, in the film's display face.
 export function tsuzuku(g, a = 1) {
   g.save(); g.globalAlpha = clamp(a); g.fillStyle = "#efe6d2"; g.font = '58px "Dela Gothic One"'; g.textAlign = "right"; g.textBaseline = "alphabetic"; g.letterSpacing = "6px";
-  g.fillText("つづく", W - 96, H - 92); g.restore();
+  g.fillText("つづく", W - 96, H - 92);
+  // the same in English, small, under it: most of the film's audience cannot read the line above
+  g.globalAlpha = clamp(a) * 0.8; g.font = '22px "Dela Gothic One"'; g.letterSpacing = "3px"; g.fillText("to be continued", W - 96, H - 56); g.restore();
 }
