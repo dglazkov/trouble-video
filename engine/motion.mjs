@@ -55,7 +55,8 @@ export function walk(shot, sync, kits) {
   const marked = new Set((shot.marks ?? []).map((m) => m.at));      // a hit the shot holds to the music is deliberate
   let actors = {}, take = null;
   for (let f = 0; f < shot.frames; f++) {
-    const fr = shot.frame(f, sync);
+    let fr = shot.frame(f, sync);
+    if (fr.panels) fr = { ...fr, camera: fr.panels[0].frame.camera, actors: [] };      // a split screen (engine/stage.js panels): its pictures are watched here, its figures in each panel's own shot
     if ((fr.take ?? 0) !== take) { actors = {}; take = fr.take ?? 0; }
     const cam = camera({ fov: 30, ...fr.camera, w: W, h: H }), hf = shot.held?.(f) ?? f - f % 2, held = hf === f ? fr : shot.frame(hf, sync), post = { ...fr.options?.post, ...fr.post };
     const row = { f, take, declared: !!(post.mode || post.flash || post.black) || marked.has(f), cam, people: [] };
