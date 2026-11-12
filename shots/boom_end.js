@@ -27,5 +27,6 @@ export const ok = shot("ok", { plates: { push: src("boom_push_3", "png"), calm: 
       cels: [{ plate: f >= 6 ? "calm" : "push", ...hung, layer: { ...AFTER, tint: [0.84, 0.86, 0.9], rim: on >= 0 ? [0.45, 1.0, 0.6] : AFTER.rim, rimDir: on >= 0 ? [9, 2] : [0, 6] } }],
       under(g) { smokeBank(g, W, H, { t: f + 90, cover: 0.3, seed: 9, colors: ["#3f3b4a", "#2a2634", "#140a16"], drift: [0.5, 0.3] }); },
       overlay(g) { readout(g, quadOf(hung, SCREEN.push), on >= 0 && !(on === 2 || on === 3) ? "ok" : "off", 0, f); ash(g, f + 20, 14); },
-      post: { bgBlur: 0.02, dark: 0.2, flash: on === 0 ? 0.12 : 0, bloom: 0.6, vignette: 0.5, sat: 0.95, wrap: 0.25 } };
+      // (no flash as the CRT lights: a flash whitens the finished frame, Ife and the grain in her blacks with it, and she speckled for that frame. The screen's own glow is the kick.)
+      post: { bgBlur: 0.02, dark: 0.2, bloom: on === 0 ? 1.0 : on === 1 ? 0.8 : 0.6, vignette: 0.5, sat: 0.95, wrap: 0.25 } };
   } });
