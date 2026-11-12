@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: the moment just BEFORE they laugh: only the eyes, eyebrows and mouths change. TANE (far left): both eyes wide open and round, looking at the two people on the right, eyebrows raised high, mouth open in a breathless astonished pant with no grin yet. IFE (the small girl with glasses): both eyes wide open and big behind her glasses, looking up at the two people on the right, eyebrows raised, a small round open mouth, and NO tears on her cheeks, only a small glint of a tear at the lower eyelids. JUNO (teal hair): both eyes wide open and bright, looking at the two people on the left, eyebrows up, her mouth open in a surprised happy gasp. NOOR (far right): the mouth is a straight closed line with no smile; everything else of Noor unchanged.",
+ "refs": [
+  "kits/tane/closeup/reun_faces_1.jpg"
+ ],
+ "kind": "edit:plate:reun_faces",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:56:15",
+ "from": "kits/tane/closeup/reun_faces_1.jpg"
+}

@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: only two small things change. TANE (far left) is not angry: he is astonished and overjoyed to see his friends. His eyebrows are raised HIGH in soft arches (not slanted down, no frown, no anger lines between them), his eyes round and bright, and his open mouth is the beginning of a big happy smile with the corners turned UP. And JUNO's (teal hair) irises are dark BROWN, not teal. Everything else stays exactly as it is.",
+ "refs": [
+  "kits/tane/closeup/reun_faces_3.jpg"
+ ],
+ "kind": "edit:edit:plate:reun_faces",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:57:38",
+ "from": "kits/tane/closeup/reun_faces_3.jpg"
+}
