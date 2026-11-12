@@ -1,0 +1,33 @@
+{
+ "painting": "far.webp",
+ "for": "sets/core.js: the far side of the zero-gravity core, projected from HERO (sets/core.js) onto a sphere far outside the set",
+ "frozen_from": "far_b2.png",
+ "how": "sets/paint.py freeze --width 4096",
+ "steps": [
+  {
+   "made": "far_a1.png",
+   "prompt": "Paint a finished widescreen background painting for a 1990s cel-anime science-fiction film. The view: we float just inside the ZERO-GRAVITY CORE of a colossal far-future space station: a hollow sphere several kilometres across, seen from a point near its inner wall, the camera level, looking straight across the void. In the far centre of the hollow, right of the middle of the picture, hangs the station heart: an enormous gyroscope-like machine, a slender spindle shaft with a blinding white core of light at its middle, wrapped in three or four huge thin concentric rings tilted at different angles like an armillary sphere, with tiny gantries and pods along the rings. Flat pale wedge-shaped shafts of light radiate from the bright core through dusty haze. Behind it, very far away, the opposite inner wall of the sphere curves up, down and around the whole picture: a dense mosaic of tiny docking cradles, tank farms, ribs, hatches and clustered pin-point lamps, so far away it is pale and soft-valued, fading into luminous lilac haze. In the middle distance, scattered and perfectly still, weightless: a few derelict hull plates, cargo containers, a broken truss, long loose loops of cable, small and dark against the glow, at different distances. The left third of the picture is the emptiest: open glowing haze. No horizon, no floor, no up or down: vast, silent, still. Style: an authentic hand-painted background from a 1988-1995 Japanese animated science-fiction feature film, opaque gouache poster colour on board: flat opaque tone areas with crisp hard-edged shadow shapes, two or three clear value steps per surface, precise ruled architectural drawing with thin dark violet line work that is partly lost in the distance, every further layer paler, stepping back in distinct flat layers into luminous haze. PALETTE, strictly: violet and white. Deep saturated violet and aubergine-indigo for the nearest dark shapes, rich amethyst and purple mid-tones, lilac and pale lavender haze, pure white and faintly pink-white for the light at the centre; only a few pin-point accents of pale gold lamps. No teal, no green, no cyan, no orange, no red, no daylight blue. Rich and saturated like the film frames given as reference images (match their flat cel look, line quality and saturation, but NOT their colours), never grey, never washed out. NOT a 3D render, NOT photographic, no soft airbrushed gradients except the haze stepping in flat bands, no lens flare, no depth-of-field blur, no film grain, no stars, no planets, no outer space: this is an INTERIOR. No people, no characters, no robots, no vehicles. Absolutely no text, letters, numbers, kanji, logos or signage anywhere.",
+   "refs": [
+    "out/descent_stills/descent_f0039.png",
+    "out/gantry_stills/gantry_f0012.png"
+   ],
+   "aspect": "16:9",
+   "size": "4K",
+   "model": "gemini-3.1-flash-image (art/gen.py)"
+  },
+  {
+   "made": "far_b2.png",
+   "prompt": "Paint a finished widescreen background painting for a 1990s cel-anime science-fiction film. The FIRST image is an earlier rough of this painting: keep its idea and composition (the giant gyroscope machine of concentric tilted rings round a blinding white core, right of centre, the ringed far wall around it, the open left third) but make the place AT LEAST TEN TIMES BIGGER and deeper, and paint it properly. The SECOND image is another rough: take from it the luminous haze and the flat pale shafts of light. The view: we float inside the ZERO-GRAVITY CORE of a colossal space station, a hollow sphere several kilometres across, looking straight across the void. The gyroscope heart hangs far away: its rings are so huge that the gantries, pods and lamps on them are tiny specks, and the spindle through it is a hairline tower. The opposite inner wall of the sphere is very far behind it and wraps around the WHOLE picture, to every edge and corner, also behind the open left third (there it is furthest and palest, almost lost in haze): concentric bands of thousands of tiny docking cradles, tanks, ribs, hatches, terraces and pin-point lamps, each band smaller and paler, like the inside of a gigantic bowl. Flat pale wedge-shaped shafts of white light radiate from the core across everything. There is NO floating debris, no containers, no cables, no trusses in the foreground or middle distance: only the heart machine, the light and the far wall. Vast, silent, still. Style: an authentic hand-painted background from a 1988-1995 Japanese animated science-fiction feature film, opaque gouache poster colour on board: flat opaque tone areas with crisp hard-edged shadow shapes and visible confident brush-cut edges, two or three clear value steps per surface, precise ruled architectural drawing, thin dark violet line work partly lost in the distance; every further layer paler, stepping back in distinct flat layers into luminous haze. A FULL VALUE RANGE: the rings of the heart machine and the nearest bands of wall in deep saturated violet and aubergine-indigo with hard lit edges of pale lilac, rich amethyst and purple mid-tones, lilac and pale lavender haze, and pure brilliant white with a faint pink edge for the core light and the shafts. PALETTE strictly violet and white, with only pin-point accents of pale gold lamps. No teal, no green, no cyan, no orange, no red, no blue daylight. Saturated and rich like the film frames given as the last reference images (match their flat cel look and line quality, NOT their colours), never grey, never washed out, never a uniform mid purple. NOT a 3D render, NOT vector clip-art, NOT photographic, no soft airbrushed gradients, no lens flare, no depth-of-field blur, no film grain, no stars, no outer space: this is an INTERIOR. No people, no robots, no vehicles. Absolutely no text, letters, numbers, kanji, logos or signage.",
+   "refs": [
+    "out/core/gen/far_a1_s.jpg",
+    "out/core/gen/far_a2_s.jpg",
+    "out/descent_stills/descent_f0039.png",
+    "out/gantry_stills/gantry_f0012.png"
+   ],
+   "aspect": "16:9",
+   "size": "4K",
+   "model": "gemini-3.1-flash-image (art/gen.py)"
+  }
+ ],
+ "candidates": "out/core/gen/ (not committed): far_a1 and far_a2 were roughs (too small a place, one flat mid purple); far_b1 and far_b3 passed over for far_b2 (the fullest value range, the palest left third to stage a black figure against)"
+}

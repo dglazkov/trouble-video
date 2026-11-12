@@ -104,7 +104,12 @@ def generate(name, out, prompt, refs, aspect="16:9", size="4K", kind="", extra=N
     log(name, rec); print("wrote", rel(out)); return True
 
 
-def spec_of(name): return json.load(open(os.path.join(kit_dir(name), "character.json")))
+def spec_of(name):
+    """character.json; KIT_VARIANT=NAME in the environment lays the character's "variants"[NAME] over its "describe"
+    (what they wear in one stretch of the film: Noor's headphones in the core, shots/core_*.js)."""
+    spec = json.load(open(os.path.join(kit_dir(name), "character.json")))
+    v = spec.get("variants", {}).get(os.environ.get("KIT_VARIANT", ""))
+    return {**spec, "describe": {**spec["describe"], **v}} if v else spec
 
 
 def design_text(spec):

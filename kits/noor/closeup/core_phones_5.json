@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: The hands have come DOWN: both arms now hang down at the sides with the hands in the coat pockets, out of the bottom of the frame, shoulders relaxed and lower. The headphones stay ON the head exactly as they are (band over the hair, pads on the ears, wire down the chest). The face, the hair, the coat and everything else stay exactly as they are.",
+ "refs": [
+  "kits/noor/closeup/core_phones_1.jpg"
+ ],
+ "kind": "edit:plate:core_phones",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:49:49",
+ "from": "kits/noor/closeup/core_phones_1.jpg"
+}

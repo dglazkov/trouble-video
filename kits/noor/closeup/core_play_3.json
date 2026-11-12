@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: The finger has pressed the gold middle button fully DOWN: the gold button is now sunk so that its top is clearly LOWER than the tops of the four grey buttons beside it, half hidden in its slot, and the fingertip and the whole hand have moved down with it by the same amount. Nothing else changes.",
+ "refs": [
+  "kits/noor/closeup/core_play_1.jpg"
+ ],
+ "kind": "edit:plate:core_play",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:49:45",
+ "from": "kits/noor/closeup/core_play_1.jpg"
+}

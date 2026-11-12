@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: The headphones are NOT on the head yet: they hang around the NECK like a collar, the thin metal band behind the neck and the two ear pads resting on the collarbones, and BOTH hands hold the ear pads there, at the collarbones, elbows down by the ribs, about to lift them. The ears are bare (covered by hair) and there is no band over the top of the head. The face, the hair, the coat and everything else stay exactly as they are.",
+ "refs": [
+  "kits/noor/closeup/core_phones_1.jpg"
+ ],
+ "kind": "edit:plate:core_phones",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:49:48",
+ "from": "kits/noor/closeup/core_phones_1.jpg"
+}

@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: The eyes are now fully CLOSED: both upper eyelids are down, each eye a single calm curved dark lash line with the dark eyeliner, relaxed, serene, like someone listening to music. The eyebrows and the mouth do not change. Nothing else changes: same face, same hair, same headphones, same coat, same magenta background.",
+ "refs": [
+  "kits/noor/closeup/core_face_2.jpg"
+ ],
+ "kind": "edit:plate:core_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:49:48",
+ "from": "kits/noor/closeup/core_face_2.jpg"
+}

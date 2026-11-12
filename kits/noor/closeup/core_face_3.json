@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: A thin hard-edged band of bright white light with a pale violet edge lies straight across the face at the level of the eyes, from one side of the face to the other, like the reflection of a laser beam passing just in front of the eyes: it brightens the skin, the eyelids, the bridge of the nose and the hair it crosses, as a flat cel-animation highlight shape with hard edges. The eyes stay half closed and do not react. Nothing else changes: same face, same hair, same headphones, same coat, same magenta background.",
+ "refs": [
+  "kits/noor/closeup/core_face_2.jpg"
+ ],
+ "kind": "edit:plate:core_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:49:47",
+ "from": "kits/noor/closeup/core_face_2.jpg"
+}

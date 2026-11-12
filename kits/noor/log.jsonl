@@ -61,3 +61,47 @@
 {"file": "kits/noor/source/hero/desc_wait/take_3.jpg", "kind": "cels:hero/desc_wait", "time": "2026-11-12T09:26:19", "ok": true}
 {"file": "kits/noor/source/hero/desc_wait/take_3.jpg", "reject": "pose: cel 0: covers 2% of the mannequin's hand.L", "by": "check", "time": "2026-11-12T09:26:25"}
 {"file": "kits/noor/closeup/gant_haul_1.jpg", "reject": "plate: good, but the grip is on the monitor's arm rather than the pack's handle; take 2 is used", "by": "hand", "time": "2026-11-12T09:49:46"}
+{"file": "kits/noor/source/hero/front/take_1.jpg", "kind": "cels:hero/front", "time": "2026-11-12T11:45:40", "ok": true}
+{"file": "kits/noor/source/hero/grid/take_1.jpg", "kind": "cels:hero/grid", "time": "2026-11-12T11:45:43", "ok": true}
+{"file": "kits/noor/source/hero/land/take_1.jpg", "kind": "cels:hero/land", "time": "2026-11-12T11:45:43", "ok": true}
+{"file": "kits/noor/source/hero/front/take_2.jpg", "kind": "cels:hero/front", "time": "2026-11-12T11:45:44", "ok": true}
+{"file": "kits/noor/source/hero/open/take_1.jpg", "kind": "cels:hero/open", "time": "2026-11-12T11:45:46", "ok": true}
+{"file": "kits/noor/closeup/core_play_1.jpg", "kind": "plate:core_play", "time": "2026-11-12T11:46:03", "ok": true}
+{"file": "kits/noor/closeup/core_play_2.jpg", "kind": "plate:core_play", "time": "2026-11-12T11:46:05", "ok": true}
+{"file": "kits/noor/closeup/core_phones_1.jpg", "kind": "plate:core_phones", "time": "2026-11-12T11:46:09", "ok": true}
+{"file": "kits/noor/closeup/core_phones_2.jpg", "kind": "plate:core_phones", "time": "2026-11-12T11:46:11", "ok": true}
+{"file": "kits/noor/closeup/core_face_1.jpg", "kind": "plate:core_face", "time": "2026-11-12T11:46:13", "ok": true}
+{"file": "kits/noor/closeup/core_face_2.jpg", "kind": "plate:core_face", "time": "2026-11-12T11:46:15", "ok": true}
+{"file": "kits/noor/source/hero/front/take_3.jpg", "kind": "edit:cels:hero/front", "time": "2026-11-12T11:48:40", "ok": true}
+{"file": "kits/noor/closeup/core_play_3.jpg", "kind": "edit:plate:core_play", "time": "2026-11-12T11:49:45", "ok": true}
+{"file": "kits/noor/closeup/core_face_3.jpg", "kind": "edit:plate:core_face", "time": "2026-11-12T11:49:47", "ok": true}
+{"file": "kits/noor/closeup/core_phones_3.jpg", "kind": "edit:plate:core_phones", "time": "2026-11-12T11:49:48", "ok": true}
+{"file": "kits/noor/closeup/core_phones_4.jpg", "kind": "edit:plate:core_phones", "time": "2026-11-12T11:49:48", "ok": true}
+{"file": "kits/noor/closeup/core_face_4.jpg", "kind": "edit:plate:core_face", "time": "2026-11-12T11:49:48", "ok": true}
+{"file": "kits/noor/closeup/core_phones_5.jpg", "kind": "edit:plate:core_phones", "time": "2026-11-12T11:49:49", "ok": true}
+{"file": "kits/noor/source/hero/front/take_3.jpg", "reject": "an edit to move the white streak to their left: it came back with none on one figure, grey on another, both sides on a third", "by": "hand", "time": "2026-11-12T11:49:56"}
+{"file": "kits/noor/source/hero/front/take_1.jpg", "reject": "good drawings, but the white streak is on THEIR RIGHT in all four (it is on their left in the design)", "by": "hand", "time": "2026-11-12T11:49:56"}
+{"file": "kits/noor/source/hero/front/take_2.jpg", "reject": "painted from straight in front, not the mannequins' three-quarter view, and the cassette player on their right hip", "by": "hand", "time": "2026-11-12T11:49:56"}
+{"file": "kits/noor/source/hero/grid/take_1.jpg", "reject": "no headphones; streak and player drawn on their right (the visible side) for a camera on their right: the camera moved to their left instead", "by": "hand", "time": "2026-11-12T11:49:56"}
+{"file": "kits/noor/source/hero/land/take_1.jpg", "reject": "drawings 2 and 3 are the model sheet's standing figures: hands out of the pockets, facing the other way", "by": "hand", "time": "2026-11-12T11:49:56"}
+{"file": "kits/noor/source/hero/land/take_2.jpg", "kind": "cels:hero/land", "time": "2026-11-12T11:50:02", "ok": true}
+{"file": "kits/noor/source/hero/grid/take_2.jpg", "kind": "cels:hero/grid", "time": "2026-11-12T11:50:02", "ok": true}
+{"file": "kits/noor/source/hero/open/take_2.jpg", "kind": "edit:cels:hero/open", "time": "2026-11-12T11:50:07", "ok": true}
+{"file": "kits/noor/source/hero/front/take_4.jpg", "kind": "cels:hero/front", "time": "2026-11-12T11:50:28", "ok": true}
+{"file": "kits/noor/source/hero/front/take_5.jpg", "kind": "cels:hero/front", "time": "2026-11-12T11:50:31", "ok": true}
+{"file": "kits/noor/closeup/core_play_3.jpg", "reject": "the edit reframed the whole picture: not line for line on its original", "by": "hand", "time": "2026-11-12T11:51:35"}
+{"file": "kits/noor/closeup/core_phones_4.jpg", "reject": "the headband became a hoop round the head", "by": "hand", "time": "2026-11-12T11:51:35"}
+{"file": "kits/noor/closeup/core_play_4.jpg", "kind": "edit:plate:core_play", "time": "2026-11-12T11:51:51", "ok": true}
+{"file": "kits/noor/closeup/core_phones_6.jpg", "kind": "edit:plate:core_phones", "time": "2026-11-12T11:51:53", "ok": true}
+{"file": "kits/noor/source/hero/front/take_4.jpg", "reject": "bare feet, a hand out of its pocket holding the player on their right", "by": "hand", "time": "2026-11-12T11:52:48"}
+{"file": "kits/noor/source/hero/front/take_5.jpg", "reject": "a white streak on both sides of the face; the four drawings nearly alike", "by": "hand", "time": "2026-11-12T11:52:48"}
+{"file": "kits/noor/source/hero/front/take_6.jpg", "kind": "cels:hero/front", "time": "2026-11-12T11:53:17", "ok": true}
+{"file": "kits/noor/source/hero/front/take_7.jpg", "kind": "cels:hero/front", "time": "2026-11-12T11:53:21", "ok": true}
+{"file": "kits/noor/source/hero/front/take_8.jpg", "kind": "cels:hero/front", "time": "2026-11-12T11:53:23", "ok": true}
+{"file": "kits/noor/source/hero/front/take_8.jpg", "reject": "a boot not on its mannequin (check); passed over for take 7", "by": "hand", "time": "2026-11-12T11:56:23"}
+{"file": "kits/noor/source/hero/land/take_4.jpg", "kind": "cels:hero/land", "time": "2026-11-12T11:59:20", "ok": true}
+{"file": "kits/noor/source/hero/land/take_5.jpg", "kind": "cels:hero/land", "time": "2026-11-12T11:59:21", "ok": true}
+{"file": "kits/noor/source/hero/land/take_2.jpg", "reject": "painted on a dull pink, not the key colour: its shadows keyed purple (take_3 is the same re-keyed, and no better)", "by": "hand", "time": "2026-11-12T12:01:01"}
+{"file": "kits/noor/source/hero/land/take_3.jpg", "reject": "take_2 re-keyed: purple spill in every shadow", "by": "hand", "time": "2026-11-12T12:01:01"}
+{"file": "kits/noor/source/hero/land/take_4.jpg", "reject": "passed over for take 5 (the hair falls in three clearer stages)", "by": "hand", "time": "2026-11-12T12:01:01"}
+{"file": "kits/noor/source/hero/front/take_6.jpg", "reject": "passed over for take 7", "by": "hand", "time": "2026-11-12T12:01:01"}

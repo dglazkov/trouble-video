@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: A small change: the headphones are just about to touch the ears. Both ear pads are held about a hand's width AWAY from the ears, out to the sides of the head, with the hands gripping them a little further from the head than before and the elbows a little lower; the thin metal band still goes over the top of the head, just clear of the hair, in the same simple arc as before (an ordinary small headphone band, not a big hoop). The ears, covered by hair, show no pads on them. The face, the hair, the coat and everything else stay exactly as they are.",
+ "refs": [
+  "kits/noor/closeup/core_phones_1.jpg"
+ ],
+ "kind": "edit:plate:core_phones",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:51:53",
+ "from": "kits/noor/closeup/core_phones_1.jpg"
+}

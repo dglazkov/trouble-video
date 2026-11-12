@@ -158,6 +158,29 @@ Object.assign(ACTIONS, {
   desc_heap: { cels: 2, loop: false, half: false, loose: true, float: true, pose: (i, who) => (DESC_HEAP[who] ?? DESC_HEAP.juno)[i] },
 });
 
+// ---- the core (shots/core_*.js, song 78.9-92.9 s): Noor crosses the station's weightless core -----------------------
+// Adrift: upright, a little laid back, hands in the coat's pockets, the feet hanging with the toes down, one knee
+// loose. The body does not move: the action's four drawings are four moments of one slow billow of the hair and the
+// coat (shots/core_cast.js plays them there and back).
+const CORE_DRIFT = pose({ lean: -7, twist: -4, head: { yaw: 0, pitch: 7, roll: -3 }, arm: { L: arm(-12, 11, 46), R: arm(-14, 10, 42) }, leg: { L: leg(7, 8, 4, 40), R: leg(-5, 28, 5, 48) } });
+// At the duct's lip: (0) standing, hands in pockets, looking out; (1) the step off it, into nothing.
+const CORE_STEP = [
+  pose({ lean: -1, twist: 3, head: { yaw: 0, pitch: -3, roll: 2 }, arm: { L: arm(-12, 11, 46), R: arm(-14, 10, 42) }, leg: { L: leg(-2, 1, 3), R: leg(7, 12, 8, 4) } }),
+  pose({ lean: 3, twist: -5, head: { yaw: 0, pitch: 2, roll: 0 }, arm: { L: arm(-12, 11, 46), R: arm(-14, 10, 42) }, leg: { L: leg(36, 10, 4, 14), R: leg(-13, 9, 4, 16) } }),
+];
+// Coming down on the island, where there is weight again: (0) a foot reaching down for the deck, still adrift; (1) it
+// is down, the other leg trailing; (2) standing on it, weight on that leg.
+const CORE_LAND = [
+  pose({ lean: -4, twist: -4, head: { yaw: 0, pitch: 7, roll: -3 }, arm: { L: arm(-12, 11, 46), R: arm(-14, 10, 42) }, leg: { L: leg(22, 5, 4, 34), R: leg(-8, 40, 5, 52) } }),
+  pose({ lean: 2, twist: -3, head: { yaw: 0, pitch: 6, roll: -2 }, arm: { L: arm(-12, 11, 46), R: arm(-14, 10, 42) }, leg: { L: leg(19, 13, 4, -3), R: leg(-17, 26, 5, 42) } }),
+  pose({ lean: 0, twist: 2, head: { yaw: 0, pitch: 5, roll: 0 }, arm: { L: arm(-12, 11, 46), R: arm(-14, 10, 42) }, leg: { L: leg(5, 3, 4, 0), R: leg(-9, 13, 6, 20) } }),
+];
+Object.assign(ACTIONS, {
+  core_drift: { cels: 4, loop: true, half: false, loose: true, float: true, pose: () => CORE_DRIFT },
+  core_step: { cels: 2, loop: false, half: false, loose: true, pose: (i) => CORE_STEP[i] },
+  core_land: { cels: 3, loop: false, half: false, loose: true, pose: (i) => CORE_LAND[i] },
+});
+
 // Which drawing of an action a phase (0..1 through the action) is on. A held action of n drawings splits the phase
 // into n equal parts (ride: below 1/3 leaning left, to 2/3 centred, then leaning right; 0, 0.5 and 1 pick them).
 export function celIndex(action, phase = 0) {

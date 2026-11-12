@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: A tiny change, in the very same picture with the very same framing: do not move, zoom, crop or redraw anything else. ONLY the gold middle button and the fingertip on it change: the gold button is pushed DOWN into the player, so that only a thin sliver of its top still shows above the casing, clearly lower than the four grey buttons beside it, and the fingertip (and the finger and hand with it) sit lower by exactly that much, pressing it. The cassette player, its window, the two discs, the chain, the wire and every fold of the black cloth stay pixel for pixel where they are.",
+ "refs": [
+  "kits/noor/closeup/core_play_1.jpg"
+ ],
+ "kind": "edit:plate:core_play",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:51:51",
+ "from": "kits/noor/closeup/core_play_1.jpg"
+}

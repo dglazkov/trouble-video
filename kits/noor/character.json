@@ -158,5 +158,20 @@
  "check": {
   "excess": 0.5,
   "features": 0.0
+ },
+ "variants": {
+  "tape": {
+   "design": [
+    "HAIR: perfectly straight black hair down to the waist, parted in the middle, with ONE bold pure-white streak that starts at the parting on THEIR LEFT side and runs the whole length of the hair in front of the left shoulder; all the rest of the hair is black",
+    "FACE: narrow and calm, half-lidded deadpan eyes with dark eyeliner, thin straight eyebrows, mouth closed, no expression",
+    "COAT: a long plain black coat down to the ankles with a pointed uneven hem, always worn open, plain lapels, long sleeves to the wrists, over a plain black top and plain black trousers; dark-grey and violet-grey shade tones so the folds of the black clothes still show",
+    "NECK: a plain black choker and two thin silver chain necklaces",
+    "HIP: one thin silver chain hanging in a loop at the hip, and a small grey retro cassette player clipped on THEIR LEFT hip",
+    "BOOTS: heavy black lace-up platform boots with thick soles, up to the middle of the shin",
+    "HANDS: bare hands with black nails",
+    "HEADPHONES: they are WEARING small retro on-ear headphones in every drawing: a thin silver metal headband over the top of the hair and one small round dark-grey foam ear pad on each ear, with ONE thin black wire running from the left ear pad down the front of the coat to the cassette player on the hip"
+   ],
+   "never": "No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on them. No hat, no weapon."
+  }
  }
 }

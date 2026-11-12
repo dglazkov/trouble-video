@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: The headphones are HALFWAY up, being put on: both hands hold the two ear pads beside the JAW, a little below the ears and a little away from the head, the thin metal band arching behind and above the head, not yet touching the hair; the elbows are lower and closer to the body than before. The ears are still bare (covered by hair). The face, the hair, the coat and everything else stay exactly as they are.",
+ "refs": [
+  "kits/noor/closeup/core_phones_1.jpg"
+ ],
+ "kind": "edit:plate:core_phones",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:49:48",
+ "from": "kits/noor/closeup/core_phones_1.jpg"
+}
