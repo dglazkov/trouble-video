@@ -5,7 +5,7 @@
 //     sets: ["corridor"],                                sets to build before the first frame (others are built when met)
 //     frame(f, sync) -> {
 //       set: "corridor" | "market" | null, camera: { pos, target, fov, up }, options: { ...the set's cues, post: {...} },
-//       actors: [{ who, action, phase, yaw, x, y, z, view, light: {...}, shadow: false, over: true }],
+//       actors: [{ who, action, phase, yaw, x, y, z, view, light: {...}, shadow: false, over: true, steady: 3, hero: "name" }],
 //       cels: [{ plate, x, y, scale, layer: {...engine/post.js LAYER} }],      plates on the frame: centre (pixels), scale
 //       backdrop(g, cam, bodies)    a painted background when there is no set (a 2D canvas the size of the frame)
 //       under(g, cam, bodies)       painted over the background, under the characters
@@ -18,10 +18,14 @@
 // set says falls where each stands, behind whatever of the set is nearer, sunk into its air with distance, a contact
 // shadow under each on the floor; then the lens, the grain and the rest over the whole picture.
 // Characters are held on twos (their drawing is the one for the last even frame; where they are is on ones, with the
-// camera and the set). An actor's `view` names the drawing the shot was staged for: a kit without it shows the dummy.
+// camera and the set). An actor's `hero` names a one-off drawing of the kit made for this shot's camera (engine/cels.js).
+// An actor's `view` names the drawing the shot was staged for: a kit without it shows the dummy.
+// A figure stands in the light of the place it is at, which is hard-edged (a pool or not): one that crosses a pool
+// every few frames would strobe, so `steady: n` lays it in the mean light of its way over n frames either side.
 // A cel is flat, at the depth of the character's middle: where a lean would put part of it behind something it is
 // really in front of, `over: true` lets nothing of the set hide it.
-// Query: ?shot=/shots/x.js &debug=1 (skeletons and which cel is on) &mannequin=1 (dummies only) &kits=a,b (the kits
+// Query: ?shot=/shots/x.js &debug=1 (skeletons and which cel is on) &mannequin=1 (dummies only) &over=1 (nothing of
+// the set hides any character: against a normal render, the difference is what the set hid) &kits=a,b (the kits
 // that exist; a cast member whose kit does not is a dummy of standard build).
 import * as THREE from "three";
 import { proportions, solve, camera } from "./body.js";
@@ -35,7 +39,7 @@ import { ndMaterial } from "../sets/kit.js";
 
 try {
   const Q = new URLSearchParams(location.search);
-  const shot = (await import(Q.get("shot"))).default, DEBUG = Q.get("debug") === "1", DUMMY = Q.get("mannequin") === "1", KITS = Q.get("kits")?.split(",");
+  const shot = (await import(Q.get("shot"))).default, DEBUG = Q.get("debug") === "1", DUMMY = Q.get("mannequin") === "1", OVER = Q.get("over") === "1", KITS = Q.get("kits")?.split(",");
   const W = shot.width ?? 1920, H = shot.height ?? 1080, fps = shot.fps ?? 24, f0 = Math.round((shot.start ?? 0) * fps);
   THREE.ColorManagement.enabled = false;
   const canvas = document.getElementById("c");
@@ -66,10 +70,10 @@ try {
     if ((fr.take ?? 0) !== take) { actors = {}; take = fr.take ?? 0; }
     const cam = camera({ fov: 30, ...fr.camera, w: W, h: H }), hf = shot.held?.(f) ?? f - f % 2, held = hf === f ? fr : shot.frame(hf, sync);
     return { cam, list: (fr.actors ?? []).map((a) => {
-      const h = held.actors?.find((x) => x.who === a.who) ?? a, on = { ...a, action: h.action, phase: h.phase }, c = cast[a.who];
+      const h = held.actors?.find((x) => x.who === a.who) ?? a, on = { ...a, action: h.action, phase: h.phase, hero: h.hero }, c = cast[a.who];
       if (!c) throw new Error(`${shot.name}: "${a.who}" is not in the cast`);
-      const body = solve(c.P, actorPose(on)), pick = (actors[a.who] ??= createActor(c.kit)).pick(on.action, celIndex(on.action, on.phase), body, cam);
-      if (a.view && !c.kit.actions[on.action]?.views[a.view]) pick.missing = true;
+      const body = solve(c.P, actorPose(on)), pick = (actors[a.who] ??= createActor(c.kit)).pick(on.action, celIndex(on.action, on.phase), body, cam, on.hero);
+      if (!on.hero && a.view && !c.kit.actions[on.action]?.views[a.view]) pick.missing = true;
       return { a: on, c, body, pick };
     }) };
   }
@@ -100,13 +104,27 @@ try {
       const { a, c, body, pick } = p, q = body.q;
       if (DUMMY || pick.missing) drawMannequin(g, body, cam, { ink: 2 }); else actors[a.who].draw(g, pick, body, cam);
       const dummy = DUMMY || pick.missing;
-      notes.push({ who: a.who, action: a.action, view: pick.view, cel: pick.cel, mirror: pick.mirror, dummy, rel: +pick.rel.toFixed(0) });
+      const note = { who: a.who, action: a.action, view: pick.view, cel: pick.cel, mirror: pick.mirror, dummy, rel: +pick.rel.toFixed(0) }; notes.push(note);
       // the light of the place where the figure stands
-      const at = [q.x, q.y ?? 0, q.z], L = { ...(set?.light?.(at, opt) ?? {}), ...a.light }, foot = cam.project(at), head = cam.project([q.x, (q.y ?? 0) + c.P.height, q.z]);
+      const at = [q.x, q.y ?? 0, q.z], L = { ...(set?.light?.(at, opt) ?? {}), ...a.light };
+      if (a.steady && set?.light) {      // moving fast through pools of light: the mean of the light along the next and last few frames of its way
+        const acc = { tint: [0, 0, 0], rim: [0, 0, 0] }; let n = 0;
+        for (let k = -a.steady; k <= a.steady; k++) {
+          const g = f + k; if (g < 0 || g >= shot.frames) continue;
+          const o = shot.frame(g, sync); if ((o.take ?? 0) !== (fr.take ?? 0)) continue;
+          const b = o.actors?.find((x) => x.who === a.who); if (!b) continue;
+          const l = set.light([b.x ?? 0, b.y ?? 0, b.z ?? 0], opt), w = 1 - Math.abs(k) / (a.steady + 1); n += w;      // nearer frames count for more: no ripple as a pool enters or leaves the span
+          for (const key of ["tint", "rim"]) for (let j = 0; j < 3; j++) acc[key][j] += w * (l[key] ?? [1, 1, 1])[j];
+        }
+        if (n) for (const key of ["tint", "rim"]) if (!a.light?.[key]) L[key] = acc[key].map((v) => v / n);
+      }
+      const foot = cam.project(at), head = cam.project([q.x, (q.y ?? 0) + c.P.height, q.z]);
       const from = L.from ?? [0, 1, 0], d = [from[0] * cam.right[0] + from[1] * cam.right[1] + from[2] * cam.right[2], from[0] * cam.up[0] + from[1] * cam.up[1] + from[2] * cam.up[2]], dl = Math.hypot(d[0], d[1]);
       const px = Math.min(9, Math.max(2.5, foot.s * 0.016)), y0 = 1 - Math.max(foot.y, head.y) / H, y1 = 1 - Math.min(foot.y, head.y) / H;
-      post.cel(s.t, { depth: a.over ? 0 : Math.max(0.05, p.depth - 0.35), tint: L.tint ?? [1, 1, 1], fog: L.fogK ? (1 - Math.exp(-p.depth * L.fogK)) : 0, fogColor: L.fogColor ?? [0, 0, 0],
-        rim: dl > 0.3 && L.rim ? L.rim : [0, 0, 0], rimDir: dl > 0.3 ? [d[0] / dl * px, d[1] / dl * px] : [0, 0], gradient: L.gradient ?? 0, gradientY: [y0, y0 + (y1 - y0) * 0.75] });
+      const layer = { depth: a.over || OVER ? 0 : Math.max(0.05, p.depth - 0.35), tint: L.tint ?? [1, 1, 1], fog: L.fogK ? (1 - Math.exp(-p.depth * L.fogK)) : 0, fogColor: L.fogColor ?? [0, 0, 0],
+        rim: dl > 0.3 && L.rim ? L.rim : [0, 0, 0], rimDir: dl > 0.3 ? [d[0] / dl * px, d[1] / dl * px] : [0, 0], gradient: L.gradient ?? 0, gradientY: [y0, y0 + (y1 - y0) * 0.75] };
+      post.cel(s.t, layer);
+      Object.assign(note, { tint: layer.tint, rim: layer.rim, fog: +layer.fog.toFixed(4), depth: +layer.depth.toFixed(3) });      // the light it was laid in (engine/motion.mjs reads it for flicker)
     });
     const paint = (i, fn) => { if (!fn && !(i === 2 && DEBUG)) return null; const s = sheet(i); fn?.(s.g, cam, bodies); return s; };
     const under = paint(1, fr.under), over = paint(2, fr.overlay);

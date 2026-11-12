@@ -4,10 +4,16 @@
 //    checks) and layout.json (per cel: its cell, the ground point under the root, every joint, and the sheet's scale
 //    in pixels per body unit). --only puts some of the action's cels on the sheet, at the scale that many allow;
 //    --out names the files (default "layout").
+//   node pipeline/layout.mjs NAME hero SHEET --shot shots/X.js --frames 7:leap_a,13:leap_b [--what "what the drawings show"]
+// -> kits/NAME/source/hero/SHEET/layout.*: HERO drawings, one-off drawings for a shot's own camera. Each mannequin
+//    is the character as the shot shows them on that frame (its pose there, seen through the shot's camera, with its
+//    perspective), named; cels.py make NAME hero SHEET paints, checks and cuts them into kits/NAME/hero/, and a shot
+//    shows one by giving its actor `hero: "leap_a"`.
 import fs from "node:fs"; import path from "node:path";
 import { open, savePng, ROOT } from "./browser.mjs";
 
 const argv = process.argv.slice(2), opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 ? argv.splice(i, 2)[1] : d; };
+const shotFile = opt("--shot", null), heroFrames = opt("--frames", null), what = opt("--what", "");
 const cols = Number(opt("--cols", 4)), aspect = opt("--aspect", "16:9"), only = opt("--only", null), stem = opt("--out", "layout");
 const [name, action, view] = argv;
 if (!view || name === "--help") { console.error(fs.readFileSync(new URL(import.meta.url), "utf8").split("\n").filter((l) => l.startsWith("//")).join("\n")); process.exit(2); }
@@ -21,7 +27,10 @@ const dir = path.join(ROOT, "kits", name, "source", action, view);
 const kitFile = path.join(ROOT, "kits", name, "kit.json"), kit = fs.existsSync(kitFile) ? JSON.parse(fs.readFileSync(kitFile, "utf8")) : { name, actions: {} };
 if (JSON.stringify(kit.body) !== JSON.stringify(spec.body)) { kit.body = spec.body; fs.writeFileSync(kitFile, JSON.stringify(kit, null, 1)); }
 const { page, close } = await open("/pipeline/layout.html");
-const r = await page.evaluate(([s, a, v, o]) => layout(s, a, v, o), [spec, action, view, { W, H, cols, aspect, only: only ? only.split(",").map(Number) : null }]);
+if (action === "hero" && !(shotFile && heroFrames)) { console.error("a hero sheet needs --shot shots/X.js and --frames FRAME:NAME,..."); process.exit(2); }
+const r = action === "hero"
+  ? await page.evaluate(([s, u, l, o]) => heroLayout(s, u, l, o), [spec, "/" + path.relative(ROOT, path.resolve(shotFile)), heroFrames.split(",").map((x) => { const [f, n] = x.split(":"); return { frame: Number(f), name: n }; }), { W, H, cols, aspect, sheet: view, what }])
+  : await page.evaluate(([s, a, v, o]) => layout(s, a, v, o), [spec, action, view, { W, H, cols, aspect, only: only ? only.split(",").map(Number) : null }]);
 await close();
 savePng(path.join(dir, stem + ".png"), r.png); savePng(path.join(dir, stem + "_map.png"), r.map);
 fs.writeFileSync(path.join(dir, stem + ".json"), JSON.stringify(r.layout));

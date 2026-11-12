@@ -9,6 +9,9 @@
   cels.py make NAME ACTION VIEW [--tries 3] [--size 4K] [--ref FILE ...] [--note "..."]
                                       paint, check, and paint again on rejection (each rejection is logged with its
                                       reasons in kits/NAME/log.jsonl); cut the first take that passes
+                                      (NAME hero SHEET: the one-off drawings of a hero sheet laid out by
+                                      pipeline/layout.mjs NAME hero SHEET --shot ... , cut into kits/NAME/hero/NAME.webp
+                                      and the kit's "heroes", each registered to the camera of its shot's frame)
   cels.py measure [--together] TAKE.jpg [...]
                                       how alike the cels of a take are: per cel, how much of each design colour shows and
                                       in how many pieces, and how much that varies between the cels
@@ -327,15 +330,18 @@ def cut(takes, force=False, max_k=1000):
         os.makedirs(os.path.join(ROOT, "out"), exist_ok=True); lock = open(os.path.join(ROOT, "out", name + ".kit.lock"), "w"); fcntl.flock(lock, fcntl.LOCK_EX)   # one writer of kit.json at a time
         kit = json.load(open(kitp)) if os.path.exists(kitp) else {"name": name}
         kit["body"] = t["spec"]["body"]
-        V = kit.setdefault("actions", {}).setdefault(L["action"], {"views": {}})["views"].setdefault(L["view"], {"yaw": L["yaw"], "elev": L["elev"], "cels": {}})
-        if t["turn"]: V["turn"] = t["turn"]
-        else: V.pop("turn", None)
+        hero = L.get("hero")      # one-off drawings for a shot's camera: kept by name under the kit's "heroes"
+        if hero: V = {"cels": {}}; kit.setdefault("heroes", {})
+        else:
+            V = kit.setdefault("actions", {}).setdefault(L["action"], {"views": {}})["views"].setdefault(L["view"], {"yaw": L["yaw"], "elev": L["elev"], "cels": {}})
+            if t["turn"]: V["turn"] = t["turn"]
+            else: V.pop("turn", None)
         TH, TW = t["img"].shape[:2]; sx, sy = TW / L["W"], TH / L["H"]; k = L["unit"] * sx; z = min(1.0, max_k / k)
         alpha, col = key(t["img"])                                              # at the size it was painted
         grade(col, alpha, t["spec"], rep["drift"])
         rgb = col[alpha > 0.99][:, ::-1]; after = flats(rgb[rgb.max(1) >= 46], t["spec"])
         graded[t["file"]] = {nm: [v[1], after.get(nm, [None, None])[1]] for nm, v in rep["drift"].items()}   # Lab distance from the design: as painted, as cut
-        d = os.path.join(kd, L["action"], L["view"]); os.makedirs(d, exist_ok=True)
+        d = os.path.join(kd, "hero") if hero else os.path.join(kd, L["action"], L["view"]); os.makedirs(d, exist_ok=True)
         for c, lc in zip(rep["cels"], L["cels"]):
             dx, dy = c["_"]["dx"] * sx, c["_"]["dy"] * sy
             F = cv2.resize(c["_"]["F"].astype(np.uint8), (TW, TH), interpolation=cv2.INTER_NEAREST)
@@ -348,12 +354,13 @@ def cut(takes, force=False, max_k=1000):
             if hole.any(): bgr = np.where(hole[..., None] > 0, cv2.inpaint(bgr, cv2.dilate(hole, np.ones((3, 3), np.uint8)), 2, cv2.INPAINT_TELEA), bgr)
             rgba = np.dstack([bgr, (a * 255).astype(np.uint8)])
             if z < 1: rgba = cv2.resize(rgba, None, fx=z, fy=z, interpolation=cv2.INTER_AREA)
-            f = os.path.join(d, f"{lc['index']}.webp"); cv2.imwrite(f, rgba, [cv2.IMWRITE_WEBP_QUALITY, 96])
+            f = os.path.join(d, f"{lc['name'] if hero else lc['index']}.webp"); cv2.imwrite(f, rgba, [cv2.IMWRITE_WEBP_QUALITY, 96])
             pt = lambda p: [round((p[0] * sx + dx - x0) * z, 1), round((p[1] * sy + dy - y0) * z, 1)]
             V["cels"][str(lc["index"])] = dict(img=os.path.relpath(f, kd), w=rgba.shape[1], h=rgba.shape[0], k=round(k * z, 2),
                 ground=pt(lc["ground"]), bottom=bottom(rgba[..., 3] > 127), hips=pt(lc["joints"]["hips"]), head=pt(lc["joints"]["head"]),
                 source=t["file"])
-            done.append(lc["index"])
+            if hero: kit["heroes"][lc["name"]] = dict(V["cels"].pop(str(lc["index"])), shot=hero["shot"], frame=lc["frame"], action=lc["action"], cel=lc["cel"], **{"from": lc["from"]})
+            done.append(lc["name"] if hero else lc["index"])
         json.dump(kit, open(kitp, "w"), indent=1); lock.close()
         qc.append(qc_sheet(t, rep, alpha, col, sx, sy))
     t0 = load(takes[0]); L = t0["layout"]
@@ -448,6 +455,7 @@ def make(name, action, view, tries=3, size="4K", refs=(), note=""):
     sys.dont_write_bytecode = True; sys.path.insert(0, os.path.dirname(__file__)); import paint
     src = os.path.join(ROOT, "kits", name, "source", action, view)
     if not os.path.exists(os.path.join(src, "layout.json")):
+        if action == "hero": raise SystemExit(f"no layout for the hero sheet {view}: node pipeline/layout.mjs {name} hero {view} --shot shots/X.js --frames FRAME:NAME,...")
         subprocess.run(["node", os.path.join(ROOT, "pipeline", "layout.mjs"), name, action, view], check=True, timeout=180)
     tried = []
     for n in range(tries):

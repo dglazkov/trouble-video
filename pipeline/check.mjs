@@ -6,7 +6,8 @@
 //  - an action whose mirrored drawing is "half the action on" really is its own mirror image half a cycle later;
 //  - the kit has, for every action and view it claims, every cel of the action with its file, a scale, and a ground
 //    point from which the drawing's lowest painted row is where the skeleton's lowest shoe is in that pose: the
-//    drawing stands on the ground the skeleton stands on.
+//    drawing stands on the ground the skeleton stands on;
+//  - each hero drawing (kit.heroes) has its file and says which shot, frame and line of sight it was drawn for.
 import fs from "node:fs"; import path from "node:path";
 import { proportions, solve, pose, runPose } from "../engine/body.js";
 import { nearest, picker, VIEWS, viewOf, viewCamera } from "../engine/views.js";
@@ -89,6 +90,15 @@ for (const [an, act] of Object.entries(kit.actions ?? {})) {
     ok(Object.keys(V.cels).length === A.cels, `${an}/${vn}: ${Object.keys(V.cels).length} drawings for an action of ${A.cels}`);
   }
 }
+// hero drawings: each has its file, a scale, the frame and line of sight it was drawn for, and its skeleton inside it
+for (const [hn, c] of Object.entries(kit.heroes ?? {})) {
+  cels++;
+  ok(fs.existsSync(path.join(dir, c.img)), `hero ${hn}: missing file ${c.img}`);
+  ok(c.k > 100, `hero ${hn}: scale ${c.k} px per unit`);
+  ok(ACTIONS[c.action] && c.cel < ACTIONS[c.action].cels, `hero ${hn}: "${c.action}" cel ${c.cel} is no pose`);
+  ok(c.shot && Number.isFinite(c.frame) && Number.isFinite(c.from?.yaw) && Number.isFinite(c.from?.elev), `hero ${hn}: no record of the shot, frame and line of sight it was drawn for`);
+  for (const j of ["hips", "head"]) ok(c[j][0] > 0 && c[j][0] < c.w && c[j][1] > 0 && c[j][1] < c.h, `hero ${hn}: the skeleton's ${j} is outside the drawing`);
+}
 ok(cels > 0, "the kit has no drawings");
-console.log(JSON.stringify({ kit: name, actions: Object.fromEntries(Object.entries(kit.actions ?? {}).map(([a, v]) => [a, Object.keys(v.views)])), cels, stride: +stride.toFixed(3), failures: fails }, null, 1));
+console.log(JSON.stringify({ kit: name, heroes: Object.keys(kit.heroes ?? {}), actions: Object.fromEntries(Object.entries(kit.actions ?? {}).map(([a, v]) => [a, Object.keys(v.views)])), cels, stride: +stride.toFixed(3), failures: fails }, null, 1));
 process.exit(fails.length ? 1 : 0);

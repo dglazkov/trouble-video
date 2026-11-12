@@ -5,6 +5,9 @@
                                              the cels of one action seen from one view, painted over its layout sheet
                                              (pipeline/layout.mjs); --ref adds reference images after the design sheet,
                                              such as an accepted sheet of the same character
+  paint.py NAME hero SHEET [--note "extra wording"]
+                                             the one-off drawings of a hero sheet (pipeline/layout.mjs NAME hero SHEET --shot ...):
+                                             each mannequin is the character as a shot's own camera sees them on one frame
   paint.py NAME closeup STEM "acting"        a widescreen head-and-shoulders close-up of the character, mid-sprint, on the
                                              key colour, from the model sheet -> kits/NAME/closeup/STEM_N.jpg
   paint.py NAME edit FILE "what to change" [--ref FILE ...]
@@ -128,12 +131,26 @@ def design_ref(name, spec):
     return out
 
 
+def hero_view(layout, w):
+    """the wording of a hero sheet's view: each mannequin is drawn through a shot's own camera"""
+    def one(c):
+        yaw, el = c["from"]["yaw"], c["from"]["elev"]; a = abs(yaw); side = "LEFT" if yaw > 0 else "RIGHT"
+        rnd = ("from straight in front" if a < 20 else f"in three-quarter FRONT view, {w['p']} {side} side nearer the viewer" if a < 70 else f"from {w['p']} {side} side" if a < 110
+               else f"in three-quarter BACK view, {w['p']} back and {w['p']} {side} side toward the viewer" if a < 150 else f"from BEHIND (and a little to {w['p']} {side}): the viewer sees {w['p']} back and the back of {w['p']} head, {w['p']} face is turned away")
+        up = ("at about eye level" if abs(el) < 10 else f"from BELOW, looking up at {w['o']}" if el < 0 else "from a little above" if el < 22 else
+              f"from ABOVE: the camera is higher than {w['o']} and looks DOWN at {w['o']} at about {round(el / 5) * 5} degrees, so the viewer sees the top of {w['p']} head and shoulders, and the upper side of whatever is under {w['p']} feet" if el < 55 else f"from HIGH ABOVE, looking steeply down on {w['o']}")
+        return f"{rnd}, {up}"
+    cs = layout["cels"]; each = "; ".join(f"drawing {i + 1} is seen {one(c)}" for i, c in enumerate(cs)) if len(cs) > 1 else f"{w['S']} {w['IS']} seen {one(cs[0])}"
+    return (f"Each mannequin is drawn in the exact PERSPECTIVE of the film camera of its shot, and the drawing must keep that camera: {each}. "
+            f"Keep each mannequin's foreshortening exactly: what is nearer the camera is drawn bigger, what points away from it is drawn shorter, and the figure's outline matches its mannequin's outline. Do NOT turn the figure to a plainer view.")
+
+
 def cel_prompt(spec, layout, extra_refs=0, note=""):
     n, cols, rows, view, action = len(layout["cels"]), layout["cols"], layout["rows"], layout["view"], layout["action"]
     w = WORDS[spec.get("pronoun", "she")]; w = {**w, "p_cap": w["p"].capitalize()}; f = lambda text: text.format(n=n, **w)
     grid = f"{n} posing mannequins in a {cols}x{rows} grid" if n > 1 else "one posing mannequin"
     order = " (reading left to right, top row then bottom row)" if rows > 1 else (" (reading left to right)" if n > 1 else "")
-    what = f(ACTIONS.get(action, "{n} drawing(s) of {o}: " + action))
+    what = f(ACTIONS.get(action, "{n} drawing(s) of {o}: " + action)) if action != "hero" else f("{n} key drawing(s) of {o} for one film shot: ") + layout.get("what", "")
     each = f"For each of the {n}: keep" if n > 1 else "Keep"
     same = (f"so the {n} figures stay the same size as each other. " if n > 1 else "")
     ident = (f"All {n} drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: " if n > 1 else "The design: ")
@@ -144,6 +161,7 @@ def cel_prompt(spec, layout, extra_refs=0, note=""):
     # what is particular to this character doing this (how they run), and a prop the layout shows with them
     acting = spec.get("acting", {}).get(action, ""); acting = f" How {w['s']} {'do' if w['IS'] == 'are' else 'does'} it: {acting}." if acting else ""
     prop = " " + spec["props"][layout["prop"]]["describe"] if layout.get("prop") else ""
+    if action == "hero": acting = ""
     face = (f"Wherever {w['p']} face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. " if view != "top" else "")
     return (
         f"Edit the FIRST image. It is an animator's layout sheet: {grid}, {what}{order}. "
@@ -152,7 +170,7 @@ def cel_prompt(spec, layout, extra_refs=0, note=""):
         f"{each} every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, "
         f"same size and same place in its cell), {same}"
         f"BLUE limbs are {w['p']} LEFT arm and leg; RED limbs are {w['p']} RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. "
-        f"{f(VIEWS[view])}{acting}{prop} Each figure has exactly two arms and two legs, and both feet are drawn complete. "
+        f"{hero_view(layout, w) if action == 'hero' else f(VIEWS[view])}{acting}{prop} Each figure has exactly two arms and two legs, and both feet are drawn complete. "
         f"{face}"
         f"{ident}{design_text(spec)} "
         "Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. "
