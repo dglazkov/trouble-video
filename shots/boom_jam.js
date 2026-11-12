@@ -10,7 +10,7 @@ import { skid as dust, rnd } from "../engine/fx.js";
 import { impacts } from "./gant_fx.js";
 import { speedLines } from "./slice_fx.js";
 import { SOCKET } from "../sets/plant.js";
-import { kana } from "../sets/sign.js";
+import { sfx } from "../engine/sfx.js";
 
 export const skid = shot("skid", { plates: { skid: src("boom_skid_2") }, marks: [{ at: 0, what: "the kick returns: the cut, she skids in", on: "kick" }],
   frame(f, sync) {
@@ -73,9 +73,7 @@ export const jam = shot("jam", { plates: { plug: src("boom_plug_1"), lock: src("
         // the twist: two strokes round the ring, the way it turned
         if (lock >= 0 && lock < 3) { const cx = p.x - 60, r = SOCKET.R * p.s; g.strokeStyle = "#fff3c4"; g.lineWidth = 7 - 2 * lock; g.lineCap = "round"; for (const [k, a0] of [[1.32, -1.25 + 0.25 * lock], [1.5, -0.95 + 0.25 * lock]]) { g.beginPath(); g.ellipse(cx, p.y, r * k * 0.36, r * k, 0, a0, a0 + 0.5); g.stroke(); } }
         // and the word for it, for ten frames: the stairwell's hand (shots/desc_ding.js)
-        if (lock >= 0 && lock < WORD) { const s = 104 * ([1.45, 1.45, 1.08, 1.08][lock] ?? 1), wx = 690, wy = 168, l2 = lock - lock % 2;
-          if (lock < 6) { g.strokeStyle = "#fff3c4"; g.lineWidth = 6; g.lineCap = "butt"; g.beginPath(); for (let i = 0; i < 9; i++) { const a = -0.5 + i * 0.72, r0 = 190 + 12 * l2 + 20 * (i % 2), r1 = r0 + 46 + 10 * (i % 3); g.moveTo(wx + Math.cos(a) * r0 * 1.1, wy + Math.sin(a) * r0 * 0.62); g.lineTo(wx + Math.cos(a) * r1 * 1.1, wy + Math.sin(a) * r1 * 0.62); } g.stroke(); }
-          g.save(); g.translate(wx, wy); g.rotate(-0.15); g.translate(-1.5 * s, -0.5 * s); kana(g, "カチッ", 0, 0, s, s * 0.3, "#16130c", { pitch: 1.0 }); kana(g, "カチッ", 0, 0, s, s * 0.15, "#ffd84a", { pitch: 1.0 }); g.restore(); }
+        sfx(g, { text: "カチッ", x: 690, y: 168, size: 104, color: "station", age: lock, life: WORD });
       },
       post: f === 0 ? { mode: 1, impact: { dark: [0.0, 0.03, 0.12], mid: [0.3, 0.75, 1.0], light: [1, 1, 1], ink: [0, 0.02, 0.1], thresholds: [0.22, 0.5], cel: [[0, 0.02, 0.1], [1, 1, 1]] } }
         : { flash: f === 1 ? 0.35 : f === 10 ? 0.16 : 0, ca: 0.0012 + 0.005 * jolt + 0.002 * on, bloom: 0.7 + 0.4 * on, bgBlur: 0.004 } };

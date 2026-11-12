@@ -7,7 +7,7 @@
 //       from above in one piece, and on the one after (28.61 s) Ife lands on top. Noor does not look up.
 import { FPS, CUT, CAST, startOf, boil, wob, rnd, facing } from "./desc_cast.js";
 import { LIFT, BOTTOM as B } from "../sets/stairplan.js";
-import { kana } from "../sets/sign.js";
+import { sfx, rays } from "../engine/sfx.js";
 const FRAMES = CUT.exit - CUT.ding, DING = 10, CLOSE = 13, WIDE = 21, CRASH = 25, IFE = 31;      // frames from the first cut: the ding, the cut in to the gate, the cut back out, the two landings      // frames of this shot
 const CAM = { pos: [-2.75, B + 1.5, 11.6], target: [-2.6, B + 1.28, 0], fov: 26 };
 // Noor: in the cage until the cut back out, then a step and a half in front of it
@@ -46,12 +46,9 @@ function frame(f, sync) {
       // the ding: ticks round the lamp over the gate, and the word, for a third of a second
       const d = f - DING;
       if (d >= 0 && d < 9) {
-        const c = P([LIFT.x, B + LIFT.h + 0.42, LIFT.z1 + 0.1]), d2 = d - d % 2, r0 = c.s * (0.3 + 0.05 * d2), r1 = c.s * (0.52 + 0.09 * d2);
-        g.strokeStyle = "#fff3c4"; g.lineWidth = Math.max(3, c.s * 0.028); g.lineCap = "butt"; g.beginPath();
-        for (let i = 0; i < 9; i++) { const a = Math.PI * (1.08 + 0.84 * i / 8); g.moveTo(c.x + Math.cos(a) * r0, c.y + Math.sin(a) * r0 * 0.9); g.lineTo(c.x + Math.cos(a) * r1, c.y + Math.sin(a) * r1 * 0.9); }
-        g.stroke();
-        const s = c.s * 0.3 * ([1.5, 1.5, 1.1, 1.1][d] ?? 1), x = c.x + c.s * 0.75, y = c.y - c.s * 0.95;
-        g.save(); g.translate(x, y); g.rotate(-0.16); kana(g, "チーン", 0, 0, s, s * 0.3, "#16130c", { pitch: 1.0 }); kana(g, "チーン", 0, 0, s, s * 0.15, "#ffd84a", { pitch: 1.0 }); g.restore();
+        const c = P([LIFT.x, B + LIFT.h + 0.42, LIFT.z1 + 0.1]), d2 = d - d % 2;
+        rays(g, c.x, c.y, { width: Math.max(3, c.s * 0.028), angle: (i) => Math.PI * (1.08 + 0.84 * i / 8), r0: () => c.s * (0.3 + 0.05 * d2), r1: () => c.s * (0.52 + 0.09 * d2), sy: 0.9 });
+        sfx(g, { text: "チーン", x: c.x + c.s * 2.2, y: c.y - c.s * 0.3, size: c.s * 0.3, angle: -0.16, pop: [1.5, 1.5, 1.1, 1.1], color: "station", age: d, life: 9, burst: false });      // beside the lamp, on the bare wall between the lift and the stairs' sign
       }
       if (impact) return;
       // dust thrown out along the floor from under the heap: hard puffs, on twos, in two tones
