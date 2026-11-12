@@ -21,7 +21,7 @@ function frame(f, sync) {
     return { type: "chaser", pos: [start[0] + (ring[0] - start[0]) * inT + dx * go, 1.7 + 0.35 * Math.sin(i * 1.7 + F * 0.3), start[1] + (ring[1] - start[1]) * inT + dz * go], yaw: yaw * t + scan, roll: -yaw * 0.3 * Math.sin(t * Math.PI), pitch: -6 * (1 - inT) - 10 * t, thrust: t > 0 ? 1 : drums, eye: 1 + drums + (f >= STALL && f < SPLIT ? 0.6 : 0), seed: 30 + i };
   });
   drones.push({ type: "enforcer", pos: [-0.3, 2.3, -13 + 5.5 * ease(k * 1.3)], yaw: 0, beam: 1, thrust: drums, seed: 5 });
-  const impact = f === 0 ? { mode: 1, impact: { dark: [0.02, 0, 0.06], mid: [0.02, 0, 0.06], light: [1, 1, 1], ink: [1, 1, 1], thresholds: [0.24, 0.24], cel: [[1, 1, 1], [1, 1, 1]] } }
+  const impact = f === 0 ? { mode: 1, impact: { dark: [0.02, 0, 0.06], mid: [0.02, 0, 0.06], light: [1, 1, 1], ink: [1, 1, 1], thresholds: [0.24, 0.24], cel: [[0.02, 0, 0.06], [0.02, 0, 0.06]] } }
     : f === 1 ? { mode: 1, impact: { dark: [0.05, 0.0, 0.14], mid: [1.0, 0.12, 0.42], light: [1.0, 0.95, 0.3], ink: [0.02, 0, 0.06], thresholds: [0.16, 0.34], cel: [[0.02, 0, 0.06], [1, 1, 1]] } } : null;
   return { set: "corridor", camera: { pos: [0, 17 - 3.5 * ease(k), 0.01], target: [0, 0, 0], fov: 50, up: [Math.sin(a), 0, Math.cos(a)] },
     options: { junction: { z: 0 }, cut: "top", alert: 1, hubDoors: { A: 0.75, B: 0.75, D: 0.75, C: 0.1 }, drones },

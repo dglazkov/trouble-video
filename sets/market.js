@@ -326,7 +326,7 @@ export async function createMarket(renderer, o = {}) {
   for (const p of people) { p.mesh = new THREE.Mesh(cardG, cardM[p.who][0]); p.mesh.layers.set(FX); p.mesh.frustumCulled = false; crowd.add(p.mesh); }
   // ---- steam: flat puffs on twos ---------------------------------------------------------------------------------------------
   // a puff is painted like a cel of smoke: a hard-edged cluster in a shade tone with its lit tone laid over, up and to one side
-  const puffT = canvasTex(256, 256, (c) => { const blob = (col, k, dx, dy) => { c.fillStyle = col; for (let i = 0; i < 7; i++) { c.beginPath(); c.arc(128 + dx + Math.cos(i * 0.9) * 52 * (i ? 1 : 0), 128 + dy + Math.sin(i * 0.9) * 46 * (i ? 1 : 0), (i ? 44 + (i * 37 % 22) : 70) * k, 0, 7); c.fill(); } }; blob("#b98f86", 1, 0, 0); blob("#fff4e2", 0.8, -9, -13); });
+  const puffT = canvasTex(256, 256, (c) => { const blob = (col, k, dx, dy) => { c.fillStyle = col; for (let i = 0; i < 7; i++) { c.beginPath(); c.arc(128 + dx + Math.cos(i * 0.9) * 52 * (i ? 1 : 0), 128 + dy + Math.sin(i * 0.9) * 46 * (i ? 1 : 0), (i ? 44 + (i * 37 % 22) : 70) * k, 0, 7); c.fill(); } }; blob("#a8807c", 1, 0, 0); blob("#ead6c2", 0.8, -9, -13); });
   const puffG = new THREE.PlaneGeometry(1, 1), puffM = mat("#ffffff", { kind: 7, flag: 2, map: puffT, alpha: 0.92, fog: 0.6 }), puffs = [];
   for (let k = 0; k < 4; k++) steamAt.push([-2.4 + k * 1.6, -1.5, GAP.z0 + 1.5 + (k * 2.7) % 7]);      // the shaft breathes
   for (let i = 0; i < 72; i++) { const m = new THREE.Mesh(puffG, puffM); m.layers.set(FX); m.renderOrder = 9; m.frustumCulled = false; scene.add(m); puffs.push(m); }
@@ -350,7 +350,7 @@ export async function createMarket(renderer, o = {}) {
     const amt = (opt.steam ?? 1), near = steamAt.filter((p) => p[2] > cam.pos[2] - 6 && p[2] < cam.pos[2] + 70).slice(0, 12); let n = 0;
     near.forEach((p, e) => { for (let j = 0; j < 6; j++) { const m = puffs[n++], sd = hash(p[0], p[2], j), age = ((f2 * 0.045 + j / 6 + sd) % 1 + 1) % 1, born = f2 - Math.floor(age / 0.045), big = 1 + 0.5 * hash(born, e, j), shaft = p[1] < 0 ? 1.8 : 1;
       m.visible = amt > 0 && Math.hypot(p[0] - cam.pos[0], p[2] - cam.pos[2]) > 3.5; m.position.set(p[0] + Math.sin(sd * 40 + age * 3) * 0.3 * age - Math.sign(p[0]) * age * 0.5 * (2 - shaft), p[1] + age * 2.9 * shaft, p[2] + (sd - 0.5) * 0.5 + age * 0.4);
-      m.quaternion.copy(camera.quaternion); m.rotateZ(sd * 6.28 + born); m.scale.setScalar((0.45 + age * 1.15) * big * shaft * (0.6 + 0.3 * amt + 0.3 * w.steam) * (age > 0.75 ? (1 - age) / 0.25 : 1)); } });
+      m.quaternion.copy(camera.quaternion); m.rotateZ(sd * 6.28 + born); m.scale.setScalar((0.35 + age * 0.85) * big * shaft * (0.6 + 0.3 * amt + 0.3 * w.steam) * (age > 0.75 ? (1 - age) / 0.25 : 1)); } });
     for (; n < puffs.length; n++) puffs[n].visible = false;
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
     markers.update(opt.markers); shadows.update(opt.shadows);

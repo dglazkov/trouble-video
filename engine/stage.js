@@ -79,7 +79,7 @@ try {
       if (a.shadow === false) continue;
       const q = body.q, floor = set?.floorAt ? set.floorAt(q.x, q.z) : 0; if (floor === null) continue;
       const feet = ["L", "R"].map((s) => body.J[s].ball), c = [(feet[0][0] + feet[1][0] + body.J.hips[0]) / 3, floor, (feet[0][2] + feet[1][2] + body.J.hips[2]) / 3], up = Math.max(0, (q.y ?? 0) - floor), k = Math.max(0, 1 - up / 3);
-      shadows.push({ at: c, rx: 0.3 * (0.5 + 0.5 * k), rz: 0.4 * (0.5 + 0.5 * k), yaw: q.yaw, alpha: 0.55 * k });
+      shadows.push({ at: c, rx: 0.34 * (0.5 + 0.5 * k), rz: 0.46 * (0.5 + 0.5 * k), yaw: q.yaw, alpha: 0.7 * k });
     }
     let params;
     if (set) { const s = set.update(fr.camera, F, sync, { ...opt, shadows }); post.capture(s.scene, s.camera, ndMaterial, { clear: s.clear }); params = { ...s.post, ...fr.post }; }
