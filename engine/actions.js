@@ -19,7 +19,7 @@ const AT_EASE = pose({ lean: -1.5, twist: -6, pelvisTwist: 5,
 export const MANNER = {
   tane: { lean: 9, energy: 0.9, twist: 12, legOut: 9, bounce: 0.035, arm: { base: -4, swing: 30, out: 26, elbow: 80, pump: 8 } },
   ife: { lean: 19, energy: 0.72, twist: 20, knee: 0.85, bounce: 0.045, arm: { base: 4, swing: 46, out: 9, elbow: 104, pump: 14 } },
-  noor: { lean: 7, energy: 1.06, twist: 7, bounce: 0.04, arm: { base: -6, swing: 13, out: 7, elbow: 22, pump: 6 } },
+  noor: { lean: 13, energy: 1.08, twist: 9, bounce: 0.05, arm: { base: -8, swing: 20, out: 8, elbow: 34, pump: 8 } },
 };
 // How far the ground passes under one cycle of a character's run (for scrolling the set under them).
 export const strideOf = (who, P) => runStride(P, MANNER[who]);
