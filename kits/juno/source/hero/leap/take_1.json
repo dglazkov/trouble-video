@@ -1,0 +1,603 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: 3 posing mannequins in a 3x1 grid, 3 key drawing(s) of her for one film shot: she jumps a wide gap on her hoverboard, and the camera rises behind her as she goes: (1) just launched off a ramp, the board's nose tilted up under her front foot, arms swinging up; (2) the same moment a little later, rising, seen from higher; (3) the top of the jump: knees tucked up tight, her right hand reaching down to grip the board's edge, her left arm thrown up, seen from above and behind so that the gap opens under her (reading left to right). Paint the character from the SECOND image (her model sheet) over every mannequin, as 3 finished key drawings by the same animator. The second image only shows what she looks like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 3 figures of the first image, each in its mannequin's pose and place, and nothing else. For each of the 3: keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), so the 3 figures stay the same size as each other. BLUE limbs are her LEFT arm and leg; RED limbs are her RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. Each mannequin is drawn in the exact PERSPECTIVE of the film camera of its shot, and the drawing must keep that camera: drawing 1 is seen from BEHIND (and a little to her LEFT): the viewer sees her back and the back of her head, her face is turned away, from a little above; drawing 2 is seen from BEHIND (and a little to her LEFT): the viewer sees her back and the back of her head, her face is turned away, from a little above; drawing 3 is seen from BEHIND (and a little to her LEFT): the viewer sees her back and the back of her head, her face is turned away, from ABOVE: the camera is higher than her and looks DOWN at her at about 35 degrees, so the viewer sees the top of her head and shoulders, and the upper side of whatever is under her feet. Keep each mannequin's foreshortening exactly: what is nearer the camera is drawn bigger, what points away from it is drawn shorter, and the figure's outline matches its mannequin's outline. Do NOT turn the figure to a plainer view. The GREEN slab with two green lumps under it, beneath her feet in the first image, is her homemade hoverboard: paint it in exactly the slab's place, size and tilt as a flat plank of welded pale steel-grey scrap-metal plates with dark weld lines and a few rivets, with two small pale steel-grey thruster pods underneath, each with one short flat hard-edged cyan-blue flame shape under it. It has NO wheels and no trucks: it floats. Her feet stand on it. Each figure has exactly two arms and two legs, and both feet are drawn complete. Wherever her face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. All 3 drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: Juno, a 15-year-old girl with tan skin. HAIR: short choppy teal hair, with ONE long thin lock hanging down in front of her LEFT ear to her collarbone. GOGGLES: round brass-brown flight goggles with pale teal lenses, always pushed up on her forehead, never over her eyes. HEADPHONES: chunky grey-brown headphones, always resting round her neck on the collar, never on her ears. JACKET: a plain orange cropped flight jacket with a high stand-up collar, worn open, sleeves pushed up to the elbows; the back of the jacket is plain orange. PATCHES: exactly three plain flat one-colour patches on the jacket and nothing else on it: a YELLOW TRIANGLE on the outside of EACH upper sleeve (the same on her left sleeve and on her right sleeve), always with one corner pointing straight up toward the shoulder and a flat base below, and a WHITE CIRCLE on her left chest; each patch is a single flat shape with a black outline and nothing inside it, the same size and in the same place in every drawing. SHIRT: a plain navy-blue shirt. GLOVES: plain grey-brown fingerless gloves on both hands (grey-brown, never teal, never green), bare fingers. TROUSERS: baggy dark-grey cargo trousers with one cream stripe down the outside of each leg and one cargo pocket on the outside of each thigh; gathered cuffs that come down over the tops of the shoes, no bare ankle. SHOES: red high-top trainers with white toe caps, white laces and white soles, completely plain. FACE: plain, no scar, no marks; the same calm look with the mouth closed in every drawing. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on her. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap.",
+ "refs": [
+  "kits/juno/source/hero/leap/layout.png",
+  "out/ref/juno_design.png"
+ ],
+ "kind": "cels:hero/leap",
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-12T00:01:58",
+ "layout": {
+  "action": "hero",
+  "hero": {
+   "shot": "shots/slice_leap.js",
+   "who": "juno"
+  },
+  "what": "she jumps a wide gap on her hoverboard, and the camera rises behind her as she goes: (1) just launched off a ramp, the board's nose tilted up under her front foot, arms swinging up; (2) the same moment a little later, rising, seen from higher; (3) the top of the jump: knees tucked up tight, her right hand reaching down to grip the board's edge, her left arm thrown up, seen from above and behind so that the gap opens under her",
+  "loose": true,
+  "float": true,
+  "prop": "board",
+  "view": "leap",
+  "yaw": null,
+  "elev": null,
+  "W": 2752,
+  "H": 1536,
+  "cols": 3,
+  "rows": 1,
+  "unit": 660,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "name": "leap_launch",
+    "frame": 7,
+    "action": "leap",
+    "cel": 0,
+    "from": {
+     "yaw": 167.2,
+     "elev": 11.2
+    },
+    "box": [
+     0,
+     0,
+     917,
+     1536
+    ],
+    "ground": [
+     426.26,
+     1225
+    ],
+    "joints": {
+     "hips": [
+      437.45,
+      714.44
+     ],
+     "waist": [
+      435.14,
+      619.41
+     ],
+     "chest": [
+      432.08,
+      493.44
+     ],
+     "neckBase": [
+      429.98,
+      406.81
+     ],
+     "headBase": [
+      429.87,
+      352.3
+     ],
+     "head": [
+      429.31,
+      261.26
+     ],
+     "crown": [
+      428.75,
+      169.61
+     ],
+     "L.sh": [
+      319.09,
+      436.7
+     ],
+     "L.elbow": [
+      210.63,
+      475.04
+     ],
+     "L.wrist": [
+      201.58,
+      448.54
+     ],
+     "L.hand": [
+      198.55,
+      439.66
+     ],
+     "L.hip": [
+      379.55,
+      714.11
+     ],
+     "L.knee": [
+      282.51,
+      735.26
+     ],
+     "L.ankle": [
+      294.18,
+      968.94
+     ],
+     "L.heel": [
+      296.44,
+      1026.09
+     ],
+     "L.toe": [
+      275.31,
+      940.08
+     ],
+     "R.sh": [
+      543.28,
+      426.68
+     ],
+     "R.elbow": [
+      679.43,
+      529.7
+     ],
+     "R.wrist": [
+      707.69,
+      684.63
+     ],
+     "R.hand": [
+      717.6,
+      738.96
+     ],
+     "R.hip": [
+      495.41,
+      714.78
+     ],
+     "R.knee": [
+      534.59,
+      954.42
+     ],
+     "R.ankle": [
+      548.68,
+      1204.5
+     ],
+     "R.heel": [
+      551.11,
+      1266.9
+     ],
+     "R.toe": [
+      517.89,
+      1163.6
+     ]
+    },
+    "face": [
+     -0.158,
+     0.135,
+     -0.991
+    ],
+    "board": true
+   },
+   {
+    "index": 1,
+    "name": "leap_rise",
+    "frame": 13,
+    "action": "leap",
+    "cel": 0,
+    "from": {
+     "yaw": 164.7,
+     "elev": 21.6
+    },
+    "box": [
+     917,
+     0,
+     1835,
+     1536
+    ],
+    "ground": [
+     1343.11,
+     1219.28
+    ],
+    "joints": {
+     "hips": [
+      1361.22,
+      734.22
+     ],
+     "waist": [
+      1359.4,
+      635.05
+     ],
+     "chest": [
+      1356.94,
+      501
+     ],
+     "neckBase": [
+      1355.22,
+      407.06
+     ],
+     "headBase": [
+      1355.65,
+      348.21
+     ],
+     "head": [
+      1355.72,
+      247.41
+     ],
+     "crown": [
+      1355.78,
+      144.21
+     ],
+     "L.sh": [
+      1235.67,
+      438.26
+     ],
+     "L.elbow": [
+      1115.74,
+      457.85
+     ],
+     "L.wrist": [
+      1101.64,
+      405.08
+     ],
+     "L.hand": [
+      1096.93,
+      387.44
+     ],
+     "L.hip": [
+      1300.68,
+      734.56
+     ],
+     "L.knee": [
+      1191.7,
+      714.22
+     ],
+     "L.ankle": [
+      1204.55,
+      944.18
+     ],
+     "L.heel": [
+      1207.37,
+      1001.14
+     ],
+     "L.toe": [
+      1181.99,
+      897.18
+     ],
+     "R.sh": [
+      1476.87,
+      430.15
+     ],
+     "R.elbow": [
+      1621.27,
+      549
+     ],
+     "R.wrist": [
+      1644.85,
+      706.19
+     ],
+     "R.hand": [
+      1652.95,
+      760.22
+     ],
+     "R.hip": [
+      1421.73,
+      733.87
+     ],
+     "R.knee": [
+      1455.57,
+      959.37
+     ],
+     "R.ankle": [
+      1469.22,
+      1217.14
+     ],
+     "R.heel": [
+      1470.85,
+      1276.92
+     ],
+     "R.toe": [
+      1434.48,
+      1155.87
+     ]
+    },
+    "face": [
+     -0.212,
+     -0.034,
+     -0.941
+    ],
+    "board": true
+   },
+   {
+    "index": 2,
+    "name": "leap_apex",
+    "frame": 26,
+    "action": "leap",
+    "cel": 1,
+    "from": {
+     "yaw": 160.9,
+     "elev": 34.6
+    },
+    "box": [
+     1835,
+     0,
+     2752,
+     1536
+    ],
+    "ground": [
+     2367.88,
+     1122.47
+    ],
+    "joints": {
+     "hips": [
+      2377.47,
+      895.82
+     ],
+     "waist": [
+      2365.37,
+      798.9
+     ],
+     "chest": [
+      2349.01,
+      667.85
+     ],
+     "neckBase": [
+      2337.54,
+      575.97
+     ],
+     "headBase": [
+      2334.42,
+      519.99
+     ],
+     "head": [
+      2338.4,
+      438.84
+     ],
+     "crown": [
+      2342.62,
+      352.61
+     ],
+     "L.sh": [
+      2224.04,
+      617.87
+     ],
+     "L.elbow": [
+      2125.77,
+      456.38
+     ],
+     "L.wrist": [
+      2095.49,
+      284.37
+     ],
+     "L.hand": [
+      2084.16,
+      220
+     ],
+     "L.hip": [
+      2318.31,
+      900.96
+     ],
+     "L.knee": [
+      2178.67,
+      713.55
+     ],
+     "L.ankle": [
+      2203.3,
+      930.88
+     ],
+     "L.heel": [
+      2212.04,
+      988.59
+     ],
+     "L.toe": [
+      2176.01,
+      888.75
+     ],
+     "R.sh": [
+      2459.26,
+      587
+     ],
+     "R.elbow": [
+      2494.9,
+      668.32
+     ],
+     "R.wrist": [
+      2498.66,
+      714.36
+     ],
+     "R.hand": [
+      2499.9,
+      729.55
+     ],
+     "R.hip": [
+      2436.36,
+      890.71
+     ],
+     "R.knee": [
+      2424.61,
+      772.16
+     ],
+     "R.ankle": [
+      2454.92,
+      1017.76
+     ],
+     "R.heel": [
+      2462.23,
+      1075.22
+     ],
+     "R.toe": [
+      2417.83,
+      972.11
+     ]
+    },
+    "face": [
+     -0.211,
+     -0.678,
+     -0.611
+    ],
+    "board": true
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/juno/source/hero/leap/layout_map.png"
+}

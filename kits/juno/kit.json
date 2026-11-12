@@ -1039,5 +1039,175 @@
     }
    }
   }
+ },
+ "heroes": {
+  "leap_launch": {
+   "img": "hero/leap_launch.webp",
+   "w": 940,
+   "h": 2105,
+   "k": 1000.0,
+   "ground": [
+    431.8,
+    1682.9
+   ],
+   "bottom": 2095,
+   "hips": [
+    448.7,
+    909.3
+   ],
+   "head": [
+    436.4,
+    222.7
+   ],
+   "source": "kits/juno/source/hero/leap/take_2.jpg",
+   "shot": "shots/slice_leap.js",
+   "frame": 7,
+   "action": "leap",
+   "cel": 0,
+   "from": {
+    "yaw": 167.2,
+    "elev": 11.2
+   }
+  },
+  "leap_rise": {
+   "img": "hero/leap_rise.webp",
+   "w": 981,
+   "h": 2155,
+   "k": 1000.0,
+   "ground": [
+    449.9,
+    1695.7
+   ],
+   "bottom": 2145,
+   "hips": [
+    477.4,
+    960.8
+   ],
+   "head": [
+    469.0,
+    223.2
+   ],
+   "source": "kits/juno/source/hero/leap/take_2.jpg",
+   "shot": "shots/slice_leap.js",
+   "frame": 13,
+   "action": "leap",
+   "cel": 0,
+   "from": {
+    "yaw": 164.7,
+    "elev": 21.6
+   }
+  },
+  "leap_apex": {
+   "img": "hero/leap_apex.webp",
+   "w": 930,
+   "h": 1911,
+   "k": 1000.0,
+   "ground": [
+    533.5,
+    1442.6
+   ],
+   "bottom": 1902,
+   "hips": [
+    548.0,
+    1099.2
+   ],
+   "head": [
+    488.8,
+    406.8
+   ],
+   "source": "kits/juno/source/hero/leap/take_2.jpg",
+   "shot": "shots/slice_leap.js",
+   "frame": 26,
+   "action": "leap",
+   "cel": 1,
+   "from": {
+    "yaw": 160.9,
+    "elev": 34.6
+   }
+  },
+  "ride_left": {
+   "img": "hero/ride_left.webp",
+   "w": 1084,
+   "h": 1961,
+   "k": 1000.0,
+   "ground": [
+    629.8,
+    1663.4
+   ],
+   "bottom": 1953,
+   "hips": [
+    547.2,
+    812.1
+   ],
+   "head": [
+    411.4,
+    184.3
+   ],
+   "source": "kits/juno/source/hero/ride/take_1.jpg",
+   "shot": "shots/slice_ride.js",
+   "frame": 54,
+   "action": "ride",
+   "cel": 0,
+   "from": {
+    "yaw": 153.8,
+    "elev": 13.8
+   }
+  },
+  "ride_mid": {
+   "img": "hero/ride_mid.webp",
+   "w": 1043,
+   "h": 1953,
+   "k": 1000.0,
+   "ground": [
+    563.1,
+    1688.5
+   ],
+   "bottom": 1943,
+   "hips": [
+    571.0,
+    808.3
+   ],
+   "head": [
+    508.1,
+    188.4
+   ],
+   "source": "kits/juno/source/hero/ride/take_1.jpg",
+   "shot": "shots/slice_ride.js",
+   "frame": 86,
+   "action": "ride",
+   "cel": 1,
+   "from": {
+    "yaw": 151.8,
+    "elev": 12.8
+   }
+  },
+  "ride_right": {
+   "img": "hero/ride_right.webp",
+   "w": 1057,
+   "h": 1882,
+   "k": 1000.0,
+   "ground": [
+    451.8,
+    1655.1
+   ],
+   "bottom": 1874,
+   "hips": [
+    562.9,
+    783.9
+   ],
+   "head": [
+    589.7,
+    181.6
+   ],
+   "source": "kits/juno/source/hero/ride/take_1.jpg",
+   "shot": "shots/slice_ride.js",
+   "frame": 24,
+   "action": "ride",
+   "cel": 2,
+   "from": {
+    "yaw": 154.8,
+    "elev": 12.2
+   }
+  }
  }
 }

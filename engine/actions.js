@@ -13,13 +13,13 @@ const AT_EASE = pose({ lean: -1.5, twist: -6, pelvisTwist: 5,
 
 // Each of the cast runs in their own manner (body.js runPose says what the numbers are). Whoever is not named
 // runs as Juno does: the athletic run the first kit was painted over.
-//   tane ploughs forward upright, chest out, elbows wide, heavy on his feet;
+//   tane ploughs forward upright, chest out, elbows wide, heavy on his feet, fists pumping from hip to chest;
 //   ife scurries: short quick steps, leaning in, arms pumping high;
-//   noor takes long unhurried strides, upright, arms hanging and barely moving.
+//   noor takes long unhurried strides, leaning into them, her arms low and loose but swinging: a lope, not a walk.
 export const MANNER = {
-  tane: { lean: 9, energy: 0.9, twist: 12, legOut: 9, bounce: 0.035, arm: { base: -4, swing: 30, out: 26, elbow: 80, pump: 8 } },
+  tane: { lean: 9, energy: 0.9, twist: 12, legOut: 9, bounce: 0.035, arm: { base: -10, swing: 50, out: 26, elbow: 84, pump: 16 } },
   ife: { lean: 19, energy: 0.72, twist: 20, knee: 0.85, bounce: 0.045, arm: { base: 4, swing: 46, out: 9, elbow: 104, pump: 14 } },
-  noor: { lean: 13, energy: 1.08, twist: 9, bounce: 0.05, arm: { base: -8, swing: 20, out: 8, elbow: 34, pump: 8 } },
+  noor: { lean: 20, energy: 1.1, twist: 14, bounce: 0.065, arm: { base: -8, swing: 36, out: 9, elbow: 62, pump: 12 } },
 };
 // How far the ground passes under one cycle of a character's run (for scrolling the set under them).
 export const strideOf = (who, P) => runStride(P, MANNER[who]);

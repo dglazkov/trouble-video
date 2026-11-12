@@ -9,163 +9,163 @@
      "cels": {
       "0": {
        "img": "run/front/0.webp",
-       "w": 895,
-       "h": 1409,
-       "k": 722.0,
+       "w": 855,
+       "h": 1317,
+       "k": 730.0,
        "ground": [
-        445.3,
-        1344.1
+        413.9,
+        1251.5
        ],
-       "bottom": 1396,
+       "bottom": 1305,
        "hips": [
-        445.3,
-        755.1
+        413.9,
+        660.3
        ],
        "head": [
-        441.1,
-        232.8
+        409.3,
+        151.5
        ],
-       "source": "kits/noor/source/run/front/take_1.jpg"
+       "source": "kits/noor/source/run/front/take_3.jpg"
       },
       "1": {
        "img": "run/front/1.webp",
-       "w": 901,
-       "h": 1401,
-       "k": 722.0,
+       "w": 923,
+       "h": 1313,
+       "k": 730.0,
        "ground": [
-        442.7,
-        1354.1
+        428.8,
+        1265.5
        ],
-       "bottom": 1389,
+       "bottom": 1300,
        "hips": [
-        442.7,
-        738.0
+        428.8,
+        642.4
        ],
        "head": [
-        438.6,
-        215.8
+        425.3,
+        133.6
        ],
-       "source": "kits/noor/source/run/front/take_1.jpg"
+       "source": "kits/noor/source/run/front/take_3.jpg"
       },
       "2": {
        "img": "run/front/2.webp",
-       "w": 891,
-       "h": 1371,
-       "k": 722.0,
+       "w": 957,
+       "h": 1255,
+       "k": 730.0,
        "ground": [
-        432.2,
-        1388.1
+        438.8,
+        1283.5
        ],
-       "bottom": 1360,
+       "bottom": 1244,
        "hips": [
-        432.2,
-        753.5
+        438.8,
+        636.0
        ],
        "head": [
-        430.6,
-        231.1
+        438.4,
+        127.0
        ],
-       "source": "kits/noor/source/run/front/take_1.jpg"
+       "source": "kits/noor/source/run/front/take_3.jpg"
       },
       "3": {
        "img": "run/front/3.webp",
-       "w": 863,
-       "h": 1285,
-       "k": 722.0,
-       "ground": [
-        426.7,
-        1242.1
-       ],
-       "bottom": 1272,
-       "hips": [
-        426.7,
-        759.6
-       ],
-       "head": [
-        428.5,
-        237.3
-       ],
-       "source": "kits/noor/source/run/front/take_1.jpg"
-      },
-      "4": {
-       "img": "run/front/4.webp",
-       "w": 895,
-       "h": 1367,
-       "k": 722.0,
-       "ground": [
-        432.6,
-        1302.1
-       ],
-       "bottom": 1355,
-       "hips": [
-        432.6,
-        713.1
-       ],
-       "head": [
-        436.7,
-        190.8
-       ],
-       "source": "kits/noor/source/run/front/take_1.jpg"
-      },
-      "5": {
-       "img": "run/front/5.webp",
-       "w": 905,
-       "h": 1375,
-       "k": 722.0,
-       "ground": [
-        442.4,
-        1328.1
-       ],
-       "bottom": 1363,
-       "hips": [
-        442.4,
-        712.0
-       ],
-       "head": [
-        446.4,
-        189.8
-       ],
-       "source": "kits/noor/source/run/front/take_1.jpg"
-      },
-      "6": {
-       "img": "run/front/6.webp",
-       "w": 895,
-       "h": 1287,
-       "k": 722.0,
-       "ground": [
-        441.9,
-        1304.1
-       ],
-       "bottom": 1275,
-       "hips": [
-        441.9,
-        669.5
-       ],
-       "head": [
-        443.5,
-        147.1
-       ],
-       "source": "kits/noor/source/run/front/take_1.jpg"
-      },
-      "7": {
-       "img": "run/front/7.webp",
-       "w": 845,
+       "w": 979,
        "h": 1209,
-       "k": 722.0,
+       "k": 730.0,
        "ground": [
-        427.4,
-        1166.1
+        442.2,
+        1173.5
        ],
        "bottom": 1197,
        "hips": [
-        427.4,
-        683.6
+        442.2,
+        685.2
        ],
        "head": [
-        425.6,
-        161.3
+        445.2,
+        176.3
        ],
-       "source": "kits/noor/source/run/front/take_1.jpg"
+       "source": "kits/noor/source/run/front/take_3.jpg"
+      },
+      "4": {
+       "img": "run/front/4.webp",
+       "w": 873,
+       "h": 1309,
+       "k": 730.0,
+       "ground": [
+        430.4,
+        1243.5
+       ],
+       "bottom": 1297,
+       "hips": [
+        430.4,
+        652.3
+       ],
+       "head": [
+        435.0,
+        143.5
+       ],
+       "source": "kits/noor/source/run/front/take_3.jpg"
+      },
+      "5": {
+       "img": "run/front/5.webp",
+       "w": 879,
+       "h": 1309,
+       "k": 730.0,
+       "ground": [
+        430.1,
+        1261.5
+       ],
+       "bottom": 1296,
+       "hips": [
+        430.1,
+        638.4
+       ],
+       "head": [
+        433.6,
+        129.6
+       ],
+       "source": "kits/noor/source/run/front/take_3.jpg"
+      },
+      "6": {
+       "img": "run/front/6.webp",
+       "w": 871,
+       "h": 1253,
+       "k": 730.0,
+       "ground": [
+        428.1,
+        1281.5
+       ],
+       "bottom": 1242,
+       "hips": [
+        428.1,
+        634.0
+       ],
+       "head": [
+        428.4,
+        125.0
+       ],
+       "source": "kits/noor/source/run/front/take_3.jpg"
+      },
+      "7": {
+       "img": "run/front/7.webp",
+       "w": 901,
+       "h": 1171,
+       "k": 730.0,
+       "ground": [
+        431.6,
+        1135.5
+       ],
+       "bottom": 1159,
+       "hips": [
+        431.6,
+        647.2
+       ],
+       "head": [
+        428.6,
+        138.3
+       ],
+       "source": "kits/noor/source/run/front/take_3.jpg"
       }
      }
     }
