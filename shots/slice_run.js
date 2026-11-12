@@ -1,13 +1,15 @@
-// Slice 1, 48.00-50.25 s: the corridor run. A low camera tracks backward ahead of the four; the swarm fills the
-// corridor behind them. They reach the hub's centre on the drop (in the film: after the four faces).
+// Slice 1, 48.00-49.88 s: the corridor run. A low camera tracks backward ahead of the four; the swarm fills the
+// corridor behind them. The cut to the faces takes it before its end: the run and its camera move were laid out to
+// HUB (the slice frame they reach the hub's centre on) and over MOVE frames, and stay so, whatever the cut is moved to,
+// because shots/gant_out.js plays this same function at negative frames and must find the same picture at frame 0.
 import { chase } from "../machines/drones.js";
 import { FPS, CUT, CAST, CADENCE, RUN, startOf, wob } from "./slice_cast.js";
-const SPEED = RUN, lead = (f) => SPEED * (f - CUT.drop) / FPS;
+const SPEED = RUN, HUB = 95, MOVE = 54, lead = (f) => SPEED * (f - HUB) / FPS;
 // where each runs in the group: across the corridor, behind the leader, and where in their cycle they start
 const PLACE = { tane: [-1.5, 0, 0.1], juno: [1.35, -0.9, 0.55], noor: [-0.65, -2.1, 0.3], ife: [0.55, -3.2, 0.8] };
 
 function frame(f, sync) {
-  const F = startOf("run") * FPS + f, drums = sync.drive({ stem: "drums", mode: "pulse", decay: 0.12 }, F), z = lead(f), k = f / (CUT.faces - CUT.run), shake = 0.012 + 0.03 * drums;
+  const F = startOf("run") * FPS + f, drums = sync.drive({ stem: "drums", mode: "pulse", decay: 0.12 }, F), z = lead(f), k = f / MOVE, shake = 0.012 + 0.03 * drums;
   return { set: "corridor",
     camera: { pos: [-0.75 + 0.55 * k + wob(f, 1.9, 3.1, 1) * shake, 0.38 + wob(f, 2.3, 3.7, 2) * shake, z + 4.6 - 1.2 * k], target: [0.0, 1.08, z - 0.6], fov: 50 + 3 * drums, up: [Math.sin(-0.07), Math.cos(-0.07), 0] },
     // the bulkhead shutters bite on the drums behind the kids, at the swarm; the ones the kids and the camera have yet

@@ -1,4 +1,5 @@
-// Slice 2, 50.25-51.96 s: four faces, one per beat (the four beats before the drop): Tane, Ife, Noor, Juno. Each is
+// Slice 2, 49.88-51.54 s: four faces, one per beat (the four beats before the first kick, which is the drop; the
+// drums roll under the first two and stop for the last two): Tane, Ife, Noor, Juno. Each is
 // one drawing lifted off its magenta, on a streaking ground of that kid's colour, with their name slammed on with
 // the beat; the drawing bobs with their stride, the camera pushes in, and the wind moves what is far from the face.
 import { FPS, CUT, COLORS, startOf } from "./slice_cast.js";
@@ -8,8 +9,8 @@ import { streaks, nameCard } from "./slice_fx.js";
 const FACES = [
   { who: "tane", at: 0, src: "/kits/tane/closeup/slice_run.png", kana: "タネ", latin: "TANE", face: [0.36, 0.58], wind: [1, 0.12], card: [1020, 800], step: 8 },
   { who: "ife", at: 10, src: "/kits/ife/closeup/slice_run_2.png", kana: "イフェ", latin: "IFE", face: [0.6, 0.55], wind: [-1, 0.1], card: [130, 830], step: 6 },
-  { who: "noor", at: 21, src: "/kits/noor/closeup/slice_run.png", kana: "ヌール", latin: "NOOR", face: [0.33, 0.42], wind: [1, 0.05], card: [1010, 810], step: 9 },
-  { who: "juno", at: 31, src: "/kits/juno/closeup/slice_run.png", kana: "ジュノ", latin: "JUNO", face: [0.62, 0.52], wind: [-1, 0.08], card: [120, 300], step: 7, ground: { main: "#0e9aa2", deep: "#04262e", hot: "#ffa030" } },      // teal, so her orange jacket stands off it
+  { who: "noor", at: 20, src: "/kits/noor/closeup/slice_run.png", kana: "ヌール", latin: "NOOR", face: [0.33, 0.42], wind: [1, 0.05], card: [1010, 810], step: 9 },
+  { who: "juno", at: 30, src: "/kits/juno/closeup/slice_run.png", kana: "ジュノ", latin: "JUNO", face: [0.62, 0.52], wind: [-1, 0.08], card: [120, 300], step: 7, ground: { main: "#0e9aa2", deep: "#04262e", hot: "#ffa030" } },      // teal, so her orange jacket stands off it
 ];
 const FRAMES = CUT.drop - CUT.faces;
 

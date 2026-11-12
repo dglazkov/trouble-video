@@ -1,10 +1,12 @@
 // The slice (song 48.0-62.0 s): what its six shots share. Frames here are frames of the slice (0 at 48.0 s); each
 // shot counts its own from its cut. Every cut and hit is on a beat or an onset of analysis/ (engine/sync.js): each
 // shot lists its own as `marks`, and `node engine/marks.mjs shots/slice.js` holds them to the song.
+// The drop is the song's first kick, 51.55 s (the stem `kick`, analysis/kicks.py): a beat BEFORE the bar line the
+// section starts on (51.97 s), which is only the second kick. The four faces are on the four beats before it.
 import { proportions } from "../engine/body.js";
 import { strideOf } from "../engine/actions.js";
 export const FPS = 24, T0 = 48;
-export const CUT = { run: 0, faces: 54, drop: 95, tane: 120, ride: 194, leap: 289, black: 334, end: 336 };
+export const CUT = { run: 0, faces: 45, drop: 85, tane: 120, ride: 194, leap: 289, black: 334, end: 336 };
 export const startOf = (name) => T0 + CUT[name] / FPS;
 export const CAST = { tane: "/kits/tane", ife: "/kits/ife", noor: "/kits/noor", juno: "/kits/juno" };
 // Each kid's colours: the streak they leave, the ground of their card, the accent
