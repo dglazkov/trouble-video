@@ -1,0 +1,732 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: 4 posing mannequins in a 4x1 grid, 4 key drawing(s) of him for one film shot: he was sneaking out of a dark vault in a line with friends and has just been caught by a wall of screens lighting up: (1) FROZEN in the middle of an exaggerated tiptoe sneaking step like a cartoon burglar, one knee lifted high, both hands up in front of his chest with the wrists limp, leaning back, his head turned to look straight at the viewer with a wide frozen toothy grin and wide eyes; (2) a moment later, standing with his feet apart facing the viewer, fists half raised, looking up and to the viewer's left at something slamming down, the grin gone, mouth a little open, one eyebrow up; (3) backing away, one foot stepping back, both fists coming up in a brawler's guard, looking up warily, teeth set; (4) braced in a wide brawler's stance with both fists up, chin up, his big fearless toothy grin back, looking up at what is coming down at them (reading left to right). Paint the character from the SECOND image (his model sheet) over every mannequin, as 4 finished key drawings by the same animator. The second image only shows what he looks like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 4 figures of the first image, each in its mannequin's pose and place, and nothing else. For each of the 4: keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), so the 4 figures stay the same size as each other. BLUE limbs are his LEFT arm and leg; RED limbs are his RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. Each mannequin is drawn in the exact PERSPECTIVE of the film camera of its shot, and the drawing must keep that camera: drawing 1 is seen in three-quarter BACK view, his back and his RIGHT side toward the viewer, at about eye level; drawing 2 is seen in three-quarter FRONT view, his RIGHT side nearer the viewer, at about eye level; drawing 3 is seen in three-quarter FRONT view, his LEFT side nearer the viewer, at about eye level; drawing 4 is seen in three-quarter FRONT view, his LEFT side nearer the viewer, at about eye level. Keep each mannequin's foreshortening exactly: what is nearer the camera is drawn bigger, what points away from it is drawn shorter, and the figure's outline matches its mannequin's outline. Do NOT turn the figure to a plainer view. Each figure has exactly two arms and two legs, and both feet are drawn complete. Wherever his face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. All 4 drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: Tane, a 16-year-old boy, stocky and a bit fat with a soft round belly, warm medium-brown skin and thick eyebrows. HAIR: a tall glossy black pompadour swept up and forward, short at the sides and back. COAT: a long plain dark-red coat down to his calves, always worn open, with a high stand-up collar and long sleeves to the wrists; four round gold buttons in a row down the front edge on HIS RIGHT side and nothing else on it; the back of the coat is plain dark red with one centre seam. BELLY WRAP: a white sleeveless undershirt tucked into a wide white cloth wrap wound round his whole belly from chest to waist, drawn with three or four horizontal fold lines. TROUSERS: plain baggy black trousers gathered at the ankles. FEET: bare feet in wooden geta sandals: a plain light-brown wooden block sole with one black V-shaped strap between the toes. HANDS: bare hands, no gloves, no rings. FACE: round cheeks, thick black eyebrows, a wide fearless grin showing his teeth. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on him. No toothpick, no cigarette, no weapon. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap.",
+ "refs": [
+  "kits/tane/source/hero/vault/layout.png",
+  "out/ref/tane_design.png"
+ ],
+ "kind": "cels:hero/vault",
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-12T08:12:53",
+ "layout": {
+  "action": "hero",
+  "hero": {
+   "shot": "shots/open.js",
+   "who": "tane"
+  },
+  "what": "he was sneaking out of a dark vault in a line with friends and has just been caught by a wall of screens lighting up: (1) FROZEN in the middle of an exaggerated tiptoe sneaking step like a cartoon burglar, one knee lifted high, both hands up in front of his chest with the wrists limp, leaning back, his head turned to look straight at the viewer with a wide frozen toothy grin and wide eyes; (2) a moment later, standing with his feet apart facing the viewer, fists half raised, looking up and to the viewer's left at something slamming down, the grin gone, mouth a little open, one eyebrow up; (3) backing away, one foot stepping back, both fists coming up in a brawler's guard, looking up warily, teeth set; (4) braced in a wide brawler's stance with both fists up, chin up, his big fearless toothy grin back, looking up at what is coming down at them",
+  "loose": true,
+  "float": true,
+  "prop": null,
+  "view": "vault",
+  "yaw": null,
+  "elev": null,
+  "W": 2752,
+  "H": 1536,
+  "cols": 4,
+  "rows": 1,
+  "unit": 614,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "name": "frozen",
+    "frame": 65,
+    "action": "caught",
+    "cel": 0,
+    "from": {
+     "yaw": -111.7,
+     "elev": 2.9
+    },
+    "box": [
+     0,
+     0,
+     688,
+     1536
+    ],
+    "ground": [
+     324.09,
+     1335.47
+    ],
+    "joints": {
+     "hips": [
+      314.1,
+      777.09
+     ],
+     "waist": [
+      302.28,
+      689.49
+     ],
+     "chest": [
+      287.42,
+      579.33
+     ],
+     "neckBase": [
+      277.07,
+      502.69
+     ],
+     "headBase": [
+      273.23,
+      452.06
+     ],
+     "head": [
+      266.41,
+      367.85
+     ],
+     "crown": [
+      259.59,
+      283.72
+     ],
+     "L.sh": [
+      285.4,
+      520.9
+     ],
+     "L.elbow": [
+      383.15,
+      637.66
+     ],
+     "L.wrist": [
+      470.69,
+      526.74
+     ],
+     "L.hand": [
+      502.1,
+      486.94
+     ],
+     "L.hip": [
+      290.73,
+      774.4
+     ],
+     "L.knee": [
+      220.88,
+      1009.01
+     ],
+     "L.ankle": [
+      126.59,
+      1230.71
+     ],
+     "L.heel": [
+      74.43,
+      1254.22
+     ],
+     "L.toe": [
+      195.84,
+      1324.67
+     ],
+     "R.sh": [
+      274.54,
+      529.81
+     ],
+     "R.elbow": [
+      350.82,
+      659.71
+     ],
+     "R.wrist": [
+      445.25,
+      539.71
+     ],
+     "R.hand": [
+      479.26,
+      496.49
+     ],
+     "R.hip": [
+      338.15,
+      779.87
+     ],
+     "R.knee": [
+      568.97,
+      890.37
+     ],
+     "R.ankle": [
+      488.62,
+      1125.2
+     ],
+     "R.heel": [
+      439.52,
+      1156.7
+     ],
+     "R.toe": [
+      571.33,
+      1210.32
+     ]
+    },
+    "face": [
+     0.732,
+     -0.043,
+     0.853
+    ],
+    "board": false
+   },
+   {
+    "index": 1,
+    "name": "started",
+    "frame": 200,
+    "action": "caught",
+    "cel": 1,
+    "from": {
+     "yaw": -33.3,
+     "elev": 2.4
+    },
+    "box": [
+     688,
+     0,
+     1376,
+     1536
+    ],
+    "ground": [
+     1009.14,
+     1314.19
+    ],
+    "joints": {
+     "hips": [
+      991.43,
+      777.89
+     ],
+     "waist": [
+      985.05,
+      689.94
+     ],
+     "chest": [
+      977.09,
+      580.1
+     ],
+     "neckBase": [
+      971.59,
+      504.17
+     ],
+     "headBase": [
+      968.97,
+      454.34
+     ],
+     "head": [
+      972.96,
+      375.27
+     ],
+     "crown": [
+      976.89,
+      297.3
+     ],
+     "L.sh": [
+      1085.63,
+      525.78
+     ],
+     "L.elbow": [
+      1176.46,
+      660.95
+     ],
+     "L.wrist": [
+      1250.76,
+      611.37
+     ],
+     "L.hand": [
+      1278.56,
+      592.82
+     ],
+     "L.hip": [
+      1044.79,
+      777.14
+     ],
+     "L.knee": [
+      1125.74,
+      1017.67
+     ],
+     "L.ankle": [
+      1107.43,
+      1260.15
+     ],
+     "L.heel": [
+      1087.5,
+      1301.63
+     ],
+     "L.toe": [
+      1176.55,
+      1327.38
+     ],
+     "R.sh": [
+      859.63,
+      527.16
+     ],
+     "R.elbow": [
+      812.05,
+      651.72
+     ],
+     "R.wrist": [
+      847.22,
+      563.82
+     ],
+     "R.hand": [
+      860.29,
+      531.15
+     ],
+     "R.hip": [
+      937.55,
+      778.64
+     ],
+     "R.knee": [
+      872.4,
+      1019.6
+     ],
+     "R.ankle": [
+      850.55,
+      1246.54
+     ],
+     "R.heel": [
+      832.74,
+      1287.82
+     ],
+     "R.toe": [
+      911.53,
+      1312.84
+     ]
+    },
+    "face": [
+     -0.037,
+     -0.3,
+     0.891
+    ],
+    "board": false
+   },
+   {
+    "index": 2,
+    "name": "backing",
+    "frame": 355,
+    "action": "caught",
+    "cel": 2,
+    "from": {
+     "yaw": 43.7,
+     "elev": 2.7
+    },
+    "box": [
+     1376,
+     0,
+     2064,
+     1536
+    ],
+    "ground": [
+     1763.89,
+     1295.51
+    ],
+    "joints": {
+     "hips": [
+      1765.27,
+      771.06
+     ],
+     "waist": [
+      1771.93,
+      682.87
+     ],
+     "chest": [
+      1780.27,
+      572.36
+     ],
+     "neckBase": [
+      1786.06,
+      495.73
+     ],
+     "headBase": [
+      1788.02,
+      445.18
+     ],
+     "head": [
+      1787.63,
+      363.22
+     ],
+     "crown": [
+      1787.24,
+      282.03
+     ],
+     "L.sh": [
+      1886.26,
+      518.55
+     ],
+     "L.elbow": [
+      1868.46,
+      621.42
+     ],
+     "L.wrist": [
+      1842.48,
+      476.32
+     ],
+     "L.hand": [
+      1833.04,
+      423.58
+     ],
+     "L.hip": [
+      1811.26,
+      772.8
+     ],
+     "L.knee": [
+      1783.87,
+      1018.09
+     ],
+     "L.ankle": [
+      1774.86,
+      1271.96
+     ],
+     "L.heel": [
+      1800.82,
+      1314.7
+     ],
+     "L.toe": [
+      1693.68,
+      1340.03
+     ],
+     "R.sh": [
+      1685.78,
+      517.96
+     ],
+     "R.elbow": [
+      1585.65,
+      640.86
+     ],
+     "R.wrist": [
+      1532.27,
+      515.32
+     ],
+     "R.hand": [
+      1512.78,
+      469.5
+     ],
+     "R.hip": [
+      1720.25,
+      769.34
+     ],
+     "R.knee": [
+      1762.81,
+      976.85
+     ],
+     "R.ankle": [
+      1899.98,
+      1087.77
+     ],
+     "R.heel": [
+      1933.26,
+      1102.65
+     ],
+     "R.toe": [
+      1855.44,
+      1184.5
+     ]
+    },
+    "face": [
+     -0.253,
+     -0.246,
+     0.973
+    ],
+    "board": false
+   },
+   {
+    "index": 3,
+    "name": "backed",
+    "frame": 359,
+    "action": "caught",
+    "cel": 3,
+    "from": {
+     "yaw": 41.2,
+     "elev": 2.6
+    },
+    "box": [
+     2064,
+     0,
+     2752,
+     1536
+    ],
+    "ground": [
+     2477.59,
+     1298.34
+    ],
+    "joints": {
+     "hips": [
+      2478.54,
+      778.43
+     ],
+     "waist": [
+      2474.62,
+      690.24
+     ],
+     "chest": [
+      2469.67,
+      578.85
+     ],
+     "neckBase": [
+      2466.21,
+      501.02
+     ],
+     "headBase": [
+      2465.12,
+      449.71
+     ],
+     "head": [
+      2461.43,
+      366.16
+     ],
+     "crown": [
+      2457.76,
+      283.26
+     ],
+     "L.sh": [
+      2569.93,
+      521.46
+     ],
+     "L.elbow": [
+      2545.9,
+      571.02
+     ],
+     "L.wrist": [
+      2571.48,
+      420.71
+     ],
+     "L.hand": [
+      2580.52,
+      367.56
+     ],
+     "L.hip": [
+      2526.18,
+      780.13
+     ],
+     "L.knee": [
+      2536.5,
+      1022.87
+     ],
+     "L.ankle": [
+      2547.38,
+      1270.48
+     ],
+     "L.heel": [
+      2571.42,
+      1313.2
+     ],
+     "L.toe": [
+      2472.49,
+      1337.28
+     ],
+     "R.sh": [
+      2368,
+      526.35
+     ],
+     "R.elbow": [
+      2244.41,
+      625.54
+     ],
+     "R.wrist": [
+      2218.1,
+      482.55
+     ],
+     "R.hand": [
+      2208.67,
+      431.25
+     ],
+     "R.hip": [
+      2431.88,
+      776.77
+     ],
+     "R.knee": [
+      2410.82,
+      999.81
+     ],
+     "R.ankle": [
+      2505.34,
+      1181.03
+     ],
+     "R.heel": [
+      2527.63,
+      1220.75
+     ],
+     "R.toe": [
+      2436.07,
+      1239.8
+     ]
+    },
+    "face": [
+     -0.175,
+     -0.213,
+     0.984
+    ],
+    "board": false
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/tane/source/hero/vault/layout_map.png"
+}

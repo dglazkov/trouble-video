@@ -543,5 +543,119 @@
     "r": 0.13
    }
   }
+ },
+ "heroes": {
+  "frozen": {
+   "img": "hero/frozen.webp",
+   "w": 1019,
+   "h": 2074,
+   "k": 1000.0,
+   "ground": [
+    463.5,
+    2045.8
+   ],
+   "bottom": 2064,
+   "hips": [
+    447.2,
+    1136.4
+   ],
+   "head": [
+    369.5,
+    469.9
+   ],
+   "source": "kits/tane/source/hero/vault/take_2.jpg",
+   "shot": "shots/open.js",
+   "frame": 65,
+   "action": "caught",
+   "cel": 0,
+   "from": {
+    "yaw": -111.7,
+    "elev": 2.9
+   }
+  },
+  "started": {
+   "img": "hero/started.webp",
+   "w": 999,
+   "h": 2195,
+   "k": 1000.0,
+   "ground": [
+    461.3,
+    1940.4
+   ],
+   "bottom": 2184,
+   "hips": [
+    432.5,
+    1067.0
+   ],
+   "head": [
+    402.4,
+    411.2
+   ],
+   "source": "kits/tane/source/hero/vault/take_2.jpg",
+   "shot": "shots/open.js",
+   "frame": 200,
+   "action": "caught",
+   "cel": 1,
+   "from": {
+    "yaw": -33.3,
+    "elev": 2.4
+   }
+  },
+  "backing": {
+   "img": "hero/backing.webp",
+   "w": 843,
+   "h": 2146,
+   "k": 1000.0,
+   "ground": [
+    458.2,
+    1931.6
+   ],
+   "bottom": 2136,
+   "hips": [
+    460.5,
+    1077.5
+   ],
+   "head": [
+    496.9,
+    413.2
+   ],
+   "source": "kits/tane/source/hero/vault/take_2.jpg",
+   "shot": "shots/open.js",
+   "frame": 355,
+   "action": "caught",
+   "cel": 2,
+   "from": {
+    "yaw": 43.7,
+    "elev": 2.7
+   }
+  },
+  "backed": {
+   "img": "hero/backed.webp",
+   "w": 1058,
+   "h": 2175,
+   "k": 1000.0,
+   "ground": [
+    603.5,
+    1890.1
+   ],
+   "bottom": 2166,
+   "hips": [
+    605.0,
+    1043.3
+   ],
+   "head": [
+    577.2,
+    371.9
+   ],
+   "source": "kits/tane/source/hero/vault/take_2.jpg",
+   "shot": "shots/open.js",
+   "frame": 359,
+   "action": "caught",
+   "cel": 3,
+   "from": {
+    "yaw": 41.2,
+    "elev": 2.6
+   }
+  }
  }
 }

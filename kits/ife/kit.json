@@ -386,5 +386,119 @@
    }
   ],
   "garments": {}
+ },
+ "heroes": {
+  "frozen": {
+   "img": "hero/frozen.webp",
+   "w": 706,
+   "h": 1649,
+   "k": 1000.0,
+   "ground": [
+    383.3,
+    1598.5
+   ],
+   "bottom": 1640,
+   "hips": [
+    379.0,
+    842.9
+   ],
+   "head": [
+    469.0,
+    305.1
+   ],
+   "source": "kits/ife/source/hero/vault/take_1.jpg",
+   "shot": "shots/open.js",
+   "frame": 65,
+   "action": "caught",
+   "cel": 0,
+   "from": {
+    "yaw": -102.2,
+    "elev": 4
+   }
+  },
+  "started": {
+   "img": "hero/started.webp",
+   "w": 779,
+   "h": 1555,
+   "k": 1000.0,
+   "ground": [
+    374.7,
+    1465.2
+   ],
+   "bottom": 1546,
+   "hips": [
+    367.5,
+    810.2
+   ],
+   "head": [
+    438.8,
+    288.1
+   ],
+   "source": "kits/ife/source/hero/vault/take_1.jpg",
+   "shot": "shots/open.js",
+   "frame": 200,
+   "action": "caught",
+   "cel": 1,
+   "from": {
+    "yaw": -52.6,
+    "elev": 3.6
+   }
+  },
+  "backing": {
+   "img": "hero/backing.webp",
+   "w": 810,
+   "h": 1638,
+   "k": 1000.0,
+   "ground": [
+    339.7,
+    1590.0
+   ],
+   "bottom": 1630,
+   "hips": [
+    343.4,
+    877.0
+   ],
+   "head": [
+    277.2,
+    334.8
+   ],
+   "source": "kits/ife/source/hero/vault/take_1.jpg",
+   "shot": "shots/open.js",
+   "frame": 355,
+   "action": "caught",
+   "cel": 2,
+   "from": {
+    "yaw": 120.4,
+    "elev": 3.6
+   }
+  },
+  "backed": {
+   "img": "hero/backed.webp",
+   "w": 720,
+   "h": 1609,
+   "k": 1000.0,
+   "ground": [
+    300.2,
+    1552.3
+   ],
+   "bottom": 1600,
+   "hips": [
+    303.2,
+    862.6
+   ],
+   "head": [
+    271.3,
+    315.3
+   ],
+   "source": "kits/ife/source/hero/vault/take_1.jpg",
+   "shot": "shots/open.js",
+   "frame": 359,
+   "action": "caught",
+   "cel": 3,
+   "from": {
+    "yaw": 117.8,
+    "elev": 3.6
+   }
+  }
  }
 }

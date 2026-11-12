@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY the face's expression and keep every other line, colour, shape and position in the picture exactly the same (same head position, same hair, same clothes, same background): their eyes are closed: both upper eyelids fully down (the eyes drawn as two calm downward curved lines with the dark eyeliner), a slow bored blink; the mouth stays a flat closed line.",
+ "refs": [
+  "kits/noor/closeup/open_face_2.jpg"
+ ],
+ "kind": "edit:closeup:open_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T08:18:05",
+ "from": "kits/noor/closeup/open_face_2.jpg"
+}
