@@ -55,6 +55,7 @@ try {
   makers.tunnel = () => import("../sets/tunnel.js").then((m) => m.createTunnel(renderer, { width: W, height: H }));
   makers.core = () => import("../sets/core.js").then((m) => m.createCore(renderer, { width: W, height: H }));
   makers.plant = () => import("../sets/plant.js").then((m) => m.createPlant(renderer, { width: W, height: H }));
+  makers.shaft = () => import("../sets/shaft.js").then((m) => m.createShaft(renderer, { width: W, height: H }));
   const need = async (name) => sets[name] ?? (sets[name] = await makers[name]());
   for (const s of shot.sets ?? []) await need(s);
   for (const [who, base] of Object.entries(shot.cast ?? {})) {
