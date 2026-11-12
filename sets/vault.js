@@ -445,7 +445,7 @@ export async function createVault(renderer, o = {}) {
   function light(p) {
     if (Math.hypot(p[0], p[2]) > R + 0.4) return { tint: [0.8, 0.84, 1.06], rim: [0.5, 0.9, 1.0], from: [0, 1, 0], fogK: 0, fogColor: [0, 0, 0], gradient: 0.2 };      // out in the passage to the corridors
     const { glow, red, gold } = state, d = Math.hypot(p[0], p[2]), near = d < 5 ? 1 : 0.8, toRing = [-p[0], 0.5, -p[2]], l = Math.hypot(...toRing) || 1;
-    const lift = 1 + 0.75 * red, tint = [lerp(0.7, 1.0, red) * glow * near * lift + 0.03, lerp(0.88, 0.62, red) * glow * near * lift + 0.03, lerp(0.9, 0.62, red) * glow * near * lift + 0.04];      // (the room's own light drops as it reddens: a face must still read)
+    const lift = 1 + 0.75 * red, tint = [lerp(0.78, 1.0, red) * glow * near * lift + 0.03, lerp(0.95, 0.62, red) * glow * near * lift + 0.03, lerp(0.96, 0.62, red) * glow * near * lift + 0.04];      // (the room's own light drops as it reddens: a face must still read)
     const rim = red > 0.5 ? [1.0, 0.25, 0.18].map((v) => v * glow) : [1.0, 0.72, 0.3].map((v) => v * gold);
     // near the way out, the corridor's light comes up on them
     const out = bayAt(0), w = clamp(1 - (Math.hypot(p[0] - out[0], p[2] - out[2]) - 1.5) / 4.5);

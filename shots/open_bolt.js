@@ -7,7 +7,7 @@ import { swarm } from "./open_drones.js";
 const FRAMES = CUT.end - CUT.bolt, D = bayDir(0), YAW = Math.atan2(D[0], D[2]) * 180 / Math.PI, ACROSS = [D[2], 0, -D[0]];
 // along the way out: s metres past the doorway's threshold (negative: still in the vault), x across it
 const way = (s, x = 0, y = 0) => [D[0] * (R + s) + ACROSS[0] * x, y, D[2] * (R + s) + ACROSS[2] * x];
-const PLACE = { tane: [-0.95, 0, 0.1], ife: [0.12, -0.9, 0.7], juno: [1.05, -1.3, 0.55], noor: [0.25, -2.3, 0.3] };      // across, behind the leader, where in the cycle
+const PLACE = { tane: [-0.95, 0, 0.1], ife: [0.3, -0.9, 0.7], juno: [1.05, -1.3, 0.55], noor: [-0.4, -1.9, 0.3] };      // across, behind the leader, where in the cycle
 function frame(f, sync) {
   const F = CUT.bolt + f, k = f / FRAMES, lead = -6.4 + RUN * f / FPS, c = cues(F), shake = 0.02;
   const pack = swarm(F, {}).map((d, i) => { const a = i / 12 * 6.28, s = lead - 5 - (i % 4) * 1.6 + 0.5 * Math.sin(F * 0.4 + i); return { ...d, fold: 0, pos: way(s, 1.5 * Math.sin(a * 2 + i), 1.5 + 0.9 * Math.abs(Math.cos(a * 3 + i))), yaw: YAW, pitch: -8, roll: 14 * Math.sin(F * 0.3 + i), eye: 1.5, thrust: 1, scale: 1 }; });
