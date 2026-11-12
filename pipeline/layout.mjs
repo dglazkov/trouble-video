@@ -2,12 +2,16 @@
 //   node pipeline/layout.mjs NAME turnaround        -> kits/NAME/source/turnaround_guide.png (+ .json: the view boxes)
 //   node pipeline/layout.mjs NAME VIEW [VIEW ...]   -> kits/NAME/source/VIEW/template.png, key.png + layout.json
 //   node pipeline/layout.mjs NAME all               -> every view
+//   --set twist                                     -> the trunk's twist swap drawings instead of the main sheet (template_twist.png ...)
 //   --unit N                                        -> cap the sheet's scale at N pixels per body unit
 import fs from "node:fs"; import path from "node:path";
 import { open, savePng, ROOT } from "./browser.mjs";
 
 const argv = process.argv.slice(2), ui = argv.indexOf("--unit");
 const maxUnit = ui >= 0 ? Number(argv.splice(ui, 2)[1]) : 1500;   // the most pixels per body unit a sheet may draw at
+const si = argv.indexOf("--set");
+const set = si >= 0 ? argv.splice(si, 2)[1] : "main";              // which sheet of a view: main, or twist (trunk swap drawings)
+const sfx = set === "main" ? "" : "_" + set;
 const [name, ...what] = argv;
 if (!name || !what.length || name === "--help") { console.error("usage: node pipeline/layout.mjs NAME turnaround|all|VIEW..."); process.exit(2); }
 const dir = path.join(ROOT, "kits", name), spec = JSON.parse(fs.readFileSync(path.join(dir, "character.json"), "utf8"));
@@ -21,10 +25,10 @@ for (const w of what.flatMap((w) => w === "all" ? VIEWS : [w])) {
     console.log("wrote", `kits/${name}/source/turnaround_guide.png`);
   } else {
     if (!VIEWS.includes(w)) { console.error("no such view: " + w); process.exitCode = 2; continue; }
-    const r = await page.evaluate(([s, v, u]) => template(s, v, u), [spec, w, maxUnit]);
-    savePng(path.join(dir, "source", w, "template.png"), r.png); savePng(path.join(dir, "source", w, "key.png"), r.key);
-    fs.writeFileSync(path.join(dir, "source", w, "layout.json"), JSON.stringify(r.layout, null, 1));
-    console.log("wrote", `kits/${name}/source/${w}/template.png`, "unit", r.layout.unit, "parts", Object.keys(r.layout.parts).length);
+    const r = await page.evaluate(([s, v, u, set]) => template(s, v, u, set), [spec, w, maxUnit, set]);
+    savePng(path.join(dir, "source", w, `template${sfx}.png`), r.png); savePng(path.join(dir, "source", w, `key${sfx}.png`), r.key);
+    fs.writeFileSync(path.join(dir, "source", w, `layout${sfx}.json`), JSON.stringify(r.layout, null, 1));
+    console.log("wrote", `kits/${name}/source/${w}/template${sfx}.png`, "unit", r.layout.unit, "parts", Object.keys(r.layout.parts).length);
   }
 }
 await close();

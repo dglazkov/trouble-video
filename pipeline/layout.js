@@ -30,8 +30,13 @@ window.turnaround = (spec, W = 2752, H = 1536) => {
 // What a humanoid kit is made of. vols: the body volumes drawn for the part ("name" or "name:near"/"name:far" for a
 // garment split by depth); pts: named joints written into the layout; pad: room left round the shape for what the
 // drawing adds (hair, folds).
-function items(view, P) {
+function items(view, P, set) {
   const it = [];
+  if (set === "twist") { // swap drawings for the trunk: the chest turned against the hips, as in a run
+    for (const [n, tw, note] of [["torso_twp", 18, "her chest and shoulders turned a little toward her own left"], ["torso_twn", -18, "her chest and shoulders turned a little toward her own right"]])
+      it.push({ name: n, kind: "torso", vols: ["torso", "collar:near"], pose: { twist: tw }, note, pts: { a: "hips", b: "neckBase", shL: "L.sh", shR: "R.sh", waist: "waist" }, scale: 1.7, pad: 60 });
+    return it;
+  }
   it.push({ name: "head", kind: "head", vols: ["head"], pts: { a: "headBase", b: "crown", c: "head" }, scale: 1.45, pad: 46 });
   it.push({ name: "neck", kind: "neck", vols: ["neck"], pts: { a: "neckBase", b: "headBase" }, scale: 1.2, pad: 20 });
   if (P.garments.collar && view.yaw <= 90) it.push({ name: "collar_back", kind: "collar_back", vols: ["collar:far"], pts: { a: "hips", b: "neckBase" }, pad: 22 });
@@ -50,9 +55,10 @@ function items(view, P) {
 }
 const joint = (J, n) => n.includes(".") ? J[n.split(".")[0]][n.split(".")[1]] : J[n];
 
-window.template = (spec, viewName, maxUnit = 1500, S = 2048) => {
+window.template = (spec, viewName, maxUnit = 1500, set = "main", S = 2048) => {
+  const H = set === "twist" ? S * 9 / 16 : S;   // a sheet is as wide as its parts need: empty room invites extra parts
   const view = VIEWS.find((v) => v.name === viewName), P = proportions(spec.body);
-  const list = items(view, P), GAP = 34;
+  const list = items(view, P, set), GAP = 34;
   // each part at unit scale first, to find how large the sheet can draw them
   const build = (U) => list.map((it) => {
     const body = solve(P, it.pose ? pose(it.pose, LAYOUT) : LAYOUT), k = U * (it.scale ?? 1);
@@ -90,10 +96,10 @@ window.template = (spec, viewName, maxUnit = 1500, S = 2048) => {
     return y;
   };
   let U = maxUnit, cells;
-  for (; U > 300; U -= 10) { cells = build(U); if (place(cells) <= S) break; }
-  const c = canvas(S, S), g = c.getContext("2d"), ck = canvas(S, S), gk = ck.getContext("2d");
-  for (const x of [g, gk]) { x.fillStyle = MAGENTA; x.fillRect(0, 0, S, S); }
-  const layout = { view: view.name, yaw: view.yaw, symmetric: !!view.symmetric, size: S, unit: U, parts: {} };
+  for (; U > 300; U -= 10) { cells = build(U); if (place(cells) <= H) break; }
+  const c = canvas(S, H), g = c.getContext("2d"), ck = canvas(S, H), gk = ck.getContext("2d");
+  for (const x of [g, gk]) { x.fillStyle = MAGENTA; x.fillRect(0, 0, S, H); }
+  const layout = { view: view.name, set, yaw: view.yaw, symmetric: !!view.symmetric, size: S, height: H, unit: U, parts: {} };
   for (const cell of cells) {
     const ox = cell.at[0] - cell.bb[0], oy = cell.at[1] - cell.bb[1];
     const cam = orbit([0, 0, 0], view.yaw, 10, { ortho: cell.k, w: 0, h: 0, cx: ox, cy: oy });
@@ -109,6 +115,7 @@ window.template = (spec, viewName, maxUnit = 1500, S = 2048) => {
       part.faceDir = [+(f.x - cam.project(cell.body.J.head).x).toFixed(3) / cell.k, 0];
     }
     if (cell.it.pose) part.pose = cell.it.pose;
+    if (cell.it.note) part.note = cell.it.note;
     layout.parts[cell.it.name] = part;
   }
   return { png: png(c), key: png(ck), layout };

@@ -1878,6 +1878,90 @@
        }
       }
      }
+    },
+    "torso_twp": {
+     "kind": "torso",
+     "side": null,
+     "img": "back34/torso_twp.png",
+     "w": 339,
+     "h": 460,
+     "k": 900.0,
+     "joints": {
+      "a": "hips",
+      "b": "neckBase",
+      "shL": "L.sh",
+      "shR": "R.sh",
+      "waist": "waist"
+     },
+     "pts": {
+      "a": [
+       158.6,
+       475.1
+      ],
+      "b": [
+       158.6,
+       81.0
+      ],
+      "shL": [
+       93.2,
+       112.7
+      ],
+      "shR": [
+       224.0,
+       112.7
+      ],
+      "waist": [
+       158.6,
+       352.7
+      ]
+     },
+     "src": "kits/juno/source/back34/twist_1.jpg",
+     "box": "torso_twp",
+     "pose": {
+      "twist": 18
+     }
+    },
+    "torso_twn": {
+     "kind": "torso",
+     "side": null,
+     "img": "back34/torso_twn.png",
+     "w": 401,
+     "h": 459,
+     "k": 900.0,
+     "joints": {
+      "a": "hips",
+      "b": "neckBase",
+      "shL": "L.sh",
+      "shR": "R.sh",
+      "waist": "waist"
+     },
+     "pts": {
+      "a": [
+       200.0,
+       474.3
+      ],
+      "b": [
+       200.0,
+       80.2
+      ],
+      "shL": [
+       71.6,
+       111.9
+      ],
+      "shR": [
+       328.3,
+       111.9
+      ],
+      "waist": [
+       200.0,
+       351.9
+      ]
+     },
+     "src": "kits/juno/source/back34/twist_1.jpg",
+     "box": "torso_twn",
+     "pose": {
+      "twist": -18
+     }
     }
    },
    "sheet": "kits/juno/source/back34/sheet_3.jpg"
@@ -2254,7 +2338,10 @@
     }
    },
    "back34": {
-    "sheet": "sheet_3"
+    "sheet": "sheet_3",
+    "more": [
+     "twist_1"
+    ]
    },
    "back": {
     "sheet": "sheet_3",

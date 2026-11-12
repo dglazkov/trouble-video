@@ -10,14 +10,14 @@
 import { clamp, SIDES, relativeYaw } from "./body.js";
 import { picker } from "./views.js";
 
-const GX = 8, GY = 16, BEND = 80, FAR_TINT = [0.76, 0.74, 0.84];
+const GX = 8, GY = 16, BEND = 80, TWIST = 9, FAR_TINT = [0.76, 0.74, 0.84];
 const VS = `#version 300 es
 in vec2 p; in vec2 uv; out vec2 v; out vec2 sp; uniform vec2 size;
 void main(){ v = uv; sp = p; gl_Position = vec4(p.x / size.x * 2. - 1., 1. - p.y / size.y * 2., 0., 1.); }`;
 const FS = `#version 300 es
 precision highp float; in vec2 v; in vec2 sp; out vec4 o;
 uniform sampler2D t, tin; uniform vec3 tint; uniform vec3 soft[3];   // soft: centre xy, radius (0 = none)
-void main(){ vec4 c = texture(t, v); float a = c.a, w = 0.;
+void main(){ vec4 c = texture(t, v, -0.5); float a = c.a, w = 0.;
   for (int i = 0; i < 3; i++) if (soft[i].z > 0.) w = max(w, 1. - smoothstep(soft[i].z * .72, soft[i].z, distance(sp, soft[i].xy)));
   if (w > 0.) a = mix(a, min(a, texture(tin, v).r), w);
   o = vec4(c.rgb * tint * a, a); }`;
@@ -143,7 +143,7 @@ export function createPuppet(gl) {
       const zc = pj(J.chest).z, zh = pj(J.hips).z;
       const tintAt = (z, ref) => { const k = clamp((z - ref) / 0.16); return [0, 1, 2].map((i) => 1 + (FAR_TINT[i] - 1) * k); };
       const hang = (kind, side, o2 = {}) => {
-        const f = find(kind, side); if (!f) return;
+        const f = o2.as && V.parts[o2.as] ? { p: V.parts[o2.as], flip: m } : find(kind, side); if (!f) return;
         const A = pj(jt(f.p.joints.a, side)), B = pj(jt(f.p.joints.b, side));
         part(f.p, A, B, { ...o2, flip: f.flip });
         marks.push({ name: kind + (side ? "_" + side : ""), A, B });
@@ -164,17 +164,21 @@ export function createPuppet(gl) {
       };
       const leg = (side, over) => {
         const j = J[side], tint = tintAt(pj(j.hip).z, zh), R = P.r.thigh + P.pad.thigh;
-        hang("shoe", side, { tint });
+        // seen from the side the trouser cuff hangs over the shoe; seen straight on, the shoe stands in front of it
+        const shoeOver = sel.yaw === 0 || sel.yaw === 180;
+        if (!shoeOver) hang("shoe", side, { tint });
         const b = j.kneeFlex > BEND ? find("bent", side) : null;
         if (b) {
           bent(b.p, pj(j.hip), pj(j.knee), pj(j.ankle), { flip: b.flip, tint, soft: over ? [zone(j.hip, R * 1.5)] : [] });
           marks.push({ name: "bent_" + side, A: pj(j.hip), B: pj(j.knee) }, { name: "", A: pj(j.knee), B: pj(j.ankle) });
+          if (shoeOver) hang("shoe", side, { tint });
           return;
         }
         const kz = zone(j.knee, (P.r.knee + P.pad.thigh) * 1.7);
         const thigh = (s) => hang("thigh", side, { tint, soft: (over ? [zone(j.hip, R * 1.5)] : []).concat(s ? [kz] : []) });
         const shin = (s) => hang("shin", side, { tint, soft: s ? [kz] : [] });
-        if (pj(j.ankle).z < pj(j.hip).z - 0.02) { thigh(false); shin(true); } else { shin(false); thigh(true); }
+        if (pj(j.ankle).z < pj(j.hip).z - 0.02) { thigh(false); shin(true); if (shoeOver) hang("shoe", side, { tint }); }
+        else { shin(false); if (shoeOver) hang("shoe", side, { tint }); thigh(true); }
       };
       // far to near
       const armZ = (s) => (pj(J[s].sh).z + pj(J[s].elbow).z + pj(J[s].wrist).z) / 3;
@@ -191,7 +195,9 @@ export function createPuppet(gl) {
       const under = legs.filter((s) => !over(s)), hipR = (P.r.thigh + P.pad.thigh) * 1.5;
       hang("pelvis", null, { soft: under.map((s) => zone(J[s].hip, hipR)).concat(under.length === 2 ? [zone([0, 1, 2].map((i) => J.hips[i] - body.F.root.Y[i] * hipR * 0.7), hipR)] : []) });
       for (const s of legs) if (over(s)) leg(s, true);
-      hang("torso", null, { warp: hemWarp });
+      // the trunk swaps to a twisted drawing when the chest turns against the hips, if the kit has one for this view
+      const tw = q.twist * (m ? -1 : 1);
+      hang("torso", null, { warp: hemWarp, as: tw > TWIST ? "torso_twp" : tw < -TWIST ? "torso_twn" : null });
       for (const s of arms) if (!behind(s)) arm(s);
       // the head has its own view: it turns further than the body does
       const hp = VH.parts.head;

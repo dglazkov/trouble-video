@@ -37,3 +37,12 @@
 {"file": "kits/juno/source/front34/patch_1.jpg", "kind": "patch:front34/head", "time": "2026-11-11T21:13:03", "ok": true}
 {"file": "kits/juno/source/front/patch_1.jpg", "kind": "patch:front/head", "time": "2026-11-11T21:13:03", "ok": true}
 {"file": "kits/juno/source/side/patch_1.jpg", "kind": "patch:side/head", "time": "2026-11-11T21:13:03", "ok": true}
+{"file": "kits/juno/source/front34/twist_1.jpg", "kind": "parts:front34", "time": "2026-11-11T21:20:17", "ok": true}
+{"file": "kits/juno/source/back34/twist_1.jpg", "kind": "parts:back34", "time": "2026-11-11T21:20:17", "ok": true}
+{"file": "kits/juno/source/side/twist_1.jpg", "kind": "parts:side", "time": "2026-11-11T21:20:18", "ok": true}
+{"file": "kits/juno/source/side/twist_1.jpg", "reject": "twist swap drawings: heavier shading than the base trunk and taller than their shapes; a sparse two-shape sheet is not followed closely", "time": "2026-11-11T21:20:36"}
+{"file": "kits/juno/source/front34/twist_1.jpg", "reject": "twist swap drawings: the model filled the empty half of the sheet with two more jackets that touch the wanted ones", "time": "2026-11-11T21:21:24"}
+{"file": "kits/juno/source/side/twist_2.jpg", "kind": "parts:side_twist", "time": "2026-11-11T21:21:42", "ok": true}
+{"file": "kits/juno/source/front34/twist_2.jpg", "kind": "parts:front34_twist", "time": "2026-11-11T21:21:44", "ok": true}
+{"file": "kits/juno/source/side/twist_2.jpg", "reject": "twist swap drawings on a wide two-shape sheet: drawn smaller than their shapes with grey left round them, and at the wrong angle (one came with sleeves, one from behind)", "time": "2026-11-11T21:22:24"}
+{"file": "kits/juno/source/front34/twist_2.jpg", "reject": "twist swap drawings on a wide two-shape sheet: drawn smaller than their shapes with grey left round them, and at the wrong angle (one came with sleeves, one from behind)", "time": "2026-11-11T21:22:24"}

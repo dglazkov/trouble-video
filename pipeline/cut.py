@@ -5,7 +5,7 @@
 chosen.json says which takes the kit is made of:
   { "front": { "sheet": "sheet_7", "parts": { "neck": "sheet_4", "shoe_R": null },
                "variants": { "head": { "blink": "patch_1" } } }, ... }
-"sheet" is the take most parts come from; "parts" overrides single parts with another take (null leaves a part
+"sheet" is the take most parts come from; "more": ["twist_1"] adds the parts of other sheets; "parts" overrides single parts with another take (null leaves a part
 out: the puppet then mirrors the other side's); "variants" name patch takes (paint.py patch) holding an edit of one
 part, such as closed eyes: the variant is cut with the part's own crop and silhouette, so it registers exactly.
 Two corrections for when the model painted the right thing the wrong way round, both judged by eye on the QC sheet:
@@ -51,8 +51,8 @@ def take(src, view, name):
         f = os.path.join(src, view, name + ".jpg")
         sheet = cv2.imread(f, cv2.IMREAD_COLOR).astype(np.float32)
         layout = json.load(open(os.path.join(src, view, name + ".layout.json")))
-        s = layout["size"]
-        if sheet.shape[0] != s: sheet = cv2.resize(sheet, (s, s), interpolation=cv2.INTER_LANCZOS4)
+        w, h = layout["size"], int(layout.get("height", layout["size"]))
+        if sheet.shape[:2] != (h, w): sheet = cv2.resize(sheet, (w, h), interpolation=cv2.INTER_LANCZOS4)
         alpha, col = key(sheet)
         n, lab, st, _ = cv2.connectedComponentsWithStats((alpha > 0.5).astype(np.uint8), 8)
         _cache[k] = dict(alpha=alpha, col=col, lab=lab, st=st, layout=layout, file=os.path.relpath(f, ROOT))
@@ -157,8 +157,10 @@ def main():
         base = take(src, view, ch["sheet"])
         out_parts, shown = {}, []
         for old in os.listdir(os.path.join(kit_dir, view)): os.remove(os.path.join(kit_dir, view, old))   # the view is rebuilt whole
-        for pname in base["layout"]["parts"]:
-            tname = ch.get("parts", {}).get(pname, ch["sheet"])
+        owner = {pname: ch["sheet"] for pname in base["layout"]["parts"]}
+        for extra in ch.get("more", []): owner.update({pname: extra for pname in take(src, view, extra)["layout"]["parts"]})
+        for pname, home in owner.items():
+            tname = ch.get("parts", {}).get(pname, home)
             if tname is None: continue
             t = take(src, view, tname)
             if pname not in t["layout"]["parts"]: sys.exit(f"{view}/{pname}: take {tname} has no such part")

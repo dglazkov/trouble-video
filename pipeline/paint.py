@@ -2,7 +2,9 @@
 
   paint.py NAME turnaround            the five-view design sheet, painted over the turnaround guide
   paint.py NAME crop FILE             cut an approved turnaround into one design drawing per view
-  paint.py NAME VIEW [--nokey]        that view's parts sheet, painted over its template (--nokey: no colour key image)
+  paint.py NAME VIEW [--set twist] [--nokey]
+                                      that view's parts sheet, painted over its template (--set: another of the
+                                      view's sheets; --nokey: no colour key image)
   paint.py NAME patch VIEW TAKE PART "what" [--region face]
                                       an edit of one part of a take (an expression, a fix), saved as a new take
                                       patch_N with the same layout; only the pixels the edit changed are taken
@@ -74,6 +76,7 @@ def parts_prompt(spec, layout, view, key=True):
         names = []
         for _, name, p in sorted(rows[y]):
             t = p["kind"].replace("_", " ").replace("uarm", "upper arm").replace("farm", "forearm").replace("bent", "bent leg").replace("shin", "lower leg").replace("thigh", "upper leg")
+            if p.get("note"): t += f" ({p['note']})"
             if p["side"] and near:
                 t += f" ({side_word[p['side']]}, the {'near' if p['side'] == near else 'far'} side" + ("" if p["side"] == near else ": drawn from its inner face") + ")"
             elif p["side"]:
@@ -179,12 +182,14 @@ def main():
         json.dump(side_car, open(out[:-4] + ".json", "w"), indent=1)
         print(f"patched {part}: {m.mean():.1%} of the crop changed"); return
     if what in VIEWS:
-        vd = os.path.join(src, what); layout = json.load(open(os.path.join(vd, "layout.json")))
-        out = take(vd, "sheet")
+        st = rest[rest.index("--set") + 1] if "--set" in rest else "main"; sfx = "" if st == "main" else "_" + st
+        vd = os.path.join(src, what); layout = json.load(open(os.path.join(vd, f"layout{sfx}.json")))
+        out = take(vd, "sheet" if st == "main" else st)
         json.dump(layout, open(out[:-4] + ".layout.json", "w"), indent=1)   # the layout this take was painted over, kept with it
         key = "--nokey" not in rest   # the colour key helps the model tell parts apart, but on sparse sheets its colours leak in
-        refs = [os.path.join(vd, "template.png")] + ([os.path.join(vd, "key.png")] if key else []) + [os.path.join(vd, "design.png")]
-        generate(src, out, parts_prompt(spec, layout, what, key), refs, kind="parts:" + what); return
+        refs = [os.path.join(vd, f"template{sfx}.png")] + ([os.path.join(vd, f"key{sfx}.png")] if key else []) + [os.path.join(vd, "design.png")]
+        wide = layout.get("height", layout["size"]) < layout["size"]
+        generate(src, out, parts_prompt(spec, layout, what, key), refs, aspect="16:9" if wide else "1:1", kind=f"parts:{what}" + sfx); return
     sys.exit("unknown step: " + what)
 
 
