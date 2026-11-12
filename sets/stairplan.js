@@ -10,7 +10,7 @@
 export const H = 3, STEPS = 12, RISE = H / STEPS, TREAD = 0.4, X0 = -2.4, X1 = 2.4, FLIGHTS = 8, BOTTOM = -FLIGHTS * H;
 export const NEAR = 0.75, FAR = -0.75, LANE = 1.3, RAIL = 1.0;                     // lane centres (z), a lane's width, a handrail's height over the nosings
 export const LEFT = { x0: -4.6, x1: X0, z0: -1.4, z1: 2.4 }, RIGHT = { x0: X1, x1: 3.9, z0: -1.4, z1: 1.4 };   // the landings
-export const LIFT = { x0: -6.8, x1: -4.6, z0: -1.4, z1: 0.8, x: -5.7, z: 0.3, h: 2.5 };      // the cage: its shaft, where a rider stands, its height
+export const LIFT = { x0: -6.8, x1: -4.6, z0: -1.4, z1: 0.8, x: -5.7, z: 0.1, h: 2.5 };      // the cage: its shaft, where a rider stands, its height
 export const BALCONY = { x0: -6.8, x1: -4.6, z0: 0.8, z1: 2.4 };                    // in front of the lift at every left landing
 export const WALK = { x0: -4.6, x1: X0, z0: -7, z1: -1.4 }, BACK = -7;              // the way in from the door in the back wall (top and bottom)
 export const SHAFT = { x0: -8.6, x1: 6.2, z0: BACK, z1: 4.6 };

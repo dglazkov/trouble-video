@@ -1,5 +1,5 @@
-// Descent 3, 23.21-24.04 s: NOOR TAKES THE LIFT. Square on the cage at the top landing: Noor inside, arms folded,
-// looking at nothing. The folding gate rattles across a notch on each hit (the brass, the drums, the bar line), latches
+// Descent 3, 23.21-24.04 s: NOOR TAKES THE LIFT. Square on the cage at the top landing: Noor inside, a hand on the hip,
+// examining the nails of the other. The folding gate rattles across a notch on each hit (the brass, the drums, the bar line), latches
 // on the next, and the cage drops out of the picture with Noor in it, in no hurry at all.
 import { FPS, CUT, CAST, startOf, boil, wob, facing } from "./desc_cast.js";
 import { LIFT } from "../sets/stairplan.js";
@@ -11,7 +11,7 @@ function frame(f, sync) {
   return { set: "stairwell", camera: cam,
     options: { lift: { y: drop, gate: gateAt(f), lamp: f >= LATCH ? 1 : 0, going: f >= GO ? 1 : 0 }, alert: 0.5 },
     post: { ca: 0.0012 + 0.003 * jolt },
-    actors: [{ who: "noor", action: "desc_cage", phase: 0, hero: "lift", x: LIFT.x, y: drop, z: LIFT.z, yaw: facing([LIFT.x, 0, LIFT.z], cam.pos), shadow: false, layer: boil(f, 1.0) }] };
+    actors: [{ who: "noor", action: "desc_cage", phase: 2 / 3, hero: "nails", x: LIFT.x, y: drop, z: LIFT.z, yaw: facing([LIFT.x, 0, LIFT.z], cam.pos) + 16, shadow: false, layer: boil(f, 1.0) }] };
 }
 export default { name: "desc_gate", start: startOf("gate"), frames: FRAMES, fps: FPS, cutOn: "beat", sets: ["stairwell"], cast: CAST, frame,
   marks: [{ at: NOTCH[0], what: "the gate: first notch", on: "brass" }, { at: NOTCH[1], what: "the gate: second notch", on: "drums" }, { at: NOTCH[2], what: "the gate shuts", on: "bar" }, { at: LATCH, what: "it latches; the cage goes", on: "brass" }] };

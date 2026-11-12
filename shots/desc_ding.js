@@ -13,7 +13,7 @@ const CAM = { pos: [-2.75, B + 1.5, 11.6], target: [-2.6, B + 1.28, 0], fov: 26 
 // Noor: in the cage until the cut back out, then a step and a half in front of it
 const YAW = 12, IN = [LIFT.x + 0.1, 0.12], AT = [LIFT.x + 0.5, 1.55], NEAR = { pos: [LIFT.x + 0.75, B + 1.5, 5.3], target: [LIFT.x + 0.08, B + 1.3, 0.12], fov: 23 };
 // the heap: where each lies, how high, the way they face, and the frame they land on
-const HEAP = { tane: { at: [-1.75, 0, 1.05], yaw: -90, on: CRASH }, juno: { at: [-1.5, 0, 1.36], yaw: -20, on: CRASH }, ife: { at: [-0.62, 0, 1.44], yaw: 14, on: IFE } };
+const HEAP = { tane: { at: [-1.2, 0, 1.05], yaw: -90, on: CRASH }, juno: { at: [-0.95, 0, 1.36], yaw: -20, on: CRASH }, ife: { at: [-0.07, 0, 1.44], yaw: 14, on: IFE } };
 const FROM = { tane: [5.0, 3.0], juno: [5.9, 3.5], ife: [1.0, 3.3] };      // how far across and up each is, four frames before landing (they come in at one speed: the floor stops them)
 const liftY = (f) => f >= DING - 1 ? 0 : 2.5 * (1 - f / (DING - 1)) ** 2;
 const gate = (f) => f <= CLOSE ? 1 : Math.max(0, 1 - (f - CLOSE) / 4);
