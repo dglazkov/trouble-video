@@ -24,15 +24,15 @@ export const MANNER = {
 // How far the ground passes under one cycle of a character's run (for scrolling the set under them).
 export const strideOf = (who, P) => runStride(P, MANNER[who]);
 
-// Tane's charge, seen from his left: (0) dropping his left shoulder in mid-stride, (1) the impact, shoulder first,
-// off the ground, the right arm and leg flung out behind.
+// Tane's charge, seen from his left: (0) dropping his left shoulder in mid-stride, low; (1) the impact: thrown
+// forward off the ground, shoulder first, body near level, the right arm and both legs flung out behind.
 const CHARGE = [
-  pose({ lean: 30, twist: -34, pelvisTwist: 8, head: { yaw: 10, pitch: -16, roll: 0 },
-    arm: { L: { swing: 26, out: 8, elbow: 112 }, R: { swing: -46, out: 16, elbow: 48 } },
-    leg: { L: { swing: 52, out: 6, knee: 58, foot: -6 }, R: { swing: -34, out: 6, knee: 26, foot: 44 } } }),
-  pose({ lean: 40, twist: -48, pelvisTwist: 10, lift: 0.07, head: { yaw: 16, pitch: -24, roll: 0 },
-    arm: { L: { swing: 8, out: 4, elbow: 124 }, R: { swing: -68, out: 22, elbow: 22 } },
-    leg: { L: { swing: 64, out: 6, knee: 96, foot: 10 }, R: { swing: -48, out: 8, knee: 30, foot: 62 } } }),
+  pose({ lean: 34, twist: -38, pelvisTwist: 8, head: { yaw: 12, pitch: -18, roll: 0 },
+    arm: { L: { swing: 30, out: 6, elbow: 118 }, R: { swing: -50, out: 16, elbow: 50 } },
+    leg: { L: { swing: 58, out: 6, knee: 70, foot: -6 }, R: { swing: -30, out: 6, knee: 30, foot: 46 } } }),
+  pose({ lean: 58, twist: -52, pelvisTwist: 10, lift: 0.28, head: { yaw: 18, pitch: -40, roll: 0 },
+    arm: { L: { swing: 24, out: 4, elbow: 128 }, R: { swing: -84, out: 24, elbow: 14 } },
+    leg: { L: { swing: 30, out: 8, knee: 92, foot: 40 }, R: { swing: -42, out: 10, knee: 18, foot: 66 } } }),
 ];
 // Juno on the board, left foot forward, knees bent, arms out for balance: banked to her left, level, to her right.
 const RIDE = [18, 0, -18].map((roll) => pose({ lean: 20, roll, board: 1, lift: 0.2, twist: -22 - roll * 0.4, pelvisTwist: -14,

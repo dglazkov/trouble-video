@@ -156,6 +156,7 @@
   "coat"
  ],
  "check": {
-  "excess": 0.5
+  "excess": 0.5,
+  "features": 0.0
  }
 }

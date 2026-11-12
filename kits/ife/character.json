@@ -163,7 +163,8 @@
   "red": "#c8553f",
   "yellow": "#d9a93a",
   "blue": "#4a6fb0",
-  "hair": "#1e1d1b"
+  "hair": "#1e1d1b",
+  "white": "#f6f6f6"
  },
  "wear": {
   "hand": [
@@ -210,7 +211,8 @@
    "packshade",
    "skin",
    "skinshade",
-   "arm"
+   "arm",
+   "white"
   ],
   "pelvis": [
    "shorts",
@@ -238,6 +240,8 @@
   "pack"
  ],
  "check": {
-  "excess": 0.4
+  "excess": 0.4,
+  "features": 0.0,
+  "limb": 0.4
  }
 }

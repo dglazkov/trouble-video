@@ -45,7 +45,7 @@ ACTIONS = {
     "run": "the {n} successive drawings of ONE run cycle",
     "idle": "{n} drawing(s) of {o} standing relaxed and at ease, like a person waiting, weight on one leg",
     "runtop": "the {n} successive drawings of ONE run cycle, seen from directly above",
-    "charge": "{n} key drawings of a running shoulder charge: in the first {s} drops {p} leading LEFT shoulder in mid-stride; in the second {s} hits a barrier shoulder first, both feet off the ground",
+    "charge": "{n} key drawings of a shoulder charge, different from each other: in the FIRST {s} {IS} still running, crouched low, dropping {p} leading LEFT shoulder with the left arm tucked against the chest; in the SECOND {s} {IS} at the moment of impact: launched forward off the ground with BOTH feet in the air behind {o}, the body thrown almost level, the left shoulder driven forward first and the right arm flung straight back",
     "ride": "{n} key drawings of {o} riding a hoverboard at speed, crouched with knees bent and arms out for balance: banking to {p} left, level, and banking to {p} right",
     "leap": "{n} key drawings of {o} jumping a gap on a hoverboard, seen from above and behind: first launching upward with the board's nose tilted up, then the top of the jump, knees tucked up, one hand gripping the board's edge and the other arm thrown up",
 }

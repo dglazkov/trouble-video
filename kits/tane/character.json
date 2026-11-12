@@ -119,7 +119,9 @@
   "thigh": [
    "trousers",
    "coat",
-   "coatshade"
+   "coatshade",
+   "white",
+   "wrapshade"
   ],
   "shin": [
    "trousers",
@@ -160,8 +162,7 @@
  "marks": [],
  "flats": [
   "skin",
-  "coat",
-  "wood"
+  "coat"
  ],
  "check": {
   "excess": 0.5

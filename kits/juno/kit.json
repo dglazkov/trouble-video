@@ -577,6 +577,172 @@
        "source": "kits/juno/source/run/back34/take_1.jpg"
       }
      }
+    },
+    "front": {
+     "yaw": 0,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "run/front/0.webp",
+       "w": 521,
+       "h": 1339,
+       "k": 808.0,
+       "ground": [
+        273.0,
+        1281.8
+       ],
+       "bottom": 1328,
+       "hips": [
+        273.0,
+        686.0
+       ],
+       "head": [
+        267.9,
+        188.9
+       ],
+       "source": "kits/juno/source/run/front/take_1.jpg"
+      },
+      "1": {
+       "img": "run/front/1.webp",
+       "w": 513,
+       "h": 1335,
+       "k": 808.0,
+       "ground": [
+        250.2,
+        1295.8
+       ],
+       "bottom": 1324,
+       "hips": [
+        250.2,
+        690.5
+       ],
+       "head": [
+        245.8,
+        193.3
+       ],
+       "source": "kits/juno/source/run/front/take_1.jpg"
+      },
+      "2": {
+       "img": "run/front/2.webp",
+       "w": 459,
+       "h": 1293,
+       "k": 808.0,
+       "ground": [
+        215.7,
+        1317.8
+       ],
+       "bottom": 1281,
+       "hips": [
+        215.7,
+        671.0
+       ],
+       "head": [
+        214.8,
+        173.7
+       ],
+       "source": "kits/juno/source/run/front/take_1.jpg"
+      },
+      "3": {
+       "img": "run/front/3.webp",
+       "w": 503,
+       "h": 1219,
+       "k": 808.0,
+       "ground": [
+        267.2,
+        1187.8
+       ],
+       "bottom": 1207,
+       "hips": [
+        267.2,
+        670.8
+       ],
+       "head": [
+        270.1,
+        173.6
+       ],
+       "source": "kits/juno/source/run/front/take_1.jpg"
+      },
+      "4": {
+       "img": "run/front/4.webp",
+       "w": 525,
+       "h": 1351,
+       "k": 808.0,
+       "ground": [
+        254.1,
+        1293.8
+       ],
+       "bottom": 1339,
+       "hips": [
+        254.1,
+        698.0
+       ],
+       "head": [
+        259.2,
+        200.9
+       ],
+       "source": "kits/juno/source/run/front/take_1.jpg"
+      },
+      "5": {
+       "img": "run/front/5.webp",
+       "w": 575,
+       "h": 1325,
+       "k": 808.0,
+       "ground": [
+        327.0,
+        1285.8
+       ],
+       "bottom": 1313,
+       "hips": [
+        327.0,
+        680.5
+       ],
+       "head": [
+        331.3,
+        183.3
+       ],
+       "source": "kits/juno/source/run/front/take_1.jpg"
+      },
+      "6": {
+       "img": "run/front/6.webp",
+       "w": 555,
+       "h": 1291,
+       "k": 808.0,
+       "ground": [
+        290.1,
+        1315.8
+       ],
+       "bottom": 1278,
+       "hips": [
+        290.1,
+        669.0
+       ],
+       "head": [
+        291.0,
+        171.7
+       ],
+       "source": "kits/juno/source/run/front/take_1.jpg"
+      },
+      "7": {
+       "img": "run/front/7.webp",
+       "w": 511,
+       "h": 1217,
+       "k": 808.0,
+       "ground": [
+        296.5,
+        1185.8
+       ],
+       "bottom": 1204,
+       "hips": [
+        296.5,
+        668.8
+       ],
+       "head": [
+        293.6,
+        171.6
+       ],
+       "source": "kits/juno/source/run/front/take_1.jpg"
+      }
+     }
     }
    }
   },
@@ -657,6 +823,56 @@
         184.2
        ],
        "source": "kits/juno/source/idle/side/take_5.jpg"
+      }
+     }
+    }
+   }
+  },
+  "leap": {
+   "views": {
+    "back34": {
+     "yaw": 135,
+     "elev": 32,
+     "cels": {
+      "0": {
+       "img": "leap/back34/0.webp",
+       "w": 1078,
+       "h": 1821,
+       "k": 1000.0,
+       "ground": [
+        679.4,
+        1481.0
+       ],
+       "bottom": 1813,
+       "hips": [
+        679.4,
+        813.9
+       ],
+       "head": [
+        594.8,
+        234.6
+       ],
+       "source": "kits/juno/source/leap/back34/take_1.jpg"
+      },
+      "1": {
+       "img": "leap/back34/1.webp",
+       "w": 1007,
+       "h": 1602,
+       "k": 1000.0,
+       "ground": [
+        674.8,
+        1284.8
+       ],
+       "bottom": 1594,
+       "hips": [
+        674.8,
+        910.0
+       ],
+       "head": [
+        514.4,
+        335.0
+       ],
+       "source": "kits/juno/source/leap/back34/take_1.jpg"
       }
      }
     }
