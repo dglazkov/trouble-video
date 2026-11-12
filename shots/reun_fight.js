@@ -1,4 +1,4 @@
-// THE REUNION, parts 3 and 4: THE FIGHT and THE END, section frames L 298-645 (song 131.83-146.29 s). Every cut and hit
+// THE REUNION, parts 3 and 4: THE FIGHT and THE END, section frames L 298-646 (song 131.83-146.33 s). Every cut and hit
 // is on a kick of reun_cast.js K (or on the brass / strings where it says so); `node engine/marks.mjs shots/reunion.js`.
 // The chain, each move causing the next:
 //   rise    298  the brass: the warden comes up over the gantry's side (a claw on the rail on 303, 308, 310, 315) and its
@@ -17,11 +17,11 @@
 //   gone    576  what is left goes over the side; far below, on 586, it blows
 //   grin    596  the four, breathless, grinning (606, 616)
 //   unlock  636  THE LAST KICK: the deck's clamps let go under them; they look down. Cut.
-// THE LAST FRAME (L 644), for the fall: camera pos [0.35, 1.32, 55.4], target [0, 1.12, 62], fov 30, looking +Z along
+// THE LAST FRAME (L 645, song frame 3511), for the fall: camera pos [0.35, 1.85, 55.4], target [0, 0.95, 62], fov 30, looking +Z along
 // the gantry (night, alarm red). The four stand in a row across the deck at z = 62, facing the camera (-Z, yaw 180),
 // from screen left to right: TANE x = +1.25 (pipe over his right shoulder), JUNO x = +0.45 (board under her arm, off
 // it), IFE x = -0.35, NOOR x = -1.15. All four look DOWN at the deck. The deck has dropped 0.3 m and a seam has opened
-// across it just in front of their feet (z 60.35-60.85); the first hole (z 67.2-73.2) is still open behind them.
+// across it just in front of their feet (z 60.85-61.65, still widening); the first hole (z 67.2-73.2) is still open behind them.
 import { camera } from "../engine/body.js";
 import { stance } from "../machines/warden.js";
 import { fireBlast, FIRE } from "../engine/fx.js";
@@ -29,7 +29,7 @@ import { speedLines } from "./slice_fx.js";
 import { kana, latin } from "../sets/sign.js";
 import { FPS, F0, W, H, PW, PH, K, CAST, NIGHT, MEET, clamp, lerp, ease, wob, rnd, mix3, kickAt, stand, plateLight } from "./reun_cast.js";
 
-export const CUT = { rise: 298, land: 318, ready: 338, jgo: 357, snap: 367, orbit: 377, ibox: 407, ikey: 417, blow: 437, tcharge: 457, tleap: 467, thit: 477, chain: 487, nwalk: 516, nover: 546, gone: 576, grin: 596, unlock: 636, end: 645 };
+export const CUT = { rise: 298, land: 318, ready: 338, jgo: 357, snap: 367, orbit: 377, ibox: 407, ikey: 417, blow: 437, tcharge: 457, tleap: 467, thit: 477, chain: 487, nwalk: 516, nover: 546, gone: 576, grin: 596, unlock: 636, end: 646 };
 const ORDER = Object.keys(CUT), lengthOf = (n) => CUT[ORDER[ORDER.indexOf(n) + 1]] - CUT[n];
 const shot = (name, o) => ({ name: "reun_" + name, start: (F0 + CUT[name]) / FPS, frames: lengthOf(name), fps: FPS, cutOn: "kick", sets: ["atrium"], cast: CAST, held: (f) => f, ...o });
 const src = (who, n) => ({ src: `/kits/${who}/closeup/${n}`, key: "magenta" });
@@ -62,7 +62,7 @@ export const junoAt = (L) => {
   const u = clamp((L - 357) / 10), a = -1.2 + (L - 367) * 0.21, r = 5.2, orbit = [HEADC[0] + Math.sin(a) * r, HEADC[1] + 1.6 + 1.3 * Math.sin((L - 367) * 0.33), HEADC[2] - Math.cos(a) * r * 0.75];
   const start = [0.65, 0.3, MEET + 1.5], go = [lerp(start[0], 2.6, u), lerp(start[1], 7, u * u), lerp(start[2], 66, u)];
   if (L < 367) return go;
-  if (L >= 377) { const v = (L - 377) / 18; return [-4 + Math.sin(Math.PI * clamp(v)), 7.4 - 5.6 * v * v, 75.5 - 14.5 * v]; }      // one pass across its face, right under its eyes, and away down the deck
+  if (L >= 377) { const v = (L - 377) / 18; return [-8 + Math.sin(Math.PI * clamp(v)), 6.6 - 4.6 * v * v, 73.5 - 11.5 * v]; }      // one pass across its face, right under its eyes, and away down the deck
   const d = ease((L - 389) / 9), down = [-0.4, 0.5, 61];
   return mix3(L < 370 ? mix3(go, orbit, (L - 367) / 3) : orbit, down, d);
 };
@@ -116,7 +116,7 @@ function whip(g, x0, age, dir = 1, seed = 1) {
 }
 // the set at L
 const scene = (L, o = {}) => ({ ...NIGHT, alert: 1.2, warden: o.warden === undefined ? wardenAt(L) : o.warden, drop: 0.35 * hitE(L, 318, 3) * Math.cos((L - 318) * 0.9) + 0.4 * hitE(L, 397, 3) * Math.cos((L - 397) * 0.9) + 0.5 * hitE(L, 447, 3.5) * Math.cos((L - 447) * 0.8) + (L >= 636 ? 0.3 * (1 - Math.exp(-(L - 636) / 1.5)) : 0),
-  hatch: [...(L >= 437 ? [{ z0: HATCH[0], z1: HATCH[1], ...(L < 470 ? { fall: 0.02 + 0.5 * 9.8 * ((L - 437) / FPS) ** 2, tilt: 0.5 * (L - 437) / FPS, roll: 0.3 * (L - 437) / FPS } : {}) }] : []), ...(L >= 636 ? [{ z0: 60.6 - 0.04 - 0.21 * (1 - Math.exp(-(L - 636) / 2)), z1: 60.6 + 0.04 + 0.21 * (1 - Math.exp(-(L - 636) / 2)) }] : [])], ...o.opt });
+  hatch: [...(L >= 437 ? [{ z0: HATCH[0], z1: HATCH[1], ...(L < 470 ? { fall: 0.02 + 0.5 * 9.8 * ((L - 437) / FPS) ** 2, tilt: 0.5 * (L - 437) / FPS, roll: 0.3 * (L - 437) / FPS } : {}) }] : []), ...(L >= 636 ? [{ z0: 61.25 - 0.05 - 0.35 * (1 - Math.exp(-(L - 636) / 2.5)), z1: 61.25 + 0.05 + 0.35 * (1 - Math.exp(-(L - 636) / 2.5)) }] : [])], ...o.opt });
 const plate = (name, hung, o = {}) => ({ plate: name, ...hung, layer: { ...plateLight(o), depth: 0, ...o.layer } });
 const boil = (f, k = 1.6) => ({ warp: k, warpStill: [0.5, 0.6], warpRadius: 0.3, warpDir: [1, 0.2], warpTime: (f - f % 2) * 0.55 });
 
@@ -132,13 +132,13 @@ export const land = shot("land", { plates: { reun_backs: src("tane", "reun_backs
   frame(f) {
     const L = CUT.land + f, s = shake(L, 1.3), cam = { pos: [0.5 + s[0], 0.62 + s[1], 56.6 - 0.02 * f], target: [0.1, 4.3 + 0.02 * f, 80], fov: 50, up: [Math.sin(-0.05 + s[2]), 1, 0] }, o = scene(L);
     return { set: "atrium", camera: cam, options: o, cels: [plate("reun_backs", stand(cam, [0, -o.drop, 61.6], BACKS.foot, BACKS.m), { layer: boil(f, 1.2) })],
-      overlay(g) { lines(g, L, W * 0.5, H * 0.3, "#ffd0c0"); whip(g, 330, L - 318, 1, 1); whip(g, 1500, L - 320, -1, 2); },
+      overlay(g) { lines(g, L, W * 0.5, H * 0.3, "#ffd0c0"); whip(g, 170, L - 318, -1, 1); whip(g, 1760, L - 320, 1, 2); },
       post: { ...hitPost(L, { red: true }), vignette: 0.5 } };
   } });
 // ---- 338: the four ----------------------------------------------------------------------------------------------------
 export const ready = shot("ready", { plates: { reun_ready: src("tane", "reun_ready_1.jpg") }, marks: [{ at: 0, what: "the four: Tane draws the pipe", on: "kick" }, { at: 10, what: "it takes a step: the deck jumps under them", on: "kick" }],
   frame(f) {
-    const L = CUT.ready + f, n = hitE(L, 348, 3), cam = { pos: [0.2, 0.55 + 0.004 * f, 67.6 - 0.01 * f + wob(L, 2.9, 4.3, 1) * 0.03 * n], target: [0, 1.25, 62], fov: 44 - 0.08 * f };
+    const L = CUT.ready + f, n = hitE(L, 348, 3), cam = { pos: [0.2, 0.55 + 0.004 * f, 67.6 - 0.01 * f + wob(L, 2.9, 4.3, 1) * 0.03 * n], target: [0, 1.2, 62], fov: 33 - 0.06 * f };
     return { set: "atrium", camera: cam, options: scene(L, { opt: { post: { bgBlur: 0.004, focus: [0.5, 0.45] } } }), cels: [plate("reun_ready", stand(cam, [0, 0, 62.3], READY.foot, READY.m), { layer: boil(f, 1.2) })],
       post: { flash: f === 0 ? 0.08 : L === 348 ? 0.1 : 0, vignette: 0.5, dark: 0.12 * ease((f - 6) / 6) } };
   } });
@@ -269,7 +269,7 @@ export const nover = shot("nover", { plates: { reun_noor_walk: src("noor", "reun
     return { set: "atrium", camera: cam, options: scene(L, { warden: headSpec(L), opt: { post: { bgBlur: 0.004 } } }),
       cels: near ? [plate("reun_noor_over", stand(cam, [nx + 0.45, 0, HEADZ - 0.75 - 0.02 * g2], NOVER.foot, NOVER.m), { layer: { rimDir: [-6, 4], ...boil(f, 1.6), warpStill: [0.4, 0.5], warpDir: [1, 0.1] } })]
         : [plate("reun_noor_walk", { x: far.x, y: far.y - 0.9 * far.s + 4 * Math.sin(f * 0.45), scale: far.s * 0.00125, depth: far.z }, { layer: { depth: far.z - 0.4 } })],
-      overlay(g) { lines(g, L, W * 0.5, H * 0.62, "#ffd0c0"); if (L >= 546 && L < 556) { const p = c.project([0.4, 0, HEADZ]); fireBlast(g, { cx: p.x, cy: p.y, s: p.s }, L - 546 + 9, { R: 1.3, seed: 61, floor: 0, wrecks: 0, debris: 6 }); } },
+      overlay(g) { lines(g, L, W * 0.5, H * 0.62, "#ffd0c0"); if (L >= 546 && L < 556) { const p = c.project([0.4, 0, HEADZ]); fireBlast(g, { cx: p.x, cy: p.y, s: p.s }, L - 546 + 14, { R: 0.55, seed: 61, floor: 0, wrecks: 0, debris: 8 }); } },
       post: { ...(L === 546 ? { mode: 1, impact: REDIMP } : L === 566 ? { flash: 0.1 } : { flash: L === 547 ? 0.2 : f === 10 ? 0.08 : 0, ca: 0.0012 + 0.004 * newest(L).jolt }), vignette: 0.5, dark: L >= 566 ? 0.12 * ease((L - 566) / 6) : 0 } };
   } });
 // ---- 576: what is left goes over the side ------------------------------------------------------------------------------
@@ -282,7 +282,7 @@ export const gone = shot("gone", { marks: [{ at: 0, what: "what is left of it go
       post: { ...(L === 586 ? { mode: 1, impact: FIREIMP } : { flash: L === 587 ? 0.3 : L === 588 ? 0.1 : f === 0 ? 0.08 : 0, bloom: 0.5 + 0.6 * b }), vignette: 0.46 } };
   } });
 // ---- 596: breathless, grinning; 636: the last kick --------------------------------------------------------------------------
-const GRIN = { foot: [1400, 1493], m: 0.00131 }, ENDCAM = (L) => { const n = hitE(L, 606, 3) + hitE(L, 616, 3); return { pos: [0.35, 1.32, 55.4 + 1.2 * ease((596 + 40 - L) / 40) - 0.05 * n], target: [0, 1.12, 62], fov: 30 }; };
+const GRIN = { foot: [1400, 1493], m: 0.00131 }, ENDCAM = (L) => { const n = hitE(L, 606, 3) + hitE(L, 616, 3); return { pos: [0.35, 1.85, 55.4 + 1.2 * ease((596 + 40 - L) / 40) - 0.05 * n], target: [0, 0.95, 62], fov: 30 }; };
 const endCel = (L, cam, name, drop = 0) => plate(name, stand(cam, [0.05, -drop, 62], GRIN.foot, GRIN.m), { layer: { ...boil(L - 596, 1.3), warpStill: [0.5, 0.66], warpRadius: 0.36 } });
 export const grin = shot("grin", { plates: { reun_grin: src("tane", "reun_grin_1.jpg") }, marks: [{ at: 0, what: "the four, breathless, grinning", on: "kick" }, { at: 10, what: "a breath", on: "kick" }, { at: 20, what: "a breath", on: "kick" }],
   frame(f) {
@@ -294,7 +294,7 @@ export const unlock = shot("unlock", { plates: { reun_grin_down: src("tane", "re
   frame(f) {
     const L = CUT.unlock + f, cam0 = ENDCAM(L), j = Math.exp(-f / 2), cam = { ...cam0, pos: [cam0.pos[0] + wob(L, 2.9, 4.3, 1) * 0.05 * j, cam0.pos[1] + wob(L, 3.3, 5.1, 2) * 0.05 * j, cam0.pos[2]] }, o = scene(L, { warden: null, opt: { alert: 2, post: { bgBlur: 0.004, focus: [0.5, 0.5], dark: 0.2 } } }), c = cam2(cam);
     return { set: "atrium", camera: cam, options: o, cels: [endCel(L, cam, "reun_grin_down", o.drop)],
-      overlay(g) { for (const x of [-2.25, 2.25]) { const p = c.project([x, -o.drop, 62]); if (f < 7) { const a2 = f - f % 2; g.fillStyle = f < 2 ? "#fff6d0" : "#ffd83a"; g.beginPath(); for (let i = 0; i < 16; i++) { const a = i / 16 * 6.283 + a2, r = (i % 2 ? 0.25 : 0.9 + 0.5 * rnd(i, a2, x)) * p.s * (1 - f / 8); g.lineTo(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r * 0.8); } g.fill(); } } },
+      overlay(g) { for (const x of [-2.25, 2.25]) { const p = c.project([x, -o.drop, 61.25]); if (f < 7) { const a2 = f - f % 2; g.fillStyle = f < 2 ? "#fff6d0" : "#ffd83a"; g.beginPath(); for (let i = 0; i < 16; i++) { const a = i / 16 * 6.283 + a2, r = (i % 2 ? 0.25 : 0.9 + 0.5 * rnd(i, a2, x)) * p.s * (1 - f / 8); g.lineTo(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r * 0.8); } g.fill(); } } },
       post: { ...(f === 0 ? { mode: 1, impact: REDIMP } : { flash: f === 1 ? 0.3 : f === 2 ? 0.1 : 0, ca: 0.0012 + 0.006 * j }), vignette: 0.5 } };
   } });
 export const FIGHT_SHOTS = [rise, land, ready, jgo, snap, orbit, ibox, ikey, blow, tcharge, tleap, thit, chain, nwalk, nover, gone, grin, unlock];

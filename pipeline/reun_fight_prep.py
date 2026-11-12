@@ -5,9 +5,9 @@
 import numpy as np
 from PIL import Image
 a = np.asarray(Image.open("kits/ife/closeup/reun_ife_key_1.jpg").convert("RGB")).copy()
-x0, y0, x1, y1 = 770, 590, 905, 840
+x0, y0, x1, y1 = 700, 560, 930, 900
 r, g, b = (a[y0:y1, x0:x1, i].astype(int) for i in range(3))
-pink = (r > 190) & (b > 180) & (g < r - 28) & (g > 60)
+pink = (r > 140) & (b > 130) & (g < r - 24) & (g < b - 10)
 a[y0:y1, x0:x1][pink] = (255, 0, 255)
 Image.fromarray(a).save("kits/ife/closeup/reun_ife_key_1.png")
 print("lens pixels keyed:", int(pink.sum()))

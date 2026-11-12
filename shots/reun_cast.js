@@ -1,4 +1,4 @@
-// THE REUNION (song frames 2866-3510, 119.42-146.29 s): what its shots share. Frames here are frames of the SECTION
+// THE REUNION (song frames 2866-3511, 119.42-146.33 s): what its shots share. Frames here are frames of the SECTION
 // (L = 0 at song frame 2866); each shot counts its own from its cut.
 // The music, measured (analysis/stems.json): the kick is on every beat from L 0 to 268, once more at 283 (late), then
 // NOTHING until 318 (the held breath; the brass comes in at 298), then every beat to 616, a beat missed, and the LAST
@@ -8,12 +8,12 @@
 //   meet    208-298  the panels break; the four on the atrium's gantry from both ends; they see each other (shots/reun_meet.js)
 //   fight   298-596  the warden comes up over the gantry's side on the brass and lands on the kick at 318; the chain
 //                    (Juno baits, Ife rewires, Tane hits, Noor walks through it); it comes apart (shots/reun_fight.js)
-//   end     596-645  breathless, grinning; the last kick: the deck unlocks under them (shots/reun_end.js)
-export const FPS = 24, F0 = 2866, FRAMES = 645, W = 1920, H = 1080, PW = 2752, PH = 1536;
+//   end     596-646  breathless, grinning; the last kick: the deck unlocks under them (shots/reun_end.js)
+export const FPS = 24, F0 = 2866, FRAMES = 646, W = 1920, H = 1080, PW = 2752, PH = 1536;
 export const K = [0, 10, 20, 30, 40, 50, 60, 69, 79, 89, 99, 109, 119, 129, 139, 149, 159, 169, 179, 189, 199, 208, 218, 228, 238, 248, 258, 268, 283,
   318, 328, 338, 348, 357, 367, 377, 387, 397, 407, 417, 427, 437, 447, 457, 467, 477, 487, 496, 506, 516, 526, 536, 546, 556, 566, 576, 586, 596, 606, 616, 636];
 export const BRASS = 298;      // the brass comes in (with keyboard, synth and strings)
-export const PART = { split: 0, meet: 208, fight: 298, end: 596, out: 645 };
+export const PART = { split: 0, meet: 208, fight: 298, end: 596, out: 646 };
 export const CAST = { tane: "/kits/tane", ife: "/kits/ife", noor: "/kits/noor", juno: "/kits/juno" };
 export const COLOR = { tane: "#e8322a", ife: "#5dff8c", noor: "#b48cff", juno: "#ff8a1c" }, TEAL = "#3fd0c0";
 export const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), lerp = (a, b, t) => a + (b - a) * t;
