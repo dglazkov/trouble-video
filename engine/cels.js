@@ -38,7 +38,7 @@ export function createActor(kit) {
   // draw(g, picked, body, cam) -> { x, y, s }: where the cel's ground point went and its scale
   function draw(g, picked, body, cam) {
     const { q } = body, p = cam.project([q.x, q.y ?? 0, q.z]);
-    const c = picked.missing ? null : kit.actions[picked.action].views[picked.view].cels[picked.cel];
+    const V = picked.missing ? null : kit.actions[picked.action].views[picked.view], c = V?.cels[picked.cel];
     if (!c) { drawMannequin(g, body, cam, { ink: 2 }); return { x: p.x, y: p.y, s: p.s }; }
     const s = p.s / c.k;
     g.save();
@@ -46,7 +46,7 @@ export function createActor(kit) {
     g.translate(p.x, p.y);
     if (picked.view === "top") {       // drawn heading up the sheet: turn it to the way the character heads on screen
       const yw = q.yaw * Math.PI / 180, f = cam.project([q.x + Math.sin(yw), q.y ?? 0, q.z + Math.cos(yw)]);
-      g.rotate(Math.atan2(f.x - p.x, -(f.y - p.y)));
+      g.rotate(Math.atan2(f.x - p.x, -(f.y - p.y)) + (V.turn ?? 0) * Math.PI / 180);   // turn: painted heading down the sheet
     }
     g.scale(picked.mirror ? -s : s, s);
     g.drawImage(c.image, -c.ground[0], -c.ground[1]);

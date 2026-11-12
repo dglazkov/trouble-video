@@ -30,7 +30,9 @@ export function nearest(rel, keep = false, names = null) {
   for (const v of VIEWS) {
     if (names && !names.includes(v.name)) continue;
     const straight = v.yaw === 0 || v.yaw === 180;
-    for (const mirror of straight ? [keep] : [false, true]) {
+    // a drawing from straight in front or behind is never mirrored: it would put what is on one side of the
+    // character (a patch, a streak of hair, a monitor) on the other
+    for (const mirror of straight ? [false] : [false, true]) {
       const d = dist(rel, v, mirror);
       if (d < bd - 1e-9 || (Math.abs(d - bd) <= 1e-9 && mirror === keep)) { best = { view: v.name, yaw: v.yaw, mirror }; bd = d; }
     }

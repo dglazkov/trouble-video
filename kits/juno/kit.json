@@ -840,39 +840,200 @@
        "h": 1821,
        "k": 1000.0,
        "ground": [
-        679.4,
-        1481.0
+        678.1,
+        1480.4
        ],
        "bottom": 1813,
        "hips": [
-        679.4,
-        813.9
+        678.1,
+        813.3
        ],
        "head": [
-        594.8,
-        234.6
+        593.5,
+        233.9
        ],
        "source": "kits/juno/source/leap/back34/take_1.jpg"
       },
       "1": {
        "img": "leap/back34/1.webp",
        "w": 1007,
-       "h": 1602,
+       "h": 1706,
        "k": 1000.0,
        "ground": [
-        674.8,
-        1284.8
+        676.0,
+        1284.9
        ],
-       "bottom": 1594,
+       "bottom": 1698,
        "hips": [
-        674.8,
-        910.0
+        676.0,
+        910.1
        ],
        "head": [
-        514.4,
-        335.0
+        515.6,
+        335.1
        ],
        "source": "kits/juno/source/leap/back34/take_1.jpg"
+      }
+     }
+    }
+   }
+  },
+  "runtop": {
+   "views": {
+    "top": {
+     "yaw": null,
+     "elev": 90,
+     "cels": {
+      "0": {
+       "img": "runtop/top/0.webp",
+       "w": 572,
+       "h": 1047,
+       "k": 1000.0,
+       "ground": [
+        286.2,
+        609.4
+       ],
+       "bottom": 1039,
+       "hips": [
+        286.2,
+        609.4
+       ],
+       "head": [
+        292.6,
+        507.8
+       ],
+       "source": "kits/juno/source/runtop/top/take_1.jpg"
+      },
+      "1": {
+       "img": "runtop/top/1.webp",
+       "w": 492,
+       "h": 1221,
+       "k": 1000.0,
+       "ground": [
+        251.3,
+        560.1
+       ],
+       "bottom": 1213,
+       "hips": [
+        251.3,
+        560.1
+       ],
+       "head": [
+        252.5,
+        459.3
+       ],
+       "source": "kits/juno/source/runtop/top/take_1.jpg"
+      },
+      "2": {
+       "img": "runtop/top/2.webp",
+       "w": 572,
+       "h": 1047,
+       "k": 1000.0,
+       "ground": [
+        286.4,
+        609.4
+       ],
+       "bottom": 1039,
+       "hips": [
+        286.4,
+        609.4
+       ],
+       "head": [
+        280.0,
+        507.7
+       ],
+       "source": "kits/juno/source/runtop/top/take_1.jpg"
+      },
+      "3": {
+       "img": "runtop/top/3.webp",
+       "w": 492,
+       "h": 1221,
+       "k": 1000.0,
+       "ground": [
+        241.3,
+        560.1
+       ],
+       "bottom": 1213,
+       "hips": [
+        241.3,
+        560.1
+       ],
+       "head": [
+        240.1,
+        459.3
+       ],
+       "source": "kits/juno/source/runtop/top/take_1.jpg"
+      }
+     },
+     "turn": 180
+    }
+   }
+  },
+  "ride": {
+   "views": {
+    "back34": {
+     "yaw": 135,
+     "elev": 14,
+     "cels": {
+      "0": {
+       "img": "ride/back34/0.webp",
+       "w": 1340,
+       "h": 1705,
+       "k": 1000.0,
+       "ground": [
+        860.2,
+        1586.9
+       ],
+       "bottom": 1695,
+       "hips": [
+        710.0,
+        794.9
+       ],
+       "head": [
+        488.0,
+        235.3
+       ],
+       "source": "kits/juno/source/ride/back34/take_2.jpg"
+      },
+      "1": {
+       "img": "ride/back34/1.webp",
+       "w": 1156,
+       "h": 1845,
+       "k": 1000.0,
+       "ground": [
+        676.0,
+        1702.7
+       ],
+       "bottom": 1835,
+       "hips": [
+        676.0,
+        841.8
+       ],
+       "head": [
+        577.6,
+        226.3
+       ],
+       "source": "kits/juno/source/ride/back34/take_2.jpg"
+      },
+      "2": {
+       "img": "ride/back34/2.webp",
+       "w": 1101,
+       "h": 1858,
+       "k": 1000.0,
+       "ground": [
+        546.5,
+        1693.1
+       ],
+       "bottom": 1847,
+       "hips": [
+        696.7,
+        828.4
+       ],
+       "head": [
+        720.7,
+        207.1
+       ],
+       "source": "kits/juno/source/ride/back34/take_2.jpg"
       }
      }
     }

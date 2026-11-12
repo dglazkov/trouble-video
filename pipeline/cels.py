@@ -12,6 +12,9 @@
   cels.py measure [--together] TAKE.jpg [...]
                                       how alike the cels of a take are: per cel, how much of each design colour shows and
                                       in how many pieces, and how much that varies between the cels
+  cels.py turn TAKE.jpg [...]         mark takes of a view from above whose figures were painted heading DOWN the sheet
+                                      (the painter put the face at the bottom): they are checked and cut as painted,
+                                      over their mannequins, and the kit says to hang them turned half round
   cels.py selftest TAKE.jpg           break a good take every way the checks guard against and see each check fail
 
 A take is judged by data, not by eye: its sidecar holds the layout it was painted over (where each mannequin stood,
@@ -125,7 +128,7 @@ def load(take):
     if img is None or mapi is None: raise SystemExit(f"cannot read {take} or its layout map {mp}")
     spec = json.load(open(os.path.join(ROOT, "kits", name, "character.json")))
     if L.get("prop"): spec["palette"] = {**spec["palette"], **spec["props"][L["prop"]]["palette"]}     # a prop in the drawing brings its colours
-    return dict(img=img, map=mapi, layout=L, spec=spec, name=name, file=rel(take))
+    return dict(img=img, map=mapi, layout=L, spec=spec, name=name, file=rel(take), turn=side.get("turn", 0))
 
 
 def bottom(mask):
@@ -166,6 +169,8 @@ def analyse(t, full=False):
     sidec = np.rint(mapi[..., 1] / 100.0).astype(np.int16)         # 0 none, 1 left, 2 right
     alpha, col = key(img)
     solid = (alpha > 0.5).astype(np.uint8)
+    if L.get("prop"):      # what a prop gives off (a thruster's flame) belongs to its figure though a gap parts them
+        r = max(2, int(0.035 * k)); solid = cv2.morphologyEx(solid, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1)))
     n, lab_, st, _ = cv2.connectedComponentsWithStats(solid, 8)
     cels = []; areas = []
     for c in L["cels"]:
@@ -323,6 +328,8 @@ def cut(takes, force=False, max_k=1000):
         kit = json.load(open(kitp)) if os.path.exists(kitp) else {"name": name}
         kit["body"] = t["spec"]["body"]
         V = kit.setdefault("actions", {}).setdefault(L["action"], {"views": {}})["views"].setdefault(L["view"], {"yaw": L["yaw"], "elev": L["elev"], "cels": {}})
+        if t["turn"]: V["turn"] = t["turn"]
+        else: V.pop("turn", None)
         TH, TW = t["img"].shape[:2]; sx, sy = TW / L["W"], TH / L["H"]; k = L["unit"] * sx; z = min(1.0, max_k / k)
         alpha, col = key(t["img"])                                              # at the size it was painted
         grade(col, alpha, t["spec"], rep["drift"])
@@ -465,6 +472,10 @@ def main():
         i = rest.index(k); j = i + 1
         while j < len(rest) and not rest[j].startswith("--"): j += 1
         v = rest[i + 1:j]; del rest[i:j]; return v
+    if cmd == "turn":      # mark takes as painted heading down the sheet: their cels are hung turned half round
+        for f in rest:
+            p = os.path.abspath(f)[:-4] + ".json"; side = json.load(open(p)); side["turn"] = 180; json.dump(side, open(p, "w"), indent=1)
+        return
     if cmd == "check":
         reps = [strip(analyse(load(f))) for f in rest]
         for r in reps: [c.pop("shown") for c in r["cels"]]

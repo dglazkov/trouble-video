@@ -1,0 +1,692 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: 4 posing mannequins in a 4x1 grid, the 4 successive drawings of ONE run cycle, seen from directly above (reading left to right). Paint the character from the SECOND image (her model sheet) over every mannequin, as 4 finished key drawings by the same animator. The second image only shows what she looks like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 4 figures of the first image, each in its mannequin's pose and place, and nothing else. For each of the 4: keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), so the 4 figures stay the same size as each other. BLUE limbs are her LEFT arm and leg; RED limbs are her RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. She is seen from DIRECTLY ABOVE, a bird's-eye plan view with the camera looking straight down at the floor: the viewer sees the top of her head and hair, her shoulders from above, and her arms and legs reaching out ahead of and behind the body, as the mannequin has them. She moves toward the TOP of the image, so her head is toward the top and whatever trails behind her trails toward the bottom. No face shows: only the top of the head. How she does it: an athlete's run; from above her short teal hair with the goggles on her forehead, the orange jacket's shoulders with a yellow triangle patch on each upper sleeve, and her arms and legs are what show. Each figure has exactly two arms and two legs, and both feet are drawn complete. All 4 drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: Juno, a 15-year-old girl with tan skin. HAIR: short choppy teal hair, with ONE long thin lock hanging down in front of her LEFT ear to her collarbone. GOGGLES: round brass-brown flight goggles with pale teal lenses, always pushed up on her forehead, never over her eyes. HEADPHONES: chunky grey-brown headphones, always resting round her neck on the collar, never on her ears. JACKET: a plain orange cropped flight jacket with a high stand-up collar, worn open, sleeves pushed up to the elbows; the back of the jacket is plain orange. PATCHES: exactly three plain flat one-colour patches on the jacket and nothing else on it: a YELLOW TRIANGLE on the outside of EACH upper sleeve (the same on her left sleeve and on her right sleeve), always with one corner pointing straight up toward the shoulder and a flat base below, and a WHITE CIRCLE on her left chest; each patch is a single flat shape with a black outline and nothing inside it, the same size and in the same place in every drawing. SHIRT: a plain navy-blue shirt. GLOVES: plain grey-brown fingerless gloves on both hands (grey-brown, never teal, never green), bare fingers. TROUSERS: baggy dark-grey cargo trousers with one cream stripe down the outside of each leg and one cargo pocket on the outside of each thigh; gathered cuffs that come down over the tops of the shoes, no bare ankle. SHOES: red high-top trainers with white toe caps, white laces and white soles, completely plain. FACE: plain, no scar, no marks; the same calm look with the mouth closed in every drawing. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on her. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap.",
+ "refs": [
+  "kits/juno/source/runtop/top/layout.png",
+  "out/ref/juno_design.png"
+ ],
+ "kind": "cels:runtop/top",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-11T23:28:47",
+ "layout": {
+  "action": "runtop",
+  "loose": false,
+  "float": true,
+  "prop": null,
+  "view": "top",
+  "yaw": null,
+  "elev": 90,
+  "W": 2752,
+  "H": 1536,
+  "cols": 4,
+  "rows": 1,
+  "unit": 1072,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "box": [
+     0,
+     0,
+     688,
+     1536
+    ],
+    "ground": [
+     344,
+     759.77
+    ],
+    "joints": {
+     "hips": [
+      344,
+      759.77
+     ],
+     "waist": [
+      344,
+      724.5
+     ],
+     "chest": [
+      344,
+      678.01
+     ],
+     "neckBase": [
+      344,
+      646.22
+     ],
+     "headBase": [
+      344,
+      636.26
+     ],
+     "head": [
+      350.81,
+      650.83
+     ],
+     "crown": [
+      357.61,
+      665.41
+     ],
+     "L.sh": [
+      173.2,
+      670.58
+     ],
+     "L.elbow": [
+      126.68,
+      768.36
+     ],
+     "L.wrist": [
+      113.7,
+      558.08
+     ],
+     "L.hand": [
+      109.06,
+      482.98
+     ],
+     "L.hip": [
+      254.94,
+      754.86
+     ],
+     "L.knee": [
+      219.07,
+      502.39
+     ],
+     "L.ankle": [
+      237.19,
+      364.67
+     ],
+     "L.heel": [
+      237.19,
+      397.91
+     ],
+     "L.toe": [
+      237.19,
+      169.54
+     ],
+     "R.sh": [
+      514.8,
+      640.11
+     ],
+     "R.elbow": [
+      567.78,
+      612.57
+     ],
+     "R.wrist": [
+      539.36,
+      374.94
+     ],
+     "R.hand": [
+      529.22,
+      290.07
+     ],
+     "R.hip": [
+      433.06,
+      764.67
+     ],
+     "R.knee": [
+      468.93,
+      821.74
+     ],
+     "R.ankle": [
+      450.81,
+      1080.57
+     ],
+     "R.heel": [
+      450.81,
+      1177.43
+     ],
+     "R.toe": [
+      450.81,
+      1057.37
+     ]
+    },
+    "face": [
+     -0.055,
+     -0.992,
+     0.11
+    ]
+   },
+   {
+    "index": 1,
+    "box": [
+     688,
+     0,
+     1376,
+     1536
+    ],
+    "ground": [
+     1032,
+     759.77
+    ],
+    "joints": {
+     "hips": [
+      1032,
+      759.77
+     ],
+     "waist": [
+      1032,
+      724.5
+     ],
+     "chest": [
+      1032,
+      678.01
+     ],
+     "neckBase": [
+      1032,
+      646.22
+     ],
+     "headBase": [
+      1032,
+      636.26
+     ],
+     "head": [
+      1033.28,
+      651.63
+     ],
+     "crown": [
+      1034.56,
+      667
+     ],
+     "L.sh": [
+      867.26,
+      609
+     ],
+     "L.elbow": [
+      852.49,
+      461.46
+     ],
+     "L.wrist": [
+      910.26,
+      284.97
+     ],
+     "L.hand": [
+      930.89,
+      221.93
+     ],
+     "L.hip": [
+      944.08,
+      774.8
+     ],
+     "L.knee": [
+      908.21,
+      992.11
+     ],
+     "L.ankle": [
+      926.33,
+      1281.76
+     ],
+     "L.heel": [
+      926.33,
+      1379.29
+     ],
+     "L.toe": [
+      926.33,
+      1218.61
+     ],
+     "R.sh": [
+      1196.74,
+      701.69
+     ],
+     "R.elbow": [
+      1196.06,
+      902.53
+     ],
+     "R.wrist": [
+      1220.59,
+      797.55
+     ],
+     "R.hand": [
+      1229.35,
+      760.06
+     ],
+     "R.hip": [
+      1119.92,
+      744.74
+     ],
+     "R.knee": [
+      1155.79,
+      338.65
+     ],
+     "R.ankle": [
+      1137.67,
+      408.57
+     ],
+     "R.heel": [
+      1137.67,
+      475.1
+     ],
+     "R.toe": [
+      1137.67,
+      235.89
+     ]
+    },
+    "face": [
+     0.167,
+     -0.98,
+     0.11
+    ]
+   },
+   {
+    "index": 2,
+    "box": [
+     1376,
+     0,
+     2064,
+     1536
+    ],
+    "ground": [
+     1720,
+     759.77
+    ],
+    "joints": {
+     "hips": [
+      1720,
+      759.77
+     ],
+     "waist": [
+      1720,
+      724.5
+     ],
+     "chest": [
+      1720,
+      678.01
+     ],
+     "neckBase": [
+      1720,
+      646.22
+     ],
+     "headBase": [
+      1720,
+      636.26
+     ],
+     "head": [
+      1713.19,
+      650.83
+     ],
+     "crown": [
+      1706.39,
+      665.41
+     ],
+     "L.sh": [
+      1549.2,
+      640.11
+     ],
+     "L.elbow": [
+      1496.22,
+      612.57
+     ],
+     "L.wrist": [
+      1524.64,
+      374.94
+     ],
+     "L.hand": [
+      1534.78,
+      290.07
+     ],
+     "L.hip": [
+      1630.94,
+      764.67
+     ],
+     "L.knee": [
+      1595.07,
+      821.74
+     ],
+     "L.ankle": [
+      1613.19,
+      1080.57
+     ],
+     "L.heel": [
+      1613.19,
+      1177.43
+     ],
+     "L.toe": [
+      1613.19,
+      1057.37
+     ],
+     "R.sh": [
+      1890.8,
+      670.58
+     ],
+     "R.elbow": [
+      1937.32,
+      768.36
+     ],
+     "R.wrist": [
+      1950.3,
+      558.08
+     ],
+     "R.hand": [
+      1954.94,
+      482.98
+     ],
+     "R.hip": [
+      1809.06,
+      754.86
+     ],
+     "R.knee": [
+      1844.93,
+      502.39
+     ],
+     "R.ankle": [
+      1826.81,
+      364.67
+     ],
+     "R.heel": [
+      1826.81,
+      397.91
+     ],
+     "R.toe": [
+      1826.81,
+      169.54
+     ]
+    },
+    "face": [
+     0.055,
+     -0.992,
+     0.11
+    ]
+   },
+   {
+    "index": 3,
+    "box": [
+     2064,
+     0,
+     2752,
+     1536
+    ],
+    "ground": [
+     2408,
+     759.77
+    ],
+    "joints": {
+     "hips": [
+      2408,
+      759.77
+     ],
+     "waist": [
+      2408,
+      724.5
+     ],
+     "chest": [
+      2408,
+      678.01
+     ],
+     "neckBase": [
+      2408,
+      646.22
+     ],
+     "headBase": [
+      2408,
+      636.26
+     ],
+     "head": [
+      2406.72,
+      651.63
+     ],
+     "crown": [
+      2405.44,
+      667
+     ],
+     "L.sh": [
+      2243.26,
+      701.69
+     ],
+     "L.elbow": [
+      2243.94,
+      902.53
+     ],
+     "L.wrist": [
+      2219.41,
+      797.55
+     ],
+     "L.hand": [
+      2210.65,
+      760.06
+     ],
+     "L.hip": [
+      2320.08,
+      744.74
+     ],
+     "L.knee": [
+      2284.21,
+      338.65
+     ],
+     "L.ankle": [
+      2302.33,
+      408.57
+     ],
+     "L.heel": [
+      2302.33,
+      475.1
+     ],
+     "L.toe": [
+      2302.33,
+      235.89
+     ],
+     "R.sh": [
+      2572.74,
+      609
+     ],
+     "R.elbow": [
+      2587.51,
+      461.46
+     ],
+     "R.wrist": [
+      2529.74,
+      284.97
+     ],
+     "R.hand": [
+      2509.11,
+      221.93
+     ],
+     "R.hip": [
+      2495.92,
+      774.8
+     ],
+     "R.knee": [
+      2531.79,
+      992.11
+     ],
+     "R.ankle": [
+      2513.67,
+      1281.76
+     ],
+     "R.heel": [
+      2513.67,
+      1379.29
+     ],
+     "R.toe": [
+      2513.67,
+      1218.61
+     ]
+    },
+    "face": [
+     -0.167,
+     -0.98,
+     0.11
+    ]
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/juno/source/runtop/top/layout_map.png",
+ "turn": 180
+}

@@ -39,7 +39,7 @@ VIEWS = {
     "side": "{S} {faces} and {moves} toward the viewer's LEFT, seen exactly from the side ({p} left side toward the viewer, {p} face in profile).",
     "back34": "{S} {IS} seen in three-quarter BACK view: {s} {faces} and {moves} toward the viewer's LEFT and away from the viewer, so the viewer sees {p} BACK, the back of {p} head and {p} LEFT side; {p} face is turned away and only the edge of {p} left cheek may show.",
     "back": "{S} {faces} away from the viewer, seen from straight behind.",
-    "top": "{S} {IS} seen from DIRECTLY ABOVE, a bird's-eye plan view with the camera looking straight down at the floor: the viewer sees the top of {p} head and hair, {p} shoulders from above, and {p} arms and legs reaching out ahead of and behind the body, as the mannequin has them. {S} {moves} toward the TOP of the image, so {p} head is toward the top and whatever trails behind {o} trails toward the bottom. No face shows: only the top of the head.",
+    "top": "{S} {IS} seen from DIRECTLY ABOVE and a little BEHIND, a bird's-eye plan view with the camera looking straight down at the floor. {S} {moves} toward the TOP edge of the image: the top of each figure is the FRONT of {p} body and the bottom is {p} back. So the viewer looks down on the crown and the BACK of {p} head, the back of {p} shoulders and {p} back, with {p} arms and legs reaching out ahead of and behind the body as the mannequin has them; whatever trails behind {o} (hair, coat tails) trails toward the BOTTOM edge. {p_cap} face, chest and belly are underneath, hidden from this camera: NO face, no eyes, no nose and no chest show in any drawing.",
 }
 ACTIONS = {
     "run": "the {n} successive drawings of ONE run cycle",
@@ -130,7 +130,7 @@ def design_ref(name, spec):
 
 def cel_prompt(spec, layout, extra_refs=0, note=""):
     n, cols, rows, view, action = len(layout["cels"]), layout["cols"], layout["rows"], layout["view"], layout["action"]
-    w = WORDS[spec.get("pronoun", "she")]; f = lambda text: text.format(n=n, **w)
+    w = WORDS[spec.get("pronoun", "she")]; w = {**w, "p_cap": w["p"].capitalize()}; f = lambda text: text.format(n=n, **w)
     grid = f"{n} posing mannequins in a {cols}x{rows} grid" if n > 1 else "one posing mannequin"
     order = " (reading left to right, top row then bottom row)" if rows > 1 else (" (reading left to right)" if n > 1 else "")
     what = f(ACTIONS.get(action, "{n} drawing(s) of {o}: " + action))

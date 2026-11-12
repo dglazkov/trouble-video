@@ -191,7 +191,8 @@
  "props": {
   "board": {
    "palette": {
-    "board": "#aab4be",
+    "board": "#9aa4b0",
+    "boardshade": "#6c7c92",
     "thruster": "#4fc3ff"
    },
    "describe": "The GREEN slab with two green lumps under it, beneath her feet in the first image, is her homemade hoverboard: paint it in exactly the slab's place, size and tilt as a flat plank of welded pale steel-grey scrap-metal plates with dark weld lines and a few rivets, with two small pale steel-grey thruster pods underneath, each with one short flat hard-edged cyan-blue flame shape under it. It has NO wheels and no trucks: it floats. Her feet stand on it."
