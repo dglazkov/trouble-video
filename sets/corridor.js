@@ -17,6 +17,8 @@
 //   slabs      { [k]: 0..1 }      a blast door at the bulkhead z = k * 24: one slab the shape of the corridor's section that
 //                                 comes down out of the ceiling (0 up and out of sight, 1 on the floor). Unlisted: there is none.
 //   hubDoors   { A, B, C, D }     the shutters at the hub's mouths: A is the +Z arm, B +X, C -Z, D -X.
+//   says       { z, text, small } the station speaks at a dead end (a shut slab at z): a CRT hung under the roof in front
+//                                 of it and a board on each wall beside it say one word, large, the katakana with it
 //   alert      0..1               the alarm state: beacons turn and a red wedge sweeps the walls (the klaxon wire adds to it)
 //   drones     [...]              machines/drones.js specs: { type, pos, yaw, ... }
 //   wiring     { name: wire }     replace wires of WIRING for this frame (engine/sync.js drive())
@@ -401,6 +403,25 @@ export async function createCorridor(renderer, o = {}) {
   }
   const pool = new Pool(scene), armX = new THREE.Group(); armX.rotation.y = Math.PI / 2; scene.add(armX); const poolX = new Pool(armX);
   const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#0b0a2a");
+  // ---- the station's voice at a dead end (opt.says): built when first asked for ---------------------------------------
+  const sayTex = (text, small) => canvasTex(1024, 384, (c) => {
+    const col = "#ffb428", bg = "#1c0d02"; c.fillStyle = bg; c.fillRect(0, 0, 1024, 384); c.strokeStyle = col; c.lineWidth = 10; c.strokeRect(18, 18, 988, 348);
+    if (text) { c.font = 'bold 250px "DejaVu Sans Mono", monospace'; const w = c.measureText(text).width, k = Math.min(1, (small ? 640 : 900) / w); c.save(); c.translate(small ? 48 : 512 - w * k / 2, 286); c.scale(k, 1); c.fillStyle = col; c.fillText(text, 0, 0); c.restore();
+      if (small) kana(c, small, 1024 - 56 - 76, 52, [...small].length > 4 ? 56 : 76, 12, col, { vertical: true, pitch: 1.0 }); }
+    else { hazard(c, 40, 40, 944, 60, col, bg, 64); kana(c, "イキドマリ", 60, 128, 104, 15, col); latin(c, "NO WAY THROUGH // SECTOR 07", 62, 322, 40, col); }
+    scanlines(c, 1024, 384, 0.4, 8); });
+  const say = { group: null, texs: new Map(), mat: null, walls: {} };
+  function sayBoard(o, cut) {
+    if (!say.group) {
+      say.mat = mat("#fff", { kind: 2, map: sayTex("", ""), gain: G.screens }); say.group = new THREE.Group(); scene.add(say.group);
+      const b = kit.builder(); b.box(3.3, 1.06, 0.4, 0, 2.82, -1.0, mat("#252a52")); b.box(3.4, 0.1, 0.48, 0, 3.36, -1.0, mat(orange)); b.quad([0, 2.82, -1.205], [-1, 0, 0], [0, 1, 0], 3.0, 0.84, say.mat); for (const x of [-1.2, 1.2]) b.cyl(0.04, 0.3, x, 3.42, -1.0, mat("#15162c"), "y", 6);
+      say.group.add(b.build());
+      for (const s of [1, -1]) { const w = kit.builder(); w.box(0.46, 1.56, 3.9, s * 2.48, 1.95, -4.4, mat("#252a52")); w.box(0.5, 0.1, 4.0, s * 2.48, 2.76, -4.4, mat(orange)); w.quad([s * 2.245, 1.95, -4.4], [0, 0, s], [0, 1, 0], 3.6, 1.32, say.mat); say.walls[s] = w.build(); say.group.add(say.walls[s]); }
+    }
+    say.group.visible = !!o; if (!o) return;
+    const key = (o.text ?? "") + "|" + (o.small ?? ""); if (!say.texs.has(key)) say.texs.set(key, sayTex(o.text ?? "", o.small ?? "")); say.mat.uniforms.uMap.value = say.texs.get(key);
+    say.group.position.set(0, 0, o.z); say.walls[1].visible = cut !== "right"; say.walls[-1].visible = cut !== "left";
+  }
 
   function module(pl, i, z, cut, doors, chomp, arm, clear, slabs) {
     const bulk = ((i % BULK) + BULK) % BULK === 0 ? 1 : 0, put = (proto) => { const g = pl.use(proto); g.position.z = z; return g; };
@@ -434,6 +455,7 @@ export async function createCorridor(renderer, o = {}) {
     pool.end(); poolX.end();
     hub.visible = !!J; if (J) { hub.position.set(0, 0, J.z); hubRoof.visible = opt.cut !== "top"; ["A", "B", "C", "D"].forEach((n, k) => setShutter(hubShutters[k], opt.hubDoors?.[n] ?? w.doorChomp)); }
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
+    if (opt.says || say.group) sayBoard(opt.says, opt.cut);
     markers.update(opt.markers); shadows.update(opt.shadows);
     return { scene, camera, wires: w, clear: opt.clear ?? (opt.cut ? 0x0a0c22 : 0x124a6b), post: { ...opt.post } };
   }

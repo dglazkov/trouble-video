@@ -10,7 +10,8 @@
 //     { type: "chaser" | "enforcer", pos: [x, y, z], yaw = 0 (degrees; 0 faces +Z, like a character), pitch = 0, roll = 0,
 //       scale = 1, eye = 1 (how hard the eye burns, 0..2; 0: shut, under a dark lid), thrust = the caller's wire, beam = 0..1 (enforcer's searchlight),
 //       sway = 0 (arms and blades), broken = null | seconds since it was destroyed, seed = 0,
-//       fold = 0 (a chaser's blades: 1 folded back along its body, as it hangs in a rack with its thrusters out) }
+//       fold = 0 (a chaser's blades: 1 folded back along its body, as it hangs in a rack with its thrusters out),
+//       smoke: false (no balls of smoke when it is destroyed: the shot draws its own) }
 //   chase(frame, sync, o) -> list    a pack following a lead point, lurching on drum hits; see below
 //
 // Destroyed: at broken = 0 a burst (four frames, hard shapes), then the parts fly apart, fall, and lie where they land.
@@ -165,7 +166,7 @@ export function createDrones(kit, scene) {
       const bf = alive ? -1 : Math.floor(br * sync.fps);
       o.burst.forEach((b, i) => { b.visible = bf >= i * 2 && bf < i * 2 + 2 + i; if (b.visible) { b.scale.setScalar(P.radius * (1.1 + bf * 0.5)); b.rotation.set(seed + bf * 1.3, seed * 2 + bf, 0); } });
       o.smoke.forEach((b, i) => {
-        b.visible = bf >= 2 && br < 1.1; if (!b.visible) return; const r = rng(seed * 7 + i * 3 + 1), a = r() * 6.28, d = P.radius * (0.4 + r() * 0.7), life = clamp(br / 1.1);
+        b.visible = bf >= 2 && br < 1.1 && s.smoke !== false; if (!b.visible) return; const r = rng(seed * 7 + i * 3 + 1), a = r() * 6.28, d = P.radius * (0.4 + r() * 0.7), life = clamp(br / 1.1);
         b.position.set(Math.cos(a) * d * (1 + br), 0.2 + r() * 0.5 + br * 0.9, Math.sin(a) * d * (1 + br)); b.scale.setScalar(P.radius * (0.35 + r() * 0.3) * (0.4 + life * 1.2) * (life > 0.6 ? (1 - life) / 0.4 : 1));
       });
       core.visible = true;
