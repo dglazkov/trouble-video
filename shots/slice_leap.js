@@ -2,11 +2,14 @@
 // (60.25 s), over the shaft; at the top of the arc, on the beat (61.07 s), an impact frame, and the moment hangs:
 // time runs at a tenth while the lines rush in. On the last bar line (61.92 s) the picture cuts to black.
 import { FPS, CUT, CAST, startOf, ease } from "./slice_cast.js";
-import { rideZ } from "./slice_ride.js";
+import { rideZ, SPEED } from "./slice_ride.js";
 import { speedLines } from "./slice_fx.js";
-const FRAMES = CUT.end - CUT.leap, LAUNCH = 5, APEX = 25, BLACK = CUT.black - CUT.leap, GAP0 = 66, GAP1 = 76, AIR = 40;      // frames of this shot; the leap takes AIR frames, stretched
-// how far through the leap she is at frame f: real time to the apex, a tenth of it after
-const leapT = (f) => f < APEX ? (f - LAUNCH) / AIR : (APEX - LAUNCH + (f - APEX) * 0.1) / AIR;
+const FRAMES = CUT.end - CUT.leap, LAUNCH = 5, APEX = 25, BLACK = CUT.black - CUT.leap, GAP0 = 66, GAP1 = 76, AIR = 40, RISE = 11, TUCK = 19;      // frames of this shot; the leap takes AIR frames, stretched
+// how far through the leap she is at frame f. She leaves the ramp at the speed she rode up it (rideZ: no jerk at the
+// launch), and time slows smoothly as she rises until, at the apex, it runs at a tenth and the moment hangs: a
+// cubic from the launch (her riding speed) to the apex (half way over, at the hang's rate).
+const V0 = SPEED / FPS / (GAP1 - GAP0 + 1.5), SLOW = 0.1 / AIR, N = APEX - LAUNCH, C3 = (N * (SLOW + V0) - 1) / N ** 3, C2 = (SLOW - V0 - 3 * C3 * N * N) / (2 * N);
+export const leapT = (f) => { const u = f - LAUNCH; return f < APEX ? V0 * u + C2 * u * u + C3 * u ** 3 : 0.5 + (f - APEX) * SLOW; };
 const arc = (t) => [0, 0.85 + 6.6 * t * (1 - t) - 0.85 * t * t, GAP0 + (GAP1 - GAP0 + 1.5) * t];
 
 function frame(f, sync) {
@@ -24,7 +27,9 @@ function frame(f, sync) {
     camera: (() => { const e = ease((f - 2) / 20); return { pos: [p[0] + 0.9, p[1] + 1.4 + 1.3 * e, p[2] - 4.2 + 1.6 * e], target: [p[0] * 0.5, p[1] - 0.1 - 0.6 * e, p[2] + 2.5 - 1.9 * e], fov: 56 - (since > 0 ? 3 * ease(since / 18) : 0) }; })(),
     options: { alert: 0.6, drones, crowd: { flee: [0, z0] }, steam: 0.5 },
     post: f >= BLACK ? { black: 1 } : impact ?? { ca: 0.0016 + (since > 1 ? 0.004 * Math.exp(-(since - 2) / 3) : 0), bloom: 1.0, flash: since === 2 ? 0.5 : since === 3 ? 0.15 : 0 },
-    actors: [{ who: "juno", action: air ? "leap" : "ride", view: "back34", phase: air ? (f >= APEX - 7 ? 1 : 0) : 0.5, x: p[0], y: p[1], z: p[2] }],
+    // on the ramp she is the ride's own level drawing; in the air she is three HERO drawings, each painted for this camera where it is on that frame (pipeline/layout.mjs
+    // juno hero leap): the launch from behind, the rise as the camera climbs, and the tuck seen from above
+    actors: [{ who: "juno", action: air ? "leap" : "ride", view: "back34", hero: !air ? "ride_mid" : f >= TUCK ? "leap_apex" : f >= RISE ? "leap_rise" : "leap_launch", phase: air ? (f >= TUCK ? 1 : 0) : 0.5, steady: 6, x: p[0], y: p[1], z: p[2] }],
     overlay(g, cam) {
       if (since < 0 || f >= BLACK) return;
       const c = cam.project([p[0], p[1] + 0.8, p[2]]);
@@ -33,5 +38,6 @@ function frame(f, sync) {
       else speedLines(g, 1920, 1080, { cx: c.x, cy: c.y, n: 70, seed: since - since % 2, inner: 330 + 4 * since, color: "rgba(255,255,255,0.9)", width: 0.007, reach: 0.9 });
     } };
 }
-export default { name: "slice_leap", start: startOf("leap"), frames: FRAMES, fps: FPS, cutOn: "drums",
+// drawings on twos counted from the launch (an odd frame), so a new one lands on it and on the apex
+export default { name: "slice_leap", start: startOf("leap"), frames: FRAMES, fps: FPS, cutOn: "drums", held: (f) => Math.max(0, f - (f + LAUNCH) % 2),
   marks: [{ at: LAUNCH, what: "Juno leaves the ramp", on: "bar" }, { at: APEX, what: "the apex: impact frames, time hangs", on: "beat" }, { at: BLACK, what: "cut to black", on: "bar" }], sets: ["market"], cast: CAST, frame };

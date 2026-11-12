@@ -150,25 +150,38 @@ function textures() {
   }));
   // shoppers: flat figures in two tones, seen from behind; no faces, the way a background crowd is painted
   // each is two drawings: at the stall, and startled (arms thrown up, leaning away)
-  T.crowd = Array.from({ length: 8 }, (_, i) => [false, true].map((startled) => canvasTex(160, 256, (c) => {
-    c.translate(16, 0); if (startled) { c.translate(64, 256); c.rotate(i % 2 ? 0.16 : -0.16); c.translate(-64, -256); }
-    const r = rng(i * 91 + 7), coat = ["#3a4a5c", "#6a3a34", "#4a4a3a", "#2a3a4a", "#70583a", "#3a2a44", "#4a5a52", "#7a3a2a"][i], hair = ["#1a1620", "#2a1c18", "#3a3038", "#1a1620"][i % 4];
-    const hgt = 216 + r() * 34, top = 256 - hgt, cx = 64, sw = 25 + r() * 7, hem = top + hgt * (0.5 + r() * 0.22), lean = (r() - 0.5) * 6;
-    const fill = (pts, col) => { c.beginPath(); pts.forEach((p, k) => k ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); c.fillStyle = col; c.fill(); };
-    fill([[cx - 11, hem - 6], [cx - 12, 252], [cx - 2, 252], [cx - 1, hem - 6]], "#1c1a26"); fill([[cx + 1, hem - 6], [cx + 3, 252], [cx + 13, 252], [cx + 11, hem - 6]], "#1c1a26");
-    fill([[cx - 16, 256], [cx - 1, 256], [cx - 1, 249], [cx - 13, 249]], "#0e0d16"); fill([[cx + 2, 256], [cx + 17, 256], [cx + 14, 249], [cx + 2, 249]], "#0e0d16");
+  // Each is drawn like a background character: an ink outline, a coat in two tones with the stall's warm light down the
+  // side that faces it, hair with a shine, a collar or scarf, the nape of the neck, trousers and shoes, sometimes a
+  // bag, a hat or a hood. Twice the size they are seen at, so the line stays a line.
+  T.crowd = Array.from({ length: 8 }, (_, i) => [false, true].map((startled) => canvasTex(320, 512, (c) => {
+    c.scale(2, 2); c.translate(16, 0); if (startled) { c.translate(64, 256); c.rotate(i % 2 ? 0.16 : -0.16); c.translate(-64, -256); }
+    const r = rng(i * 91 + 7), coat = ["#5d7896", "#b45a48", "#8a8a5c", "#4a6f8c", "#c49a52", "#7a5a9a", "#6f9a86", "#d0623c"][i], shade = ["#3a4c66", "#7a3430", "#5a5a3c", "#2e4a62", "#8a6a34", "#4c3868", "#466a5c", "#8e3c26"][i], hair = ["#2a2434", "#4a2c22", "#5a4a58", "#1e1a28"][i % 4];
+    const INK = "#17111f", hgt = 216 + r() * 34, top = 256 - hgt, cx = 64, sw = 25 + r() * 7, hem = top + hgt * (0.5 + r() * 0.22), lean = (r() - 0.5) * 6;
+    c.lineJoin = "round"; c.lineCap = "round";
+    const path = (pts) => { c.beginPath(); pts.forEach((p, k) => k ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); };
+    const fill = (pts, col, ink = 2.2) => { path(pts); if (ink) { c.strokeStyle = INK; c.lineWidth = ink * 2; c.stroke(); } c.fillStyle = col; c.fill(); };
+    const trousers = ["#3a3850", "#4a4038", "#2e3444", "#54463e"][i % 4];
+    fill([[cx - 11, hem - 6], [cx - 12, 250], [cx - 2, 250], [cx - 1, hem - 6]], trousers); fill([[cx + 1, hem - 6], [cx + 3, 250], [cx + 13, 250], [cx + 11, hem - 6]], trousers);
+    fill([[cx - 16, 255], [cx - 1, 255], [cx - 1, 248], [cx - 13, 248]], "#241c28"); fill([[cx + 2, 255], [cx + 17, 255], [cx + 14, 248], [cx + 2, 248]], "#241c28");
     const t0 = top + 30;
-    if (startled) {
-      fill([[cx - 7 + lean, t0 - 4], [cx + 7 + lean, t0 - 4], [cx + sw, t0 + 8], [cx + sw - 4, hem], [cx - sw + 4, hem], [cx - sw, t0 + 8]], coat);
-      for (const sg of [1, -1]) { fill([[cx + sg * (sw - 9), t0 + 4], [cx + sg * sw, t0 + 16], [cx + sg * (sw + 24), t0 - 30], [cx + sg * (sw + 14), t0 - 38]], coat); fill([[cx + sg * (sw + 13), t0 - 36], [cx + sg * (sw + 25), t0 - 30], [cx + sg * (sw + 30), t0 - 46], [cx + sg * (sw + 19), t0 - 50]], "#c89a78"); }
-    } else fill([[cx - 7 + lean, t0 - 4], [cx + 7 + lean, t0 - 4], [cx + sw, t0 + 8], [cx + sw + 5, t0 + 70], [cx + sw - 3, t0 + 74], [cx + sw - 4, hem], [cx - sw + 4, hem], [cx - sw + 3, t0 + 74], [cx - sw - 5, t0 + 70], [cx - sw, t0 + 8]], coat);
-    c.globalAlpha = 0.28; fill([[cx + 4, t0], [cx + sw, t0 + 8], [cx + sw + 5, t0 + 70], [cx + sw - 4, hem], [cx + 8, hem]], "#000"); c.globalAlpha = 1;
-    fill([[cx - sw + 1, t0 + 9], [cx - sw + 8, t0 + 6], [cx - sw + 11, hem - 2], [cx - sw + 5, hem - 2]], "#ffb86a");      // the stall's light down one side
-    c.beginPath(); c.ellipse(cx + lean, top + 14, 11, 14, 0, 0, 7); c.fillStyle = hair; c.fill();
-    if (i % 4 === 1) fill([[cx - 22 + lean, top + 8], [cx + 22 + lean, top + 8], [cx + 10 + lean, top - 1], [cx - 10 + lean, top - 1]], "#b8923a");
-    if (i % 4 === 2) { c.beginPath(); c.ellipse(cx + lean, top + 16, 15, 17, 0, 0, 7); c.fillStyle = coat; c.fill(); }
-    if (i % 4 === 3) { c.beginPath(); c.arc(cx + lean, top + 2, 6, 0, 7); c.fillStyle = hair; c.fill(); }
-    if (i % 3 === 0) fill(startled ? [[cx + sw + 18, t0 - 20], [cx + sw + 38, t0 - 12], [cx + sw + 30, t0 + 18], [cx + sw + 10, t0 + 10]] : [[cx + sw + 1, t0 + 62], [cx + sw + 19, t0 + 64], [cx + sw + 17, t0 + 96], [cx + sw - 1, t0 + 94]], "#b8923a");
+    fill([[cx - 5 + lean, t0 - 12], [cx + 5 + lean, t0 - 12], [cx + 6 + lean, t0], [cx - 6 + lean, t0]], "#c89a78");      // the nape
+    const body = startled ? [[cx - 7 + lean, t0 - 4], [cx + 7 + lean, t0 - 4], [cx + sw, t0 + 8], [cx + sw - 4, hem], [cx - sw + 4, hem], [cx - sw, t0 + 8]]
+      : [[cx - 7 + lean, t0 - 4], [cx + 7 + lean, t0 - 4], [cx + sw, t0 + 8], [cx + sw + 5, t0 + 70], [cx + sw - 3, t0 + 74], [cx + sw - 4, hem], [cx - sw + 4, hem], [cx - sw + 3, t0 + 74], [cx - sw - 5, t0 + 70], [cx - sw, t0 + 8]];
+    if (startled) for (const sg of [1, -1]) { fill([[cx + sg * (sw - 9), t0 + 4], [cx + sg * sw, t0 + 16], [cx + sg * (sw + 24), t0 - 30], [cx + sg * (sw + 14), t0 - 38]], coat); fill([[cx + sg * (sw + 13), t0 - 36], [cx + sg * (sw + 25), t0 - 30], [cx + sg * (sw + 30), t0 - 46], [cx + sg * (sw + 19), t0 - 50]], "#c89a78"); }
+    fill(body, coat);
+    c.save(); path(body); c.clip();      // the coat's shade tone and the stall's light, inside its outline
+    fill([[cx + 2, t0 - 6], [cx + sw + 8, t0], [cx + sw + 8, hem + 4], [cx + 9, hem + 4]], shade, 0);
+    fill([[cx - sw - 6, t0], [cx - sw + 9, t0 + 4], [cx - sw + 12, hem + 2], [cx - sw - 6, hem + 2]], "#ffc47a", 0);
+    c.strokeStyle = INK; c.lineWidth = 1.4; c.beginPath(); c.moveTo(cx + lean * 0.5, t0 + 6); c.lineTo(cx, hem - 8); c.stroke();      // the back seam
+    c.restore();
+    if (!startled) for (const sg of [1, -1]) { c.strokeStyle = INK; c.lineWidth = 1.4; c.beginPath(); c.moveTo(cx + sg * (sw - 7), t0 + 22); c.lineTo(cx + sg * (sw - 4), t0 + 70); c.stroke(); fill([[cx + sg * (sw - 2), t0 + 70], [cx + sg * (sw + 5), t0 + 70], [cx + sg * (sw + 4), t0 + 81], [cx + sg * (sw - 2), t0 + 80]], "#c89a78", 1.5); }      // sleeves and hands
+    fill([[cx - 9 + lean, t0 - 5], [cx + 9 + lean, t0 - 5], [cx + 11 + lean, t0 + 2], [cx - 11 + lean, t0 + 2]], i % 2 ? "#e8dcc0" : shade, 1.6);      // collar or scarf
+    c.beginPath(); c.ellipse(cx + lean, top + 14, 11, 14, 0, 0, 7); c.strokeStyle = INK; c.lineWidth = 4.4; c.stroke(); c.fillStyle = hair; c.fill();
+    c.strokeStyle = "#8a7a96"; c.lineWidth = 2; c.beginPath(); c.arc(cx + lean, top + 14, 7, 3.6, 4.9); c.stroke();      // the shine on the hair
+    if (i % 4 === 1) fill([[cx - 22 + lean, top + 8], [cx + 22 + lean, top + 8], [cx + 10 + lean, top - 1], [cx - 10 + lean, top - 1]], "#d8b04a");
+    if (i % 4 === 2) { c.beginPath(); c.ellipse(cx + lean, top + 16, 15, 17, 0, 0, 7); c.strokeStyle = INK; c.lineWidth = 4.4; c.stroke(); c.fillStyle = coat; c.fill(); }
+    if (i % 4 === 3) { c.beginPath(); c.arc(cx + lean, top + 2, 6, 0, 7); c.strokeStyle = INK; c.lineWidth = 4.4; c.stroke(); c.fillStyle = hair; c.fill(); }
+    if (i % 3 === 0) fill(startled ? [[cx + sw + 18, t0 - 20], [cx + sw + 38, t0 - 12], [cx + sw + 30, t0 + 18], [cx + sw + 10, t0 + 10]] : [[cx + sw + 1, t0 + 62], [cx + sw + 19, t0 + 64], [cx + sw + 17, t0 + 96], [cx + sw - 1, t0 + 94]], "#e0b24a");
   })));
   return T;
 }
@@ -326,7 +339,7 @@ export async function createMarket(renderer, o = {}) {
   for (const p of people) { p.mesh = new THREE.Mesh(cardG, cardM[p.who][0]); p.mesh.layers.set(FX); p.mesh.frustumCulled = false; crowd.add(p.mesh); }
   // ---- steam: flat puffs on twos ---------------------------------------------------------------------------------------------
   // a puff is painted like a cel of smoke: a hard-edged cluster in a shade tone with its lit tone laid over, up and to one side
-  const puffT = canvasTex(256, 256, (c) => { const blob = (col, k, dx, dy) => { c.fillStyle = col; for (let i = 0; i < 7; i++) { c.beginPath(); c.arc(128 + dx + Math.cos(i * 0.9) * 52 * (i ? 1 : 0), 128 + dy + Math.sin(i * 0.9) * 46 * (i ? 1 : 0), (i ? 44 + (i * 37 % 22) : 70) * k, 0, 7); c.fill(); } }; blob("#a8807c", 1, 0, 0); blob("#ead6c2", 0.8, -9, -13); });
+  const puffT = canvasTex(256, 256, (c) => { const blob = (col, k, dx, dy) => { c.fillStyle = col; for (let i = 0; i < 7; i++) { c.beginPath(); c.arc(128 + dx + Math.cos(i * 0.9) * 52 * (i ? 1 : 0), 128 + dy + Math.sin(i * 0.9) * 46 * (i ? 1 : 0), (i ? 44 + (i * 37 % 22) : 70) * k, 0, 7); c.fill(); } }; blob("#8e6c6e", 1, 0, 0); blob("#c4aa96", 0.8, -9, -13); c.globalCompositeOperation = "destination-out"; c.fillStyle = "#000"; for (let i = 0; i < 5; i++) { c.beginPath(); c.arc(128 + Math.cos(i * 1.9 + 0.6) * 96, 128 + Math.sin(i * 1.9 + 0.6) * 92, 15 + (i * 7) % 9, 0, 7); c.fill(); } c.globalCompositeOperation = "source-over"; });      // two tones that stay under the bloom (steam is lit, not a lamp), bites out of the rim
   const puffG = new THREE.PlaneGeometry(1, 1), puffM = mat("#ffffff", { kind: 7, flag: 2, map: puffT, alpha: 0.92, fog: 0.6 }), puffs = [];
   for (let k = 0; k < 4; k++) steamAt.push([-2.4 + k * 1.6, -1.5, GAP.z0 + 1.5 + (k * 2.7) % 7]);      // the shaft breathes
   for (let i = 0; i < 72; i++) { const m = new THREE.Mesh(puffG, puffM); m.layers.set(FX); m.renderOrder = 9; m.frustumCulled = false; scene.add(m); puffs.push(m); }
@@ -349,7 +362,7 @@ export async function createMarket(renderer, o = {}) {
     // the nearest emitters ahead of the camera get the puffs
     const amt = (opt.steam ?? 1), near = steamAt.filter((p) => p[2] > cam.pos[2] - 6 && p[2] < cam.pos[2] + 70).slice(0, 12); let n = 0;
     near.forEach((p, e) => { for (let j = 0; j < 6; j++) { const m = puffs[n++], sd = hash(p[0], p[2], j), age = ((f2 * 0.045 + j / 6 + sd) % 1 + 1) % 1, born = f2 - Math.floor(age / 0.045), big = 1 + 0.5 * hash(born, e, j), shaft = p[1] < 0 ? 1.8 : 1;
-      m.visible = amt > 0 && Math.hypot(p[0] - cam.pos[0], p[2] - cam.pos[2]) > 3.5; m.position.set(p[0] + Math.sin(sd * 40 + age * 3) * 0.3 * age - Math.sign(p[0]) * age * 0.5 * (2 - shaft), p[1] + age * 2.9 * shaft, p[2] + (sd - 0.5) * 0.5 + age * 0.4);
+      m.visible = amt > 0 && Math.hypot(p[0] - cam.pos[0], p[2] - cam.pos[2]) > 6.5;      // none in the camera's lap: one puff would fill a third of the frame m.position.set(p[0] + Math.sin(sd * 40 + age * 3) * 0.3 * age - Math.sign(p[0]) * age * 0.5 * (2 - shaft), p[1] + age * 2.9 * shaft, p[2] + (sd - 0.5) * 0.5 + age * 0.4);
       m.quaternion.copy(camera.quaternion); m.rotateZ(sd * 6.28 + born); m.scale.setScalar((0.35 + age * 0.85) * big * shaft * (0.6 + 0.3 * amt + 0.3 * w.steam) * (age > 0.75 ? (1 - age) / 0.25 : 1)); } });
     for (; n < puffs.length; n++) puffs[n].visible = false;
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
