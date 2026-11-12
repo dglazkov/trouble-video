@@ -50,3 +50,24 @@
 {"file": "kits/ife/source/hero/desc_heap/take_3.jpg", "kind": "cels:hero/desc_heap", "time": "2026-11-12T09:26:25", "ok": true}
 {"file": "kits/ife/source/hero/desc_heap/take_3.jpg", "reject": "count: 1 stray pieces (13% of a figure); pose: cel 0: covers 88% of its mannequin; facing: cel 0: the face is on the wrong side of the head; palette: cel 0: only 30% of the shin is in the design's colours for it (leggings, skin, skinshade)", "by": "check", "time": "2026-11-12T09:26:34"}
 {"file": "kits/ife/closeup/gant_trip_2.jpg", "reject": "plate: the flying glasses' lenses were painted the key colour (they would key out)", "by": "hand", "time": "2026-11-12T09:49:45"}
+{"file": "kits/ife/closeup/boom_plug_1.jpg", "kind": "plate:boom_plug", "time": "2026-11-12T11:23:40", "ok": true}
+{"file": "kits/ife/closeup/boom_peek_1.jpg", "kind": "plate:boom_peek", "time": "2026-11-12T11:23:41", "ok": true}
+{"file": "kits/ife/closeup/boom_face_1.jpg", "kind": "plate:boom_face", "time": "2026-11-12T11:23:41", "ok": true}
+{"file": "kits/ife/closeup/boom_back_1.jpg", "kind": "plate:boom_back", "time": "2026-11-12T11:23:42", "ok": true}
+{"file": "kits/ife/closeup/boom_eyes_1.jpg", "kind": "plate:boom_eyes", "time": "2026-11-12T11:23:42", "ok": true}
+{"file": "kits/ife/closeup/boom_push_1.jpg", "kind": "plate:boom_push", "time": "2026-11-12T11:23:42", "ok": true}
+{"file": "kits/ife/closeup/boom_duck_1.jpg", "kind": "plate:boom_duck", "time": "2026-11-12T11:23:42", "ok": true}
+{"file": "kits/ife/closeup/boom_skid_1.jpg", "kind": "plate:boom_skid", "time": "2026-11-12T11:23:43", "ok": true}
+{"file": "kits/ife/closeup/boom_collar_1.jpg", "kind": "plate:boom_collar", "time": "2026-11-12T11:23:46", "ok": true}
+{"file": "kits/ife/closeup/boom_peek_1.jpg", "reject": "plate: jumper a darker, bluer green than the design, soft-shaded ash, and the pack and monitor on her right", "by": "hand", "time": "2026-11-12T11:26:50"}
+{"file": "kits/ife/closeup/boom_skid_1.jpg", "reject": "plate: skid dust painted translucent over the key colour (pink dust)", "by": "hand", "time": "2026-11-12T11:26:50"}
+{"file": "kits/ife/closeup/boom_face_3.jpg", "kind": "edit:plate:boom_face", "time": "2026-11-12T11:27:06", "ok": true}
+{"file": "kits/ife/closeup/boom_face_4.jpg", "kind": "edit:plate:boom_face", "time": "2026-11-12T11:27:06", "ok": true}
+{"file": "kits/ife/closeup/boom_push_2.jpg", "kind": "edit:plate:boom_push", "time": "2026-11-12T11:27:07", "ok": true}
+{"file": "kits/ife/closeup/boom_face_2.jpg", "kind": "edit:plate:boom_face", "time": "2026-11-12T11:27:07", "ok": true}
+{"file": "kits/ife/closeup/boom_duck_2.jpg", "kind": "edit:plate:boom_duck", "time": "2026-11-12T11:27:07", "ok": true}
+{"file": "kits/ife/closeup/boom_skid_2.jpg", "kind": "plate:boom_skid", "time": "2026-11-12T11:27:08", "ok": true}
+{"file": "kits/ife/closeup/boom_eyes_2.jpg", "kind": "edit:plate:boom_eyes", "time": "2026-11-12T11:27:08", "ok": true}
+{"file": "kits/ife/closeup/boom_face_5.jpg", "kind": "edit:plate:boom_face", "time": "2026-11-12T11:27:09", "ok": true}
+{"file": "kits/ife/closeup/boom_crt_1.jpg", "kind": "plate:boom_crt", "time": "2026-11-12T11:27:20", "ok": true}
+{"file": "kits/ife/closeup/boom_face_5.jpg", "reject": "edit: the mouth became a whistling pucker with stray marks beside it", "by": "hand", "time": "2026-11-12T11:30:23"}

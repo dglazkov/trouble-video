@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY what is described and keep every other line, colour, shape and position in the picture exactly the same (same head position, same hair, same glasses, same clothes, same background): her hand and arm are lowered out of the picture (no hand, no finger and no sleeve in front of her face any more): her glasses now sit straight on her nose, and her face, turtle-neck collar and shoulder are drawn complete where the hand was. Her expression stays exactly the same.",
+ "refs": [
+  "kits/ife/closeup/boom_push_1.jpg"
+ ],
+ "kind": "edit:plate:boom_push",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:27:07",
+ "from": "kits/ife/closeup/boom_push_1.jpg"
+}

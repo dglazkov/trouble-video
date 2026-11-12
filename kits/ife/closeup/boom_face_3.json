@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY what is described and keep every other line, colour, shape and position in the picture exactly the same (same head position, same hair, same glasses, same clothes, same background): her mouth is now open a little wider, lips parted showing a thin strip of upper teeth, as she whispers a number under her breath. The eyes stay exactly as they are.",
+ "refs": [
+  "kits/ife/closeup/boom_face_1.jpg"
+ ],
+ "kind": "edit:plate:boom_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:27:06",
+ "from": "kits/ife/closeup/boom_face_1.jpg"
+}

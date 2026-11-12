@@ -1,0 +1,11 @@
+{
+ "prompt": "Anime film frame, widescreen. The FIRST image is a character's model sheet: do NOT copy its figures. The picture holds exactly ONE drawing and nothing else, and the girl is NOT in it: a big close-up of ONLY the small beige CRT monitor of her backpack computer, exactly as designed on the model sheet (a boxy beige retro monitor casing with rounded corners, a row of vent slots on its side, one small unlit button under the screen), seen from straight in front and very slightly from its left, drawn large so that it fills most of the height of the frame, in the middle of the picture. Its screen is ONE completely flat blank dark green rounded rectangle with nothing on it at all: no dashes, no text, no reflections, no highlights, no gradient. The monitor sits on its short grey jointed metal arm, which goes down and out of the bottom edge of the frame; one thin grey cable runs with the arm. No lettering, no numbers, no logos and no brand marks anywhere. Style: a 1990s cel anime key frame exactly like the LAST image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no scenery, no text. Background: one flat solid pure magenta (#FF00FF) everywhere and nothing else.",
+ "refs": [
+  "out/ref/ife_design.png",
+  "art/ref/test_face.png"
+ ],
+ "kind": "plate:boom_crt",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:27:20"
+}
