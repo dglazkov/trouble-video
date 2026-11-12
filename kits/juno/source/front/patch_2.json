@@ -1,0 +1,13 @@
+{
+ "prompt": "Edit this image. Change ONLY this: recolour the yellow rim of this collar piece to the same orange as the rest of the jacket collar (flat orange with a darker orange shade), keeping the dark headphone band as it is. Everything else stays exactly where it is: the same drawing, same position, same size, same outlines, same colours, same flat magenta (#FF00FF) ground. Style: 1990s hand-painted cel anime, exactly like the style reference: clean black ink outlines of even weight, flat colour fills, exactly two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no highlights bloom. No brand logos, no text, no letters, no emblems anywhere.",
+ "refs": [
+  "kits/juno/source/front/patch_2.in.png"
+ ],
+ "aspect": "1:1",
+ "size": "1K",
+ "made": "2026-11-11T21:13:02",
+ "command": "pipeline/paint.py juno patch front sheet_4 collar_back recolour the yellow rim of this collar piece to the same orange as the rest of the jacket collar (flat orange with a darker orange shade), keeping the dark headphone band as it is.",
+ "patch_of": "front/sheet_4",
+ "part": "collar_back",
+ "changed": 0.1416562795639038
+}

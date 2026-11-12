@@ -1,0 +1,39 @@
+{"file": "kits/juno/source/turnaround_1.jpg", "kind": "turnaround", "time": "2026-11-11T20:52:50", "ok": true}
+{"file": "kits/juno/source/front34/sheet_1.jpg", "kind": "parts:front34", "time": "2026-11-11T20:53:40", "ok": false, "error": "no image: {\"candidates\": [{\"content\": {}, \"finishReason\": \"NO_IMAGE\", \"index\": 0}], \"usageMetadata\": {\"promptTokenCount\": 1814, \"totalTokenCount\": 1814, \"promptTokensDetails\": [{\"modality\": \"TEXT\", \"tokenCount\": 1298}, {\"modality\": \"IMAGE\", \"tokenCount\": 516}], \"serviceTier\": \"standard\"}, \"modelVersion\": \"gemini-3.1-flash-image\", \"responseId\": \"Tkb1asGuAu-m9MoP35PUwQs\"}\n"}
+{"file": "kits/juno/source/side/sheet_1.jpg", "kind": "parts:side", "time": "2026-11-11T20:53:50", "ok": true}
+{"file": "kits/juno/source/front/sheet_1.jpg", "kind": "parts:front", "time": "2026-11-11T20:53:51", "ok": true}
+{"file": "kits/juno/source/back34/sheet_1.jpg", "kind": "parts:back34", "time": "2026-11-11T20:53:51", "ok": true}
+{"file": "kits/juno/source/back/sheet_1.jpg", "kind": "parts:back", "time": "2026-11-11T20:53:52", "ok": true}
+{"file": "kits/juno/source/front34/sheet_1.jpg", "kind": "parts:front34", "time": "2026-11-11T20:54:17", "ok": true}
+{"file": "kits/juno/source/front/sheet_1.jpg", "reject": "grey template, loose prompt: extra parts painted into empty areas, cuffs on thigh pieces, wrong viewing angle on head/torso in back views", "time": "2026-11-11T20:55:47"}
+{"file": "kits/juno/source/front34/sheet_1.jpg", "reject": "grey template, loose prompt: extra parts painted into empty areas, cuffs on thigh pieces, wrong viewing angle on head/torso in back views", "time": "2026-11-11T20:55:47"}
+{"file": "kits/juno/source/side/sheet_1.jpg", "reject": "grey template, loose prompt: extra parts painted into empty areas, cuffs on thigh pieces, wrong viewing angle on head/torso in back views", "time": "2026-11-11T20:55:47"}
+{"file": "kits/juno/source/back34/sheet_1.jpg", "reject": "grey template, loose prompt: extra parts painted into empty areas, cuffs on thigh pieces, wrong viewing angle on head/torso in back views", "time": "2026-11-11T20:55:47"}
+{"file": "kits/juno/source/back/sheet_1.jpg", "reject": "grey template, loose prompt: extra parts painted into empty areas, cuffs on thigh pieces, wrong viewing angle on head/torso in back views", "time": "2026-11-11T20:55:47"}
+{"file": "kits/juno/source/back34/sheet_2.jpg", "kind": "parts:back34", "time": "2026-11-11T20:56:08", "ok": true}
+{"file": "kits/juno/source/front/sheet_2.jpg", "kind": "parts:front", "time": "2026-11-11T20:56:09", "ok": true}
+{"file": "kits/juno/source/front/sheet_2.jpg", "reject": "colour-coded template: the template's colours bled into the painted parts (blue and teal trousers), one shape left unpainted", "time": "2026-11-11T20:56:47"}
+{"file": "kits/juno/source/back34/sheet_2.jpg", "reject": "colour-coded template: the template's colours bled into the painted parts (blue and teal trousers), one shape left unpainted", "time": "2026-11-11T20:56:47"}
+{"file": "kits/juno/source/front/sheet_3.jpg", "kind": "parts:front", "time": "2026-11-11T20:57:11", "ok": true}
+{"file": "kits/juno/source/back34/sheet_3.jpg", "kind": "parts:back34", "time": "2026-11-11T20:57:11", "ok": true}
+{"file": "kits/juno/source/front/sheet_3.jpg", "reject": "key colours bled into parts (green sleeve, blue legs, grey skin); torso does not fill its shape", "time": "2026-11-11T20:57:28"}
+{"file": "kits/juno/source/side/sheet_2.jpg", "kind": "parts:side", "time": "2026-11-11T20:57:45", "ok": true}
+{"file": "kits/juno/source/front/sheet_4.jpg", "kind": "parts:front", "time": "2026-11-11T20:57:46", "ok": true}
+{"file": "kits/juno/source/front34/sheet_2.jpg", "kind": "parts:front34", "time": "2026-11-11T20:57:47", "ok": true}
+{"file": "kits/juno/source/back/sheet_2.jpg", "kind": "parts:back", "time": "2026-11-11T20:57:51", "ok": true}
+{"file": "kits/juno/source/front/sheet_4.jpg", "reject": "upper arm and forearm left partly unpainted (key colours), torso narrower than its shape", "time": "2026-11-11T20:58:29"}
+{"file": "kits/juno/source/front/sheet_5.jpg", "kind": "parts:front", "time": "2026-11-11T20:58:48", "ok": true}
+{"file": "kits/juno/source/front/sheet_5.jpg", "kind": "parts:front", "time": "2026-11-11T20:58:57", "ok": true}
+{"file": "kits/juno/source/front/sheet_5.jpg", "reject": "two takes collided on one file name (one lost); the survivor has key colours left on forearm, thigh and shoe", "time": "2026-11-11T20:59:28"}
+{"file": "kits/juno/source/front/sheet_6.jpg", "kind": "parts:front", "time": "2026-11-11T20:59:45", "ok": true}
+{"file": "kits/juno/source/front/sheet_6.jpg", "reject": "no colour key: forearm and shoe shapes painted as trouser pieces, extra parts in the empty half", "time": "2026-11-11T21:00:00"}
+{"file": "kits/juno/source/front/sheet_7.jpg", "kind": "parts:front", "time": "2026-11-11T21:00:19", "ok": true}
+{"file": "kits/juno/source/back/sheet_3.jpg", "kind": "parts:back", "time": "2026-11-11T21:11:13", "ok": false, "error": "no image: {\"candidates\": [{\"content\": {}, \"finishReason\": \"NO_IMAGE\", \"index\": 0}], \"usageMetadata\": {\"promptTokenCount\": 1934, \"totalTokenCount\": 1934, \"promptTokensDetails\": [{\"modality\": \"TEXT\", \"tokenCount\": 1160}, {\"modality\": \"IMAGE\", \"tokenCount\": 774}], \"serviceTier\": \"standard\"}, \"modelVersion\": \"gemini-3.1-flash-image\", \"responseId\": \"a0r1aoyMH57p-8YPlai1-Qc\"}\n"}
+{"file": "kits/juno/source/front/sheet_8.jpg", "kind": "parts:front", "time": "2026-11-11T21:11:19", "ok": false, "error": "no image: {\"candidates\": [{\"content\": {}, \"finishReason\": \"NO_IMAGE\", \"index\": 0}], \"usageMetadata\": {\"promptTokenCount\": 1915, \"totalTokenCount\": 1915, \"promptTokensDetails\": [{\"modality\": \"TEXT\", \"tokenCount\": 1141}, {\"modality\": \"IMAGE\", \"tokenCount\": 774}], \"serviceTier\": \"standard\"}, \"modelVersion\": \"gemini-3.1-flash-image\", \"responseId\": \"a0r1au-3HbDTjMcP9ouzyQE\"}\n"}
+{"file": "kits/juno/source/back/sheet_3.jpg", "kind": "parts:back", "time": "2026-11-11T21:11:54", "ok": true}
+{"file": "kits/juno/source/front/sheet_8.jpg", "kind": "parts:front", "time": "2026-11-11T21:11:55", "ok": true}
+{"file": "kits/juno/source/back/sheet_3.jpg", "reject": "partly used (torso, arms, pelvis, shoes, neck): thighs and shins came out plain with no stripe or pocket, head is three-quarter not straight back", "time": "2026-11-11T21:12:54"}
+{"file": "kits/juno/source/front/patch_2.jpg", "kind": "patch:front/collar_back", "time": "2026-11-11T21:13:02", "ok": true}
+{"file": "kits/juno/source/front34/patch_1.jpg", "kind": "patch:front34/head", "time": "2026-11-11T21:13:03", "ok": true}
+{"file": "kits/juno/source/front/patch_1.jpg", "kind": "patch:front/head", "time": "2026-11-11T21:13:03", "ok": true}
+{"file": "kits/juno/source/side/patch_1.jpg", "kind": "patch:side/head", "time": "2026-11-11T21:13:03", "ok": true}

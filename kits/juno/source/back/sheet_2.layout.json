@@ -1,0 +1,282 @@
+{
+ "view": "back",
+ "yaw": 180,
+ "symmetric": true,
+ "size": 2048,
+ "unit": 1500,
+ "parts": {
+  "head": {
+   "kind": "head",
+   "colour": "light grey",
+   "side": null,
+   "k": 2175,
+   "joints": {
+    "a": "headBase",
+    "b": "crown",
+    "c": "head"
+   },
+   "pts": {
+    "a": [
+     767.1,
+     724.9
+    ],
+    "b": [
+     767.1,
+     172.5
+    ],
+    "c": [
+     767.1,
+     448.7
+    ]
+   },
+   "box": [
+    408,
+    34,
+    1127,
+    897
+   ],
+   "skull": [
+    767.1,
+    421.1,
+    248.6
+   ],
+   "faceDir": [
+    0,
+    0
+   ]
+  },
+  "neck": {
+   "kind": "neck",
+   "colour": "pale yellow",
+   "side": null,
+   "k": 1800,
+   "joints": {
+    "a": "neckBase",
+    "b": "headBase"
+   },
+   "pts": {
+    "a": [
+     1587.6,
+     1250.9
+    ],
+    "b": [
+     1587.6,
+     1113.8
+    ]
+   },
+   "box": [
+    1486,
+    957,
+    1689,
+    1387
+   ]
+  },
+  "torso": {
+   "kind": "torso",
+   "colour": "mid grey",
+   "side": null,
+   "k": 1500,
+   "joints": {
+    "a": "hips",
+    "b": "neckBase",
+    "shL": "L.sh",
+    "shR": "R.sh",
+    "waist": "waist"
+   },
+   "pts": {
+    "a": [
+     414,
+     1775.6
+    ],
+    "b": [
+     414,
+     1118.8
+    ],
+    "shL": [
+     174,
+     1171.6
+    ],
+    "shR": [
+     654,
+     1171.6
+    ],
+    "waist": [
+     414,
+     1571.6
+    ]
+   },
+   "box": [
+    34,
+    957,
+    794,
+    1777
+   ]
+  },
+  "pelvis": {
+   "kind": "pelvis",
+   "colour": "dark grey",
+   "side": null,
+   "k": 1500,
+   "joints": {
+    "a": "hips",
+    "b": "waist",
+    "hipL": "L.hip",
+    "hipR": "R.hip"
+   },
+   "pts": {
+    "a": [
+     1139.9,
+     1341.2
+    ],
+    "b": [
+     1139.9,
+     1137.2
+    ],
+    "hipL": [
+     1015.1,
+     1341.2
+    ],
+    "hipR": [
+     1264.7,
+     1341.2
+    ]
+   },
+   "box": [
+    828,
+    957,
+    1452,
+    1570
+   ]
+  },
+  "uarm_L": {
+   "kind": "uarm",
+   "colour": "dark green",
+   "side": "L",
+   "k": 1500,
+   "joints": {
+    "a": "L.sh",
+    "b": "L.elbow"
+   },
+   "pts": {
+    "a": [
+     1613.5,
+     170.8
+    ],
+    "b": [
+     1613.5,
+     542.8
+    ]
+   },
+   "box": [
+    1477,
+    34,
+    1750,
+    668
+   ]
+  },
+  "farm_L": {
+   "kind": "farm",
+   "colour": "light green",
+   "side": "L",
+   "k": 1500,
+   "joints": {
+    "a": "L.elbow",
+    "b": "L.wrist"
+   },
+   "pts": {
+    "a": [
+     1894.1,
+     125.8
+    ],
+    "b": [
+     1894.1,
+     461.8
+    ]
+   },
+   "box": [
+    1784,
+    34,
+    2004,
+    638
+   ]
+  },
+  "shoe_L": {
+   "kind": "shoe",
+   "colour": "brown",
+   "side": "L",
+   "k": 1500,
+   "joints": {
+    "a": "L.ankle",
+    "b": "L.sole"
+   },
+   "pts": {
+    "a": [
+     1836.3,
+     1210.1
+    ],
+    "b": [
+     1836.3,
+     1318.1
+    ]
+   },
+   "box": [
+    1723,
+    957,
+    1943,
+    1362
+   ]
+  },
+  "thigh_L": {
+   "kind": "thigh",
+   "colour": "dark blue",
+   "side": "L",
+   "k": 1500,
+   "joints": {
+    "a": "L.hip",
+    "b": "L.knee"
+   },
+   "pts": {
+    "a": [
+     203.8,
+     203.8
+    ],
+    "b": [
+     203.8,
+     779.8
+    ]
+   },
+   "box": [
+    34,
+    34,
+    374,
+    923
+   ]
+  },
+  "shin_L": {
+   "kind": "shin",
+   "colour": "light blue",
+   "side": "L",
+   "k": 1500,
+   "joints": {
+    "a": "L.knee",
+    "b": "L.ankle"
+   },
+   "pts": {
+    "a": [
+     1300.9,
+     174.4
+    ],
+    "b": [
+     1326.3,
+     737.8
+    ]
+   },
+   "box": [
+    1161,
+    34,
+    1443,
+    854
+   ]
+  }
+ }
+}

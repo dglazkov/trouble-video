@@ -1,0 +1,516 @@
+{
+ "view": "front34",
+ "yaw": 45,
+ "symmetric": false,
+ "size": 2048,
+ "unit": 1080,
+ "parts": {
+  "head": {
+   "kind": "head",
+   "colour": "light grey",
+   "side": null,
+   "k": 1566,
+   "joints": {
+    "a": "headBase",
+    "b": "crown",
+    "c": "head"
+   },
+   "pts": {
+    "a": [
+     1384.9,
+     550.1
+    ],
+    "b": [
+     1384.9,
+     152.4
+    ],
+    "c": [
+     1384.9,
+     351.3
+    ]
+   },
+   "box": [
+    1106,
+    34,
+    1676,
+    692
+   ],
+   "skull": [
+    1384.9,
+    331.4,
+    179
+   ],
+   "faceDir": [
+    -0.7071066411238824,
+    0
+   ]
+  },
+  "neck": {
+   "kind": "neck",
+   "colour": "pale yellow",
+   "side": null,
+   "k": 1296,
+   "joints": {
+    "a": "neckBase",
+    "b": "headBase"
+   },
+   "pts": {
+    "a": [
+     1927.5,
+     965.2
+    ],
+    "b": [
+     1927.5,
+     866.4
+    ]
+   },
+   "box": [
+    1848,
+    747,
+    2007,
+    1070
+   ]
+  },
+  "collar_back": {
+   "kind": "collar_back",
+   "colour": "dark yellow",
+   "side": null,
+   "k": 1080,
+   "joints": {
+    "a": "hips",
+    "b": "neckBase"
+   },
+   "pts": {
+    "a": [
+     1760.8,
+     2021.4
+    ],
+    "b": [
+     1760.8,
+     1548.5
+    ]
+   },
+   "box": [
+    1597,
+    1435,
+    1924,
+    1571
+   ]
+  },
+  "torso": {
+   "kind": "torso",
+   "colour": "mid grey",
+   "side": null,
+   "k": 1080,
+   "joints": {
+    "a": "hips",
+    "b": "neckBase",
+    "shL": "L.sh",
+    "shR": "R.sh",
+    "waist": "waist"
+   },
+   "pts": {
+    "a": [
+     575.7,
+     1344.1
+    ],
+    "b": [
+     575.7,
+     871.2
+    ],
+    "shL": [
+     697.9,
+     909.2
+    ],
+    "shR": [
+     453.5,
+     909.2
+    ],
+    "waist": [
+     575.7,
+     1197.2
+    ]
+   },
+   "box": [
+    326,
+    747,
+    825,
+    1354
+   ]
+  },
+  "pelvis": {
+   "kind": "pelvis",
+   "colour": "dark grey",
+   "side": null,
+   "k": 1080,
+   "joints": {
+    "a": "hips",
+    "b": "waist",
+    "hipL": "L.hip",
+    "hipR": "R.hip"
+   },
+   "pts": {
+    "a": [
+     239,
+     1717.8
+    ],
+    "b": [
+     239,
+     1570.9
+    ],
+    "hipL": [
+     302.6,
+     1717.8
+    ],
+    "hipR": [
+     175.5,
+     1717.8
+    ]
+   },
+   "box": [
+    34,
+    1435,
+    444,
+    1889
+   ]
+  },
+  "uarm_L": {
+   "kind": "uarm",
+   "colour": "dark green",
+   "side": "L",
+   "k": 1080,
+   "joints": {
+    "a": "L.sh",
+    "b": "L.elbow"
+   },
+   "pts": {
+    "a": [
+     1463.9,
+     852.2
+    ],
+    "b": [
+     1463.9,
+     1120
+    ]
+   },
+   "box": [
+    1359,
+    747,
+    1569,
+    1217
+   ]
+  },
+  "farm_L": {
+   "kind": "farm",
+   "colour": "light green",
+   "side": "L",
+   "k": 1080,
+   "joints": {
+    "a": "L.elbow",
+    "b": "L.wrist"
+   },
+   "pts": {
+    "a": [
+     563.9,
+     1507.4
+    ],
+    "b": [
+     563.9,
+     1749.4
+    ]
+   },
+   "box": [
+    478,
+    1435,
+    650,
+    1883
+   ]
+  },
+  "uarm_R": {
+   "kind": "uarm",
+   "colour": "dark green",
+   "side": "R",
+   "k": 1080,
+   "joints": {
+    "a": "R.sh",
+    "b": "R.elbow"
+   },
+   "pts": {
+    "a": [
+     1708.3,
+     852.2
+    ],
+    "b": [
+     1708.3,
+     1120
+    ]
+   },
+   "box": [
+    1603,
+    747,
+    1814,
+    1217
+   ]
+  },
+  "farm_R": {
+   "kind": "farm",
+   "colour": "light green",
+   "side": "R",
+   "k": 1080,
+   "joints": {
+    "a": "R.elbow",
+    "b": "R.wrist"
+   },
+   "pts": {
+    "a": [
+     769.4,
+     1507.4
+    ],
+    "b": [
+     769.4,
+     1749.4
+    ]
+   },
+   "box": [
+    684,
+    1435,
+    855,
+    1883
+   ]
+  },
+  "shoe_L": {
+   "kind": "shoe",
+   "colour": "brown",
+   "side": "L",
+   "k": 1080,
+   "joints": {
+    "a": "L.heel",
+    "b": "L.toe"
+   },
+   "pts": {
+    "a": [
+     1132,
+     1701.7
+    ],
+    "b": [
+     961,
+     1701.7
+    ]
+   },
+   "box": [
+    889,
+    1435,
+    1209,
+    1741
+   ]
+  },
+  "shoe_R": {
+   "kind": "shoe",
+   "colour": "brown",
+   "side": "R",
+   "k": 1080,
+   "joints": {
+    "a": "R.heel",
+    "b": "R.toe"
+   },
+   "pts": {
+    "a": [
+     1485.9,
+     1701.7
+    ],
+    "b": [
+     1314.8,
+     1701.7
+    ]
+   },
+   "box": [
+    1243,
+    1435,
+    1563,
+    1741
+   ]
+  },
+  "thigh_L": {
+   "kind": "thigh",
+   "colour": "dark blue",
+   "side": "L",
+   "k": 1080,
+   "joints": {
+    "a": "L.hip",
+    "b": "L.knee"
+   },
+   "pts": {
+    "a": [
+     1839.4,
+     163
+    ],
+    "b": [
+     1839.4,
+     577.7
+    ]
+   },
+   "box": [
+    1710,
+    34,
+    1968,
+    688
+   ]
+  },
+  "shin_L": {
+   "kind": "shin",
+   "colour": "light blue",
+   "side": "L",
+   "k": 1080,
+   "joints": {
+    "a": "L.knee",
+    "b": "L.ankle"
+   },
+   "pts": {
+    "a": [
+     967.2,
+     854.8
+    ],
+    "b": [
+     954.3,
+     1260.4
+    ]
+   },
+   "box": [
+    859,
+    747,
+    1075,
+    1351
+   ]
+  },
+  "thigh_R": {
+   "kind": "thigh",
+   "colour": "dark blue",
+   "side": "R",
+   "k": 1080,
+   "joints": {
+    "a": "R.hip",
+    "b": "R.knee"
+   },
+   "pts": {
+    "a": [
+     163,
+     875.9
+    ],
+    "b": [
+     163,
+     1290.7
+    ]
+   },
+   "box": [
+    34,
+    747,
+    292,
+    1401
+   ]
+  },
+  "shin_R": {
+   "kind": "shin",
+   "colour": "light blue",
+   "side": "R",
+   "k": 1080,
+   "joints": {
+    "a": "R.knee",
+    "b": "R.ankle"
+   },
+   "pts": {
+    "a": [
+     1216.9,
+     854.8
+    ],
+    "b": [
+     1229.8,
+     1260.4
+    ]
+   },
+   "box": [
+    1109,
+    747,
+    1325,
+    1351
+   ]
+  },
+  "bent_L": {
+   "kind": "bent",
+   "colour": "teal",
+   "side": "L",
+   "k": 1080,
+   "joints": {
+    "hip": "L.hip",
+    "knee": "L.knee",
+    "ankle": "L.ankle"
+   },
+   "pts": {
+    "hip": [
+     404.9,
+     165
+    ],
+    "knee": [
+     146,
+     359.7
+    ],
+    "ankle": [
+     352.8,
+     620.4
+    ]
+   },
+   "box": [
+    34,
+    34,
+    536,
+    713
+   ],
+   "pose": {
+    "leg": {
+     "L": {
+      "swing": 62,
+      "knee": 112
+     }
+    }
+   }
+  },
+  "bent_R": {
+   "kind": "bent",
+   "colour": "teal",
+   "side": "R",
+   "k": 1080,
+   "joints": {
+    "hip": "R.hip",
+    "knee": "R.knee",
+    "ankle": "R.ankle"
+   },
+   "pts": {
+    "hip": [
+     940.8,
+     165
+    ],
+    "knee": [
+     681.8,
+     359.7
+    ],
+    "ankle": [
+     914.5,
+     620.4
+    ]
+   },
+   "box": [
+    570,
+    34,
+    1072,
+    713
+   ],
+   "pose": {
+    "leg": {
+     "R": {
+      "swing": 62,
+      "knee": 112
+     }
+    }
+   }
+  }
+ }
+}
