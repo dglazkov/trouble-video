@@ -30,6 +30,7 @@
 //   screens   { text, small, alarm }   what the great screens say (default: the station's idle listings)
 //   alert     0..1                 how hard lit beacons burn (the klaxon wire adds to it)
 //   drones    [...]                machines/drones.js specs
+//   warden    {...}                machines/warden.js spec: the one enormous machine (the reunion)
 //   guide     true | "wall"        the blockout instead of the paintings (shots/atrium_plate.js); "wall": without the core
 //   gantry    false                no gantry (a guide to paint over)
 //   wiring    { name: wire }       replace wires of WIRING for this frame
@@ -39,6 +40,7 @@ import { createKit, createShadows, canvasTex, quadGeometry, aim, hash, rng, clam
 import { kana, latin, scanlines, hazard, chevrons, kanaWidth, FONT } from "./sign.js";
 import { driveAll } from "../engine/sync.js";
 import { createDrones } from "../machines/drones.js";
+import { createWarden } from "../machines/warden.js";
 import { createMarkers } from "./markers.js";
 import { HERO } from "./atriumplan.js";
 import { projector, loadPainting, painted, paintedScreen, PROJECT_VS } from "./painted.js";
@@ -368,6 +370,7 @@ void main(){ vec2 r = vec2(vW.x, vW.z+${RC.toFixed(1)}); float a = uTurn, c = co
   const haloMat = kit.mat("#ff3a28", { kind: 7, flag: 1, map: haloTex, alpha: 0.85, fog: 0.25 }), halos = [];
   for (let z = POSTS; z <= GANTRY.len; z += POSTS) for (const s of [1, -1]) { const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), haloMat); m.layers.set(FX); m.renderOrder = 12; m.frustumCulled = false; m.position.set(s * (GANTRY.w / 2 + 0.1), 2.52, z); scene.add(m); halos.push(m); }
   const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#252a52");
+  let warden = null;      // the reunion's machine (machines/warden.js), built the first time a shot asks for it
 
   function update(cam, frame, sync, opt = {}) {
     const w = driveAll(sync, WIRING, frame, opt.wiring), t = frame / sync.fps, A = opt.alarm ?? {}, alert = opt.alert ?? 0;
@@ -388,6 +391,7 @@ void main(){ vec2 r = vec2(vW.x, vW.z+${RC.toFixed(1)}); float a = uTurn, c = co
     for (const c of craft) { const dt = t - CRAFT_T; c.g.visible = !guide; c.g.position.set(c.p[0] + c.v[0] * dt, c.p[1] + c.v[1] * dt + 0.5 * Math.sin(t * 1.3 + c.p[0]), c.p[2] + c.v[2] * dt); c.g.rotation.set(0, Math.atan2(c.v[0], c.v[2]), 0.1 * Math.sin(t * 0.9 + c.p[2])); c.g.scale.setScalar(c.sc); }
     halos.forEach((m, i) => { const on = m.position.z <= U.uGantry.value, k = Math.floor(m.position.z / POSTS + 0.5), bl = ((U.uBlink.value + k * 0.5) % 1) >= 0.5 ? 1 : 0.5; m.visible = on; if (on) { m.quaternion.copy(camera.quaternion); m.scale.setScalar((0.9 + 0.8 * U.uAlarm.value) * bl * (1 + camera.position.distanceTo(m.position) * 0.012)); } });
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
+    if (opt.warden || warden) (warden ??= createWarden(kit, scene)).update(opt.warden ?? null, frame, sync, camera);
     markers.update(opt.markers); shadows.update(opt.shadows);
     return { scene, camera, wires: w, clear: opt.clear ?? 0xb3e6ed, post: { inkColor: [0.1, 0.1, 0.3], shadowTint: [0.01, 0.012, 0.04], bloom: lerp(0.55, 0.3, V), bloomThreshold: lerp(0.78, 0.9, V), diffusion: lerp(0.16, 0.07, V), contrast: lerp(0.42, 0.3, V), sat: lerp(1.14, 1.08, V), inkFar: 0.022, ...opt.post } };
   }
