@@ -161,3 +161,14 @@
 {"file": "kits/juno/source/hero/wins_c/take_3.png", "note": "in the kit (heroes under_drop, under_flat: shots/wins_under.js): take_3.jpg graded to take_2 by pipeline/match.py, and the last specks on the board's edge (five places, each a few pixels) painted out by hand from the steel round them. The flat pose's mannequin was changed for it (engine/actions.js WINS_JUNO[4]: on her elbows, chin up, hands low on the nose): with the hands up beside the head, as it was, the near arm is across her face from this camera.", "time": "2026-11-12T12:43:40"}
 {"file": "kits/juno/source/hero/wins_a/take_2.jpg", "note": "an edit of take_1: the salute drawing's goggle lenses dark, like shades, nothing else", "time": "2026-11-12T12:43:40"}
 {"file": "kits/juno/source/hero/wins_a/shades_1.png", "note": "in the kit (hero shades: the last ten frames of shots/wins_salute.js). Not a generation: take_2.jpg graded and registered to take_1 (pipeline/match.py --register; the edit came back 2.5 px to the right), cut with a sidecar that holds only its salute drawing, named shades.", "time": "2026-11-12T12:43:40"}
+{"file": "kits/juno/closeup/brk_face_1.jpg", "kind": "plate:brk_face", "time": "2026-11-12T12:53:08", "ok": true}
+{"file": "kits/juno/closeup/brk_face_2.jpg", "kind": "edit:plate:brk_face", "time": "2026-11-12T12:54:04", "ok": true}
+{"file": "kits/juno/closeup/brk_face_3.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:55:56", "ok": true}
+{"file": "kits/juno/closeup/brk_face_4.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:55:59", "ok": true}
+{"file": "kits/juno/closeup/brk_face_5.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:56:02", "ok": true}
+{"file": "kits/juno/closeup/brk_face_6.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:56:08", "ok": true}
+{"file": "kits/juno/closeup/brk_face_7.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:21", "ok": true}
+{"file": "kits/juno/closeup/brk_face_8.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:32", "ok": true}
+{"file": "kits/juno/closeup/brk_face_9.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:43", "ok": true}
+{"file": "kits/juno/closeup/brk_go_1.jpg", "kind": "plate:brk_go", "time": "2026-11-12T13:09:15", "ok": true}
+{"file": "kits/juno/closeup/brk_go_2.jpg", "kind": "edit:plate:brk_go", "time": "2026-11-12T13:11:05", "ok": true}

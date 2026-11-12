@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY the colour of her irises and keep every other line, colour, shape and position exactly the same: both irises are now DARK BROWN (a warm dark brown with a black pupil and one small white highlight), instead of blue or grey. The eyes keep exactly the same shape, size and direction of gaze, and the expression does not change at all.",
+ "refs": [
+  "kits/juno/closeup/brk_face_6.jpg"
+ ],
+ "kind": "edit:edit:edit:plate:brk_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:57:43",
+ "from": "kits/juno/closeup/brk_face_6.jpg"
+}

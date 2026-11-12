@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY what is described and keep every other line, colour, shape and position in the picture exactly the same (same head position, same hair and smoke wisp, same glasses, same flat black soot smudges exactly where and as they are, same clothes, same monitor with its blank dark green screen, same magenta background): she now looks SIDEWAYS at the monitor beside her: both irises and pupils are moved to the corner of her eyes toward the viewer's RIGHT (toward the monitor), her eyes wide open, her eyebrows raised, and her mouth open in a small relieved smile of surprise and hope. Her head does not move. Only the eyes, eyelids, eyebrows and mouth change.",
+ "refs": [
+  "kits/ife/closeup/brk_face_1.jpg"
+ ],
+ "kind": "edit:edit:edit:plate:boom_push",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:53:31",
+ "from": "kits/ife/closeup/brk_face_1.jpg"
+}

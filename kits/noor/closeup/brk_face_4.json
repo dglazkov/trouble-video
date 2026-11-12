@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY what is described and keep every other line, colour, shape and position in the picture exactly the same (same head position, same hair and white streak, same headphones, same choker and necklaces, same coat, same magenta background): they now look SIDEWAYS: both irises and pupils are moved to the corner of the eyes toward the viewer's LEFT, looking at something beside them; the eyelids are half closed again and relaxed, and the mouth has the faintest hint of a smile: one corner of the closed mouth turned up very slightly. The head does not move. Only the irises, pupils and that corner of the mouth change.",
+ "refs": [
+  "kits/noor/closeup/brk_face_1.jpg"
+ ],
+ "kind": "edit:plate:brk_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:54:21",
+ "from": "kits/noor/closeup/brk_face_1.jpg"
+}

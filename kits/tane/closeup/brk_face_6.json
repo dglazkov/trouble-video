@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY what is described and keep every other line, colour, shape and position in the picture exactly the same (same head position, same pompadour, same pipe and fist, same coat and buttons, same white wrap, same magenta background): his grin is gone and he looks UP: both irises and pupils are at the TOP of his eyes, looking up at the ceiling above him, his eyes open rounder, one thick eyebrow raised; his mouth is closed, a small puzzled line pulled to one side. The head does not move. Only the eyes, eyebrows and mouth change.",
+ "refs": [
+  "kits/tane/closeup/brk_face_5.jpg"
+ ],
+ "kind": "edit:edit:edit:plate:brk_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:57:04",
+ "from": "kits/tane/closeup/brk_face_5.jpg"
+}

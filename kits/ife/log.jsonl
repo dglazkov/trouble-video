@@ -79,3 +79,9 @@
 {"file": "kits/ife/closeup/boom_push_3.jpg", "note": "in the film as boom_push_3.png (graded and registered by pipeline/match.py --register; shots/boom_end.js): an edit of boom_push_1: the soot is flat hard-edged black smudges with dry-brush tails (forehead, nose, cheek, a smear on a lens) and a curl of smoke off a hair puff", "time": "2026-11-12T12:43:40"}
 {"file": "kits/ife/closeup/boom_push_4.jpg", "note": "in the film as boom_push_4.png (graded to boom_push_3.png): an edit of boom_push_3, her hand lowered; the soot is where it was", "time": "2026-11-12T12:43:40"}
 {"file": "kits/ife/closeup/boom_plug_2.jpg", "note": "in the film as boom_plug_2.png (graded and registered to boom_plug_1; shots/boom_jam.js from the twist-lock on): an edit of boom_plug_1, her grip rolled over the knurled ring as she twists it; the plug is where it was", "time": "2026-11-12T12:43:40"}
+{"file": "kits/ife/closeup/brk_face_2.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:19", "ok": true}
+{"file": "kits/ife/closeup/brk_face_3.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:20", "ok": true}
+{"file": "kits/ife/closeup/brk_face_4.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:25", "ok": true}
+{"file": "kits/ife/closeup/brk_face_5.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:31", "ok": true}
+{"file": "kits/ife/closeup/brk_face_6.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:39", "ok": true}
+{"file": "kits/ife/closeup/brk_go_1.jpg", "kind": "plate:brk_go", "time": "2026-11-12T13:09:14", "ok": true}

@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY what is described and keep every other line, colour, shape and position in the picture exactly the same (same head position, same hair and smoke wisp, same glasses, same flat black soot smudges exactly where and as they are, same clothes, same monitor with its blank dark green screen, same magenta background): she now looks UP: both irises and pupils are moved to the TOP of her eyes, looking up at the ceiling above her, her eyes open wider (no longer half-lidded: the upper lids are raised) and her eyebrows are raised a little in wary surprise. Her mouth is a small closed line, slightly parted. Her head does not move. Only the eyes, eyelids, eyebrows and mouth change.",
+ "refs": [
+  "kits/ife/closeup/brk_face_1.jpg"
+ ],
+ "kind": "edit:edit:edit:plate:boom_push",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:53:20",
+ "from": "kits/ife/closeup/brk_face_1.jpg"
+}

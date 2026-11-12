@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY the white circle patch and keep every other line, colour, shape and position exactly the same: ERASE the white circle patch from the jacket's front panel where it is now (that spot becomes plain orange jacket), and DRAW the same white circle patch, the same size, on the jacket's OTHER front panel, on the other side of the open front and the navy shirt (the panel on the viewer's RIGHT, on the chest just below the shoulder with the yellow triangle). Nothing else changes.",
+ "refs": [
+  "kits/juno/closeup/brk_go_1.jpg"
+ ],
+ "kind": "edit:plate:brk_go",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T13:11:05",
+ "from": "kits/juno/closeup/brk_go_1.jpg"
+}

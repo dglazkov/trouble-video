@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY what is described and keep every other line, colour, shape and position in the picture exactly the same (same head position, same pompadour, same pipe and fist, same coat and buttons, same white wrap, same magenta background): his grin is gone and he is ALARMED, though he would never admit it: his eyes are wide open and round with small pupils, looking at the viewer; his thick eyebrows are raised high; his teeth are clenched in a tight square grimace, the corners of the mouth pulled DOWN; one big bead of sweat on his temple. The head does not move. Only the eyes, eyebrows and mouth change, plus the one sweat bead.",
+ "refs": [
+  "kits/tane/closeup/brk_face_5.jpg"
+ ],
+ "kind": "edit:edit:edit:plate:brk_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:57:03",
+ "from": "kits/tane/closeup/brk_face_5.jpg"
+}

@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY the gold buttons and keep every other line, colour, shape and position exactly the same. The open coat has two front edges, one each side of the white belly wrap. ERASE the three round gold buttons that are on the coat edge to the RIGHT of the white wrap (near the hand that holds the pipe): that edge becomes plain dark red with no buttons. DRAW three round gold buttons, the same size, in a vertical row on the coat's OTHER front edge, the one to the LEFT of the white wrap as the viewer sees it, at the same heights. Nothing else changes.",
+ "refs": [
+  "kits/tane/closeup/brk_face_4.jpg"
+ ],
+ "kind": "edit:edit:plate:brk_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:55:56",
+ "from": "kits/tane/closeup/brk_face_4.jpg"
+}

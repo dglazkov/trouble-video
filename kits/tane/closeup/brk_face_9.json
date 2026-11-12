@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY what is described and keep every other line, colour, shape and position in the picture exactly the same (same head position, same pompadour, same pipe and fist, same coat and buttons, same white wrap, same magenta background): he looks SIDEWAYS, ready for a fight: both irises and pupils are in the corners of his eyes toward the viewer's RIGHT; his thick eyebrows are lowered hard toward the nose; his wide fearless grin showing his teeth stays, even wider and fiercer. The head does not move. Only the eyes and eyebrows change, and the grin a little.",
+ "refs": [
+  "kits/tane/closeup/brk_face_5.jpg"
+ ],
+ "kind": "edit:edit:edit:plate:brk_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:57:13",
+ "from": "kits/tane/closeup/brk_face_5.jpg"
+}

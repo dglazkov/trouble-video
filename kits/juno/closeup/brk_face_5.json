@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY what is described and keep every other line, colour, shape and position in the picture exactly the same (same head position and tilt, same hair and long lock, same goggles on the forehead, same headphones, same jacket and patches, same magenta background): she has stopped laughing and looks SIDEWAYS: her eyes are now OPEN, bright and round, with the irises and pupils in the corners of the eyes toward the viewer's LEFT, looking at something beside her; her eyebrows are raised in happy surprise and her mouth is an open, relieved, delighted smile. The head does not move. Only the eyes, eyebrows and mouth change.",
+ "refs": [
+  "kits/juno/closeup/brk_face_2.jpg"
+ ],
+ "kind": "edit:edit:plate:brk_face",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:56:02",
+ "from": "kits/juno/closeup/brk_face_2.jpg"
+}

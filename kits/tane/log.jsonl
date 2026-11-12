@@ -80,3 +80,15 @@
 {"file": "kits/tane/source/hero/wins_b/take_3.jpg", "note": "in the kit (heroes catch, weigh, coil, slam, rise, rest: shots/wins_catch.js, wins_slam.js, wins_rest.js), cut by hand over the checks (loose poses: the figures stand a little off their mannequins). An edit of take_1: the stick and the ring taken out; the coil's face came back redrawn (a grin to the viewer), the rest line for line. His left fist is drawn shut and empty in catch, weigh, coil and slam: the machine he holds is the set's, hung on that fist (shots/wins_tane.js FIST).", "time": "2026-11-12T12:14:27"}
 {"file": "kits/tane/closeup/wins_crack_1.jpg", "note": "in the film (shots/wins_crack.js): the roll of his head, eyes shut", "time": "2026-11-12T12:14:27"}
 {"file": "kits/tane/closeup/wins_crack_2.jpg", "note": "in the film as wins_crack_2.png (graded to wins_crack_1 by pipeline/match.py): an edit of wins_crack_1, the head over the other way and the eyes open", "time": "2026-11-12T12:14:27"}
+{"file": "kits/tane/closeup/brk_face_1.jpg", "kind": "plate:brk_face", "time": "2026-11-12T12:53:08", "ok": true}
+{"file": "kits/tane/closeup/brk_face_1.jpg", "reject": "the pipe is on his right shoulder in his right hand: in the shot before it is on his left, in his left", "by": "hand", "time": "2026-11-12T12:53:46"}
+{"file": "kits/tane/closeup/brk_face_2.jpg", "kind": "plate:brk_face", "time": "2026-11-12T12:54:06", "ok": true}
+{"file": "kits/tane/closeup/brk_face_2.jpg", "reject": "the pipe is on the wrong shoulder again; kept mirrored as take 3", "by": "hand", "time": "2026-11-12T12:54:57"}
+{"file": "kits/tane/closeup/brk_face_4.jpg", "kind": "edit:plate:brk_face", "time": "2026-11-12T12:55:15", "ok": true}
+{"file": "kits/tane/closeup/brk_face_5.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:55:56", "ok": true}
+{"file": "kits/tane/closeup/brk_face_7.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:03", "ok": true}
+{"file": "kits/tane/closeup/brk_face_6.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:04", "ok": true}
+{"file": "kits/tane/closeup/brk_face_8.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:11", "ok": true}
+{"file": "kits/tane/closeup/brk_face_9.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:13", "ok": true}
+{"file": "kits/tane/closeup/brk_back_1.jpg", "kind": "plate:brk_back", "time": "2026-11-12T13:07:40", "ok": true}
+{"file": "kits/tane/closeup/brk_go_1.jpg", "kind": "plate:brk_go", "time": "2026-11-12T13:09:15", "ok": true}
