@@ -29,16 +29,25 @@ from PIL import Image
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 STYLE = ("1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material "
          "(a base and one hard-edged shade), no gradients, no texture, no soft shading")
+# {S} she/he/they, {s} the same in lower case, {o} her/him/them, {p} her/his/their, and the verbs that follow {S}
+WORDS = {"she": dict(S="She", s="she", o="her", p="her", IS="is", faces="faces", moves="moves", looks="looks"),
+         "he": dict(S="He", s="he", o="him", p="his", IS="is", faces="faces", moves="moves", looks="looks"),
+         "they": dict(S="They", s="they", o="them", p="their", IS="are", faces="face", moves="move", looks="look")}
 VIEWS = {
-    "front": "She faces the viewer, seen from straight in front.",
-    "front34": "She is seen in three-quarter FRONT view: she faces and moves toward the viewer's LEFT and a little toward the viewer, so her face, her chest and her LEFT side show.",
-    "side": "She faces and moves toward the viewer's LEFT, seen exactly from the side (her left side toward the viewer, her face in profile).",
-    "back34": "She is seen in three-quarter BACK view: she faces and moves toward the viewer's LEFT and away from the viewer, so the viewer sees her BACK, the back of her head and her LEFT side; her face is turned away and only the edge of her left cheek may show.",
-    "back": "She faces away from the viewer, seen from straight behind.",
+    "front": "{S} {faces} the viewer and {moves} straight toward the viewer, seen from straight in front: {p} face and chest are toward the viewer, and the limbs that reach toward or away from the viewer are drawn foreshortened, as the mannequin has them.",
+    "front34": "{S} {IS} seen in three-quarter FRONT view: {s} {faces} and {moves} toward the viewer's LEFT and a little toward the viewer, so {p} face, {p} chest and {p} LEFT side show.",
+    "side": "{S} {faces} and {moves} toward the viewer's LEFT, seen exactly from the side ({p} left side toward the viewer, {p} face in profile).",
+    "back34": "{S} {IS} seen in three-quarter BACK view: {s} {faces} and {moves} toward the viewer's LEFT and away from the viewer, so the viewer sees {p} BACK, the back of {p} head and {p} LEFT side; {p} face is turned away and only the edge of {p} left cheek may show.",
+    "back": "{S} {faces} away from the viewer, seen from straight behind.",
+    "top": "{S} {IS} seen from DIRECTLY ABOVE, a bird's-eye plan view with the camera looking straight down at the floor: the viewer sees the top of {p} head and hair, {p} shoulders from above, and {p} arms and legs reaching out ahead of and behind the body, as the mannequin has them. {S} {moves} toward the TOP of the image, so {p} head is toward the top and whatever trails behind {o} trails toward the bottom. No face shows: only the top of the head.",
 }
 ACTIONS = {
     "run": "the {n} successive drawings of ONE run cycle",
-    "idle": "{n} drawing(s) of her standing relaxed and at ease, like a person waiting, weight on one leg",
+    "idle": "{n} drawing(s) of {o} standing relaxed and at ease, like a person waiting, weight on one leg",
+    "runtop": "the {n} successive drawings of ONE run cycle, seen from directly above",
+    "charge": "{n} key drawings of a running shoulder charge: in the first {s} drops {p} leading LEFT shoulder in mid-stride; in the second {s} hits a barrier shoulder first, both feet off the ground",
+    "ride": "{n} key drawings of {o} riding a hoverboard at speed, crouched with knees bent and arms out for balance: banking to {p} left, level, and banking to {p} right",
+    "leap": "{n} key drawings of {o} jumping a gap on a hoverboard, seen from above and behind: first launching upward with the board's nose tilted up, then the top of the jump, knees tucked up, one hand gripping the board's edge and the other arm thrown up",
 }
 
 
@@ -121,9 +130,10 @@ def design_ref(name, spec):
 
 def cel_prompt(spec, layout, extra_refs=0, note=""):
     n, cols, rows, view, action = len(layout["cels"]), layout["cols"], layout["rows"], layout["view"], layout["action"]
+    w = WORDS[spec.get("pronoun", "she")]; f = lambda text: text.format(n=n, **w)
     grid = f"{n} posing mannequins in a {cols}x{rows} grid" if n > 1 else "one posing mannequin"
     order = " (reading left to right, top row then bottom row)" if rows > 1 else (" (reading left to right)" if n > 1 else "")
-    what = ACTIONS.get(action, "{n} drawing(s) of her: " + action).format(n=n)
+    what = f(ACTIONS.get(action, "{n} drawing(s) of {o}: " + action))
     each = f"For each of the {n}: keep" if n > 1 else "Keep"
     same = (f"so the {n} figures stay the same size as each other. " if n > 1 else "")
     ident = (f"All {n} drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: " if n > 1 else "The design: ")
@@ -131,17 +141,21 @@ def cel_prompt(spec, layout, extra_refs=0, note=""):
     if extra_refs:
         refs = (f" The {'THIRD image is' if extra_refs == 1 else 'images after the second are'} finished drawings of this same character already "
                 "approved: match their design, colours, line weight and every detail exactly, but take the poses only from the first image.")
+    # what is particular to this character doing this (how they run), and a prop the layout shows with them
+    acting = spec.get("acting", {}).get(action, ""); acting = f" How {w['s']} {'do' if w['IS'] == 'are' else 'does'} it: {acting}." if acting else ""
+    prop = " " + spec["props"][layout["prop"]]["describe"] if layout.get("prop") else ""
+    face = (f"Wherever {w['p']} face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. " if view != "top" else "")
     return (
         f"Edit the FIRST image. It is an animator's layout sheet: {grid}, {what}{order}. "
-        f"Paint the character from the SECOND image (her model sheet) over every mannequin, as {n if n > 1 else 'a'} finished key drawing{'s' if n > 1 else ''} by the same animator. "
-        f"The second image only shows what she looks like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the {n} figure{'s' if n > 1 else ''} of the first image, each in its mannequin's pose and place, and nothing else.{refs} "
+        f"Paint the character from the SECOND image ({w['p']} model sheet) over every mannequin, as {n if n > 1 else 'a'} finished key drawing{'s' if n > 1 else ''} by the same animator. "
+        f"The second image only shows what {w['s']} {w['looks']} like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the {n} figure{'s' if n > 1 else ''} of the first image, each in its mannequin's pose and place, and nothing else.{refs} "
         f"{each} every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, "
         f"same size and same place in its cell), {same}"
-        "BLUE limbs are her LEFT arm and leg; RED limbs are her RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. "
-        f"{VIEWS[view]} Each figure has exactly two arms and two legs, and both feet are drawn complete. "
-        "Wherever her face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. "
+        f"BLUE limbs are {w['p']} LEFT arm and leg; RED limbs are {w['p']} RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. "
+        f"{f(VIEWS[view])}{acting}{prop} Each figure has exactly two arms and two legs, and both feet are drawn complete. "
+        f"{face}"
         f"{ident}{design_text(spec)} "
-        "Remove every trace of the mannequins: no blue, red or grey mannequin colour may remain. "
+        "Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. "
         f"Style as the second image: {STYLE}, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. "
         f"Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap. {note}").strip()
 

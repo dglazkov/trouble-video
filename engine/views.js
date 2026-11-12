@@ -1,6 +1,7 @@
 // Which of a kit's drawings shows a character from where the camera stands. A view is drawn for the camera at its
 // yaw round the character (0 front, 90 the character's left side, 180 back); the other side is the same drawing
 // mirrored. A kit need not have every view: the picker chooses among the ones it is given.
+import { camera, orbit } from "./body.js";
 export const VIEWS = [
   { name: "front", yaw: 0 },
   { name: "front34", yaw: 45 },
@@ -8,6 +9,16 @@ export const VIEWS = [
   { name: "back34", yaw: 135 },
   { name: "back", yaw: 180 },
 ];
+// One more drawing is not a yaw: "top", the character seen from straight above, head toward the top of the drawing.
+// It is shown when the camera looks down steeply, turned to the way the character heads on screen.
+export const TOP = { name: "top", yaw: null, elev: 90 };
+export const viewOf = (name) => name === "top" ? TOP : VIEWS.find((v) => v.name === name);
+// The camera a view's drawing is made from (orthographic, k pixels per unit, the character's ground point at
+// cx, cy): the layout sheet is drawn with it, and the checks ask it where the skeleton's feet are in a drawing.
+export function viewCamera(name, k, cx, cy, elev = 5) {
+  if (name === "top") return camera({ pos: [0, 10, 0], target: [0, 0, 0], up: [0, 0, 1], ortho: k, w: 0, h: 0, cx, cy });
+  return orbit([0, 0, 0], viewOf(name).yaw, 10, { ortho: k, w: 0, h: 0, cx, cy, elev });
+}
 export const wrap = (a) => { a = ((a + 180) % 360 + 360) % 360 - 180; return a === -180 ? 180 : a; };
 const dist = (rel, v, mirror) => Math.abs(wrap(rel - (mirror ? -v.yaw : v.yaw)));
 

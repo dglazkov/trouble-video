@@ -181,5 +181,20 @@
   "trousers",
   "glove",
   "shoe"
- ]
+ ],
+ "acting": {
+  "run": "she runs like an athlete, light and fast, fists loose, eyes ahead; her short hair and the open jacket blow back",
+  "runtop": "an athlete's run; from above her short teal hair with the goggles on her forehead, the orange jacket's shoulders with a yellow triangle patch on each upper sleeve, and her arms and legs are what show",
+  "ride": "her short hair and the open jacket whip back in the wind; she looks ahead, where she is going; in the first drawing her whole body and the board bank to HER left, in the third to HER right",
+  "leap": "her hair and jacket fly up; the board stays under her feet in both drawings"
+ },
+ "props": {
+  "board": {
+   "palette": {
+    "board": "#aab4be",
+    "thruster": "#4fc3ff"
+   },
+   "describe": "The GREEN slab with two green lumps under it, beneath her feet in the first image, is her homemade hoverboard: paint it in exactly the slab's place, size and tilt as a flat plank of welded pale steel-grey scrap-metal plates with dark weld lines and a few rivets, with two small pale steel-grey thruster pods underneath, each with one short flat hard-edged cyan-blue flame shape under it. It has NO wheels and no trucks: it floats. Her feet stand on it."
+  }
+ }
 }

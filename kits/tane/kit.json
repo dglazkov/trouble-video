@@ -1,0 +1,69 @@
+{
+ "name": "tane",
+ "actions": {},
+ "body": {
+  "height": 1.7,
+  "heads": 6.1,
+  "shoulderW": 0.201,
+  "hipW": 0.102,
+  "belly": 0.075,
+  "shoeTop": 0.1,
+  "pad": {
+   "torso": 0.05,
+   "pelvis": 0.045,
+   "uarm": 0.036,
+   "farm": 0.022,
+   "hand": 0.012,
+   "thigh": 0.042,
+   "shin": 0.036,
+   "foot": 0.012
+  },
+  "extras": [
+   {
+    "part": "head",
+    "frame": "head",
+    "tone": "hair",
+    "spheres": [
+     {
+      "at": [
+       0,
+       0.62,
+       -0.08
+      ],
+      "r": 0.52
+     },
+     {
+      "at": [
+       0,
+       1.05,
+       0.2
+      ],
+      "r": 0.42
+     },
+     {
+      "at": [
+       0,
+       1.12,
+       0.5
+      ],
+      "r": 0.3
+     }
+    ]
+   }
+  ],
+  "garments": {
+   "collar": {
+    "ring": true,
+    "frame": "chest",
+    "from": 40,
+    "to": 320,
+    "n": 9,
+    "radius": 0.42,
+    "depth": 1.05,
+    "y": 0.16,
+    "back": 0.4,
+    "r": 0.13
+   }
+  }
+ }
+}

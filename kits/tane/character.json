@@ -1,0 +1,169 @@
+{
+ "name": "tane",
+ "pronoun": "he",
+ "origin": "art/cast/tane_v4.png",
+ "style": "art/ref/test_face.png",
+ "design": "kits/tane/design/model_1.png",
+ "body": {
+  "height": 1.7,
+  "heads": 6.1,
+  "shoulderW": 0.201,
+  "hipW": 0.102,
+  "belly": 0.075,
+  "shoeTop": 0.1,
+  "pad": {
+   "torso": 0.05,
+   "pelvis": 0.045,
+   "uarm": 0.036,
+   "farm": 0.022,
+   "hand": 0.012,
+   "thigh": 0.042,
+   "shin": 0.036,
+   "foot": 0.012
+  },
+  "extras": [
+   {
+    "part": "head",
+    "frame": "head",
+    "tone": "hair",
+    "spheres": [
+     {
+      "at": [
+       0,
+       0.62,
+       -0.08
+      ],
+      "r": 0.52
+     },
+     {
+      "at": [
+       0,
+       1.05,
+       0.2
+      ],
+      "r": 0.42
+     },
+     {
+      "at": [
+       0,
+       1.12,
+       0.5
+      ],
+      "r": 0.3
+     }
+    ]
+   }
+  ],
+  "garments": {
+   "collar": {
+    "ring": true,
+    "frame": "chest",
+    "from": 40,
+    "to": 320,
+    "n": 9,
+    "radius": 0.42,
+    "depth": 1.05,
+    "y": 0.16,
+    "back": 0.4,
+    "r": 0.13
+   }
+  }
+ },
+ "describe": {
+  "who": "Tane, a 16-year-old boy, stocky and a bit fat with a soft round belly, warm medium-brown skin and thick eyebrows",
+  "design": [
+   "HAIR: a tall glossy black pompadour swept up and forward, short at the sides and back",
+   "COAT: a long plain dark-red coat down to his calves, always worn open, with a high stand-up collar and long sleeves to the wrists; four round gold buttons in a row down the front edge on HIS RIGHT side and nothing else on it; the back of the coat is plain dark red with one centre seam",
+   "BELLY WRAP: a white sleeveless undershirt tucked into a wide white cloth wrap wound round his whole belly from chest to waist, drawn with three or four horizontal fold lines",
+   "TROUSERS: plain baggy black trousers gathered at the ankles",
+   "FEET: bare feet in wooden geta sandals: a plain light-brown wooden block sole with one black V-shaped strap between the toes",
+   "HANDS: bare hands, no gloves, no rings",
+   "FACE: round cheeks, thick black eyebrows, a wide fearless grin showing his teeth"
+  ],
+  "never": "No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on him. No toothpick, no cigarette, no weapon."
+ },
+ "acting": {
+  "run": "he ploughs forward like a bull, upright with his chest and belly pushed out, elbows wide, fists clenched, grinning; the open coat flies out behind him",
+  "runtop": "a heavy bull-like run, elbows wide; from above his black pompadour, broad dark-red shoulders and the open coat spreading out behind him are what show",
+  "charge": "grinning with bared teeth the whole time, coat streaming straight out behind him; nothing else in the drawing: no barrier, no impact flash"
+ },
+ "palette": {
+  "skin": "#d39371",
+  "skinshade": "#a2614d",
+  "coat": "#9d2a37",
+  "coatshade": "#651322",
+  "white": "#f1ecee",
+  "wrapshade": "#cfc4d2",
+  "trousers": "#2e2d30",
+  "wood": "#b8794f",
+  "gold": "#d9912e",
+  "hair": "#1d1c1d"
+ },
+ "wear": {
+  "hand": [
+   "skin",
+   "skinshade",
+   "coat",
+   "coatshade"
+  ],
+  "farm": [
+   "coat",
+   "coatshade",
+   "skin",
+   "skinshade"
+  ],
+  "uarm": [
+   "coat",
+   "coatshade"
+  ],
+  "thigh": [
+   "trousers",
+   "coat",
+   "coatshade"
+  ],
+  "shin": [
+   "trousers",
+   "coat",
+   "coatshade",
+   "skin",
+   "skinshade"
+  ],
+  "shoe": [
+   "skin",
+   "skinshade",
+   "wood",
+   "trousers"
+  ],
+  "torso": [
+   "coat",
+   "coatshade",
+   "white",
+   "wrapshade",
+   "skin",
+   "skinshade",
+   "gold",
+   "trousers"
+  ],
+  "pelvis": [
+   "trousers",
+   "coat",
+   "coatshade",
+   "white",
+   "wrapshade"
+  ]
+ },
+ "accents": [
+  "gold",
+  "white",
+  "wood"
+ ],
+ "marks": [],
+ "flats": [
+  "skin",
+  "coat",
+  "wood"
+ ],
+ "check": {
+  "excess": 0.5
+ }
+}

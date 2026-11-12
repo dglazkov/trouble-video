@@ -17,6 +17,9 @@ if (!SIZES[aspect]) { console.error(`no such aspect: ${aspect} (one of ${Object.
 const [W, H] = SIZES[aspect];
 const spec = JSON.parse(fs.readFileSync(path.join(ROOT, "kits", name, "character.json"), "utf8"));
 const dir = path.join(ROOT, "kits", name, "source", action, view);
+// the kit's own copy of the body is the character's: a kit with no drawings yet still has a body to pose
+const kitFile = path.join(ROOT, "kits", name, "kit.json"), kit = fs.existsSync(kitFile) ? JSON.parse(fs.readFileSync(kitFile, "utf8")) : { name, actions: {} };
+if (JSON.stringify(kit.body) !== JSON.stringify(spec.body)) { kit.body = spec.body; fs.writeFileSync(kitFile, JSON.stringify(kit, null, 1)); }
 const { page, close } = await open("/pipeline/layout.html");
 const r = await page.evaluate(([s, a, v, o]) => layout(s, a, v, o), [spec, action, view, { W, H, cols, aspect, only: only ? only.split(",").map(Number) : null }]);
 await close();

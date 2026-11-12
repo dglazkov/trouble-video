@@ -8,9 +8,9 @@
 //    point from which the drawing's lowest painted row is where the skeleton's lowest shoe is in that pose: the
 //    drawing stands on the ground the skeleton stands on.
 import fs from "node:fs"; import path from "node:path";
-import { proportions, solve, pose, runPose, runStride, orbit } from "../engine/body.js";
-import { nearest, picker, VIEWS } from "../engine/views.js";
-import { ACTIONS, celIndex, mirrored, actorPose } from "../engine/actions.js";
+import { proportions, solve, pose, runPose } from "../engine/body.js";
+import { nearest, picker, VIEWS, viewOf, viewCamera } from "../engine/views.js";
+import { ACTIONS, MANNER, celIndex, mirrored, actorPose, strideOf } from "../engine/actions.js";
 
 const args = process.argv.slice(2), ki = args.indexOf("--kit");
 const dirArg = ki >= 0 ? args.splice(ki, 2)[1] : null, name = args[0];
@@ -25,12 +25,12 @@ ok(Math.abs(stand.J.crown[1] - P.height) < 0.03 * P.height, `standing height is 
 for (const s of ["L", "R"]) ok(Math.abs(Math.min(stand.J[s].heel[1], stand.J[s].toe[1])) < 1e-6, `standing: ${s} foot is not on the ground`);
 let grounded = 0;
 for (let i = 0; i < 64; i++) {
-  const b = solve(P, runPose(i / 64)), low = Math.min(...["L", "R"].flatMap((s) => [b.J[s].heel[1], b.J[s].toe[1]]));
+  const b = solve(P, runPose(i / 64, MANNER[kit.name])), low = Math.min(...["L", "R"].flatMap((s) => [b.J[s].heel[1], b.J[s].toe[1]]));
   ok(low > -1e-6, `run phase ${i}/64: a foot is ${(-low).toFixed(3)} under the ground`);
   if (low < 1e-6) grounded++;
 }
 ok(grounded > 8, "run: a foot is planted in too few phases to read as contact");
-const stride = runStride(P);
+const stride = strideOf(kit.name, P);
 ok(stride > 0.8 * P.height && stride < 3.5 * P.height, `run stride per cycle is ${stride.toFixed(2)}: not a run`);
 
 // views
@@ -50,13 +50,14 @@ for (const names of [null, ["front34", "side", "back34"], ["side"]]) {
 }
 
 // actions
-const swap = (q) => ({ ...q, twist: -q.twist, pelvisTwist: -q.pelvisTwist, head: { ...q.head, yaw: -q.head.yaw, roll: -q.head.roll }, arm: { L: q.arm.R, R: q.arm.L }, leg: { L: q.leg.R, R: q.leg.L } });
+const swap = (q) => ({ ...q, roll: -q.roll, twist: -q.twist, pelvisTwist: -q.pelvisTwist, head: { ...q.head, yaw: -q.head.yaw, roll: -q.head.roll }, arm: { L: q.arm.R, R: q.arm.L }, leg: { L: q.leg.R, R: q.leg.L } });
 const flat = (q, pre = "") => Object.entries(q).flatMap(([k, v]) => typeof v === "object" ? flat(v, pre + k + ".") : typeof v === "number" ? [[pre + k, v]] : []);
 for (const [an, A] of Object.entries(ACTIONS)) {
   ok(celIndex(an, 0) === 0 && celIndex(an, 0.999) === A.cels - 1 && celIndex(an, 1) === (A.loop ? 0 : A.cels - 1), `${an}: phases do not run over its ${A.cels} cels`);
+  if (A.flip) for (let i = 0; i < A.cels; i++) ok(A.flip[A.flip[i]] === i && A.pose(A.flip[i]).roll === -A.pose(i).roll, `${an}: cel ${A.flip[i]} is not cel ${i} banked the other way`);
   if (!A.half) continue;
   for (let i = 0; i < A.cels; i++) {
-    const a = Object.fromEntries(flat(swap(A.pose(i)))), b = Object.fromEntries(flat(A.pose(mirrored(an, i))));
+    const a = Object.fromEntries(flat(swap(A.pose(i, kit.name)))), b = Object.fromEntries(flat(A.pose(mirrored(an, i), kit.name)));
     for (const k in a) if (k !== "flight" && Math.abs(a[k] - b[k]) > 1e-6) { fails.push(`${an}: cel ${mirrored(an, i)} is not the mirror image of cel ${i} (${k}: ${b[k].toFixed(2)} for ${a[k].toFixed(2)})`); break; }
   }
 }
@@ -67,7 +68,7 @@ for (const [an, act] of Object.entries(kit.actions ?? {})) {
   const A = ACTIONS[an];
   if (!A) { fails.push(`the kit draws "${an}", which is no action`); continue; }
   for (const [vn, V] of Object.entries(act.views)) {
-    const view = VIEWS.find((v) => v.name === vn);
+    const view = viewOf(vn);
     if (!view) { fails.push(`${an}: no such view as ${vn}`); continue; }
     for (let i = 0; i < A.cels; i++) {
       const c = V.cels[i], at = `${an}/${vn}/${i}`;
@@ -77,10 +78,13 @@ for (const [an, act] of Object.entries(kit.actions ?? {})) {
       ok(c.k > 100, `${at}: scale ${c.k} px per unit`);
       ok(c.ground[0] > 0 && c.ground[0] < c.w, `${at}: its ground point ${c.ground} is not under its ${c.w}x${c.h} drawing`);
       // the lowest point of the body in this pose, drawn the way the layout drew it, against the drawing's lowest row
-      const cam = orbit([0, 0, 0], view.yaw, 10, { ortho: c.k, w: 0, h: 0, cx: c.ground[0], cy: c.ground[1], elev: V.elev ?? 5 });
-      const body = solve(P, actorPose({ action: an, phase: i / A.cels }));
+      // (a drawing that floats, on a board or seen from above, hangs from where its figure fitted its mannequin:
+      // its skeleton must at least lie inside the drawing)
+      const cam = viewCamera(vn, c.k, c.ground[0], c.ground[1], V.elev ?? 5);
+      const body = solve(P, actorPose({ who: kit.name, action: an, phase: i / A.cels }));
       const low = Math.max(...body.vol.flatMap((v) => v.spheres.map((s) => cam.project(s.c).y + s.r * c.k)));
-      ok(Math.abs(low - c.bottom) <= Math.max(3, 0.006 * c.k), `${at}: the drawing's feet are ${(c.bottom - low).toFixed(1)} px from where the skeleton's are`);
+      if (!(A.float || vn === "top")) ok(Math.abs(low - c.bottom) <= Math.max(3, 0.006 * c.k), `${at}: the drawing's feet are ${(c.bottom - low).toFixed(1)} px from where the skeleton's are`);
+      else for (const j of ["hips", "head"]) { const p = cam.project(body.J[j]); ok(p.x > 0 && p.x < c.w && p.y > 0 && p.y < c.h, `${at}: the skeleton's ${j} is outside the drawing`); }
     }
     ok(Object.keys(V.cels).length === A.cels, `${an}/${vn}: ${Object.keys(V.cels).length} drawings for an action of ${A.cels}`);
   }

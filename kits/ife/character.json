@@ -1,0 +1,243 @@
+{
+ "name": "ife",
+ "pronoun": "she",
+ "origin": "art/cast/ife_v2.png",
+ "style": "art/ref/test_face.png",
+ "design": "kits/ife/design/model_1.png",
+ "body": {
+  "height": 1.42,
+  "heads": 5.5,
+  "shoeTop": 0.16,
+  "pad": {
+   "torso": 0.04,
+   "pelvis": 0.03,
+   "uarm": 0.034,
+   "farm": 0.03,
+   "hand": 0.004,
+   "thigh": 0.006,
+   "shin": 0.0,
+   "foot": 0.02
+  },
+  "extras": [
+   {
+    "part": "head",
+    "frame": "head",
+    "tone": "hair",
+    "spheres": [
+     {
+      "at": [
+       0,
+       0.6,
+       -0.06
+      ],
+      "r": 0.52
+     }
+    ]
+   },
+   {
+    "part": "head",
+    "frame": "head",
+    "tone": "hair",
+    "spheres": [
+     {
+      "at": [
+       0.6,
+       1.02,
+       -0.1
+      ],
+      "r": 0.37
+     }
+    ]
+   },
+   {
+    "part": "head",
+    "frame": "head",
+    "tone": "hair",
+    "spheres": [
+     {
+      "at": [
+       -0.6,
+       1.02,
+       -0.1
+      ],
+      "r": 0.37
+     }
+    ]
+   },
+   {
+    "part": "pack",
+    "frame": "chest",
+    "tone": "pack",
+    "spheres": [
+     {
+      "at": [
+       0.42,
+       -0.45,
+       -0.78
+      ],
+      "r": 0.28
+     },
+     {
+      "at": [
+       -0.42,
+       -0.45,
+       -0.78
+      ],
+      "r": 0.28
+     },
+     {
+      "at": [
+       0.42,
+       -1.6,
+       -0.78
+      ],
+      "r": 0.28
+     },
+     {
+      "at": [
+       -0.42,
+       -1.6,
+       -0.78
+      ],
+      "r": 0.28
+     }
+    ]
+   },
+   {
+    "part": "pack",
+    "frame": "chest",
+    "tone": "pack",
+    "spheres": [
+     {
+      "at": [
+       1.3,
+       0.8,
+       -0.45
+      ],
+      "r": 0.36
+     },
+     {
+      "at": [
+       1.3,
+       0.8,
+       -0.75
+      ],
+      "r": 0.34
+     }
+    ]
+   }
+  ],
+  "garments": {}
+ },
+ "describe": {
+  "who": "Ife, a small 14-year-old girl, the smallest of her friends (about five and a half heads tall), with dark brown skin",
+  "design": [
+   "HAIR: black hair parted in the middle and tied up in two big round afro puffs, one on each side of the top of her head",
+   "GLASSES: enormous perfectly round thin-rimmed glasses; the lenses are clear, so her skin and her eyes show through them exactly as the rest of her face does (never tinted, never the background colour)",
+   "JUMPER: an oversized plain pale-green knitted jumper with a thick rolled turtle neck, ribbed hem and cuffs, and baggy sleeves that come down to her knuckles",
+   "SHORTS AND LEGGINGS: short plain grey shorts with a turned-up hem over plain dark navy leggings",
+   "SHOES: plain dark-grey canvas trainers with grey laces and grey soles",
+   "BACKPACK COMPUTER: a boxy beige retro computer worn on her back as a backpack with two beige shoulder straps over the jumper; from its top a short grey jointed metal arm holds a small beige CRT monitor in the air above HER LEFT shoulder, beside her head, its dark-green screen facing forward with a few rows of small bright-green dashes on it; three short loose cables (red, yellow, blue) hang from the bottom of the pack",
+   "FACE: big round dark eyes, small worried eyebrows, a small mouth"
+  ],
+  "never": "No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on her. Nothing readable on the screen. Her hands are empty."
+ },
+ "acting": {
+  "run": "she scurries with short quick steps, leaning in, elbows tight and fists pumping high, eyes wide and worried; the backpack computer bounces on her back and its monitor wobbles on its arm, the cables swinging",
+  "runtop": "a quick scurry with short steps; from above her two round black hair puffs, the pale-green jumper's shoulders, the beige backpack computer on her back and its small monitor on its arm beside her head (on HER LEFT, the viewer's left) are what show"
+ },
+ "palette": {
+  "skin": "#885446",
+  "skinshade": "#5d3a33",
+  "jumper": "#b7cca0",
+  "jumpershade": "#7e8b6e",
+  "leggings": "#39384e",
+  "shorts": "#929293",
+  "shortsshade": "#656366",
+  "shoe": "#5c5756",
+  "pack": "#d8caae",
+  "packshade": "#a99980",
+  "screen": "#354135",
+  "glow": "#5fd068",
+  "arm": "#8c8a8c",
+  "red": "#c8553f",
+  "yellow": "#d9a93a",
+  "blue": "#4a6fb0",
+  "hair": "#1e1d1b"
+ },
+ "wear": {
+  "hand": [
+   "skin",
+   "skinshade",
+   "jumper",
+   "jumpershade"
+  ],
+  "farm": [
+   "jumper",
+   "jumpershade",
+   "skin",
+   "skinshade"
+  ],
+  "uarm": [
+   "jumper",
+   "jumpershade",
+   "pack",
+   "packshade"
+  ],
+  "thigh": [
+   "leggings",
+   "shorts",
+   "shortsshade",
+   "jumper",
+   "jumpershade"
+  ],
+  "shin": [
+   "leggings",
+   "skin",
+   "skinshade"
+  ],
+  "shoe": [
+   "shoe",
+   "leggings",
+   "skin",
+   "arm",
+   "shortsshade"
+  ],
+  "torso": [
+   "jumper",
+   "jumpershade",
+   "pack",
+   "packshade",
+   "skin",
+   "skinshade",
+   "arm"
+  ],
+  "pelvis": [
+   "shorts",
+   "shortsshade",
+   "jumper",
+   "jumpershade",
+   "leggings",
+   "pack",
+   "packshade"
+  ]
+ },
+ "accents": [
+  "pack",
+  "glow",
+  "shorts",
+  "red",
+  "yellow",
+  "blue"
+ ],
+ "marks": [],
+ "flats": [
+  "skin",
+  "jumper",
+  "leggings",
+  "pack"
+ ],
+ "check": {
+  "excess": 0.4
+ }
+}

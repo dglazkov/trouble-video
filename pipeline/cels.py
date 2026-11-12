@@ -28,7 +28,8 @@ which body part is where), and kits/NAME/character.json holds the design's colou
 At the cut each of the design's flats is graded from the colour the take painted it to the design's own, so takes
 agree in colour. A cel is registered by its layout: its scale is the layout's, and its ground point is the layout's moved by where the
 figure was actually painted (sideways by the best fit of the mannequin inside the figure, vertically by the lowest
-point of the shoes), so a cel stands on the ground whichever way the painter nudged it.
+point of the shoes), so a cel stands on the ground whichever way the painter nudged it. A drawing that does not stand
+on its lowest row ("float" in engine/actions.js: on a board, or seen from above) is registered by the fit both ways.
 """
 import fcntl, json, os, subprocess, sys, time
 import numpy as np, cv2
@@ -38,7 +39,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 CLASSES = ["face", "hair", "neck", "torso", "pelvis", "garment", "uarm", "farm", "hand", "thigh", "shin", "shoe"]   # pipeline/layout.js NAMES
 LIMBS = ["uarm", "farm", "thigh", "shin", "shoe"]
 MANNEQUIN = ["#3f6fe6", "#2a49a8", "#9bb8ff", "#6c8bd6", "#e24a4a", "#a52e2e", "#ff9c9c", "#d06a6a"]   # engine/mannequin.js limb tones
-T = dict(
+T_DEFAULT = T = dict(
     cover=0.88,        # least share of a mannequin its figure must cover
     limb=0.55,         # least share of any one limb segment
     limb_loose=0.25,   # the same for a held drawing (an action that is "loose"), whose arms and feet may settle
@@ -123,6 +124,7 @@ def load(take):
     img = cv2.imread(take, cv2.IMREAD_COLOR); mapi = cv2.imread(mp, cv2.IMREAD_COLOR)
     if img is None or mapi is None: raise SystemExit(f"cannot read {take} or its layout map {mp}")
     spec = json.load(open(os.path.join(ROOT, "kits", name, "character.json")))
+    if L.get("prop"): spec["palette"] = {**spec["palette"], **spec["props"][L["prop"]]["palette"]}     # a prop in the drawing brings its colours
     return dict(img=img, map=mapi, layout=L, spec=spec, name=name, file=rel(take))
 
 
@@ -150,6 +152,8 @@ def analyse(t, full=False):
     """Judge a loaded take. Returns a report: { ok, reasons, cels: [...], spread, ... }. The judging is done on the
     sheet at the layout's own size; offsets are reported in body units. full: keep each cel's masks under "_"."""
     L, spec = t["layout"], t["spec"]
+    T = {**T_DEFAULT, **spec.get("check", {})}      # a character may loosen a limit its design cannot keep (a long coat flies far from the body)
+    top = L["view"] == "top"                        # seen from above: no face to judge
     TH, TW = t["img"].shape[:2]; reasons = []; bad = lambda kind, msg: reasons.append(f"{kind}: {msg}")
     loose = bool(L.get("loose"))      # a held drawing: judged on its stance, not limb by limb (engine/actions.js)
     if abs((TW / L["W"]) / (TH / L["H"]) - 1) > 0.01: bad("place", f"the sheet came back in another shape ({TW}x{TH} for a {L['W']}x{L['H']} layout)")
@@ -207,7 +211,7 @@ def analyse(t, full=False):
         if not ce["comp"]: continue
         i, c = ce["index"], ce["c"]
         Fw = lab_ == ce["comp"]
-        dx, dy0 = fit(Fw, ce["M"]); dy = float(bottom(Fw) - bottom(ce["M"]))
+        dx, dy0 = fit(Fw, ce["M"]); dy = dy0 if L.get("float") else float(bottom(Fw) - bottom(ce["M"]))
         Mw = shift(ce["M"].astype(np.uint8), round(dx), round(dy)) > 0
         ys, xs = np.nonzero(Fw | Mw); pad = int(0.12 * k)
         win = (slice(max(0, ys.min() - pad), ys.max() + pad), slice(max(0, xs.min() - pad), xs.max() + pad))
@@ -261,6 +265,7 @@ def analyse(t, full=False):
         if excess > T["excess"]: bad("pose", f"cel {i}: {excess:.0%} of the figure is away from its mannequin")
         if np.hypot(dx, dy) / k > T["place"]: bad("place", f"cel {i}: painted {np.hypot(dx, dy) / k:.2f} body units from its mannequin")
         f2 = np.hypot(face[0], face[1])
+        if top: face = [0, 0, -0.3]; f2 = 0; share = min(share, 0.2)
         if face[2] > 0.3 and share < 0.10: bad("facing", f"cel {i}: no face where the face should be ({share:.0%} skin)")
         if face[2] > -0.3 and share >= 0.10 and features < T["features"]: bad("facing", f"cel {i}: the face is blank (eyes and mouth are {features:.1%} of it)")
         if face[2] < -0.3 and share > 0.22: bad("facing", f"cel {i}: a face shows ({share:.0%} skin) on a head seen from behind")

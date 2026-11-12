@@ -1,0 +1,69 @@
+{
+ "name": "noor",
+ "actions": {},
+ "body": {
+  "height": 1.82,
+  "heads": 7.5,
+  "shoulderW": 0.167,
+  "shoeTop": 0.5,
+  "pad": {
+   "torso": 0.022,
+   "pelvis": 0.022,
+   "uarm": 0.02,
+   "farm": 0.012,
+   "hand": 0,
+   "thigh": 0.014,
+   "shin": 0.022,
+   "foot": 0.036
+  },
+  "extras": [
+   {
+    "part": "head",
+    "frame": "head",
+    "tone": "hair",
+    "spheres": [
+     {
+      "at": [
+       0,
+       0.6,
+       -0.06
+      ],
+      "r": 0.52
+     }
+    ]
+   },
+   {
+    "part": "head",
+    "frame": "head",
+    "tone": "hair",
+    "spheres": [
+     {
+      "at": [
+       0,
+       0.25,
+       -0.3
+      ],
+      "r": 0.36
+     },
+     {
+      "at": [
+       0,
+       -0.9,
+       -0.5
+      ],
+      "r": 0.3
+     },
+     {
+      "at": [
+       0,
+       -1.9,
+       -0.55
+      ],
+      "r": 0.24
+     }
+    ]
+   }
+  ],
+  "garments": {}
+ }
+}

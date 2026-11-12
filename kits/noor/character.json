@@ -1,0 +1,161 @@
+{
+ "name": "noor",
+ "pronoun": "they",
+ "origin": "art/cast/noor_v2.png",
+ "style": "art/ref/test_face.png",
+ "design": "kits/noor/design/model_2.png",
+ "body": {
+  "height": 1.82,
+  "heads": 7.5,
+  "shoulderW": 0.167,
+  "shoeTop": 0.5,
+  "pad": {
+   "torso": 0.022,
+   "pelvis": 0.022,
+   "uarm": 0.02,
+   "farm": 0.012,
+   "hand": 0.0,
+   "thigh": 0.014,
+   "shin": 0.022,
+   "foot": 0.036
+  },
+  "extras": [
+   {
+    "part": "head",
+    "frame": "head",
+    "tone": "hair",
+    "spheres": [
+     {
+      "at": [
+       0,
+       0.6,
+       -0.06
+      ],
+      "r": 0.52
+     }
+    ]
+   },
+   {
+    "part": "head",
+    "frame": "head",
+    "tone": "hair",
+    "spheres": [
+     {
+      "at": [
+       0,
+       0.25,
+       -0.3
+      ],
+      "r": 0.36
+     },
+     {
+      "at": [
+       0,
+       -0.9,
+       -0.5
+      ],
+      "r": 0.3
+     },
+     {
+      "at": [
+       0,
+       -1.9,
+       -0.55
+      ],
+      "r": 0.24
+     }
+    ]
+   }
+  ],
+  "garments": {}
+ },
+ "describe": {
+  "who": "Noor, 16 years old, androgynous, the tallest of the friends: very tall and thin with long legs, a small head and narrow shoulders (seven and a half heads tall), light brown skin",
+  "design": [
+   "HAIR: perfectly straight black hair down to the waist, parted in the middle, with ONE bold pure-white streak that starts at the parting on THEIR LEFT side and runs the whole length of the hair in front of the left shoulder; all the rest of the hair is black",
+   "FACE: narrow and calm, half-lidded deadpan eyes with dark eyeliner, thin straight eyebrows, mouth closed, no expression",
+   "COAT: a long plain black coat down to the ankles with a pointed uneven hem, always worn open, plain lapels, long sleeves to the wrists, over a plain black top and plain black trousers; dark-grey and violet-grey shade tones so the folds of the black clothes still show",
+   "NECK: a plain black choker and two thin silver chain necklaces",
+   "HIP: one thin silver chain hanging in a loop at the hip, and a small grey retro cassette player clipped on THEIR LEFT hip",
+   "BOOTS: heavy black lace-up platform boots with thick soles, up to the middle of the shin",
+   "HANDS: bare hands with black nails"
+  ],
+  "never": "No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on them. No headphones on the head, no hat, no weapon."
+ },
+ "acting": {
+  "run": "they run with long unhurried strides, upright and effortless, the arms hanging almost straight and the hands barely moving, the face deadpan; the long hair and the long coat stream out behind them",
+  "runtop": "long unhurried strides, arms close to the body; from above the black hair with its white streak (on THEIR LEFT, the viewer's left) streaming back over the narrow black shoulders, and the long black coat spreading out behind them, are what show"
+ },
+ "palette": {
+  "skin": "#cf987a",
+  "skinshade": "#a8705a",
+  "coat": "#312d34",
+  "coatshade": "#1c1a20",
+  "white": "#e5dfe0",
+  "silver": "#969495",
+  "grey": "#59575a"
+ },
+ "wear": {
+  "hand": [
+   "skin",
+   "skinshade",
+   "coat"
+  ],
+  "farm": [
+   "coat",
+   "coatshade",
+   "skin",
+   "grey"
+  ],
+  "uarm": [
+   "coat",
+   "coatshade",
+   "white",
+   "grey"
+  ],
+  "thigh": [
+   "coat",
+   "coatshade",
+   "grey",
+   "silver"
+  ],
+  "shin": [
+   "coat",
+   "coatshade",
+   "grey"
+  ],
+  "shoe": [
+   "coat",
+   "coatshade",
+   "grey"
+  ],
+  "torso": [
+   "coat",
+   "coatshade",
+   "white",
+   "skin",
+   "skinshade",
+   "silver",
+   "grey"
+  ],
+  "pelvis": [
+   "coat",
+   "coatshade",
+   "grey",
+   "silver",
+   "skin"
+  ]
+ },
+ "accents": [
+  "white",
+  "silver"
+ ],
+ "marks": [],
+ "flats": [
+  "skin",
+  "coat"
+ ],
+ "check": {
+  "excess": 0.5
+ }
+}

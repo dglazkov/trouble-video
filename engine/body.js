@@ -44,7 +44,10 @@ export function proportions(spec = {}) {
 // ---- poses ---------------------------------------------------------------------------------------------------------
 // A pose is plain numbers (degrees and metres).
 const LIMB = { arm: { swing: 0, out: 0, elbow: 0 }, leg: { swing: 0, out: 0, knee: 0, foot: 0 } };
-export const ZERO = { yaw: 0, x: 0, z: 0, lift: 0, lean: 0, twist: 0, pelvisTwist: 0,
+// y: how high the ground point the figure is hung from is (a leap's arc); lift: how far the lowest foot is above it;
+// roll: the whole figure banked sideways about its feet (positive toward its left), as on a board in a turn;
+// board: 1 puts a hoverboard under the feet (a prop that is part of the drawing).
+export const ZERO = { yaw: 0, x: 0, y: 0, z: 0, lift: 0, lean: 0, roll: 0, board: 0, twist: 0, pelvisTwist: 0,
   head: { yaw: 0, pitch: 0, roll: 0 },
   arm: { L: { ...LIMB.arm }, R: { ...LIMB.arm } }, leg: { L: { ...LIMB.leg }, R: { ...LIMB.leg } } };
 export function pose(over = {}, base = ZERO) {
@@ -66,19 +69,21 @@ const THIGH = [38, 22, -32, -42, -8, 44, 82, 62];
 const KNEE = [18, 52, 14, 62, 132, 122, 92, 34];
 const FOOT = [-18, 0, 48, 78, 60, 30, 5, -18];
 export const RUN_KEYS = 8;
-// p: phase 0..1 of one full cycle (two steps). o: { lean, energy }
+// p: phase 0..1 of one full cycle (two steps). o: a manner of running: { lean, energy (how far the thighs swing),
+// twist (how far the chest turns), arm: { base, swing, out, elbow, pump } (where the arms hang and how far they
+// swing), knee (how high the heels kick, 0..1), bounce }
 export function runPose(p, o = {}) {
-  const energy = o.energy ?? 1, lean = o.lean ?? 14;
-  const tw = 17 * Math.cos(2 * Math.PI * (p - 0.8)) * energy;
+  const energy = o.energy ?? 1, lean = o.lean ?? 14, A = { base: -8, swing: 42, out: 12, elbow: 86, pump: 12, ...o.arm }, kn = o.knee ?? 1;
+  const tw = (o.twist ?? 17) * Math.cos(2 * Math.PI * (p - 0.8)) * energy;
   const q = { lean, twist: tw, pelvisTwist: -0.6 * tw, arm: {}, leg: {},
     head: { yaw: 0, pitch: -lean * 0.45, roll: 3 * Math.sin(2 * Math.PI * p + 1) } };
   for (const side of SIDES) {
     const ph = side === "L" ? p : p + 0.5, pl = ph * 8, c = Math.cos(2 * Math.PI * (ph - 0.8));
-    q.leg[side] = { swing: cr(THIGH, pl) * energy, out: 5, knee: cr(KNEE, pl), foot: cr(FOOT, pl) };
-    q.arm[side] = { swing: -8 - 42 * c * energy, out: 12, elbow: 86 - 12 * c };   // back: hand by the hip; front: fist up by the chest
+    q.leg[side] = { swing: cr(THIGH, pl) * energy, out: o.legOut ?? 5, knee: cr(KNEE, pl) * kn, foot: cr(FOOT, pl) * kn };
+    q.arm[side] = { swing: A.base - A.swing * c * energy, out: A.out, elbow: A.elbow - A.pump * c };   // back: hand by the hip; front: fist up by the chest
   }
   const h = (p * 2) % 1, fl = h > 0.3 ? Math.sin(Math.PI * Math.min(1, (h - 0.3) / 0.65)) : 0;
-  q.lift = 0.055 * fl * energy;
+  q.lift = (o.bounce ?? 0.055) * fl * energy;
   q.flight = fl;
   return pose(q);
 }
@@ -105,7 +110,7 @@ export function solve(P, q0) {
     j.kneeFlex = l.knee;
     minY = Math.min(minY, j.heel[1], j.toe[1]);
   }
-  const hips = [q.x, -minY + q.lift, q.z];
+  const hips = [q.x, -minY + q.lift + q.y, q.z];
   for (const side of SIDES) for (const k of ["hip", "knee", "ankle", "sole", "heel", "toe", "ball"]) J[side][k] = add(J[side][k], hips);
   J.hips = hips;
   // spine
@@ -135,7 +140,32 @@ export function solve(P, q0) {
   const hX = comb(hX0, Math.cos(hr), hU0, Math.sin(hr)), hU = comb(hU0, Math.cos(hr), hX0, -Math.sin(hr));
   J.head = add(J.headBase, hU, P.headH * 0.5); J.crown = add(J.headBase, hU, P.headH);
   const F = { root: { X, Y, Z }, pelvis: { X: pX, Y, Z }, chest: { X: cX, Y: S, Z: cF }, head: { X: hX, Y: hU, Z: hF }, neck: N };
-  return { P, q, J, F, vol: volumes(P, J, F) };
+  if (q.roll) bank(J, F, Z, [q.x, q.y + q.lift, q.z], -q.roll * D);
+  const vol = volumes(P, J, F);
+  if (q.board) vol.push(...board(P, J, F));
+  return { P, q, J, F, vol };
+}
+// Turn every joint and frame about the axis k through the point o (Rodrigues), in place.
+function bank(J, F, k, o, a) {
+  const c = Math.cos(a), s = Math.sin(a);
+  const dir = (v) => comb(v, c, cross(k, v), s, k, dot(k, v) * (1 - c)), pnt = (v) => add(o, dir(sub(v, o)));
+  const walk = (j) => { for (const n in j) { const v = j[n];
+    if (Array.isArray(v)) j[n] = /Dir$|footDn$/.test(n) ? dir(v) : pnt(v); else if (v && typeof v === "object") walk(v); } };
+  walk(J);
+  for (const f of Object.values(F)) { if (Array.isArray(f)) continue; for (const n in f) f[n] = dir(f[n]); }
+  F.neck = dir(F.neck);
+}
+// A hoverboard under the feet: a flat plank lying along the line from the right sole to the left (so the feet set
+// its pitch) with two pods beneath it. Volumes like the body's, tagged "board".
+function board(P, J, F) {
+  const H = P.height, X = F.root.X, mid = lerp3(J.R.sole, J.L.sole, 0.5);
+  let f = sub(J.L.sole, J.R.sole); f = sub(f, mul(X, dot(f, X)));
+  f = Math.hypot(...f) < 0.12 * H ? F.root.Z : norm(f);
+  const up = norm(cross(f, X)), r = 0.016 * H, c = add(mid, up, -r), V = [], sp = [];
+  for (const [a, b] of [[0.36, 0.085], [0.33, -0.085], [-0.3, 0.1], [-0.3, -0.1]]) sp.push({ c: comb(c, 1, f, a * H, X, b * H), r });
+  V.push({ part: "board", side: null, tone: "board", spheres: sp });
+  for (const a of [0.2, -0.2]) V.push({ part: "board", side: null, tone: "board", spheres: [{ c: comb(c, 1, f, a * H, up, -0.045 * H), r: 0.034 * H }, { c: comb(c, 1, f, (a - 0.05) * H, up, -0.045 * H), r: 0.034 * H }] });
+  return V;
 }
 
 // ---- volumes -------------------------------------------------------------------------------------------------------

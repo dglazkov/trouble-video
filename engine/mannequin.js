@@ -2,7 +2,7 @@
 // upper segments dark and lower ones light, so overlapping limbs read as in front or behind.
 const TONES = {
   trunk: ["#b9b9b9", "#8d8d8d"], pelvis: ["#9a9a9a", "#707070"], neck: ["#d9d9d9", "#ababab"], head: ["#eeeeee", "#c2c2c2"],
-  garment: ["#e9d27a", "#b79c45"], hair: ["#cfd8cf", "#9fb0a3"],
+  garment: ["#e9d27a", "#b79c45"], hair: ["#cfd8cf", "#9fb0a3"], board: ["#58c070", "#3a8a4c"], pack: ["#d8c8a0", "#a89870"],
   L: { upper: ["#3f6fe6", "#2a49a8"], lower: ["#9bb8ff", "#6c8bd6"] },
   R: { upper: ["#e24a4a", "#a52e2e"], lower: ["#ff9c9c", "#d06a6a"] },
 };
