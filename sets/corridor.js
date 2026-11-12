@@ -11,6 +11,7 @@
 //   junction   null | { z }       the hub's centre is at (0, 0, z); z must be a multiple of 4. Arms run along +-Z and +-X.
 //   cut        null | "top" | "left" | "right"   remove the ceiling (view from above) or one wall (side-on tracking;
 //                                 left is x < 0). The cut shows the structure's section and passing struts.
+//   clearStruts [z0, z1]          no struts of a cut wall between these z (where the shot's business is)
 //   doors      { [k]: 0..1 }      how far shut the bulkhead shutter at z = k * 24 is (1 = shut), or [top, bottom] for
 //                                 its two leaves apart. Unlisted shutters rest open and twitch with the `doorChomp` wire.
 //   hubDoors   { A, B, C, D }     the shutters at the hub's mouths: A is the +Z arm, B +X, C -Z, D -X.
@@ -77,7 +78,7 @@ vec3 setExtra(vec3 col, vec3 W, vec3 N, float tone){
   if(k < 1.5){
     vec3 along = k > 0.5 ? vec3(1.0,0.0,0.0) : vec3(0.0,0.0,1.0);
     col *= mix(1.0, 0.7, abs(dot(N, along)));
-    if(abs(L.x) < 2.9 && W.y < 3.44){
+    if(abs(L.x) < 2.9 && W.y < 3.44 && abs(dot(N, along)) < 0.9){      // the strips' glow on what runs along them, not on a shutter's face
       float dc = length(vec2(abs(L.x)-2.62, W.y-2.5));
       col += vec3(0.1,0.85,1.0)*(step(dc,0.75)*0.10 + step(dc,0.3)*0.16);
       float dm = length(vec2(abs(L.x)-2.25, W.y-0.06));
@@ -387,14 +388,14 @@ export async function createCorridor(renderer, o = {}) {
   const pool = new Pool(scene), armX = new THREE.Group(); armX.rotation.y = Math.PI / 2; scene.add(armX); const poolX = new Pool(armX);
   const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#0b0a2a");
 
-  function module(pl, i, z, cut, doors, chomp, arm) {
+  function module(pl, i, z, cut, doors, chomp, arm, clear) {
     const bulk = ((i % BULK) + BULK) % BULK === 0 ? 1 : 0, put = (proto) => { const g = pl.use(proto); g.position.z = z; return g; };
     put(P.floor[bulk]); if (hash(i, arm, 9) > 0.5) put(floorArrow);
     if (cut !== "top") put(P.ceil[bulk]);
     for (const s of [1, -1]) {
       const gone = (cut === "left" && s < 0) || (cut === "right" && s > 0);
       if (cut === "top") put(P.cutTop[s]); else if (!gone) put(P.slant[s][bulk]);
-      if (gone) { put(P.cutSide[s]); if (!bulk) put(P.strut[s]); continue; }
+      if (gone) { put(P.cutSide[s]); if (!bulk && !(clear && z >= clear[0] && z <= clear[1])) put(P.strut[s]); continue; }
       put(P.wall[s][bulk]);
       const v = variantOf(i, s, arm), n = Math.floor(hash(i, s, arm, 77) * 5); put(P.vari[s][v][n] ?? P.vari[s][v][0]);
     }
@@ -413,7 +414,7 @@ export async function createCorridor(renderer, o = {}) {
     G.screens.value = w.screens; G.meters.value = w.meters; G.stars.value = clamp(w.stars, 0, 1.6); G.beam.value = 0.6 + w.hull; G.reels.value = (G.reelAngle = t * 2 + sync.drive({ stem: "keyboard", mode: "count" }, frame) * 0.7);
     pool.begin(); poolX.begin();
     const i0 = Math.floor(cam.pos[2] / M), span = opt.span ?? 24;
-    for (let i = i0 - span; i <= i0 + span; i++) { const z = i * M; if (J && Math.abs(z + M / 2 - J.z) < HUB) continue; module(pool, i, z, opt.cut, opt.doors, w.doorChomp, 0); }
+    for (let i = i0 - span; i <= i0 + span; i++) { const z = i * M; if (J && Math.abs(z + M / 2 - J.z) < HUB) continue; module(pool, i, z, opt.cut, opt.doors, w.doorChomp, 0, opt.clearStruts); }
     if (J) { armX.position.set(0, 0, J.z); for (let k = 2; k < 16; k++) for (const sgn of [1, -1]) { const i = sgn > 0 ? k : -k - 1; module(poolX, i, i * M, opt.cut === "top" ? "top" : null, null, w.doorChomp, 1); } }
     pool.end(); poolX.end();
     hub.visible = !!J; if (J) { hub.position.set(0, 0, J.z); hubRoof.visible = opt.cut !== "top"; ["A", "B", "C", "D"].forEach((n, k) => setShutter(hubShutters[k], opt.hubDoors?.[n] ?? w.doorChomp)); }

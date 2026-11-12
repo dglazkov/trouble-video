@@ -37,7 +37,7 @@ function frame(f, sync) {
   return { set: "corridor",
     // it trails him to the shutter and swings ahead as he goes through: the far face of the shutter, and what comes through it, come at us
     camera: { pos: [7.2 + shake * wob(f, 9, 14, 1), 1.02 + shake * wob(f, 11, 17, 2), cz - 1.6 + 4.4 * ease((f - HIT - 1) / 11)], target: [0, 1.5, cz + 0.4], fov: 37 },
-    options: { cut: "right", alert: 0.3, doors: { 1: gate(f, sync) }, drones },
+    options: { cut: "right", clearStruts: [26, 30], alert: 0.3, doors: { 1: gate(f, sync) }, drones },
     post: impact ?? { bgStreak: [0.004, 0], ca: 0.0012 + 0.005 * Math.max(jolt, slam), flash: since === 2 ? 0.4 : since === 3 ? 0.12 : f === SLAM ? 0.2 : 0, bloom: 0.85 + 0.5 * jolt },
     actors: [{ who: "tane", action: charging ? "charge" : "run", view: "side", phase: charging ? (f >= HIT ? 1 : 0) : f / CYCLE, over: f >= HIT - 12 && f < HIT + 6, x: 0, z, y: charging && f >= HIT ? 0.12 * Math.sin(Math.PI * Math.min(1, since / 7)) : 0 }],
     overlay(g, cam) {

@@ -22,7 +22,7 @@ function frame(f, sync) {
   return { set: "market",
     // behind her on the deck, then up over her shoulder as she leaves it, so that the shaft opens under her
     camera: (() => { const e = ease((f - 2) / 20); return { pos: [p[0] + 0.9, p[1] + 1.4 + 1.3 * e, p[2] - 4.2 + 1.6 * e], target: [p[0] * 0.5, p[1] - 0.1 - 0.6 * e, p[2] + 2.5 - 1.9 * e], fov: 56 - (since > 0 ? 3 * ease(since / 18) : 0) }; })(),
-    options: { alert: 0.6, drones, crowd: { flee: [0, z0] }, steam: 1.4 },
+    options: { alert: 0.6, drones, crowd: { flee: [0, z0] }, steam: 0.5 },
     post: f >= BLACK ? { black: 1 } : impact ?? { ca: 0.0016 + (since > 1 ? 0.004 * Math.exp(-(since - 2) / 3) : 0), bloom: 1.0, flash: since === 2 ? 0.5 : since === 3 ? 0.15 : 0 },
     actors: [{ who: "juno", action: air ? "leap" : "ride", view: "back34", phase: air ? (f >= APEX - 7 ? 1 : 0) : 0.5, x: p[0], y: p[1], z: p[2] }],
     overlay(g, cam) {
