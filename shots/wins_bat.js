@@ -7,6 +7,7 @@ import { FPS, CUT, CAST, TZ, startOf, corridor, ease, wob, rnd, IMPACT, SAY_MARK
 import { tane, trio, TX, HIT1, ROOF, STAMP, GRAB, BAT_AT, ROOF_AT } from "./wins_tane.js";
 import { PIPE } from "./wins_corner.js";
 import { speedLines } from "./slice_fx.js";
+import { sfx, sfxMark } from "../engine/sfx.js";
 import { pipe, burst, sparks, smoke, shards, shardsOf, smear } from "./wins_fx.js";
 const FRAMES = CUT.catch - CUT.bat, HIT = HIT1 - CUT.bat, CRASH = ROOF - CUT.bat, GOT = GRAB - CUT.bat;
 const BITS = shardsOf(22, 4, ROOF_AT, [0, -1, 2.5], 7, ["#2a2f55", "#d9cfb0", "#f07a22", "#14152b", "#2a2f55", "#ff2a1e"]);
@@ -33,10 +34,11 @@ function frame(f, sync) {
       if (since === 0) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 120, seed: 21, inner: 150, color: "#07020f", width: 0.024, reach: 0.9 });
       else if (since === 1) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 100, seed: 22, inner: 220, color: "#fff", width: 0.02, reach: 0.9 });
       if (since >= 1) { burst(g, hit.x, hit.y, 120, since, 7); sparks(g, cam, BAT_AT, [0, 3, -9], since - 1, { n: 16, seed: 2, life: 10 }); }
+      sfx(g, { text: "ガンッ", x: 1480, y: 935, size: 104, angle: -0.12, color: since < 2 ? ["#ffffff", "#07020f"] : "tane", age: since, life: 9, shake: 12, seed: 7 });      // the pipe on the machine: on the floor in front of him, under the board
       // where it meets the roof
       if (crash >= 0) { const p = cam.project(ROOF_AT); burst(g, p.x, p.y, 130, crash, 9); smoke(g, cam, [ROOF_AT[0], ROOF_AT[1] - 0.25, ROOF_AT[2]], crash - 1, { size: 0.7, life: 30, seed: 6, up: -0.5, drift: [0, 0, -0.6], hot: true }); sparks(g, cam, ROOF_AT, [0, -3, -3], crash, { n: 18, seed: 8, life: 12 }); shards(g, cam, BITS, crash); }
     } };
 }
 export default { name: "wins_bat", start: startOf("bat"), frames: FRAMES, fps: FPS, cutOn: "drums", held: (f) => f,
-  marks: [{ at: 0, what: "his foot comes down on the pipe", on: "drums" }, { at: GOT, what: "the pipe is in his hands", on: "drums" }, { at: HIT, what: "Tane bats the first machine: impact frames", on: "kick" }, { at: CRASH, what: "it breaks on the roof", on: "kick" }, ...SAY_MARKS(CUT.bat, CUT.catch)],
+  marks: [{ at: 0, what: "his foot comes down on the pipe", on: "drums" }, { at: GOT, what: "the pipe is in his hands", on: "drums" }, { at: HIT, what: "Tane bats the first machine: impact frames", on: "kick" }, sfxMark(HIT, "ガンッ", "the pipe meets the first machine", "kick"), { at: CRASH, what: "it breaks on the roof", on: "kick" }, ...SAY_MARKS(CUT.bat, CUT.catch)],
   sets: ["corridor"], cast: CAST, frame };

@@ -5,6 +5,8 @@
 // The camera never stops trucking down the line, the vault passing behind; a monitor's back wipes each cut, on a beat
 // (two dark frames, and a glint as it clears the lens).
 import { FPS, CUT, LINE, startOf, cues, ease, rnd } from "./open_cast.js";
+import { sfx, sfxMark } from "../engine/sfx.js";
+const OOPS = 76;      // the frame Juno's mouth goes round (her drawing 4): what she says, lettered beside her in the dark of the bay
 const FRAMES = CUT.shut - CUT.faces, W = 1920, H = 1080, PW = 2752, PH = 1536;
 // at: the cut (frames of this shot); face: where the face is in the drawing (0..1); size: how big the drawing is hung;
 // looks: [from frame of the face's own time, which drawing], in order; dip: frames on which the head ducks; shiver
@@ -31,6 +33,7 @@ function frame(f, sync) {
     cels: [{ plate: plateOf(c.who, look), x, y, scale, layer: { tint: [0.84, 0.98, 0.96], rim: [1.0, 0.7, 0.28], rimDir: [-13, 2], gradient: 0.32, gradientY: [0, 0.5],
       warp: 1.6, warpDir: [0.2, -1], warpTime: a2 * 0.5, warpStill: [fx / W, 1 - fy / H], warpRadius: 0.2 } }],
     overlay(g) {
+      sfx(g, { text: "おっと…", gloss: { text: "oops", below: true, size: 64 }, face: "type", x: 1640, y: 215, size: 92, angle: -0.1, color: "juno", age: f - OOPS, life: 11, burst: false, pop: [1.3, 1.3, 1.06, 1.06] });
       if (wipe === null) return;
       const x0 = -2500 + wipe * 1080; g.fillStyle = "#020809"; g.beginPath(); g.moveTo(x0, -40); g.lineTo(x0 + 2300, -40); g.lineTo(x0 + 2420, 1120); g.lineTo(x0 - 120, 1120); g.closePath(); g.fill();
       g.fillStyle = "#0c2a2a"; g.fillRect(x0 + 2300, -40, 26, 1200); g.fillStyle = "#061314"; for (let j = 0; j < 5; j++) g.fillRect(x0 + 1700, 180 + j * 46, 420, 16);
@@ -38,4 +41,4 @@ function frame(f, sync) {
     post: { flash: i > 0 && age === 2 ? 0.07 : 0, dark: 0.42, bgStreak: [0.0035, 0], ink: 0.7, bloom: 0.8, bloomThreshold: 0.6, wrap: 0.35, ca: 0.0012, vignette: 0.5, focus: [0.5, 0.5] } };
 }
 const used = FACES.flatMap((c) => [...new Set(c.looks.map((l) => l[1]))].map((n) => [plateOf(c.who, n), { src: `/kits/${c.who}/closeup/open_face_${n}.${n === c.looks[0][1] ? "jpg" : "png"}`, key: "magenta" }]));
-export default { name: "open_faces", start: startOf("faces"), frames: FRAMES, fps: FPS, cutOn: "beat", marks: FACES.slice(1).map((c) => ({ at: c.at, what: `to ${c.who}'s face`, on: "beat" })), sets: ["vault"], plates: Object.fromEntries(used), frame };
+export default { name: "open_faces", start: startOf("faces"), frames: FRAMES, fps: FPS, cutOn: "beat", marks: [...FACES.slice(1).map((c) => ({ at: c.at, what: `to ${c.who}'s face`, on: "beat" })), sfxMark(OOPS, "おっと…", "Juno mouths \"oops\"", "other")], sets: ["vault"], plates: Object.fromEntries(used), frame };

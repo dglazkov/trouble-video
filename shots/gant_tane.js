@@ -3,6 +3,7 @@
 // frame, and the machine goes over the rail, spinning. His first small win. The board behind him says WE'RE, IN.
 import { FPS, CUT, CAST, startOf, gz, runner, sign, wob, ease, rnd, RUN, SIGN_MARKS } from "./gant_cast.js";
 import { speedLines } from "./slice_fx.js";
+import { sfx, sfxMark } from "../engine/sfx.js";
 const FRAMES = CUT.fall - CUT.tane, PLANT = 877 - CUT.tane, GO = 893 - CUT.tane, HIT = 899 - CUT.tane, ZT = 44;
 export const HIT_AT = [0.35, 1.35, ZT - 1.25];
 // the drone: in along the gantry behind him, up short as he turns (it rears, its eye burning), then at him; after the
@@ -32,9 +33,10 @@ function frame(f, sync) {
       }
       if (since === 0) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 120, seed: 14, inner: 150, color: "#07020f", width: 0.024, reach: 0.9 });
       else if (since === 1) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 100, seed: 15, inner: 210, color: "#fff", width: 0.02, reach: 0.9 });
+      sfx(g, { text: "ドカッ", x: 1290, y: 830, size: 104, angle: -0.12, color: since < 2 ? ["#ffffff", "#07020f"] : "tane", age: since, life: 10, shake: 12, seed: 5 });      // on the dark of the deck, under the hit: clear of his face and of the board; in the impact frames' own black and white while they last
       if (since >= 1 && since < 6) { g.save(); g.translate(hit.x + 70, hit.y - 60); g.fillStyle = since < 4 ? "#fff6d8" : "#ff8a2a"; g.beginPath(); const n = 12, R = (60 + since * 14) * (since < 4 ? 1 : 0.6); for (let i = 0; i < n * 2; i++) { const a = i / (n * 2) * 2 * Math.PI + since, r = i % 2 ? R * (0.25 + 0.1 * since) : R * (0.7 + 0.6 * rnd(i, since - since % 2)); g.lineTo(Math.cos(a) * r, Math.sin(a) * r * 0.85); } g.closePath(); g.fill(); g.restore(); }
     } };
 }
 // drawings on twos, counted so that a new one lands on the hit
 export default { name: "gant_tane", start: startOf("tane"), frames: FRAMES, fps: FPS, cutOn: "beat", held: (f) => f < PLANT ? f - f % 2 : Math.max(PLANT, f - (f + HIT) % 2),
-  marks: [{ at: PLANT, what: "Tane plants his feet and turns", on: "beat" }, { at: HIT, what: "Tane's shoulder meets the drone: impact frames", on: "drums" }, ...SIGN_MARKS(CUT.tane, CUT.fall)], sets: ["gantry"], cast: CAST, frame };
+  marks: [{ at: PLANT, what: "Tane plants his feet and turns", on: "beat" }, { at: HIT, what: "Tane's shoulder meets the drone: impact frames", on: "drums" }, sfxMark(HIT, "ドカッ", "his shoulder meets the drone", "drums"), ...SIGN_MARKS(CUT.tane, CUT.fall)], sets: ["gantry"], cast: CAST, frame };

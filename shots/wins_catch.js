@@ -4,6 +4,7 @@
 import { FPS, CUT, CAST, TZ, startOf, corridor, ease, wob, IMPACT, SAY_MARKS } from "./wins_cast.js";
 import { tane, trio, fist, CATCH } from "./wins_tane.js";
 import { speedLines } from "./slice_fx.js";
+import { sfx, sfxMark } from "../engine/sfx.js";
 import { burst, sparks } from "./wins_fx.js";
 const FRAMES = CUT.slam - CUT.catch, HIT = CATCH - CUT.catch;
 function frame(f, sync) {
@@ -17,8 +18,9 @@ function frame(f, sync) {
       const hit = cam.project(at);
       if (since === 0) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 120, seed: 31, inner: 140, color: "#07020f", width: 0.024, reach: 0.9 });
       else if (since === 1) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 100, seed: 32, inner: 200, color: "#fff", width: 0.02, reach: 0.9 });
+      sfx(g, { text: "ガシッ", x: 1600, y: 945, size: 92, angle: -0.1, color: since < 2 ? ["#ffffff", "#07020f"] : "tane", age: since, life: 9, shake: 10, seed: 8 });      // a catch, not a blow: the word for a hard grip
       if (since >= 1) { burst(g, hit.x, hit.y - 30, 90, since, 11, 11); sparks(g, cam, at, [0, 2, -4], since - 1, { n: 10, seed: 12, life: 8 }); }
     } };
 }
 export default { name: "wins_catch", start: startOf("catch"), frames: FRAMES, fps: FPS, cutOn: "kick", held: (f) => f,
-  marks: [{ at: HIT, what: "Tane catches the second machine by the tail: impact frames", on: "kick" }, ...SAY_MARKS(CUT.catch, CUT.slam)], sets: ["corridor"], cast: CAST, frame };
+  marks: [{ at: HIT, what: "Tane catches the second machine by the tail: impact frames", on: "kick" }, sfxMark(HIT, "ガシッ", "his fist shuts on its tail", "kick"), ...SAY_MARKS(CUT.catch, CUT.slam)], sets: ["corridor"], cast: CAST, frame };

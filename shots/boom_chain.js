@@ -10,6 +10,10 @@
 import { CUT, W, H, IFE, shot, src, stand, plateLight, plant, hitAt, blastPost, shake, eyeDots, DUCK, BLASTS, wob, ease, rnd, F0 } from "./boom_cast.js";
 import { fireBlast, drone2d, FIRE, ICE } from "../engine/fx.js";
 import { speedLines } from "./slice_fx.js";
+import { sfx, sfxMark } from "../engine/sfx.js";
+// the chain's sound, on its two biggest blasts only (the one beside us, and the last, which takes the camera): Ife's green,
+// in the impact frame's own cream and black while that lasts
+const boom = (g, f, o) => sfx(g, { text: "ドーン", color: f < 1 ? ["#fff3c0", "#140a16"] : "ife", age: f, life: 9, shake: 16, burst: false, ...o });
 const marksIn = (name) => BLASTS.filter((b) => b.at >= CUT[name] && b.at < CUT[name] + (CUT[Object.keys(CUT)[Object.keys(CUT).indexOf(name) + 1]] - CUT[name]) && b.at > CUT[name]).map((b) => ({ at: b.at - CUT[name], what: b.ice ? "a main bursts" : "a blast", on: "kick" }));
 const lines = (g, L, cx = W / 2, cy = H / 2) => { const h = hitAt(L); if (!h) return; if (h.age === 0) speedLines(g, W, H, { n: 100, seed: L, inner: 300, color: h.ice ? "#ffffff" : "#fff3c0", width: 0.02, cx, cy }); else if (h.age < 4) speedLines(g, W, H, { n: 56, seed: L, inner: 420 + h.age * 70, color: "rgba(255,255,255,0.85)", width: 0.008, cx, cy }); };
 // the light of the newest blast on her drawing
@@ -23,10 +27,10 @@ export const first = shot("first", { plates: { duck: src("boom_duck_1") }, marks
       under(g) { eyeDots(g, cam, set.drones, 40); }, overlay(g) { lines(g, L, W * 0.52, H * 0.42); },
       post: { ...blastPost(L), ...(f === 0 ? { flash: 0.14 } : {}), vignette: 0.5 } };
   } });
-export const x2 = shot("x2", { marks: [{ at: 0, what: "a blast, beside us", on: "kick" }, { at: 10, what: "a main bursts", on: "kick" }],
+export const x2 = shot("x2", { marks: [{ at: 0, what: "a blast, beside us", on: "kick" }, sfxMark(0, "ドーン", "the blast beside us", "kick"), { at: 10, what: "a main bursts", on: "kick" }],
   frame(f, sync) {
     const L = CUT.x2 + f, s = shake(L), cam = { pos: [1.45 + s[0], 0.6 + s[1], 32 - 0.05 * f], target: [-0.6, 2.1, 44], fov: 58, up: [Math.sin(0.1), Math.cos(0.1), 0] }, set = plant(L, sync, { fine: true });
-    return { set: "plant", camera: cam, options: set, overlay(g) { lines(g, L, W * 0.47, H * 0.4); }, post: { ...blastPost(L), bgBlur: 0.01, focus: [0.47, 0.4] } };
+    return { set: "plant", camera: cam, options: set, overlay(g) { lines(g, L, W * 0.47, H * 0.4); boom(g, f, { x: 520, y: 890, size: 132, angle: -0.12, seed: 11 }); }, post: { ...blastPost(L), bgBlur: 0.01, focus: [0.47, 0.4] } };
   } });
 export const x3 = shot("x3", { marks: [{ at: 0, what: "a blast behind the swarm", on: "kick" }, { at: 10, what: "a main bursts", on: "kick" }],
   frame(f, sync) {
@@ -48,13 +52,14 @@ export const x4 = shot("x4", { plates: { duck: src("boom_duck_1") }, marks: [{ a
       post: { ...blastPost(L), bgBlur: 0.008, focus: [0.42, 0.4] } };
   } });
 // the last blast: its card first, then the same fireball drawn straight on the frame as it swallows the lens
-export const hit = shot("hit", { marks: [{ at: 0, what: "the last blast takes the camera", on: "kick" }],
+export const hit = shot("hit", { marks: [{ at: 0, what: "the last blast takes the camera", on: "kick" }, sfxMark(0, "ドーン", "the last blast", "kick")],
   frame(f, sync) {
     const L = CUT.hit + f, s = shake(L, 1.6), cam = { pos: [0.1 + s[0], 1.4 + s[1], -1.6 + 0.12 * f], target: [0, 1.6, 12], fov: 52 + 1.2 * f }, set = plant(L, sync, { fine: true });
     const sc = typeof OffscreenCanvas !== "undefined" ? (hit.sc ??= new OffscreenCanvas(W, H)) : null;
     return { set: "plant", camera: cam, options: set,
       overlay(g) { lines(g, L, W * 0.5, H * 0.46);
         if (f >= 1 && sc) { const c = sc.getContext("2d"); c.clearRect(0, 0, W, H); fireBlast(c, { cx: W * 0.5, cy: H * 0.5, s: 170 * (1 + 0.55 * f) }, f + 1, { R: 2.4, seed: 59, floor: -9, wrecks: 0, debris: 0 }); g.drawImage(sc, 0, 0); }
-        if (f >= 6) speedLines(g, W, H, { n: 90, seed: f - f % 2, inner: 120, color: "#140a16", width: 0.016 }); },
+        if (f >= 6) speedLines(g, W, H, { n: 90, seed: f - f % 2, inner: 120, color: "#140a16", width: 0.016 });
+        boom(g, f, { x: 1380, y: 870, size: 156, angle: 0.1, seed: 12, life: 8 }); },
       post: f === 0 ? blastPost(L) : { flash: f === 1 ? 0.4 : f >= 7 ? [0.35, 0.7, 1][f - 7] : 0.004, ca: 0.004 + 0.002 * f, bloom: 1.2, bgBlur: 0.03 } };
   } });

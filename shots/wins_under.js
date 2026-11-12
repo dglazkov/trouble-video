@@ -6,6 +6,7 @@
 import { FPS, CUT, CAST, J, DOORZ, UNDER, SLAM, startOf, jz, doorAt, ease, wob } from "./wins_cast.js";
 import { swarm } from "./wins_juno.js";
 import { sparks, smoke } from "./wins_fx.js";
+import { sfx, sfxMark } from "../engine/sfx.js";
 const FRAMES = CUT.pile - CUT.under, FLAT = 4, LAND = SLAM - CUT.under;
 function frame(f, sync) {
   const F = CUT.under + f, z = jz(F), since = f - LAND, jolt = since >= 0 ? Math.exp(-since / 2.2) : 0, shake = 0.008 + 0.09 * jolt, k = ease(f / FRAMES);
@@ -18,6 +19,7 @@ function frame(f, sync) {
     actors: [{ who: "juno", action: "wins_juno", view: "side", phase: J(f < FLAT ? 3 : 4), hero: f < FLAT ? "under_drop" : "under_flat", over: true, light: { tint: [0.98, 1.05, 0.98], fogK: 0 }, x: 0, z, y: 0 }],
     overlay(g, cam) {
       if (since < 0) return;
+      sfx(g, { text: "ガシャン", x: 1480, y: 890, size: 92, angle: -0.1, color: "station", age: since, life: 5, shake: 10, seed: 10, pop: [1.3, 1.3, 1.05, 1.05], burst: { k: 0.7 } });      // on the dark of the floor under the door: Juno and the door's own sign are clear of it
       for (const x of [0.9, 0.2, -0.6]) sparks(g, cam, [x, 0.05, DOORZ - 0.1], [0, 2.5, -4], since, { n: 6, seed: 40 + x, life: 8, width: 4 });
       for (const x of [0.9, 0.0]) sparks(g, cam, [x, 0.05, DOORZ + 0.1], [0, 2.5, 4], since, { n: 6, seed: 50 + x, life: 8, width: 4 });
       smoke(g, cam, [0.9, 0.12, DOORZ - 0.35], since - 1, { size: 0.3, life: 18, n: 9, seed: 61, base: "#cfe6dc", shade: "#7fb5a4", up: 0.4, drift: [0, 0, -1], squash: 0.6 });
@@ -25,4 +27,4 @@ function frame(f, sync) {
     } };
 }
 export default { name: "wins_under", start: startOf("under"), frames: FRAMES, fps: FPS, cutOn: "kick", held: (f) => f,
-  marks: [{ at: UNDER - CUT.under, what: "Juno goes under the door", on: "kick" }, { at: LAND, what: "the door lands", on: "drums" }], sets: ["tunnel"], cast: CAST, frame };
+  marks: [{ at: UNDER - CUT.under, what: "Juno goes under the door", on: "kick" }, { at: LAND, what: "the door lands", on: "drums" }, sfxMark(LAND, "ガシャン", "the blast door lands behind Juno", "drums")], sets: ["tunnel"], cast: CAST, frame };

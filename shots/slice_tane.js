@@ -4,6 +4,7 @@
 // heels is cut in two.
 import { FPS, CUT, CAST, RUN, startOf, ease, wob, rnd } from "./slice_cast.js";
 import { speedLines } from "./slice_fx.js";
+import { sfx, sfxMark } from "../engine/sfx.js";
 const FRAMES = CUT.ride - CUT.tane, HIT = 55, SLAM = 64, GATE = 24;     // frames of this shot; the shutter's z
 // side-on, a foot that slides shows: he covers exactly his own stride every cycle of twelve frames (RUN is that speed).
 // He runs until WIND frames before the hit, then drops his shoulder and leaves the ground: the wind-up drawing is
@@ -45,6 +46,8 @@ function frame(f, sync) {
       const off = (p, r) => { const dx = p.x - face.x, dy = p.y - face.y, d = Math.hypot(dx, dy) || 1, m = clear + r; return d >= m ? p : { ...p, x: face.x + dx / d * m, y: face.y + dy / d * m }; };
       if (since === 0) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 120, seed: 4, inner: 170, color: "#07020f", width: 0.024, reach: 0.9 });
       else if (since === 1) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 100, seed: 5, inner: 230, color: "#fff", width: 0.02, reach: 0.9 });
+      // the word for it, low on the floor behind him (the wall says TROUBLE; his grin is above): in the impact frames' black and white, then his red
+      sfx(g, { text: "バキッ", x: 560, y: 905, size: 104, angle: -0.1, color: since < 2 ? ["#ffffff", "#07020f"] : "tane", age: since, life: 9, shake: 12, seed: 6 });
       if (since < 1) return;
       // the shards, on twos
       const t = (since - since % 2 + 1) / FPS;
@@ -60,4 +63,4 @@ function frame(f, sync) {
 }
 // drawings on twos, counted so that a new one lands on the hit (an odd frame): the impact frame shows the impact drawing
 export default { name: "slice_tane", start: startOf("tane"), frames: FRAMES, fps: FPS, cutOn: "drums", held: (f) => Math.max(0, f - (f + HIT) % 2),
-  marks: [{ at: HIT, what: "Tane goes through the shutter: impact frames", on: "bar" }, { at: SLAM, what: "the shutter slams, the chaser breaks", on: "drums" }], sets: ["corridor"], cast: CAST, frame };
+  marks: [{ at: HIT, what: "Tane goes through the shutter: impact frames", on: "bar" }, sfxMark(HIT, "バキッ", "the shutter breaks", "bar"), { at: SLAM, what: "the shutter slams, the chaser breaks", on: "drums" }], sets: ["corridor"], cast: CAST, frame };
