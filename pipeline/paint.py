@@ -13,6 +13,12 @@
   paint.py NAME reject FILE "why"            record that a take was looked at and thrown away
   paint.py NAME count                        generations made, and rejected by the checks or by hand, with reasons
 
+What making the first kit showed (kits/juno/log.jsonl has the takes): paint all of an action's cels in ONE image;
+that is what keeps them alike. A finished sheet given with --ref has its poses and its view copied over the layout's
+(three of three takes), and its colours come back warmer; a second sheet of four (--layout) for more pixels does not
+match the first without it, and copies the first's poses with it. An edit pass asking for identical details changes
+little and shifts the colours.
+
 Every generation is saved under kits/NAME/ with a sidecar .json holding its prompt and references, and is logged
 in kits/NAME/log.jsonl. Generated art is frozen: nothing here overwrites a take.
 """
