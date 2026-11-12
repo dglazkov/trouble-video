@@ -155,6 +155,16 @@ only words that fit whole (fix 6). The hanging blade signs are written downwards
 9. **チーン**, the lift's bell, was lettered almost entirely above the top of the frame; it is now on the bare wall
    beside the lift's lamp (`shots/desc_ding.js`).
 
-Checked and found right: no letter is mirrored or turned (the floor lettering of the hub and of the shaft reads the
-right way round from where it is seen); small letters are small; the long mark is level in level writing; ソ / ン and
+Checked and found right: no letter is mirrored or turned in any frame looked at (the floor lettering at the foot of
+the shaft, S8 サイカソウ, and on the core's lip, ゼロ 0G, reads the right way round from where the camera is); small letters are small; the long mark is level in level writing; ソ / ン and
 シ / ツ, which differ only in the slant of their strokes, are each drawn as the right one.
+
+## Not errors, but worth knowing
+
+- **Stall signs pair a Japanese word with an unrelated English one.** The market's signs take their katakana and their
+  Latin from two separate lists, so one reads テープ NOODLE ("tape", NOODLE) and another メシ NOX MARKET ("meal").
+  Each word is right; the pairs are set dressing, not translations of each other. Left as it is.
+- **チーン lasts three frames.** The lift's bell is lettered on the hit and the film cuts in to the gate three frames
+  later, so the word is a flash. It is now visible; it is not long.
+- **タネ** is also the Japanese word for "seed", and **ホシ**, **ハナ**, **アメ** have everyday second meanings
+  (want, nose, rain). None is rude or odd in its place.
