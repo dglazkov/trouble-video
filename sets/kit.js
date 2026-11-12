@@ -13,9 +13,16 @@ export const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 export const lerp = (a, b, t) => a + (b - a) * t;
 export const sstep = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
 
-const VERT = `
-varying vec3 vW; varying vec3 vN; varying vec2 vUv; varying vec3 vL;
-void main(){ vec4 w = modelMatrix*vec4(position,1.0); vW = w.xyz; vL = position; vN = normalize(mat3(modelMatrix)*normal); vUv = uv; gl_Position = projectionMatrix*viewMatrix*w; }`;
+// A set may bend what is built along its line (the atrium's gantry under a great weight): up to four DENTS, each
+// [z, metres down, half-length along z, metres of sideways rock per metre of height], applied to whatever stands within
+// DENT_BOX (|x| under .x, y between .y and .z, fading out over the three metres above .z) in the colour pass and the ink buffer alike. One set of values for the
+// page: the set that uses them writes them on every update (zeros when it has none).
+export const DENTS = { value: [0, 1, 2, 3].map(() => new THREE.Vector4(0, 0, 1, 0)) }, DENT_BOX = { value: new THREE.Vector3(0, 0, 0) };
+const DENT_GLSL = `uniform vec4 uDent[4]; uniform vec3 uDentBox;
+vec3 dent(vec3 w){ if(abs(w.x) < uDentBox.x && w.y > uDentBox.y && w.y < uDentBox.z+3.0){ float k = 1.0-smoothstep(uDentBox.z, uDentBox.z+3.0, w.y), h = max(w.y+0.3, 0.0); for(int i = 0; i < 4; i++){ float u = clamp(abs(w.z-uDent[i].x)/uDent[i].z, 0.0, 1.0), b = (0.5+0.5*cos(u*3.14159265))*k; w.y -= uDent[i].y*b; w.x += uDent[i].w*b*h*sin(w.z*1.7); } } return w; }`;
+const VERT = `${DENT_GLSL}
+varying vec3 vW; varying vec3 vN; varying vec2 vUv; varying vec3 vL; varying vec3 vNL;
+void main(){ vec4 w = modelMatrix*vec4(position,1.0); w.xyz = dent(w.xyz); vW = w.xyz; vL = position; vNL = normal; vN = normalize(mat3(modelMatrix)*normal); vUv = uv; gl_Position = projectionMatrix*viewMatrix*w; }`;
 // Kinds of surface:
 //  0 lit by the set, flat base colour      4 the same, cut out by the map's alpha (stencils)   10 the same, coloured by the map
 //                                                                                              (flag 1: and cut out by its alpha)
@@ -28,10 +35,13 @@ void main(){ vec4 w = modelMatrix*vec4(position,1.0); vW = w.xyz; vL = position;
 // 11 a drawn figure standing in the set (a cel on a card; map: premultiplied alpha): its own paint in the light of its
 //    place (the base colour), darker toward the feet, the set's rim light hard along the edges that face up (seam: how
 //    far, in uv; gain: how much), soft-edged, and no ink line over it
+// 12 a machine's DRAWN skin: its paint is the map (panel lines, rivets, markings: flat colours), laid on by the piece's
+//    own box (seam: [u, v] metres to a tile; flag 1: by its uv, seam = repeats; flag 2: a decal, cut out by the map's
+//    alpha), in three tones from the key light, lit from below by the deep's glow, a hard rim
 const FRAG = (chunk) => `
 uniform int uKind, uSeamMode, uFlag, uNoInk; uniform vec3 uBase; uniform vec2 uSeam; uniform sampler2D uMap; uniform float uGain, uFogMul, uAlpha, uPaint;
 uniform vec3 uCam, uFogCol, uFogTop, uFogDeep, uKey, uTintLit, uTintMid, uTintShade, uRim; uniform float uFogK, uFrame; uniform vec2 uFogH;
-varying vec3 vW; varying vec3 vN; varying vec2 vUv; varying vec3 vL;
+varying vec3 vW; varying vec3 vN; varying vec2 vUv; varying vec3 vL; varying vec3 vNL;
 float hash(vec2 p){ vec3 p3 = fract(vec3(p.xyx)*0.1031); p3 += dot(p3, p3.yzx+33.33); return fract((p3.x+p3.y)*p3.z); }
 float vnoise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f); return mix(mix(hash(i), hash(i+vec2(1.0,0.0)), f.x), mix(hash(i+vec2(0.0,1.0)), hash(i+vec2(1.0,1.0)), f.x), f.y); }
 vec2 surf(vec3 W, vec3 N){ vec3 a = abs(N); return a.y > 0.7 ? W.xz : (a.x > a.z ? W.zy : W.xy); }
@@ -65,6 +75,16 @@ void main(){
     float d = dot(N, uKey);
     float tone = d > 0.3 ? 2.0 : (d > -0.2 ? 1.0 : 0.0);
     col *= tone > 1.5 ? vec3(1.12) : (tone > 0.5 ? uTintMid*1.08 : uTintShade*0.92);
+    float fr = 1.0-max(dot(N, V), 0.0);
+    if(fr > 0.72 && d < 0.3 && dot(N, -uKey) > -0.3) col = mix(col, uRim, 0.55);
+    col = setExtra(col, vW, N, tone);
+  } else if(uKind==12){
+    vec3 a = abs(vNL); vec2 uv = (uFlag==1 || uFlag==3) ? vUv*uSeam : (a.y > a.x && a.y > a.z ? vec2(vL.x, vNL.y > 0.0 ? -vL.z : vL.z) : (a.x > a.z ? vec2(vNL.x > 0.0 ? -vL.z : vL.z, vL.y) : vec2(vNL.z > 0.0 ? vL.x : -vL.x, vL.y)))/uSeam;
+    vec4 t = texture2D(uMap, uv); if(uFlag >= 2 && t.a < 0.5) discard;
+    col = uBase*t.rgb;
+    float d = dot(N, uKey);
+    float tone = d > 0.3 ? 2.0 : (d > -0.2 ? 1.0 : 0.0);
+    col *= tone > 1.5 ? uTintLit*1.0+uRim*0.45 : (tone > 0.5 ? uTintMid*1.55+uRim*0.14 : (N.y < -0.45 ? uTintShade*0.8+uFogDeep*0.38 : uTintShade*1.05));
     float fr = 1.0-max(dot(N, V), 0.0);
     if(fr > 0.72 && d < 0.3 && dot(N, -uKey) > -0.3) col = mix(col, uRim, 0.55);
     col = setExtra(col, vW, N, tone);
@@ -114,8 +134,8 @@ void main(){
 // Normal and one over the view depth (so nothing at all, cleared to zero, is infinitely far), for the ink lines the
 // photography pass draws at their discontinuities and for hiding cels behind what is nearer.
 export const ndMaterial = new THREE.ShaderMaterial({
-  side: THREE.DoubleSide,
-  vertexShader: `varying vec3 vN; varying float vD; void main(){ vec4 mv = modelViewMatrix*vec4(position,1.0); vD = -mv.z; vN = normalize(normalMatrix*normal); gl_Position = projectionMatrix*mv; }`,
+  side: THREE.DoubleSide, uniforms: { uDent: DENTS, uDentBox: DENT_BOX },
+  vertexShader: `${DENT_GLSL} varying vec3 vN; varying float vD; void main(){ vec4 w = modelMatrix*vec4(position,1.0); w.xyz = dent(w.xyz); vec4 mv = viewMatrix*w; vD = -mv.z; vN = normalize(normalMatrix*normal); gl_Position = projectionMatrix*mv; }`,
   fragmentShader: `varying vec3 vN; varying float vD; void main(){ vec3 n = normalize(vN); if(!gl_FrontFacing) n = -n; gl_FragColor = vec4(n*0.5+0.5, 1.0/vD); }`,
 });
 
@@ -125,6 +145,7 @@ export const ndMaterial = new THREE.ShaderMaterial({
 export function createKit(chunk, uniforms = {}) {
   const shared = {
     uCam: { value: new THREE.Vector3() }, uFogCol: { value: new THREE.Color(0.07, 0.27, 0.42) }, uFogK: { value: 0.03 }, uFrame: { value: 0 }, uFogTop: { value: new THREE.Color(0.07, 0.27, 0.42) }, uFogH: { value: new THREE.Vector2(1e5, 2e5) }, uFogDeep: { value: new THREE.Color(0.07, 0.27, 0.42) },
+    uDent: DENTS, uDentBox: DENT_BOX,
     uKey: { value: new THREE.Vector3(0.3, 0.9, 0.3).normalize() }, uTintLit: { value: new THREE.Color(1.18, 1.22, 1.25) },
     uTintMid: { value: new THREE.Color(0.66, 0.68, 0.92) }, uTintShade: { value: new THREE.Color(0.36, 0.33, 0.66) }, uRim: { value: new THREE.Color(0.4, 0.9, 1.0) },
     ...uniforms,
@@ -141,7 +162,7 @@ export function createKit(chunk, uniforms = {}) {
       uniforms: { ...shared, uKind: { value: kind }, uBase: { value: new THREE.Color(color) }, uSeam: { value: new THREE.Vector2(...(o.seam ?? [1, 1])) },
         uSeamMode: { value: o.seam && kind !== 8 ? (o.seamMode ?? 1) : 0 }, uMap: { value: o.map ?? null }, uGain: o.gain ?? ONE, uFogMul: { value: o.fog ?? (kind === 1 || kind === 2 || kind === 6 ? 0.75 : 1) },
         uAlpha: { value: o.alpha ?? 1 }, uFlag: { value: o.flag ?? 0 }, uNoInk: { value: o.noInk && kind !== 7 ? 1 : 0 }, uPaint: { value: o.paint ?? (kind === 0 ? 1 : 0) } } });
-    if (kind === 4 || o.offset) { m.polygonOffset = true; m.polygonOffsetFactor = -2 * (o.offset ?? 1); m.polygonOffsetUnits = -2 * (o.offset ?? 1); }
+    if (kind === 4 || (kind === 12 && (o.flag ?? 0) >= 2) || o.offset) { m.polygonOffset = true; m.polygonOffsetFactor = -2 * (o.offset ?? 1); m.polygonOffsetUnits = -2 * (o.offset ?? 1); }
     if (kind === 7) { m.transparent = true; m.depthWrite = false; if (o.additive) m.blending = THREE.AdditiveBlending; }
     if (kind === 11) {      // laid over what is behind by its own alpha, and the buffer's alpha (ink or no ink) goes to none under it
       m.transparent = true; m.blending = THREE.CustomBlending; m.blendSrc = THREE.OneFactor; m.blendDst = THREE.OneMinusSrcAlphaFactor; m.blendSrcAlpha = THREE.ZeroFactor; m.blendDstAlpha = THREE.OneMinusSrcAlphaFactor;
