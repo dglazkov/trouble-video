@@ -50,6 +50,37 @@ const LEAP = [
     leg: { L: { swing: 104, out: 16, knee: 112, foot: -6 }, R: { swing: 78, out: 16, knee: 118, foot: -6 } } }),
 ];
 
+// Caught in the vault (the film's opening), each of the four in their own manner, four held drawings each:
+// (0) frozen in the middle of a sneaking step; (1) started round as the shutters come down; (2) backing away, a step
+// taken; (3) backed into the others, braced. A character with no manner of their own is caught as Juno is.
+const leg = (swing, knee, out = 6, foot = 0) => ({ swing, knee, out, foot }), arm = (swing, out, elbow) => ({ swing, out, elbow });
+const CAUGHT = {
+  tane: [
+    pose({ lean: -7, twist: -24, head: { yaw: -52, pitch: 0, roll: 5 }, arm: { L: arm(38, 18, 104), R: arm(30, 26, 112) }, leg: { L: leg(-16, 10, 6, 30), R: leg(64, 84, 8, 22) } }),
+    pose({ lean: -4, twist: -8, head: { yaw: -30, pitch: -14, roll: -4 }, arm: { L: arm(18, 26, 92), R: arm(26, 30, 100) }, leg: { L: leg(7, 14, 15), R: leg(-7, 10, 15) } }),
+    pose({ lean: -6, twist: 8, head: { yaw: 24, pitch: -10, roll: 3 }, arm: { L: arm(48, 20, 112), R: arm(30, 26, 120) }, leg: { L: leg(20, 20, 10), R: leg(-26, 30, 10, 30) } }),
+    pose({ lean: 4, twist: 6, head: { yaw: 28, pitch: -8, roll: 4 }, arm: { L: arm(70, 24, 122), R: arm(44, 30, 126) }, leg: { L: leg(17, 24, 17), R: leg(-12, 22, 17) } }),
+  ],
+  ife: [
+    pose({ lean: 14, twist: -20, head: { yaw: -60, pitch: -4, roll: -4 }, arm: { L: arm(30, 6, 136), R: arm(30, 6, 136) }, leg: { L: leg(42, 64, 5, 24), R: leg(-14, 14, 5, 28) } }),
+    pose({ lean: 20, twist: -6, head: { yaw: -24, pitch: -16, roll: 6 }, arm: { L: arm(150, 22, 112), R: arm(150, 22, 112) }, leg: { L: leg(38, 62, 4), R: leg(34, 60, 4) } }),
+    pose({ lean: 12, twist: 10, head: { yaw: 50, pitch: 2, roll: -6 }, arm: { L: arm(32, 5, 138), R: arm(32, 5, 138) }, leg: { L: leg(10, 30, 4), R: leg(-20, 30, 4, 25) } }),
+    pose({ lean: 6, twist: 12, head: { yaw: 62, pitch: 6, roll: -8 }, arm: { L: arm(36, 4, 140), R: arm(36, 4, 140) }, leg: { L: leg(22, 44, 3), R: leg(22, 44, 3) } }),
+  ],
+  noor: [
+    pose({ lean: 0, twist: -8, head: { yaw: -36, pitch: 2, roll: 0 }, arm: { L: arm(-6, 8, 28), R: arm(6, 9, 30) }, leg: { L: leg(-14, 8, 4, 18), R: leg(20, 16, 4, -6) } }),
+    pose({ lean: -3, twist: -6, head: { yaw: -30, pitch: -24, roll: 4 }, arm: { L: arm(-4, 8, 28), R: arm(4, 9, 30) }, leg: { L: leg(-4, 2, 4), R: leg(5, 6, 6) } }),
+    pose({ lean: -2, twist: -10, head: { yaw: -70, pitch: -8, roll: 3 }, arm: { L: arm(26, -4, 112), R: arm(24, -4, 116) }, leg: { L: leg(12, 10, 4), R: leg(-14, 44, 4, 10) } }),
+    pose({ lean: -5, twist: -12, head: { yaw: -78, pitch: -12, roll: 5 }, arm: { L: arm(26, -4, 114), R: arm(24, -4, 118) }, leg: { L: leg(2, 2, 4), R: leg(9, 16, 7) } }),
+  ],
+  juno: [
+    pose({ lean: 4, twist: -38, pelvisTwist: -10, head: { yaw: -66, pitch: 0, roll: 8 }, arm: { L: arm(20, 50, 62), R: arm(-14, 56, 72) }, leg: { L: leg(-20, 12, 6, 34), R: leg(52, 72, 8, 10) } }),
+    pose({ lean: 2, twist: 24, head: { yaw: 30, pitch: -16, roll: -6 }, arm: { L: arm(150, 26, 14), R: arm(8, 14, 30) }, leg: { L: leg(8, 10, 12), R: leg(-8, 12, 12) } }),
+    pose({ lean: 10, twist: -8, head: { yaw: -30, pitch: -14, roll: 4 }, arm: { L: arm(10, 60, 30), R: arm(20, 56, 40) }, leg: { L: leg(30, 50, 14), R: leg(-10, 40, 16, 20) } }),
+    pose({ lean: 16, twist: -10, head: { yaw: -35, pitch: -18, roll: -6 }, arm: { L: arm(30, 70, 26), R: arm(40, 60, 60) }, leg: { L: leg(48, 78, 18), R: leg(20, 70, 20) } }),
+  ],
+};
+
 // cels: how many drawings; pose(i, who): the pose of drawing i (who: the character, for those with a manner);
 // loop: the drawings repeat;
 // loose: a held drawing whose stance is the layout's but whose arms and feet may settle as the painter draws a
@@ -67,6 +98,7 @@ export const ACTIONS = {
   runtop: { cels: 4, loop: true, half: true, float: true, pose: (i, who) => runPose(i / 4, MANNER[who]) },
   charge: { cels: 2, loop: false, half: false, loose: true, pose: (i) => CHARGE[i] },
   ride: { cels: 3, loop: false, half: false, loose: true, float: true, flip: [2, 1, 0], elev: 14, pose: (i) => RIDE[i] },
+  caught: { cels: 4, loop: false, half: false, loose: true, pose: (i, who) => (CAUGHT[who] ?? CAUGHT.juno)[i] },
   leap: { cels: 2, loop: false, half: false, loose: true, float: true, elev: 32, pose: (i) => LEAP[i] },
 };
 

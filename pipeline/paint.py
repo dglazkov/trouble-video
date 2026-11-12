@@ -10,6 +10,7 @@
                                              each mannequin is the character as a shot's own camera sees them on one frame
   paint.py NAME closeup STEM "acting"        a widescreen head-and-shoulders close-up of the character, mid-sprint, on the
                                              key colour, from the model sheet -> kits/NAME/closeup/STEM_N.jpg
+                                             (--still: standing dead still, face to the viewer, not running)
   paint.py NAME edit FILE "what to change" [--ref FILE ...]
                                              a new take that is FILE with one thing changed (same folder, next number);
                                              it keeps FILE's layout, so it is checked and cut like any take
@@ -205,7 +206,19 @@ def count(name):
             "rejections": [{"file": r["file"], "by": r.get("by", "hand"), "why": r["reject"]} for r in rej.values()]}
 
 
-def closeup_prompt(spec, acting):
+def closeup_prompt(spec, acting, still=False):
+    if still:   # caught standing still (the opening's pass along the four faces), not running
+        w = WORDS[spec.get("pronoun", "she")]
+        return (
+            f"Anime close-up shot, widescreen film frame, of the character from the FIRST image (same face, hair, skin tone, outfit; "
+            f"the first image is {w['p']} model sheet: it only shows what {w['s']} {w['looks']} like, do NOT copy its standing figures or its callouts). "
+            f"The picture holds exactly ONE drawing and nothing else: one big head-and-shoulders close-up, no full-length figures, no second figure, no objects beside {w['o']}. Head and shoulders, three-quarter view: {w['p']} shoulders are turned toward the viewer's RIGHT and "
+            f"{w['p']} face is turned toward the viewer. {w['S']} {w['IS']} standing dead still, frozen on the spot: hair and clothes hang still, no wind, no running, no lean. "
+            f"The whole head is inside the frame with a little space above the hair; the face is in the middle of the frame, drawn large. "
+            f"The design, exactly as on the model sheet: {design_text(spec)} "
+            f"Style: 1990s cel anime key frame exactly like the SECOND image: {STYLE}, white highlight shapes in eyes and hair, "
+            "no motion blur, no speed lines, no text, no brand marks. "
+            f"Background: one flat solid pure magenta (#FF00FF) and nothing else. Expression and acting: {acting}").strip()
     return (
         "Anime close-up shot, widescreen film frame, of the character from the FIRST image (same face, hair, skin tone, outfit; "
         "the first image is her model sheet). Head and shoulders fill the frame, three-quarter view, mid-sprint: body leaning "
@@ -244,7 +257,7 @@ def main():
         return
     if what == "closeup":
         spec = spec_of(name); out = take(os.path.join(kit_dir(name), "closeup"), rest[0])
-        if not generate(name, out, closeup_prompt(spec, rest[1]), [os.path.join(ROOT, spec["design"]), os.path.join(ROOT, spec["style"])],
+        if not generate(name, out, closeup_prompt(spec, rest[1], "--still" in rest), [design_ref(name, spec) if "--still" in rest else os.path.join(ROOT, spec["design"]), os.path.join(ROOT, spec["style"])],
                         size="2K", kind="closeup:" + rest[0]): sys.exit(1)
         return
     if what == "design":

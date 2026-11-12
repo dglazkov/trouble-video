@@ -8,8 +8,9 @@
 //   const drones = createDrones(kit, scene);                    // kit: the set's sets/kit.js kit, so they take its light
 //   drones.update(list, frame, sync, threeCamera, { thrust });  // every frame; list = specs:
 //     { type: "chaser" | "enforcer", pos: [x, y, z], yaw = 0 (degrees; 0 faces +Z, like a character), pitch = 0, roll = 0,
-//       scale = 1, eye = 1 (how hard the eye burns, 0..2), thrust = the caller's wire, beam = 0..1 (enforcer's searchlight),
-//       sway = 0 (arms and blades), broken = null | seconds since it was destroyed, seed = 0 }
+//       scale = 1, eye = 1 (how hard the eye burns, 0..2; 0: shut, under a dark lid), thrust = the caller's wire, beam = 0..1 (enforcer's searchlight),
+//       sway = 0 (arms and blades), broken = null | seconds since it was destroyed, seed = 0,
+//       fold = 0 (a chaser's blades: 1 folded back along its body, as it hangs in a rack with its thrusters out) }
 //   chase(frame, sync, o) -> list    a pack following a lead point, lurching on drum hits; see below
 //
 // Destroyed: at broken = 0 a burst (four frames, hard shapes), then the parts fly apart, fall, and lie where they land.
@@ -117,11 +118,13 @@ export function createDrones(kit, scene) {
   const haloMat = kit.mat("#ff3a2a", { kind: 7, flag: 1, map: haloTex, additive: true, fog: 0.3 });
   const burstMat = kit.mat("#fff6d8", { kind: 1, fog: 0.2 }), burst2 = kit.mat("#ff8a2a", { kind: 1, fog: 0.2 }), smokeMat = kit.mat("#a9abd6", { kind: 1, fog: 1 }), smokeHull = kit.mat("#0b0a1e", { kind: 1, side: THREE.BackSide, fog: 1 });
   const spike = (() => { const g = new THREE.IcosahedronGeometry(1, 0), p = g.attributes.position; for (let i = 0; i < p.count; i += 3) { const k = 0.35 + 1.3 * hash(i, 4); for (let j = 0; j < 3; j++) { const x = p.getX(i + j), y = p.getY(i + j), z = p.getZ(i + j); p.setXYZ(i + j, x * (j ? 0.35 : k), y * (j ? 0.35 : k), z * (j ? 0.35 : k)); } } g.computeVertexNormals(); return g; })();
-  const ballG = new THREE.SphereGeometry(1, 18, 12);
+  const ballG = new THREE.SphereGeometry(1, 18, 12), lidMat = kit.mat("#14152b", { kind: 5 });
   const proto = { chaser: buildChaser(kit), enforcer: buildEnforcer(kit, reels) }, pools = { chaser: [], enforcer: [] };
   function instance(type) {
     const P = proto[type], g = P.group.clone(true), o = { g, parts: [], flames: [], beam: null };
     g.children.forEach((c, i) => { const src = P.group.children[i]; if (P.flames.includes(src)) o.flames.push(c); else if (src === P.beam) o.beam = c; else if (src.userData.name) o.parts.push(c); });
+    // an eyelid: a dark shell over the eye while it is shut (eye = 0)
+    o.lid = new THREE.Mesh(ballG, lidMat); o.lid.frustumCulled = false; o.lid.position.set(P.eyeAt[0], P.eyeAt[1], P.eyeAt[2] - P.haloSize * 0.13); o.lid.scale.set(P.haloSize * 0.3, P.haloSize * 0.3, P.haloSize * 0.2); g.add(o.lid);
     o.halo = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), haloMat); o.halo.layers.set(FX); o.halo.renderOrder = 12; o.halo.frustumCulled = false; g.add(o.halo);
     o.burst = [burstMat, burst2].map((m) => { const b = new THREE.Mesh(spike, m); b.layers.set(FX); b.frustumCulled = false; g.add(b); return b; });
     o.smoke = [0, 1, 2, 3, 4].map(() => { const b = new THREE.Mesh(ballG, smokeMat); b.frustumCulled = false; const h = new THREE.Mesh(ballG, smokeHull); h.scale.setScalar(1.07); h.layers.set(FX); h.frustumCulled = false; b.add(h); g.add(b); return b; });
@@ -137,10 +140,10 @@ export function createDrones(kit, scene) {
       const g = o.g, seed = s.seed ?? 0, sc = s.scale ?? 1, br = s.broken ?? null, alive = br === null || br < 0;
       g.visible = true; g.position.set(...s.pos); g.scale.setScalar(sc);
       g.rotation.set(-(s.pitch ?? 0) * D, (s.yaw ?? 0) * D, (s.roll ?? 0) * D, "YXZ");
-      const thrust = s.thrust ?? wires.thrust ?? 0, eye = s.eye ?? 1, sway = s.sway ?? 0;
+      const thrust = s.thrust ?? wires.thrust ?? 0, eye = s.eye ?? 1, sway = s.sway ?? 0, fold = Math.min(1, Math.max(0, s.fold ?? 0));
       o.parts.forEach((p, i) => {
         const u = p.userData, h = u.home;
-        if (alive) { p.position.set(h[0], h[1], h[2]); p.rotation.set(u.sway && s.type !== "chaser" ? Math.sin(frame * 0.35 + seed) * 0.12 * (1 + sway) : 0, 0, u.dihedral ? u.dihedral + u.sway * 0.14 * thrust : 0); return; }
+        if (alive) { p.position.set(h[0], h[1], h[2]); p.rotation.set(u.sway && s.type !== "chaser" ? Math.sin(frame * 0.35 + seed) * 0.12 * (1 + sway) : 0, u.dihedral ? Math.sign(h[0]) * fold * 0.98 : 0, u.dihedral ? (u.dihedral + u.sway * 0.14 * thrust) * (1 - fold) : 0); return; }
         // thrown: out along its kick, tumbling, then down; it lies where it lands
         const r = rng(seed * 131 + i * 17 + 5), k = u.kick ?? [0, 1, 0], v = [k[0] * (0.8 + r() * 0.8) + (r() - 0.5) * 1.5, k[1] * (0.7 + r()) + 1.2, k[2] * (0.8 + r() * 0.8) + (r() - 0.5) * 1.5 + (s.carry ?? 0)];
         const floor = (0.12 - s.pos[1]) / sc - h[1] + (u.heavy ? 0.35 : 0), gA = 9.8 / sc;
@@ -149,11 +152,11 @@ export function createDrones(kit, scene) {
         const w = [(r() - 0.5) * 14, (r() - 0.5) * 14, (r() - 0.5) * 14]; p.rotation.set(w[0] * tt, w[1] * tt, w[2] * tt);
       });
       const flick = 0.75 + 0.5 * hash(frame, seed, 3);
-      o.flames.forEach((f) => { f.visible = alive; const k = (0.55 + 1.1 * thrust) * flick; if (s.type === "chaser") f.scale.set(1, 1, k); else f.scale.set(1, k, 1); });
+      o.flames.forEach((f) => { f.visible = alive && fold < 0.5; const k = (0.55 + 1.1 * thrust) * flick; if (s.type === "chaser") f.scale.set(1, 1, k); else f.scale.set(1, k, 1); });
       if (o.beam) { o.beam.visible = alive && (s.beam ?? 0) > 0.01; o.beam.scale.setScalar(0.3 + 0.7 * (s.beam ?? 0)); o.beam.rotation.x = 0.2 + (s.beamTilt ?? 0); }
       // the eye's halo faces the camera, a little toward it so the body does not cut it
       const core = o.parts[0], hs = P.haloSize * (0.55 + 0.3 * eye + 0.5 * thrust) * (hash(frame >> 1, seed, 9) > 0.12 ? 1 : 0.6);
-      o.halo.visible = alive && eye > 0.02;
+      o.halo.visible = alive && eye > 0.02; o.lid.visible = alive && eye <= 0.02;
       if (o.halo.visible) {
         g.updateMatrixWorld(true); const wp = new THREE.Vector3(...P.eyeAt).applyMatrix4(g.matrixWorld), toCam = camera.position.clone().sub(wp).normalize().multiplyScalar(0.12 * sc);
         g.worldToLocal(wp.add(toCam)); o.halo.position.copy(wp); g.getWorldQuaternion(q); o.halo.quaternion.copy(q.invert()).multiply(camera.quaternion); o.halo.scale.set(hs * 1.6, hs, 1);

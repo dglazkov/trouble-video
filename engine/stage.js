@@ -5,7 +5,8 @@
 //     sets: ["corridor"],                                sets to build before the first frame (others are built when met)
 //     frame(f, sync) -> {
 //       set: "corridor" | "market" | null, camera: { pos, target, fov, up }, options: { ...the set's cues, post: {...} },
-//       actors: [{ who, action, phase, yaw, x, y, z, view, light: {...}, shadow: false, over: true, steady: 3, hero: "name" }],
+//       actors: [{ who, action, phase, yaw, x, y, z, view, light: {...}, shadow: false, over: true, steady: 3, hero: "name",
+//                  layer: {...engine/post.js LAYER, over what the stage works out: a wobble of hair and cloth} }],
 //       cels: [{ plate, x, y, scale, layer: {...engine/post.js LAYER} }],      plates on the frame: centre (pixels), scale
 //       backdrop(g, cam, bodies)    a painted background when there is no set (a 2D canvas the size of the frame)
 //       under(g, cam, bodies)       painted over the background, under the characters
@@ -47,7 +48,8 @@ try {
   renderer.setPixelRatio(1); renderer.setSize(W, H, false); renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
   const gl = renderer.getContext(), dbg = gl.getExtension("WEBGL_debug_renderer_info");
   const sync = await loadSync(), post = new Post(renderer, W, H), sets = {}, cast = {}, plates = {};
-  const makers = { corridor: () => import("../sets/corridor.js").then((m) => m.createCorridor(renderer, { width: W, height: H })), market: () => import("../sets/market.js").then((m) => m.createMarket(renderer, { width: W, height: H })) };
+  const makers = { corridor: () => import("../sets/corridor.js").then((m) => m.createCorridor(renderer, { width: W, height: H })), market: () => import("../sets/market.js").then((m) => m.createMarket(renderer, { width: W, height: H })),
+    vault: () => import("../sets/vault.js").then((m) => m.createVault(renderer, { width: W, height: H })) };
   const need = async (name) => sets[name] ?? (sets[name] = await makers[name]());
   for (const s of shot.sets ?? []) await need(s);
   for (const [who, base] of Object.entries(shot.cast ?? {})) {
@@ -122,7 +124,7 @@ try {
       const from = L.from ?? [0, 1, 0], d = [from[0] * cam.right[0] + from[1] * cam.right[1] + from[2] * cam.right[2], from[0] * cam.up[0] + from[1] * cam.up[1] + from[2] * cam.up[2]], dl = Math.hypot(d[0], d[1]);
       const px = Math.min(9, Math.max(2.5, foot.s * 0.016)), y0 = 1 - Math.max(foot.y, head.y) / H, y1 = 1 - Math.min(foot.y, head.y) / H;
       const layer = { depth: a.over || OVER ? 0 : Math.max(0.05, p.depth - 0.35), tint: L.tint ?? [1, 1, 1], fog: L.fogK ? (1 - Math.exp(-p.depth * L.fogK)) : 0, fogColor: L.fogColor ?? [0, 0, 0],
-        rim: dl > 0.3 && L.rim ? L.rim : [0, 0, 0], rimDir: dl > 0.3 ? [d[0] / dl * px, d[1] / dl * px] : [0, 0], gradient: L.gradient ?? 0, gradientY: [y0, y0 + (y1 - y0) * 0.75] };
+        rim: dl > 0.3 && L.rim ? L.rim : [0, 0, 0], rimDir: dl > 0.3 ? [d[0] / dl * px, d[1] / dl * px] : [0, 0], gradient: L.gradient ?? 0, gradientY: [y0, y0 + (y1 - y0) * 0.75], ...a.layer };
       post.cel(s.t, layer);
       Object.assign(note, { tint: layer.tint, rim: layer.rim, fog: +layer.fog.toFixed(4), depth: +layer.depth.toFixed(3) });      // the light it was laid in (engine/motion.mjs reads it for flicker)
     });
