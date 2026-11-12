@@ -31,6 +31,10 @@
 //   alert     0..1                 how hard lit beacons burn (the klaxon wire adds to it)
 //   drones    [...]                machines/drones.js specs
 //   warden    {...}                machines/warden.js spec: the one enormous machine (the reunion)
+//   block     true                 the built place (the blockout, with its windows) instead of the paintings: for cameras
+//                                  the paintings were not made for (out on the gantry, looking along it, up or down)
+//   night     0..1                 the lights are out: the place dark indigo under the alarm's red, few windows lit
+//   flex      (z) => metres        the gantry's deck bent this frame (see `bend` below); cut: [z, ...] stays that have snapped
 //   guide     true | "wall"        the blockout instead of the paintings (shots/atrium_plate.js); "wall": without the core
 //   gantry    false                no gantry (a guide to paint over)
 //   wiring    { name: wire }       replace wires of WIRING for this frame
@@ -61,7 +65,7 @@ export const WIRING = {
 };
 
 const CHUNK = `
-uniform float uHull, uWin, uTwinkle, uRings, uGantry, uAlarm, uBlink, uGuide, uVista; uniform sampler2D tMid; uniform mat4 uPaintProj;
+uniform float uHull, uWin, uTwinkle, uRings, uGantry, uAlarm, uBlink, uGuide, uVista, uNight; uniform sampler2D tMid; uniform mat4 uPaintProj;
 const float RA = 150.0, RC = 14.0;
 vec2 polar(vec3 W){ return vec2(atan(W.x, W.z+RC), length(vec2(W.x, W.z+RC))); }  // the angle round the axis from the gantry's line, and how far out
 // a storey of windows, painted: arc metres round, w metres to a window. Some are lit, warm or pale; which, changes with the strings.
@@ -75,6 +79,7 @@ vec3 storeys(vec3 col, float arc, float y, float w, float lit){
     float h = hash(cell*1.3+7.7), flip = hash(cell+floor(uTwinkle*0.5+h*3.0)*0.37);
     float on = step(lit, h)*step(0.25, flip);
     vec3 glow = h > 0.9 ? vec3(0.55,0.95,1.0) : (h > 0.8 ? vec3(1.0,0.8,0.56) : vec3(1.0,0.92,0.66));
+    if(uNight > 0.0){ on *= step(uNight*0.82, hash(cell*2.1+1.3)); glow = mix(glow, vec3(1.0,0.3,0.22), uNight*step(0.35, hash(cell*3.7))); }      // the lights are out (the reunion): few windows, most of them red
     col = mix(col*0.46, glow*(0.85+0.3*uWin), on);
   }
   return col;
@@ -104,11 +109,11 @@ float setEmit(vec3 W, int flag){
   if(flag == 1 || flag == 2){
     // lamps round a deck's edge: white deck lights (1), and red ones (2) that come on ring by ring, outward from this level
     vec2 p = polar(W); float st = floor(W.y/6.0+0.5), a = p.x*p.y, pitch = p.y > 100.0 ? 5.0 : 2.0, dot = step(fract(a/pitch), 0.36), lit = step(abs(st), uRings-0.5);
-    if(flag == 1) return dot*(0.35+0.75*uHull)*(1.0-lit);
+    if(flag == 1) return dot*(0.35+0.75*uHull)*(1.0-lit)*(1.0-0.9*uNight);
     return dot*lit*(0.5+1.3*uAlarm)*(0.55+0.45*step(0.5, fract(uBlink+st*0.5+floor(a/pitch)*0.5)));
   }
   if(flag == 3){ float i = floor(W.z/8.0+0.5), lit = step(W.z, uGantry); return 0.1+lit*(0.7+1.5*uAlarm)*(0.45+0.55*step(0.5, fract(uBlink+i*0.5))); }   // the gantry's beacons
-  if(flag == 4) return 0.6+0.6*uHull;                                              // strip lights
+  if(flag == 4) return (0.6+0.6*uHull)*(1.0-uNight*(0.75+0.2*step(0.5, fract(uBlink*0.37+floor(W.x*0.13+W.z*0.07)*0.31))));      // strip lights (at night: failing)
   return 1.0;
 }
 vec3 setSpecial(vec3 W, vec3 d, vec2 uv){ return vec3(0.0); }`;
@@ -147,7 +152,7 @@ export async function createAtrium(renderer, o = {}) {
   // the vista's paintings (sets/atrium/*.webp, each with its sidecar): the far plate and the tower with its bridges, by day and in alarm
   const PJ = projector({ pos: HERO.pos, target: HERO.target, fov: HERO.wide }), art = (n, o) => loadPainting(`/sets/atrium/${n}.webp`, o);
   const [farDay, farAlarm, midDay, midAlarm] = await Promise.all([art("far_day", { mirror: true }), art("far_alarm", { mirror: true }), art("mid_day"), art("mid_alarm")]);
-  const U = { uVista: { value: 0 }, tMid: { value: midDay }, uPaintProj: { value: PJ.matrix }, uHull: { value: 1 }, uWin: { value: 1 }, uTwinkle: { value: 0 }, uRings: { value: 0 }, uGantry: { value: -1 }, uAlarm: { value: 0 }, uBlink: { value: 0 }, uGuide: { value: 0 } };
+  const U = { uVista: { value: 0 }, tMid: { value: midDay }, uPaintProj: { value: PJ.matrix }, uHull: { value: 1 }, uWin: { value: 1 }, uTwinkle: { value: 0 }, uRings: { value: 0 }, uGantry: { value: -1 }, uAlarm: { value: 0 }, uBlink: { value: 0 }, uGuide: { value: 0 }, uNight: { value: 0 } };
   const kit = createKit(CHUNK, U), { shared } = kit, T = textures(), mat = (c, o) => kit.mat(c, o);
   const HAZE = [0.7, 0.9, 0.93], HIGH = [0.3, 0.47, 0.74];
   shared.uFogCol.value.setRGB(...HAZE); shared.uFogDeep.value.setRGB(...HAZE); shared.uFogTop.value.setRGB(...HIGH); shared.uFogH.value.set(4, 150); shared.uFogK.value = 0.002;
@@ -380,11 +385,14 @@ void main(){ vec2 r = vec2(vW.x, vW.z+${RC.toFixed(1)}); float a = uTurn, c = co
     G.screens.value = clamp(w.screens, 0, 1.4); G.craft.value = clamp(w.traffic, 0, 1.4) * 1.3;
     const sp = opt.screens ?? {}; screens.forEach((s, i) => { drawScreen(s.g, sp, frame, i); s.t.needsUpdate = true; });
     const guide = !!opt.guide, V = clamp(opt.vista ?? 0), reds = clamp((A.rings ?? 0) / 3) * V;      // (close to, at a doorway, the place keeps its own light)
-    gantryG.visible = opt.gantry !== false; const block = guide || opt.door === "stairs";      // the stair tower's doorway is not in the paintings: round it, the blockout still stands in
+    gantryG.visible = opt.gantry !== false; const block = guide || opt.door === "stairs" || !!opt.block;      // the stair tower's doorway is not in the paintings: round it, the blockout still stands in
     wallG.visible = block; coreG.visible = block && opt.guide !== "wall"; vista.visible = !block; U.uGuide.value = guide ? 1 : 0;
     U.uVista.value = V; faceG.visible = V < 1; frameU.value = frame; hazeU.uTurn.value = t * 0.012; { const k = clamp((A.rings ?? 0) / 12); hazeU.uCol.value.setRGB(lerp(HAZE[0], 1.0, k), lerp(HAZE[1], 0.62, k), lerp(HAZE[2], 0.66, k)); }
     // the geometry in front of the painting takes the alarm's light as the rings turn
     shared.uTintLit.value.setRGB(lerp(1.03, 1.1, reds), lerp(1.03, 0.86, reds), lerp(1.0, 0.8, reds)); shared.uTintMid.value.setRGB(lerp(0.72, 0.82, reds), lerp(0.76, 0.52, reds), lerp(0.96, 0.7, reds)); shared.uTintShade.value.setRGB(lerp(0.4, 0.5, reds), lerp(0.42, 0.24, reds), lerp(0.7, 0.42, reds));
+    const N = clamp(opt.night ?? 0); U.uNight.value = N;
+    if (N > 0) { const d = (u, to) => u.value.setRGB(lerp(u.value.r, to[0], N), lerp(u.value.g, to[1], N), lerp(u.value.b, to[2], N)); d(shared.uTintLit, [0.62, 0.44, 0.62]); d(shared.uTintMid, [0.36, 0.22, 0.44]); d(shared.uTintShade, [0.17, 0.1, 0.27]); d(shared.uRim, [1.0, 0.36, 0.3]); }
+    shared.uFogCol.value.setRGB(lerp(HAZE[0], 0.5, N), lerp(HAZE[1], 0.13, N), lerp(HAZE[2], 0.22, N)); shared.uFogDeep.value.setRGB(lerp(HAZE[0], 0.78, N), lerp(HAZE[1], 0.2, N), lerp(HAZE[2], 0.2, N)); shared.uFogTop.value.setRGB(lerp(HIGH[0], 0.16, N), lerp(HIGH[1], 0.06, N), lerp(HIGH[2], 0.24, N)); shared.uFogK.value = lerp(0.002, 0.0075, N);
     doors.inside.visible = V < 1; doors.flat.visible = V >= 1;
     doors.vault.visible = !guide && (opt.door ?? "vault") === "vault"; doors.stairs.visible = !guide && !doors.vault.visible;
     G.strobe.value = (frame % 12) < 2 ? 2.2 : 0.15;
@@ -393,13 +401,14 @@ void main(){ vec2 r = vec2(vW.x, vW.z+${RC.toFixed(1)}); float a = uTurn, c = co
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
     if (opt.warden || warden) (warden ??= createWarden(kit, scene)).update(opt.warden ?? null, frame, sync, camera);
     markers.update(opt.markers); shadows.update(opt.shadows);
-    return { scene, camera, wires: w, clear: opt.clear ?? 0xb3e6ed, post: { inkColor: [0.1, 0.1, 0.3], shadowTint: [0.01, 0.012, 0.04], bloom: lerp(0.55, 0.3, V), bloomThreshold: lerp(0.78, 0.9, V), diffusion: lerp(0.16, 0.07, V), contrast: lerp(0.42, 0.3, V), sat: lerp(1.14, 1.08, V), inkFar: 0.022, ...opt.post } };
+    return { scene, camera, wires: w, clear: opt.clear ?? (N > 0.5 ? 0x1a0a22 : 0xb3e6ed), post: { inkColor: [0.1, 0.1, 0.3], shadowTint: [0.01, 0.012, 0.04], bloom: lerp(0.55, 0.3, V), bloomThreshold: lerp(0.78, 0.9, V), diffusion: lerp(0.16, 0.07, V), contrast: lerp(0.42, 0.3, V), sat: lerp(1.14, 1.08, V), inkFar: 0.022, ...opt.post } };
   }
   // The light on a figure at p: the atrium's daylight from above, cool and even; in the doorway, the red of whatever is
   // behind them (the vault), fading over the first few metres of the gantry.
   function light(p, opt = {}) {
     const red = (opt.door ?? "vault") === "vault" ? clamp(1 - (p[2] - 0.5) / 5) : 0;
     const al = clamp((opt.alarm?.rings ?? 0) / 3) * (1 - red) * clamp(opt.vista ?? 0);
+    const N = clamp(opt.night ?? 0); if (N > 0.5) return { tint: [0.8, 0.62, 0.74], rim: [1.0, 0.4, 0.3], from: [0, 1, 0], fogK: 0.0075, fogColor: [0.5, 0.13, 0.22], gradient: 0.22 };
     return { tint: [lerp(0.98, 1.0, red) + 0.04 * al, lerp(1.0, 0.72, red) - 0.14 * al, lerp(1.04, 0.72, red) - 0.2 * al], rim: red > 0.5 ? [1.0, 0.3, 0.2] : [0.85, 0.97, 1.0], from: red > 0.5 ? [0, 0.3, -1] : [0, 1, 0],
       fogK: shared.uFogK.value, fogColor: HAZE, gradient: 0.16 };
   }
