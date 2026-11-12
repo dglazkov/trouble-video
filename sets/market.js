@@ -3,28 +3,33 @@
 // GAP the deck is gone: a shaft down through the lower levels, with a buckled plate for a ramp on the near side.
 // Built once from a seed (it does not repeat); z runs from Z0 to Z1.
 //
-//   const set = await createMarket(renderer, { width, height, post });
-//   set.render(camera, frame, sync, options);      // camera = engine/body.js's { pos, target, fov, up }
+//   const set = await createMarket(renderer, { width, height });
+//   const { scene, camera, clear, post } = set.update(camera, frame, sync, options);   // camera = engine/body.js's { pos, target, fov, up }
+//   set.light([x, y, z]) -> the light a figure there is in;  floorAt(x, z) -> the deck's height there, or null over the gap
 //
 // Cue options:
 //   drones     [...]              machines/drones.js specs
 //   alert      0..1               beacons on the gantries and a red sweep on the street
-//   crowd      true | false       the cut-out shoppers at the stalls (default true)
-//   steam      0..2               how hard the pots and vents steam (default 1; the `steam` wire adds puffs on drum hits)
+//   crowd      true | false | { flee: [x, z] }   the shoppers at the stalls (default true). They shift their weight on
+//                                 a slow beat; given what to flee (a rider coming down the street), those it is
+//                                 about to reach throw their arms up and jump back toward the stalls
+//   steam      0..2               how hard the pots, the vents and the shaft steam (default 1; the `steam` wire adds on drum hits)
 //   wiring     { name: wire }     replace wires of WIRING for this frame
 //   markers    [[x, y, z], ...]   camera-agreement markers
+//   shadows    [...]              contact shadows of the figures (sets/kit.js createShadows)
 //   post       { ... }            engine/post.js parameters
 // Geometry worth knowing: the walkway is |x| < 3.4 at y = 0; stalls are behind x = +-3.5; lantern rows hang at
 // z = 4k + 2, y = 4.4; GAP = { z0: 66, z1: 76 }; the ramp rises from z = 62.4 to 0.85 m at z = 66.
 import * as THREE from "three";
-import { createKit, ndMaterial, canvasTex, aim, hash, rng, clamp, FX } from "./kit.js";
+import { createKit, createShadows, canvasTex, aim, hash, rng, clamp, FX } from "./kit.js";
 import { kana, latin, scanlines, hazard, kanaWidth } from "./sign.js";
-import { Post } from "../engine/post.js";
 import { driveAll } from "../engine/sync.js";
 import { createDrones } from "../machines/drones.js";
 import { createMarkers } from "./markers.js";
 
-export const Z0 = -28, Z1 = 132, GAP = { z0: 66, z1: 76 }, WX = 3.4;
+export const Z0 = -28, Z1 = 132, GAP = { z0: 66, z1: 76 }, WX = 3.4, RAMP = { z0: 62.4, h: 0.85 };
+// The height of what a figure stands on at (x, z): the deck, the ramp's plate, or nothing over the gap.
+export const floorAt = (x, z) => z > GAP.z0 && z < GAP.z1 ? null : z > RAMP.z0 && z <= GAP.z0 && Math.abs(x) < 2.2 ? RAMP.h * (z - RAMP.z0) / (GAP.z0 - RAMP.z0) : 0;
 export const WIRING = {
   lamps: { stem: "bass", mode: "env", floor: 0.45, gain: 0.7 },                    // lanterns and the pools under them
   blink: { stem: "drums", mode: "count", gain: 1 },                                // which neon signs are lit changes on every drum hit
@@ -65,12 +70,21 @@ vec3 setExtra(vec3 col, vec3 W, vec3 N, float tone){
     float p = vnoise(W.xz*0.45+3.0)+0.3*vnoise(W.xz*1.7);
     if(p > 0.93) col = mix(col, tone > 1.5 ? vec3(1.0,0.72,0.42) : vec3(0.16,0.36,0.42), 0.45);
   }
-  if(W.y < -0.3){
-    // the shaft: bands of teal that brighten toward the glow at the bottom
-    float d = -W.y, band = floor(d/3.0);
-    vec3 deep = mix(vec3(0.015,0.05,0.08), vec3(0.08,0.42,0.42), clamp((band-1.0)/9.0, 0.0, 1.0));
-    col = col*0.1 + deep*(0.8+0.2*mod(band, 2.0));
-    if(fract(d/3.0) < 0.06) col *= 0.45;                       // floor slabs of the levels below
+  if(W.y < -0.3 && abs(N.y) < 0.5){
+    // the shaft's walls: the levels below, one every three metres, each a lit ledge over its own shadow with a row
+    // of windows, every level down a step paler in the glow that comes up from the bottom. Depth is drawn, in
+    // steps, the way a background painter lays a receding tower.
+    float d = -W.y, band = floor(d/3.0), f = fract(d/3.0), u = abs(N.x) > 0.5 ? W.z : W.x;
+    vec3 wall = mix(vec3(0.05,0.12,0.17), vec3(0.16,0.62,0.6), clamp(band/11.0, 0.0, 1.0));
+    col = col*0.12 + wall*(0.85+0.15*mod(band, 2.0));
+    vec2 cell = vec2(floor(u/1.3), band); float h = hash(cell), fu = fract(u/1.3);
+    if(f > 0.3 && f < 0.78 && fu > 0.16 && fu < 0.84 && band > 0.5){
+      vec3 win = h > 0.62 ? vec3(1.0,0.74,0.38) : (h > 0.47 ? vec3(0.4,0.95,0.88) : wall*0.55);
+      col = mix(win, wall*1.25, clamp(band/13.0, 0.0, 0.85));
+      if(abs(fu-0.5) < 0.03) col *= 0.6;                         // the mullion
+    }
+    if(f < 0.1) col = wall*1.7+0.06; else if(f < 0.2) col *= 0.55;    // the ledge, and the shadow under it
+    if(fract(u/5.2+0.3) < 0.035) col *= 0.5;                     // a downpipe
   }
   if(uAlarm > 0.0 && W.y < 6.0){
     float gz = (fract(W.z/16.0+0.5)-0.5)*16.0, ang = atan(W.x, gz);
@@ -135,33 +149,39 @@ function textures() {
     kana(c, w, 512 - kanaWidth(w, size) / 2, 28, size, size * 0.15, fg); latin(c, sub, 512, 226, 34, fg, { align: "center" }); scanlines(c, 1024, 256, 0.3);
   }));
   // shoppers: flat figures in two tones, seen from behind; no faces, the way a background crowd is painted
-  T.crowd = Array.from({ length: 8 }, (_, i) => canvasTex(128, 256, (c) => {
+  // each is two drawings: at the stall, and startled (arms thrown up, leaning away)
+  T.crowd = Array.from({ length: 8 }, (_, i) => [false, true].map((startled) => canvasTex(160, 256, (c) => {
+    c.translate(16, 0); if (startled) { c.translate(64, 256); c.rotate(i % 2 ? 0.16 : -0.16); c.translate(-64, -256); }
     const r = rng(i * 91 + 7), coat = ["#3a4a5c", "#6a3a34", "#4a4a3a", "#2a3a4a", "#70583a", "#3a2a44", "#4a5a52", "#7a3a2a"][i], hair = ["#1a1620", "#2a1c18", "#3a3038", "#1a1620"][i % 4];
     const hgt = 216 + r() * 34, top = 256 - hgt, cx = 64, sw = 25 + r() * 7, hem = top + hgt * (0.5 + r() * 0.22), lean = (r() - 0.5) * 6;
     const fill = (pts, col) => { c.beginPath(); pts.forEach((p, k) => k ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])); c.closePath(); c.fillStyle = col; c.fill(); };
     fill([[cx - 11, hem - 6], [cx - 12, 252], [cx - 2, 252], [cx - 1, hem - 6]], "#1c1a26"); fill([[cx + 1, hem - 6], [cx + 3, 252], [cx + 13, 252], [cx + 11, hem - 6]], "#1c1a26");
     fill([[cx - 16, 256], [cx - 1, 256], [cx - 1, 249], [cx - 13, 249]], "#0e0d16"); fill([[cx + 2, 256], [cx + 17, 256], [cx + 14, 249], [cx + 2, 249]], "#0e0d16");
     const t0 = top + 30;
-    fill([[cx - 7 + lean, t0 - 4], [cx + 7 + lean, t0 - 4], [cx + sw, t0 + 8], [cx + sw + 5, t0 + 70], [cx + sw - 3, t0 + 74], [cx + sw - 4, hem], [cx - sw + 4, hem], [cx - sw + 3, t0 + 74], [cx - sw - 5, t0 + 70], [cx - sw, t0 + 8]], coat);
+    if (startled) {
+      fill([[cx - 7 + lean, t0 - 4], [cx + 7 + lean, t0 - 4], [cx + sw, t0 + 8], [cx + sw - 4, hem], [cx - sw + 4, hem], [cx - sw, t0 + 8]], coat);
+      for (const sg of [1, -1]) { fill([[cx + sg * (sw - 9), t0 + 4], [cx + sg * sw, t0 + 16], [cx + sg * (sw + 24), t0 - 30], [cx + sg * (sw + 14), t0 - 38]], coat); fill([[cx + sg * (sw + 13), t0 - 36], [cx + sg * (sw + 25), t0 - 30], [cx + sg * (sw + 30), t0 - 46], [cx + sg * (sw + 19), t0 - 50]], "#c89a78"); }
+    } else fill([[cx - 7 + lean, t0 - 4], [cx + 7 + lean, t0 - 4], [cx + sw, t0 + 8], [cx + sw + 5, t0 + 70], [cx + sw - 3, t0 + 74], [cx + sw - 4, hem], [cx - sw + 4, hem], [cx - sw + 3, t0 + 74], [cx - sw - 5, t0 + 70], [cx - sw, t0 + 8]], coat);
     c.globalAlpha = 0.28; fill([[cx + 4, t0], [cx + sw, t0 + 8], [cx + sw + 5, t0 + 70], [cx + sw - 4, hem], [cx + 8, hem]], "#000"); c.globalAlpha = 1;
+    fill([[cx - sw + 1, t0 + 9], [cx - sw + 8, t0 + 6], [cx - sw + 11, hem - 2], [cx - sw + 5, hem - 2]], "#ffb86a");      // the stall's light down one side
     c.beginPath(); c.ellipse(cx + lean, top + 14, 11, 14, 0, 0, 7); c.fillStyle = hair; c.fill();
     if (i % 4 === 1) fill([[cx - 22 + lean, top + 8], [cx + 22 + lean, top + 8], [cx + 10 + lean, top - 1], [cx - 10 + lean, top - 1]], "#b8923a");
     if (i % 4 === 2) { c.beginPath(); c.ellipse(cx + lean, top + 16, 15, 17, 0, 0, 7); c.fillStyle = coat; c.fill(); }
     if (i % 4 === 3) { c.beginPath(); c.arc(cx + lean, top + 2, 6, 0, 7); c.fillStyle = hair; c.fill(); }
-    if (i % 3 === 0) fill([[cx + sw + 1, t0 + 62], [cx + sw + 19, t0 + 64], [cx + sw + 17, t0 + 96], [cx + sw - 1, t0 + 94]], "#b8923a");
-  }));
+    if (i % 3 === 0) fill(startled ? [[cx + sw + 18, t0 - 20], [cx + sw + 38, t0 - 12], [cx + sw + 30, t0 + 18], [cx + sw + 10, t0 + 10]] : [[cx + sw + 1, t0 + 62], [cx + sw + 19, t0 + 64], [cx + sw + 17, t0 + 96], [cx + sw - 1, t0 + 94]], "#b8923a");
+  })));
   return T;
 }
 
 export async function createMarket(renderer, o = {}) {
-  const W = o.width ?? 1920, H = o.height ?? 1080, post = o.post ?? new Post(renderer, W, H);
+  const W = o.width ?? 1920, H = o.height ?? 1080;
   const U = { uLamp: { value: 1 }, uBlink: { value: 0 }, uAlarm: { value: 0 }, uAlarmAng: { value: 0 }, uFlood: { value: 1 }, uGap: { value: new THREE.Vector2(GAP.z0, GAP.z1) } };
   const kit = createKit(CHUNK, U), { mat } = kit, T = textures(), sh = kit.shared;
-  sh.uFogCol.value.setRGB(0.42, 0.2, 0.17); sh.uFogTop.value.setRGB(0.04, 0.15, 0.19); sh.uFogH.value.set(2.5, 9); sh.uFogK.value = 0.017;
+  sh.uFogCol.value.setRGB(0.42, 0.2, 0.17); sh.uFogTop.value.setRGB(0.04, 0.15, 0.19); sh.uFogDeep.value.setRGB(0.14, 0.55, 0.54); sh.uFogH.value.set(2.5, 9); sh.uFogK.value = 0.017;
   sh.uTintLit.value.setRGB(1.3, 1.02, 0.7); sh.uTintMid.value.setRGB(0.78, 0.56, 0.6); sh.uTintShade.value.setRGB(0.24, 0.4, 0.5); sh.uRim.value.setRGB(1.0, 0.7, 0.35);
   sh.uKey.value.set(0.1, 0.8, -0.5).normalize();
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(50, W / H, 0.08, 500), G = { screens: { value: 1 } };
-  const b = kit.builder(), crowdB = kit.builder(), steamAt = [];
+  const b = kit.builder(), people = [], steamAt = [];
   const wood = mat("#9a6a44"), steel = mat("#7d8790"), darkm = mat("#2c2a36"), paper = mat(PAPER), red = mat("#b3261e"), tealm = mat("#3a7a78"), rust = mat("#9a4a2a"), crate = mat("#a8854e", { seam: [0.4, 0.2], seamMode: 2 });
   const bulb = mat("#ffe2a0", { kind: 1, flag: 5 }), lanternR = mat("#ff4a26", { kind: 1, flag: 4 }), lanternA = mat("#ffb23c", { kind: 1, flag: 4 });
   const neon = (i) => mat("#fff", { kind: 2, map: T.fascia[i % T.fascia.length], gain: G.screens }), bladeM = (i) => mat("#fff", { kind: 2, map: T.blade[i % T.blade.length], gain: G.screens });
@@ -185,7 +205,9 @@ export async function createMarket(renderer, o = {}) {
     // the ramp: a deck plate buckled upward on the near side, and knocked-over barriers
     b.box(4.4, 0.1, 3.75, 0, 0.42, GAP.z0 - 1.8, mat("#9a948e", { seam: [1.1, 1.2], seamMode: 2 }), { rx: -0.232 });
     b.slab([[-(GAP.z0 - 3.6), 0], [-GAP.z0, 0.8], [-GAP.z0, 0]], 4.3, -2.15, 0, 0, mat("#5a5660"), { ry: Math.PI / 2 });
-    b.quad([0.6, -18, zc + 1], [-1, 0, 0.3], [0, 1, 0], 2.6, 36, mat("#3fd8c8", { kind: 7, alpha: 0.06, additive: true, fog: 0.2 }));
+    // light coming up the shaft, and sheets of mist lying across it at three depths: each hides more of what is under it
+    for (const [x, z, w, r] of [[0.6, zc + 1, 2.6, 0.3], [-1.6, zc - 2.5, 1.5, -0.5], [1.9, zc + 3.2, 1.1, 0.9]]) b.quad([x, -18, z], [-1, 0, r], [0, 1, 0], w, 36, mat("#3fd8c8", { kind: 7, alpha: 0.09, additive: true, fog: 0.2 }));
+    for (const y of [-9, -18, -28]) b.quad([0, y, zc], [1, 0, 0], [0, 0, -1], WX * 2, len, mat("#8fe6dc", { kind: 7, alpha: 0.16, fog: 0 }));
     b.quad([0, -39.5, zc], [1, 0, 0], [0, 0, -1], WX * 2, len, mat("#9ffff0", { kind: 7, alpha: 0.35, additive: true, fog: 0 }));
     b.box(0.2, 0.84, 0.2, -2.0, 0.42, GAP.z0 - 0.15, rust); b.box(0.2, 0.84, 0.2, 2.0, 0.42, GAP.z0 - 0.15, rust); b.box(4.4, 0.16, 0.16, 0, 0.74, GAP.z0 - 0.1, mat("#ffc21e"));
     for (const [x, z, r] of [[-2.9, GAP.z0 - 3.4, 0.5], [2.95, GAP.z0 - 2.2, -0.9], [2.7, GAP.z1 + 1.6, 0.3], [-2.8, GAP.z1 + 2.4, -0.4]]) { b.box(1.3, 0.5, 0.08, x, 0.55, z, mat("#ffc21e"), { ry: r }); b.box(1.32, 0.16, 0.09, x, 0.55, z, mat(INK), { ry: r }); b.box(0.08, 0.8, 0.3, x - 0.5 * Math.cos(r), 0.4, z + 0.5 * Math.sin(r), darkm, { ry: r }); b.box(0.08, 0.8, 0.3, x + 0.5 * Math.cos(r), 0.4, z - 0.5 * Math.sin(r), darkm, { ry: r }); }
@@ -238,7 +260,7 @@ export async function createMarket(renderer, o = {}) {
       for (let i = 0; i < 3; i++) b.box(0.55, 0.42, 0.6, s * 3.2, 0.36 + (i === 2 ? 0.42 : 0), z0 + 2.9 + (i === 1 ? 0.62 : 0.05), crate);
     }
     // shoppers
-    if (v !== "shut") { const cnt = 1 + Math.floor(r() * 3); for (let i = 0; i < cnt; i++) { const x = s * (2.6 + r() * 0.6), z = z0 + 0.5 + r() * 3, hgt = 1.5 + r() * 0.25, m = mat("#fff", { kind: 10, flag: 1, map: T.crowd[Math.floor(r() * T.crowd.length)], noInk: true }); crowdB.quad([x, hgt / 2 + 0.16 * (Math.abs(x) > 3.45 ? 1 : 0), z], [-1, 0, (r() - 0.5) * 0.5], up, hgt / 2, hgt, m); } }
+    if (v !== "shut") { const cnt = 1 + Math.floor(r() * 3); for (let i = 0; i < cnt; i++) { const x = s * (2.6 + r() * 0.6), z = z0 + 0.5 + r() * 3; people.push({ x, z, hgt: 1.5 + r() * 0.25, who: Math.floor(r() * T.crowd.length), turn: (r() - 0.5) * 0.5, seed: Math.floor(r() * 97) }); } }
     // street clutter at the kerb
     if (r() > 0.55) { const z = z0 + r() * 4; b.box(0.5, 0.5, 0.5, s * 2.95, 0.25, z, crate, { ry: r() }); if (r() > 0.5) b.box(0.4, 0.36, 0.4, s * 2.95, 0.68, z, crate, { ry: r() }); }
     if (r() > 0.7) { const z = z0 + r() * 4; b.box(0.5, 0.9, 0.05, s * 2.7, 0.45, z, paper, { rx: 0.25 }); b.box(0.5, 0.9, 0.05, s * 2.7, 0.45, z + 0.3, darkm, { rx: -0.25 }); }
@@ -298,29 +320,46 @@ export async function createMarket(renderer, o = {}) {
   for (let z = Z0 + 4; z < Z1; z += 8) b.quad([0, 15.36, z], [1, 0, 0], [0, 0, 1], 2.2, 3.4, mat("#3fb8b0", { kind: 1, fog: 0.4 }));
   b.quad([0, 7.7, Z1], [-1, 0, 0], [0, 1, 0], 7.3, 15.4, mat("#6a4a44")); b.add(new THREE.RingGeometry(1.9, 2.5, 40), mat("#ffb23c", { kind: 1, fog: 0.3 }), new THREE.Matrix4().makeTranslation(0, 6, Z1 - 0.1).multiply(new THREE.Matrix4().makeRotationY(Math.PI)));
   b.quad([0, 7.7, Z0], [1, 0, 0], [0, 1, 0], 7.3, 15.4, mat("#6a4a44"));
-  const world = b.build(), crowd = crowdB.build(); scene.add(world); scene.add(crowd);
+  const world = b.build(), crowd = new THREE.Group(); scene.add(world); scene.add(crowd);
+  // ---- the shoppers: flat figures, each its own cel so that it can be held, shifted and swapped ----------------------------------
+  const cardG = new THREE.PlaneGeometry(1, 1), cardM = T.crowd.map((pair) => pair.map((map) => mat("#fff", { kind: 10, flag: 1, map, noInk: true })));
+  for (const p of people) { p.mesh = new THREE.Mesh(cardG, cardM[p.who][0]); p.mesh.layers.set(FX); p.mesh.frustumCulled = false; crowd.add(p.mesh); }
   // ---- steam: flat puffs on twos ---------------------------------------------------------------------------------------------
-  const puffT = canvasTex(256, 256, (c) => { const blob = (a, k) => { c.fillStyle = `rgba(255,255,255,${a})`; for (let i = 0; i < 7; i++) { c.beginPath(); c.arc(128 + Math.cos(i * 0.9) * 52 * (i ? 1 : 0), 128 + Math.sin(i * 0.9) * 46 * (i ? 1 : 0), (i ? 44 + (i * 37 % 22) : 70) * k, 0, 7); c.fill(); } }; blob(0.45, 1); blob(0.5, 0.72); });
-  const puffG = new THREE.PlaneGeometry(1, 1), puffM = mat("#c4b3a2", { kind: 7, flag: 1, map: puffT, alpha: 0.8, fog: 0.6 }), puffs = [];
-  for (let i = 0; i < 40; i++) { const m = new THREE.Mesh(puffG, puffM); m.layers.set(FX); m.renderOrder = 9; m.frustumCulled = false; scene.add(m); puffs.push(m); }
-  const drones = createDrones(kit, scene), markers = createMarkers(scene);
+  // a puff is painted like a cel of smoke: a hard-edged cluster in a shade tone with its lit tone laid over, up and to one side
+  const puffT = canvasTex(256, 256, (c) => { const blob = (col, k, dx, dy) => { c.fillStyle = col; for (let i = 0; i < 7; i++) { c.beginPath(); c.arc(128 + dx + Math.cos(i * 0.9) * 52 * (i ? 1 : 0), 128 + dy + Math.sin(i * 0.9) * 46 * (i ? 1 : 0), (i ? 44 + (i * 37 % 22) : 70) * k, 0, 7); c.fill(); } }; blob("#b98f86", 1, 0, 0); blob("#fff4e2", 0.8, -9, -13); });
+  const puffG = new THREE.PlaneGeometry(1, 1), puffM = mat("#ffffff", { kind: 7, flag: 2, map: puffT, alpha: 0.92, fog: 0.6 }), puffs = [];
+  for (let k = 0; k < 4; k++) steamAt.push([-2.4 + k * 1.6, -1.5, GAP.z0 + 1.5 + (k * 2.7) % 7]);      // the shaft breathes
+  for (let i = 0; i < 72; i++) { const m = new THREE.Mesh(puffG, puffM); m.layers.set(FX); m.renderOrder = 9; m.frustumCulled = false; scene.add(m); puffs.push(m); }
+  const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#2a1420");
 
-  function render(cam, frame, sync, opt = {}) {
+  function update(cam, frame, sync, opt = {}) {
     const w = driveAll(sync, WIRING, frame, opt.wiring), t = frame / sync.fps, alert = opt.alert ?? 0;
     aim(camera, cam, W / H); sh.uCam.value.copy(camera.position); sh.uFrame.value = frame;
     U.uLamp.value = clamp(w.lamps, 0, 1.3); U.uBlink.value = w.blink; U.uFlood.value = w.floods; U.uAlarm.value = clamp(alert * 0.8 + w.klaxon * (alert > 0 ? 1 : 0.6), 0, 1.2); U.uAlarmAng.value = t * 5.2; G.screens.value = w.screens;
-    crowd.visible = opt.crowd ?? true;
+    // the shoppers, on twos: a slow shift of weight; those the rider is about to reach (or has just passed) are on
+    // their startled drawing, jumped back toward the stalls, with a hop as it happens
+    const f2 = Math.floor(frame / 2), flee = opt.crowd?.flee;
+    crowd.visible = (opt.crowd ?? true) !== false;
+    for (const p of people) {
+      const ahead = flee ? p.z - flee[1] : 1e9, scared = ahead > -2 && ahead < 10, fresh = scared ? Math.max(0, 1 - (10 - ahead) / 2.5) : 0, sway = Math.floor((f2 + p.seed) / 6) % 2, sx = Math.sign(p.x);
+      p.mesh.material = cardM[p.who][scared ? 1 : 0];
+      p.mesh.position.set(p.x + (scared ? sx * 0.45 : 0) + (sway ? 0.02 : 0), p.hgt / 2 + (Math.abs(p.x) > 3.45 ? 0.16 : 0) + (scared ? 0.16 * fresh + 0.02 * ((f2 + p.seed) % 2) : 0), p.z);
+      p.mesh.rotation.set(0, Math.PI + p.turn, (sway ? 0.02 : -0.02) + (scared ? -sx * 0.1 : 0)); p.mesh.scale.set(p.hgt * 0.625, p.hgt, 1);
+    }
     // the nearest emitters ahead of the camera get the puffs
-    const f2 = Math.floor(frame / 2), amt = (opt.steam ?? 1), near = steamAt.filter((p) => p[2] > cam.pos[2] - 6 && p[2] < cam.pos[2] + 70).slice(0, 8); let n = 0;
-    near.forEach((p, e) => { for (let j = 0; j < 5; j++) { const m = puffs[n++], sd = hash(p[0], p[2], j), age = ((f2 * 0.045 + j / 5 + sd) % 1 + 1) % 1, born = f2 - Math.floor(age / 0.045), big = 1 + 0.5 * hash(born, e, j);
-      m.visible = amt > 0; m.position.set(p[0] + Math.sin(sd * 40 + age * 3) * 0.25 * age - Math.sign(p[0]) * age * 0.5, p[1] + age * 1.9, p[2] + (sd - 0.5) * 0.5 + age * 0.4);
-      m.quaternion.copy(camera.quaternion); m.rotateZ(sd * 6.28 + born); m.scale.setScalar((0.3 + age * 0.75) * big * (0.6 + 0.3 * amt + 0.3 * w.steam) * (age > 0.7 ? (1 - age) / 0.3 : 1)); } });
+    const amt = (opt.steam ?? 1), near = steamAt.filter((p) => p[2] > cam.pos[2] - 6 && p[2] < cam.pos[2] + 70).slice(0, 12); let n = 0;
+    near.forEach((p, e) => { for (let j = 0; j < 6; j++) { const m = puffs[n++], sd = hash(p[0], p[2], j), age = ((f2 * 0.045 + j / 6 + sd) % 1 + 1) % 1, born = f2 - Math.floor(age / 0.045), big = 1 + 0.5 * hash(born, e, j), shaft = p[1] < 0 ? 1.8 : 1;
+      m.visible = amt > 0 && Math.hypot(p[0] - cam.pos[0], p[2] - cam.pos[2]) > 3.5; m.position.set(p[0] + Math.sin(sd * 40 + age * 3) * 0.3 * age - Math.sign(p[0]) * age * 0.5 * (2 - shaft), p[1] + age * 2.9 * shaft, p[2] + (sd - 0.5) * 0.5 + age * 0.4);
+      m.quaternion.copy(camera.quaternion); m.rotateZ(sd * 6.28 + born); m.scale.setScalar((0.45 + age * 1.15) * big * shaft * (0.6 + 0.3 * amt + 0.3 * w.steam) * (age > 0.75 ? (1 - age) / 0.25 : 1)); } });
     for (; n < puffs.length; n++) puffs[n].visible = false;
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
-    markers.update(opt.markers);
-    post.capture(scene, camera, ndMaterial, { clear: opt.clear ?? 0x3a2622 });
-    post.finish({ seed: frame * 1.618 + 3.1, fogColor: [0.42, 0.2, 0.17], inkColor: [0.1, 0.05, 0.1], shadowTint: [0.0, 0.02, 0.03], charTint: [1.0, 0.95, 0.9], ...opt.post });
-    return { wires: w };
+    markers.update(opt.markers); shadows.update(opt.shadows);
+    return { scene, camera, wires: w, clear: opt.clear ?? 0x3a2622, post: { inkColor: [0.1, 0.05, 0.1], shadowTint: [0.0, 0.02, 0.03], ...opt.post } };
   }
-  return { name: "market", scene, camera, kit, post, render, WIRING, GAP, Z0, Z1 };
+  // The light on a figure at p: amber under a lantern row (one every 4 m), dusk rose between; the lanterns rim it.
+  function light(p) {
+    const lit = Math.abs(((p[2] / 4) % 1 + 1) % 1 - 0.5) * 4 < 1.1 * U.uLamp.value + 0.3;
+    return { tint: lit ? [1.1, 0.99, 0.84] : [0.86, 0.74, 0.76], rim: lit ? [1.0, 0.8, 0.45] : [0.95, 0.5, 0.3], from: [0, 1, 0.4], fogK: sh.uFogK.value * 0.7, fogColor: sh.uFogCol.value.toArray(), gradient: 0.18 };
+  }
+  return { name: "market", scene, camera, kit, update, light, floorAt, WIRING, GAP, Z0, Z1 };
 }

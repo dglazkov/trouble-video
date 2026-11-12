@@ -22,11 +22,12 @@ void main(){ vec4 w = modelMatrix*vec4(position,1.0); vW = w.xyz; vL = position;
 //  1 emissive flat colour x gain           2 emissive map x gain (screens)                     6 emissive, cut out by the map's alpha
 //  3 the set's special (a window on space, a backdrop)
 //  5 machine: three tones from the key light, a hard rim
-//  7 flat translucent (beams, steam): colour x gain, alpha = uAlpha x map alpha
+//  7 flat translucent (beams, steam): colour x gain, alpha = uAlpha (flag 1: x the map's alpha; flag 2: and the
+//    colour x the map's, for a puff painted in two tones)
 //  8 a level meter: columns of cells lit up to gain    9 tape reels turning
 const FRAG = (chunk) => `
-uniform int uKind, uSeamMode, uFlag; uniform vec3 uBase; uniform vec2 uSeam; uniform sampler2D uMap; uniform float uGain, uFogMul, uAlpha, uPaint;
-uniform vec3 uCam, uFogCol, uFogTop, uKey, uTintLit, uTintMid, uTintShade, uRim; uniform float uFogK, uFrame; uniform vec2 uFogH;
+uniform int uKind, uSeamMode, uFlag, uNoInk; uniform vec3 uBase; uniform vec2 uSeam; uniform sampler2D uMap; uniform float uGain, uFogMul, uAlpha, uPaint;
+uniform vec3 uCam, uFogCol, uFogTop, uFogDeep, uKey, uTintLit, uTintMid, uTintShade, uRim; uniform float uFogK, uFrame; uniform vec2 uFogH;
 varying vec3 vW; varying vec3 vN; varying vec2 vUv; varying vec3 vL;
 float hash(vec2 p){ vec3 p3 = fract(vec3(p.xyx)*0.1031); p3 += dot(p3, p3.yzx+33.33); return fract((p3.x+p3.y)*p3.z); }
 float vnoise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f); return mix(mix(hash(i), hash(i+vec2(1.0,0.0)), f.x), mix(hash(i+vec2(0.0,1.0)), hash(i+vec2(1.0,1.0)), f.x), f.y); }
@@ -76,8 +77,8 @@ void main(){
   } else if(uKind==3){
     col = setSpecial(vW, -V, vUv); fog *= 0.2;
   } else if(uKind==7){
-    alpha = uAlpha*(1.0-clamp(fog, 0.0, 1.0)); if(uFlag==1) alpha *= texture2D(uMap, vUv).a;
-    col = uBase*uGain; fog = 0.0;
+    alpha = uAlpha*(1.0-clamp(fog, 0.0, 1.0)); col = uBase*uGain; fog = 0.0;
+    if(uFlag >= 1){ vec4 t = texture2D(uMap, vUv); alpha *= t.a; if(uFlag == 2) col *= t.rgb; }
   } else if(uKind==8){
     vec2 g = vUv*uSeam; vec2 c = floor(g), f = fract(g);
     float lvl = uGain*(0.45+0.75*hash(vec2(c.x, floor(uFrame*0.5)+floor(vW.z*0.25+vW.x*0.25))));
@@ -93,15 +94,19 @@ void main(){
     if(r < 0.3) col = uBase;
     if(r < 0.1) col = vec3(0.03,0.04,0.1);
   }
-  col = mix(col, mix(uFogCol, uFogTop, clamp(smoothstep(uFogH.x, uFogH.y, vW.y)+step(vW.y, -0.5), 0.0, 1.0)), clamp(fog, 0.0, 1.0));
-  gl_FragColor = vec4(col, alpha);
+  // the air: one colour low down, another high up, and a third below the floor (a shaft's haze)
+  col = mix(col, vW.y < -0.5 ? uFogDeep : mix(uFogCol, uFogTop, smoothstep(uFogH.x, uFogH.y, vW.y)), clamp(fog, 0.0, 1.0));
+  // a free-standing cut-out is not in the ink buffer, and says so in the colour buffer's alpha: the photography pass
+  // draws no ink line over it from whatever is behind
+  gl_FragColor = vec4(col, uNoInk == 1 ? 0.0 : alpha);
 }`;
 
-// Normal and view depth, for the ink lines the photography pass draws at their discontinuities.
+// Normal and one over the view depth (so nothing at all, cleared to zero, is infinitely far), for the ink lines the
+// photography pass draws at their discontinuities and for hiding cels behind what is nearer.
 export const ndMaterial = new THREE.ShaderMaterial({
   side: THREE.DoubleSide,
   vertexShader: `varying vec3 vN; varying float vD; void main(){ vec4 mv = modelViewMatrix*vec4(position,1.0); vD = -mv.z; vN = normalize(normalMatrix*normal); gl_Position = projectionMatrix*mv; }`,
-  fragmentShader: `varying vec3 vN; varying float vD; void main(){ vec3 n = normalize(vN); if(!gl_FrontFacing) n = -n; gl_FragColor = vec4(n*0.5+0.5, vD); }`,
+  fragmentShader: `varying vec3 vN; varying float vD; void main(){ vec3 n = normalize(vN); if(!gl_FrontFacing) n = -n; gl_FragColor = vec4(n*0.5+0.5, 1.0/vD); }`,
 });
 
 // A set's materials. chunk must define: float setTone(vec3 W, vec3 N) -> 0 shade, 1 mid, 2 lit;
@@ -109,7 +114,7 @@ export const ndMaterial = new THREE.ShaderMaterial({
 // uniforms: the set's own, shared by every material (its systems' levels live here).
 export function createKit(chunk, uniforms = {}) {
   const shared = {
-    uCam: { value: new THREE.Vector3() }, uFogCol: { value: new THREE.Color(0.07, 0.27, 0.42) }, uFogK: { value: 0.03 }, uFrame: { value: 0 }, uFogTop: { value: new THREE.Color(0.07, 0.27, 0.42) }, uFogH: { value: new THREE.Vector2(1e5, 2e5) },
+    uCam: { value: new THREE.Vector3() }, uFogCol: { value: new THREE.Color(0.07, 0.27, 0.42) }, uFogK: { value: 0.03 }, uFrame: { value: 0 }, uFogTop: { value: new THREE.Color(0.07, 0.27, 0.42) }, uFogH: { value: new THREE.Vector2(1e5, 2e5) }, uFogDeep: { value: new THREE.Color(0.07, 0.27, 0.42) },
     uKey: { value: new THREE.Vector3(0.3, 0.9, 0.3).normalize() }, uTintLit: { value: new THREE.Color(1.18, 1.22, 1.25) },
     uTintMid: { value: new THREE.Color(0.66, 0.68, 0.92) }, uTintShade: { value: new THREE.Color(0.36, 0.33, 0.66) }, uRim: { value: new THREE.Color(0.4, 0.9, 1.0) },
     ...uniforms,
@@ -125,7 +130,7 @@ export function createKit(chunk, uniforms = {}) {
     const m = new THREE.ShaderMaterial({ vertexShader: VERT, fragmentShader: frag, side: o.side ?? THREE.DoubleSide,
       uniforms: { ...shared, uKind: { value: kind }, uBase: { value: new THREE.Color(color) }, uSeam: { value: new THREE.Vector2(...(o.seam ?? [1, 1])) },
         uSeamMode: { value: o.seam && kind !== 8 ? (o.seamMode ?? 1) : 0 }, uMap: { value: o.map ?? null }, uGain: o.gain ?? ONE, uFogMul: { value: o.fog ?? (kind === 1 || kind === 2 || kind === 6 ? 0.75 : 1) },
-        uAlpha: { value: o.alpha ?? 1 }, uFlag: { value: o.flag ?? 0 }, uPaint: { value: o.paint ?? (kind === 0 ? 1 : 0) } } });
+        uAlpha: { value: o.alpha ?? 1 }, uFlag: { value: o.flag ?? 0 }, uNoInk: { value: o.noInk && kind !== 7 ? 1 : 0 }, uPaint: { value: o.paint ?? (kind === 0 ? 1 : 0) } } });
     if (kind === 4 || o.offset) { m.polygonOffset = true; m.polygonOffsetFactor = -2 * (o.offset ?? 1); m.polygonOffsetUnits = -2 * (o.offset ?? 1); }
     if (kind === 7) { m.transparent = true; m.depthWrite = false; if (o.additive) m.blending = THREE.AdditiveBlending; }
     m.userData.fx = kind === 7 || !!o.noInk;
@@ -190,6 +195,18 @@ export class Pool {
     const o = p.list[p.n++]; o.visible = true; o.position.set(0, 0, 0); o.rotation.set(0, 0, 0); o.scale.set(1, 1, 1); return o;
   }
   end() { for (const p of this.items.values()) for (let i = p.n; i < p.list.length; i++) p.list[i].visible = false; }
+}
+
+// Contact shadows: flat hard-edged discs on the floor under whoever stands in the set. list = [{ at: [x, y, z],
+// rx, rz (metres, before yaw), yaw (degrees), alpha }]; alpha is held to a few steps so a shadow is a tone, not a gradient.
+export function createShadows(kit, scene, color = "#0a0a24") {
+  const g = new THREE.CircleGeometry(1, 28).rotateX(-Math.PI / 2), list = [];
+  return { update(specs = []) {
+    while (list.length < specs.length) { const o = new THREE.Mesh(g, null); o.layers.set(FX); o.renderOrder = 8; o.frustumCulled = false; scene.add(o); list.push(o); }
+    list.forEach((o, i) => { const s = specs[i]; o.visible = !!s && s.alpha >= 0.05; if (!o.visible) return;
+      o.material = kit.mat(color, { kind: 7, alpha: Math.round(s.alpha * 10) / 10, offset: 2 });
+      o.position.set(s.at[0], s.at[1] + 0.02, s.at[2]); o.rotation.set(0, (s.yaw ?? 0) * Math.PI / 180, 0); o.scale.set(s.rx, 1, s.rz); });
+  } };
 }
 
 export function canvasTex(w, h, draw, o = {}) {

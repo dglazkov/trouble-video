@@ -3,8 +3,9 @@
 // cutaways so the hub can be seen from above and a run can be tracked from the side. Cold indigo and cyan, orange
 // hazard paint. Tone is drawn in the shader as hard shapes (the pools under each ceiling panel), not lit by lamps.
 //
-//   const set = await createCorridor(renderer, { width, height, post });   // post: an engine/post.js Post to share
-//   set.render(camera, frame, sync, options);      // camera = engine/body.js's { pos, target, fov, up }
+//   const set = await createCorridor(renderer, { width, height });
+//   const { scene, camera, clear, post } = set.update(camera, frame, sync, options);   // camera = engine/body.js's { pos, target, fov, up }
+//   set.light([x, y, z], options) -> the light a figure standing there is in (engine/stage.js lays the cels in it)
 //
 // Cue options (all optional; every one is a plain value for this frame):
 //   junction   null | { z }       the hub's centre is at (0, 0, z); z must be a multiple of 4. Arms run along +-Z and +-X.
@@ -17,12 +18,12 @@
 //   drones     [...]              machines/drones.js specs: { type, pos, yaw, ... }
 //   wiring     { name: wire }     replace wires of WIRING for this frame (engine/sync.js drive())
 //   markers    [[x, y, z], ...]   camera-agreement crosses (see sets/markers.js)
-//   post       { ... }            engine/post.js parameters; char / fx layers go here
+//   shadows    [...]              contact shadows of the figures (sets/kit.js createShadows)
+//   post       { ... }            engine/post.js parameters
 //   clear      colour             what is outside the structure (cutaways)
 import * as THREE from "three";
-import { createKit, ndMaterial, Pool, canvasTex, aim, hash, clamp, FX } from "./kit.js";
+import { createKit, createShadows, Pool, canvasTex, aim, hash, clamp } from "./kit.js";
 import { kana, latin, scanlines, hazard, chevrons, kanaWidth } from "./sign.js";
-import { Post } from "../engine/post.js";
 import { driveAll } from "../engine/sync.js";
 import { createDrones } from "../machines/drones.js";
 import { createMarkers } from "./markers.js";
@@ -66,6 +67,8 @@ float setTone(vec3 W, vec3 N){
   float hh = 3.4-W.y, wide = 0.55+0.45*uHull;
   float t = dz < (0.45+hh*0.36)*wide ? 2.0 : (dz < (0.95+hh*0.5)*wide ? 1.0 : 0.0);
   if(N.y > 0.7 && W.y < 0.2) t = max(t, 1.0);
+  // a shutter's faces are lit by its own frame: its paint and its warning stripes read from either side
+  if(abs(N.z) > 0.9 && abs((fract(L.z/24.0+0.5)-0.5)*24.0) < 0.25 && k < 0.5) t = W.y+wob > 0.95 && W.y+wob < 2.5 ? 2.0 : 1.0;
   if(W.y > 3.45 || W.y < -0.02 || abs(L.x) > 2.95) t = min(t, 0.0);       // the section a cutaway shows: always in shade
   return t;
 }
@@ -215,7 +218,7 @@ function hubFloorTex() {
 }
 
 export async function createCorridor(renderer, o = {}) {
-  const W = o.width ?? 1920, H = o.height ?? 1080, post = o.post ?? new Post(renderer, W, H);
+  const W = o.width ?? 1920, H = o.height ?? 1080;
   const U = { uJunc: { value: new THREE.Vector4(0, 0, HUB, 0) }, uHull: { value: 1 }, uAlarm: { value: 0 }, uAlarmAng: { value: 0 }, uStars: { value: 1 }, uRun: { value: 0 }, uSpin: { value: 0 } };
   const kit = createKit(CHUNK, U), { mat } = kit, T = textures();
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(50, W / H, 0.08, 500);
@@ -309,16 +312,19 @@ export async function createCorridor(renderer, o = {}) {
     const b = kit.builder(), sec = mat("#0e1030", { paint: 0 });
     if (top) { b.box(1.6, 0.5, M, s * 3.5, 2.3, M / 2, sec); b.box(0.5, 0.12, M, s * 3.1, 2.58, M / 2, mat("#2a3060")); b.cyl(0.11, M, s * 3.75, 2.62, M / 2, mat("#c25a2c"), "z"); b.box(0.5, 0.2, 0.5, s * 3.6, 2.62, 0, mat("#f07a22")); }
     else {
-      b.box(1.3, 0.5, M, s * 2.85, -0.25, M / 2, sec); b.box(1.3, 0.5, M, s * 2.35, 3.66, M / 2, sec);
-      b.box(1.34, 0.06, M, s * 2.85, 0.0, M / 2, mat("#5a2c14", { paint: 0 })); b.box(0.2, 4.4, 0.34, s * 3.3, 1.7, 0, sec);
-      b.cyl(0.07, M, s * 3.3, 3.2, M / 2, sec, "z"); b.cyl(0.05, M, s * 3.3, 0.4, M / 2, sec, "z");
+      // side-on the camera is at the height of whoever runs past: the floor's section is a thin lit sill, not a dark
+      // band across their feet, and nothing runs along in front of them
+      b.box(0.55, 0.5, M, s * 2.47, -0.25, M / 2, sec); b.box(1.3, 0.5, M, s * 2.35, 3.66, M / 2, sec);
+      b.box(0.6, 0.05, M, s * 2.5, -0.005, M / 2, mat("#525c9a", { paint: 0 })); b.box(0.06, 0.1, M, s * 2.77, -0.03, M / 2, mat("#f07a22", { paint: 0 }));
     }
     return b.build();
   }
-  const P = { floor: [floorPart(false), floorPart(true)], ceil: [ceilPart(false), ceilPart(true)], slant: {}, wall: {}, vari: {}, cutSide: {}, cutTop: {} };
+  // a strut of the cut wall, passing in front of the run (not at a bulkhead: the frame's own section is there)
+  const cutStrut = (s) => { const b = kit.builder(); b.box(0.14, 4.4, 0.24, s * 3.3, 1.7, 0, mat("#0e1030", { paint: 0 })); return b.build(); };
+  const P = { floor: [floorPart(false), floorPart(true)], ceil: [ceilPart(false), ceilPart(true)], slant: {}, wall: {}, vari: {}, cutSide: {}, cutTop: {}, strut: {} };
   for (const s of [1, -1]) {
     P.slant[s] = [slantPart(s, false), slantPart(s, true)]; P.wall[s] = [wallBase(s, false), wallBase(s, true)];
-    P.cutSide[s] = cutPart(s, false); P.cutTop[s] = cutPart(s, true); P.vari[s] = {};
+    P.cutSide[s] = cutPart(s, false); P.cutTop[s] = cutPart(s, true); P.strut[s] = cutStrut(s); P.vari[s] = {};
     for (const v of VARIANTS) P.vari[s][v] = [0, 1, 2, 3, 4].map((n) => (v === "window" || v === "deck") && n ? null : wallVariant(s, v, n));
   }
   // ---- a shutter: two toothed leaves over the corridor's section ---------------------------------------------------
@@ -379,7 +385,7 @@ export async function createCorridor(renderer, o = {}) {
     hub.add(b.build()); hubRoof.add(r.build()); hub.add(hubRoof); scene.add(hub);
   }
   const pool = new Pool(scene), armX = new THREE.Group(); armX.rotation.y = Math.PI / 2; scene.add(armX); const poolX = new Pool(armX);
-  const drones = createDrones(kit, scene), markers = createMarkers(scene);
+  const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#0b0a2a");
 
   function module(pl, i, z, cut, doors, chomp, arm) {
     const bulk = ((i % BULK) + BULK) % BULK === 0 ? 1 : 0, put = (proto) => { const g = pl.use(proto); g.position.z = z; return g; };
@@ -388,14 +394,14 @@ export async function createCorridor(renderer, o = {}) {
     for (const s of [1, -1]) {
       const gone = (cut === "left" && s < 0) || (cut === "right" && s > 0);
       if (cut === "top") put(P.cutTop[s]); else if (!gone) put(P.slant[s][bulk]);
-      if (gone) { put(P.cutSide[s]); continue; }
+      if (gone) { put(P.cutSide[s]); if (!bulk) put(P.strut[s]); continue; }
       put(P.wall[s][bulk]);
       const v = variantOf(i, s, arm), n = Math.floor(hash(i, s, arm, 77) * 5); put(P.vari[s][v][n] ?? P.vari[s][v][0]);
     }
     if (bulk) { const g = put(shutterProto); setShutter(g, doors?.[i / BULK] ?? chomp); }
   }
 
-  function render(cam, frame, sync, opt = {}) {
+  function update(cam, frame, sync, opt = {}) {
     const w = driveAll(sync, WIRING, frame, opt.wiring), t = frame / sync.fps, J = opt.junction, alert = opt.alert ?? 0;
     aim(camera, cam, W / H);
     kit.shared.uCam.value.copy(camera.position); kit.shared.uFrame.value = frame;
@@ -412,10 +418,15 @@ export async function createCorridor(renderer, o = {}) {
     pool.end(); poolX.end();
     hub.visible = !!J; if (J) { hub.position.set(0, 0, J.z); hubRoof.visible = opt.cut !== "top"; ["A", "B", "C", "D"].forEach((n, k) => setShutter(hubShutters[k], opt.hubDoors?.[n] ?? w.doorChomp)); }
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
-    markers.update(opt.markers);
-    post.capture(scene, camera, ndMaterial, { clear: opt.clear ?? (opt.cut ? 0x0a0c22 : 0x124a6b) });
-    post.finish({ seed: frame * 1.618 + 3.1, ...opt.post });
-    return { wires: w };
+    markers.update(opt.markers); shadows.update(opt.shadows);
+    return { scene, camera, wires: w, clear: opt.clear ?? (opt.cut ? 0x0a0c22 : 0x124a6b), post: { ...opt.post } };
   }
-  return { name: "corridor", scene, camera, kit, post, render, WIRING, M, BULK, HUB };
+  // The light on a figure at p: under a ceiling panel (one every module, or the hub's ring) it is in the pool, between
+  // them in the indigo; the neon strips rim it from above. The same hard shapes the shader draws on the floor.
+  function light(p, opt = {}) {
+    const J = opt.junction, inHub = J && Math.max(Math.abs(p[0]), Math.abs(p[2] - J.z)) < HUB, along = J && !inHub && Math.abs(p[0]) > Math.abs(p[2] - J.z) ? p[0] : p[2];
+    const lit = inHub ? Math.hypot(p[0], p[2] - J.z) < 3.1 * (0.6 + 0.4 * U.uHull.value) : Math.abs(((along / M) % 1 + 1) % 1 - 0.5) * M < 1.25 * (0.55 + 0.45 * U.uHull.value);
+    return { tint: lit ? [0.96, 1.0, 1.1] : [0.7, 0.74, 1.0], rim: lit ? [0.62, 0.95, 1.0] : [0.36, 0.62, 0.95], from: [0, 1, 0], fogK: kit.shared.uFogK.value * 0.7, fogColor: kit.shared.uFogCol.value.toArray(), gradient: 0.22 };
+  }
+  return { name: "corridor", scene, camera, kit, update, light, WIRING, M, BULK, HUB };
 }
