@@ -298,7 +298,7 @@ export async function createMarket(renderer, o = {}) {
     const z = k * 4 + 2, r = rng(k * 53 + 1), over = z > GAP.z0 - 1 && z < GAP.z1 + 1;
     // a lantern string with a sag
     const N = 6, sag = (x) => 4.55 - 0.35 * (1 - (x / 3.6) ** 2);
-    for (let i = 0; i < 12; i++) { const x0 = -3.6 + i * 0.6, x1 = x0 + 0.6; b.box(0.61, 0.018, 0.018, (x0 + x1) / 2, (sag(x0) + sag(x1)) / 2, z, darkm, { rz: Math.atan2(sag(x1) - sag(x0), 0.6) }); }
+    if (!over) for (let i = 0; i < 12; i++) { const x0 = -3.6 + i * 0.6, x1 = x0 + 0.6; b.box(0.61, 0.018, 0.018, (x0 + x1) / 2, (sag(x0) + sag(x1)) / 2, z, darkm, { rz: Math.atan2(sag(x1) - sag(x0), 0.6) }); }
     if (!over) for (let i = 0; i < N; i++) { const x = -2.75 + i * 1.1, y = sag(x) - 0.3, m = (k + i) % 3 === 0 ? lanternA : lanternR; b.ball(0.2, x, y, z, m, { s: [1, m === lanternA ? 1.35 : 0.85, 1] }, 10); b.cyl(0.09, 0.05, x, y + (m === lanternA ? 0.27 : 0.17), z, darkm, "y", 8); b.cyl(0.09, 0.05, x, y - (m === lanternA ? 0.27 : 0.17), z, darkm, "y", 8); }
     if (k % 3 === 1 && !over) for (let i = 0; i < 3; i++) { const x = -2.2 + i * 2.2 + (r() - 0.5) * 0.6, top = 6.6 + r() * 0.5; b.quad([x, top - 1.05, z + 0.4], [-1, 0, 0], [0, 1, 0], 0.7, 2.1, mat("#fff", { kind: 10, map: T.banner[Math.floor(r() * 6)] })); b.box(0.8, 0.04, 0.04, x, top, z + 0.4, darkm); b.box(7.4, 0.02, 0.02, 0, top + 0.02, z + 0.4, darkm); }
     if (k % 4 === 2) { const y = 8.3 + r(); b.box(7.4, 0.015, 0.015, 0, y, z - 0.7, darkm); for (let i = 0; i < 7; i++) if (r() > 0.3) b.quad([-2.7 + i * 0.9, y - 0.3, z - 0.7], [-1, 0, 0], [0, 1, 0], 0.5 + r() * 0.3, 0.6, mat(["#e9e0c8", "#b3261e", "#3a7a78", "#c9a23a", "#8d8f9a"][Math.floor(r() * 5)], { noInk: false })); }

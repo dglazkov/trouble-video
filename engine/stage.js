@@ -5,7 +5,7 @@
 //     sets: ["corridor"],                                sets to build before the first frame (others are built when met)
 //     frame(f, sync) -> {
 //       set: "corridor" | "market" | null, camera: { pos, target, fov, up }, options: { ...the set's cues, post: {...} },
-//       actors: [{ who, action, phase, yaw, x, y, z, view, light: {...}, shadow: false }],
+//       actors: [{ who, action, phase, yaw, x, y, z, view, light: {...}, shadow: false, over: true }],
 //       cels: [{ plate, x, y, scale, layer: {...engine/post.js LAYER} }],      plates on the frame: centre (pixels), scale
 //       backdrop(g, cam, bodies)    a painted background when there is no set (a 2D canvas the size of the frame)
 //       under(g, cam, bodies)       painted over the background, under the characters
@@ -19,6 +19,8 @@
 // shadow under each on the floor; then the lens, the grain and the rest over the whole picture.
 // Characters are held on twos (their drawing is the one for the last even frame; where they are is on ones, with the
 // camera and the set). An actor's `view` names the drawing the shot was staged for: a kit without it shows the dummy.
+// A cel is flat, at the depth of the character's middle: where a lean would put part of it behind something it is
+// really in front of, `over: true` lets nothing of the set hide it.
 // Query: ?shot=/shots/x.js &debug=1 (skeletons and which cel is on) &mannequin=1 (dummies only) &kits=a,b (the kits
 // that exist; a cast member whose kit does not is a dummy of standard build).
 import * as THREE from "three";
@@ -103,7 +105,7 @@ try {
       const at = [q.x, q.y ?? 0, q.z], L = { ...(set?.light?.(at, opt) ?? {}), ...a.light }, foot = cam.project(at), head = cam.project([q.x, (q.y ?? 0) + c.P.height, q.z]);
       const from = L.from ?? [0, 1, 0], d = [from[0] * cam.right[0] + from[1] * cam.right[1] + from[2] * cam.right[2], from[0] * cam.up[0] + from[1] * cam.up[1] + from[2] * cam.up[2]], dl = Math.hypot(d[0], d[1]);
       const px = Math.min(9, Math.max(2.5, foot.s * 0.016)), y0 = 1 - Math.max(foot.y, head.y) / H, y1 = 1 - Math.min(foot.y, head.y) / H;
-      post.cel(s.t, { depth: Math.max(0.05, p.depth - 0.35), tint: L.tint ?? [1, 1, 1], fog: L.fogK ? (1 - Math.exp(-p.depth * L.fogK)) : 0, fogColor: L.fogColor ?? [0, 0, 0],
+      post.cel(s.t, { depth: a.over ? 0 : Math.max(0.05, p.depth - 0.35), tint: L.tint ?? [1, 1, 1], fog: L.fogK ? (1 - Math.exp(-p.depth * L.fogK)) : 0, fogColor: L.fogColor ?? [0, 0, 0],
         rim: dl > 0.3 && L.rim ? L.rim : [0, 0, 0], rimDir: dl > 0.3 ? [d[0] / dl * px, d[1] / dl * px] : [0, 0], gradient: L.gradient ?? 0, gradientY: [y0, y0 + (y1 - y0) * 0.75] });
     });
     const paint = (i, fn) => { if (!fn && !(i === 2 && DEBUG)) return null; const s = sheet(i); fn?.(s.g, cam, bodies); return s; };

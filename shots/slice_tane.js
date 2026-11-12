@@ -2,9 +2,13 @@
 // shutter ahead bites further shut on every drum hit; he drops his shoulder and goes through it on the bar line
 // (55.29 s) with an impact frame and its teeth flying; on the next beat it slams behind him and the chaser on his
 // heels is cut in two.
-import { FPS, CUT, CAST, CADENCE, startOf, ease, wob, rnd } from "./slice_cast.js";
+import { proportions } from "../engine/body.js";
+import { strideOf } from "../engine/actions.js";
+import { FPS, CUT, CAST, startOf, ease, wob, rnd } from "./slice_cast.js";
 import { speedLines } from "./slice_fx.js";
-const FRAMES = CUT.ride - CUT.tane, HIT = 55, SLAM = 64, RUN = 8.5, GATE = 24;     // frames of this shot; m/s; the shutter's z
+const FRAMES = CUT.ride - CUT.tane, HIT = 55, SLAM = 64, GATE = 24;     // frames of this shot; the shutter's z
+// side-on, a foot that slides shows: he covers exactly his own stride (he is 1.7 m) every cycle of twelve frames
+const CYCLE = 12, RUN = strideOf("tane", proportions({ height: 1.7 })) * FPS / CYCLE;
 const tz = (f) => GATE + RUN * (f - HIT) / FPS + (f > HIT ? 0.9 * (1 - Math.exp(-(f - HIT) / 3)) : 0);      // he is at the shutter on HIT, and bursts out of it
 // the shutter: how far shut it is, biting on each drum hit that has landed (the drum stem's onsets)
 function gate(f, sync) {
@@ -32,10 +36,10 @@ function frame(f, sync) {
   const charging = f >= HIT - 9 && f < HIT + 7;
   return { set: "corridor",
     // it trails him to the shutter and swings ahead as he goes through: the far face of the shutter, and what comes through it, come at us
-    camera: { pos: [7.2 + shake * wob(f, 9, 14, 1), 1.02 + shake * wob(f, 11, 17, 2), cz - 1.6 + 4.4 * ease((f - HIT + 5) / 16)], target: [0, 1.5, cz + 0.4], fov: 37 },
+    camera: { pos: [7.2 + shake * wob(f, 9, 14, 1), 1.02 + shake * wob(f, 11, 17, 2), cz - 1.6 + 4.4 * ease((f - HIT - 1) / 11)], target: [0, 1.5, cz + 0.4], fov: 37 },
     options: { cut: "right", alert: 0.3, doors: { 1: gate(f, sync) }, drones },
     post: impact ?? { bgStreak: [0.004, 0], ca: 0.0012 + 0.005 * Math.max(jolt, slam), flash: since === 2 ? 0.4 : since === 3 ? 0.12 : f === SLAM ? 0.2 : 0, bloom: 0.85 + 0.5 * jolt },
-    actors: [{ who: "tane", action: charging ? "charge" : "run", view: "side", phase: charging ? (f >= HIT ? 1 : 0) : f / CADENCE.tane, x: 0, z, y: charging && f >= HIT ? 0.12 * Math.sin(Math.PI * Math.min(1, since / 7)) : 0 }],
+    actors: [{ who: "tane", action: charging ? "charge" : "run", view: "side", phase: charging ? (f >= HIT ? 1 : 0) : f / CYCLE, over: f >= HIT - 12 && f < HIT + 6, x: 0, z, y: charging && f >= HIT ? 0.12 * Math.sin(Math.PI * Math.min(1, since / 7)) : 0 }],
     overlay(g, cam) {
       const hit = cam.project([0, 1.25, GATE]);
       if (since === 0) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 120, seed: 4, inner: 170, color: "#07020f", width: 0.024, reach: 0.9 });
