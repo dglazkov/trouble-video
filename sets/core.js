@@ -25,7 +25,7 @@
 //   wiring    { name: wire }            replace wires of WIRING
 //   shadows, post                       as in the other sets
 import * as THREE from "three";
-import { createKit, createShadows, canvasTex, aim, hash, clamp, rng, FX } from "./kit.js";
+import { createKit, createShadows, canvasTex, aim, hash, clamp, sstep, rng, FX } from "./kit.js";
 import { kana, latin, hazard, chevrons } from "./sign.js";
 import { driveAll } from "../engine/sync.js";
 import { createDrones } from "../machines/drones.js";
@@ -68,10 +68,11 @@ void main(){
   vec4 p = uProj*vec4(vW, 1.0);
   if(p.w <= 0.0){ gl_FragColor = vec4(uHaze*0.82, 1.0); return; }
   vec2 uv = p.xy/p.w*0.5+0.5; vec2 o = max(vec2(0.0), max(-uv, uv-1.0));
-  vec3 col = texture2D(tMap, uv).rgb;
+  vec3 col = texture2D(tMap, clamp(uv, 0.002, 0.998)).rgb;
   float r = length((uv-uLight)*vec2(1.78, 1.0));
   col *= 0.8+0.2*uFar; col += vec3(1.0, 0.94, 1.0)*(0.5*uFar-0.25)*exp(-r*r/0.012) + vec3(0.9, 0.8, 1.0)*(0.16*uFar-0.08)*exp(-r*r/0.12);
-  col = mix(col, uHaze*0.82, clamp(max(o.x, o.y)*1.6, 0.0, 1.0));
+  float out_ = clamp(max(max(o.x, o.y)*5.0, smoothstep(0.89, 0.965, uv.x)), 0.0, 1.0);
+  col = mix(col, uHaze*mix(0.9, 0.66, clamp(0.5-uv.y, 0.0, 1.0)), out_);
   gl_FragColor = vec4(col, 1.0); }`;
 
 // a kit material that is cut off by clipping planes (a machine in slices): the same shader and the same uniforms
@@ -139,6 +140,12 @@ export async function createCore(renderer, o = {}) {
     uvq(b, [0, -0.2, 0.955], [1, 0, 0], [0, 1, 0], DUCT.w + 1.1, 0.4, stripeMat, 8, 1);
     b.box(0.5, 0.26, 0.3, 0, dh + 0.72, 0.5, mat(dark)); b.box(0.3, 0.12, 0.05, 0, dh + 0.72, 0.67, mat("#f6f0ff", { kind: 1 }));
     b.quad([hw + 4.2, 2.3, 0.02], [1, 0, 0], [0, 1, 0], 5.6, 2.8, sWall);
+    // round the mouth: a ladder up the wall, pipe runs over it, a bank of lockers with lit ports, a hatch
+    for (const x of [-3.05, -3.6]) b.box(0.07, 60, 0.07, x, 6, 0.22, mat(steel)); for (let y = -8; y < 22; y += 0.42) b.box(0.55, 0.05, 0.05, -3.325, y, 0.22, mat(steel));
+    for (const [y, r, c] of [[5.3, 0.16, steel], [5.75, 0.24, wallD], [6.2, 0.12, pale]]) { b.cyl(r, 46, 6, y, 0.12 + r, mat(c), "x", 8); for (let x = -15; x < 28; x += 5.5) b.box(0.14, r * 2 + 0.16, r * 2 + 0.2, x, y, 0.12 + r, mat(rib)); }
+    for (let k = 0; k < 4; k++) { const x = -5.2 - k * 1.5; b.box(1.3, 2.6, 0.5, x, 1.5, 0.25, mat(k % 2 ? wallD : steel)); b.box(0.9, 0.3, 0.04, x, 2.3, 0.51, mat(k === 2 ? gold : "#f6f0ff", { kind: 1 })); b.box(0.1, 0.5, 0.06, x + 0.4, 1.3, 0.52, mat(dark)); }
+    b.box(2.2, 2.2, 0.36, 5.0, -3.2, 0.18, mat(rib)); b.cyl(0.8, 0.1, 5.0, -3.2, 0.4, mat(wallD), "z", 16); b.box(1.2, 0.14, 0.08, 5.0, -3.2, 0.46, mat(pale));
+    for (const s of [1, -1]) { b.box(0.3, 0.3, 0.34, s * (hw + 0.95), dh + 0.3, 0.17, mat(dark)); b.box(0.16, 0.16, 0.06, s * (hw + 0.95), dh + 0.3, 0.37, mat(gold, { kind: 1 })); }
     // what the wall is made of: ribs, ledges, plates proud of it, pipe runs, other mouths with a lamp over each
     for (let i = -14; i <= 14; i++) { const x = i * 13 + (i >= 0 ? 6.5 : -6.5); b.box(0.9, 2 * R * 0.6, 1.1, x, 0, 0.5, mat(rib)); b.box(0.3, 2 * R * 0.6, 0.3, x + 2.1, 0, 0.15, mat(wallD)); }
     for (let j = -12; j <= 12; j++) { const y = j * 11 + 7.4; b.box(2 * R * 0.6, 0.7, 1.5, 0, y, 0.7, mat(wallD)); b.box(2 * R * 0.6, 0.12, 1.7, 0, y + 0.42, 0.8, mat(rib)); }
@@ -158,12 +165,12 @@ export async function createCore(renderer, o = {}) {
   {
     const truss = mat("#463b76"), trussD = mat("#30285a"), bar = (p, q, t, m) => { const d = new THREE.Vector3(q[0] - p[0], q[1] - p[1], q[2] - p[2]), l = d.length(), g = new THREE.BoxGeometry(t, t, l); const o3 = new THREE.Object3D(); o3.position.set((p[0] + q[0]) / 2, (p[1] + q[1]) / 2, (p[2] + q[2]) / 2); o3.lookAt(q[0], q[1], q[2]); o3.updateMatrix(); b.add(g, m, o3.matrix); };
     const rings = [LAT.z0, (LAT.z0 + LAT.z1) / 2, LAT.z1];
-    for (const z of rings) for (let k = 0; k < 6; k++) { bar(hexAt(30 + k * 60, z), hexAt(90 + k * 60, z), 0.15, truss); bar(hexAt(30 + k * 60, z, LAT.r + 0.5), hexAt(90 + k * 60, z, LAT.r + 0.5), 0.07, trussD); bar(hexAt(30 + k * 60, z), hexAt(30 + k * 60, z, LAT.r + 0.5), 0.09, trussD); }
-    for (let k = 0; k < 6; k++) {
-      const a = 30 + k * 60; bar(hexAt(a, LAT.z0 - 0.4), hexAt(a, LAT.z1 + 0.4), 0.16, truss);
-      for (let n = 0; n < 2; n++) if ((k + n) % 2) bar(hexAt(a, rings[n]), hexAt(a + 60, rings[n + 1]), 0.05, trussD);
-      if (k % 2 === 0) { bar(hexAt(a, LAT.z0), hexAt(a, 0.4, LAT.r + 5), 0.16, trussD); const f = hexAt(a, 0.5, LAT.r + 5); b.box(1.2, 1.2, 0.9, f[0], f[1], 0.45, mat(rib)); }
-      const n = hexAt(a, LAT.z0 - 0.4); b.box(0.5, 0.5, 0.3, n[0], n[1], n[2], mat(gold)); const m2 = hexAt(a, LAT.z1 + 0.4); b.box(0.5, 0.5, 0.3, m2[0], m2[1], m2[2], mat(gold));
+    for (const z of rings) for (let k = 0; k < 12; k++) { bar(hexAt(k * 30, z), hexAt(k * 30 + 30, z), 0.15, truss); bar(hexAt(k * 30, z, LAT.r + 0.5), hexAt(k * 30 + 30, z, LAT.r + 0.5), 0.07, trussD); if (k % 2) bar(hexAt(k * 30, z), hexAt(k * 30, z, LAT.r + 0.5), 0.07, trussD); }
+    for (let k = 0; k < 12; k++) {
+      const a = k * 30; bar(hexAt(a, LAT.z0 - 0.4), hexAt(a, LAT.z1 + 0.4), k % 2 ? 0.16 : 0.1, truss);
+      for (let n = 0; n < 2; n++) if ((k + n) % 4 === 1) bar(hexAt(a, rings[n]), hexAt(a + 60, rings[n + 1]), 0.05, trussD);
+      if (k % 4 === 1) { bar(hexAt(a, LAT.z0), hexAt(a, 0.4, LAT.r + 5), 0.16, trussD); const f = hexAt(a, 0.5, LAT.r + 5); b.box(1.2, 1.2, 0.9, f[0], f[1], 0.45, mat(rib)); }
+      if (k % 2) { const n = hexAt(a, LAT.z0 - 0.4); b.box(0.42, 0.42, 0.3, n[0], n[1], n[2], mat(gold)); const m2 = hexAt(a, LAT.z1 + 0.4); b.box(0.42, 0.42, 0.3, m2[0], m2[1], m2[2], mat(gold)); }
     }
   }
   // ---- the island: a landing deck on a boom, the pod its door is in, the mast they hang on -------------------------------
@@ -176,7 +183,6 @@ export async function createCore(renderer, o = {}) {
       for (let z = z0 + 7; z < z0 + len; z += 1.8) b.box(0.07, 1.1, 0.07, s * (iw / 2 - 0.12), 0.55, z, mat(steel));
       for (const y of [0.6, 1.1]) b.box(0.05, 0.05, len - 7, s * (iw / 2 - 0.12), y, z0 + 7 + (len - 7) / 2, mat(y > 1 ? pale : steel));
       b.box(0.3, 0.7, len, s * (iw / 2 - 0.3), -0.7, zc, mat(wallD));
-      b.box(0.26, 0.3, 0.26, s * (iw / 2 - 0.14), 0.15, z0 + 0.25, mat(dark)); b.box(0.16, 0.1, 0.16, s * (iw / 2 - 0.14), 0.35, z0 + 0.25, mat("#f6f0ff", { kind: 1 }));
     }
     for (let k = 0; k < 4; k++) b.box(iw - 0.6, 0.3, 0.3, 0, -0.5, z0 + 1 + k * 3.3, mat(dark));
     // the pod: a drum with a lit door, on the mast
@@ -190,7 +196,7 @@ export async function createCore(renderer, o = {}) {
 
   // ---- the far plate ----------------------------------------------------------------------------------------------------
   const PJ = projector({ pos: HERO.pos, target: HERO.target, fov: HERO.wide });
-  const farMat = new THREE.ShaderMaterial({ vertexShader: PROJECT_VS, fragmentShader: FAR_FS, uniforms: { tMap: { value: await loadPainting("/sets/core/far.webp", { mirror: true }) }, uProj: { value: PJ.matrix }, uHaze: { value: new THREE.Color(...HAZE) }, uLight: { value: new THREE.Vector2(0.711, 0.507) }, uFar: U.uFar } });
+  const farMat = new THREE.ShaderMaterial({ vertexShader: PROJECT_VS, fragmentShader: FAR_FS, uniforms: { tMap: { value: await loadPainting("/sets/core/far.webp") }, uProj: { value: PJ.matrix }, uHaze: { value: new THREE.Color(...HAZE) }, uLight: { value: new THREE.Vector2(0.711, 0.507) }, uFar: U.uFar } });
   const far = new THREE.Mesh(new THREE.SphereGeometry(1200, 48, 32), farMat); far.position.set(...HERO.pos); painted(farMat, far, -30); scene.add(far);
 
   // ---- what floats: wreckage turning slowly, each piece about its own axis; loose cable ----------------------------------
@@ -230,15 +236,20 @@ export async function createCore(renderer, o = {}) {
     }
   }
   const beamGeo = new THREE.PlaneGeometry(1, 1), beams = [];
+  // across a strip: a soft shoulder for the glow, a flat top with a feathered edge for the sheath and the core (the
+  // frame is drawn without anti-aliasing: a hard thin bright line would stair-step, and its bloom with it)
+  const strip = (f) => { const t = canvasTex(4, 64, (c) => { const d = c.createImageData(4, 64); for (let y = 0; y < 64; y++) { const u = Math.abs((y + 0.5) / 64 - 0.5) * 2, a = f(u); for (let x = 0; x < 4; x++) d.data.set([255, 255, 255, Math.round(255 * a)], (y * 4 + x) * 4); } c.putImageData(d, 0, 0); }); t.premultiplyAlpha = false; return t; };
+  const softTex = strip((u) => Math.exp(-u * u * 4.5) * (1 - u) ** 0.5), coreTex = strip((u) => 1 - sstep(0.45, 0.95, u));
   const beamMesh = (i) => beams[i] ?? (beams[i] = [0, 1, 2].map((k) => { const m = new THREE.Mesh(beamGeo, null); m.layers.set(FX); m.renderOrder = 11 + k; m.frustumCulled = false; scene.add(m); return m; }));
-  const vA = new THREE.Vector3(), vB = new THREE.Vector3(), vD = new THREE.Vector3(), vS = new THREE.Vector3(), vN = new THREE.Vector3(), mB = new THREE.Matrix4();
+  const vA = new THREE.Vector3(), vB = new THREE.Vector3(), vD = new THREE.Vector3(), vS = new THREE.Vector3(), vN = new THREE.Vector3(), vM = new THREE.Vector3(), mB = new THREE.Matrix4();
   function layBeams(list, glow) {
+    const pxm = (H / 2) / Math.tan(camera.fov * Math.PI / 360);      // pixels a metre covers at one metre
     list.forEach((bm, i) => {
-      const ms = beamMesh(i); vA.set(...bm.a); vB.set(...bm.b); vD.subVectors(vB, vA); const len = vD.length(); vD.normalize();
-      vN.subVectors(camera.position, vA.clone().add(vB).multiplyScalar(0.5)).normalize(); vS.crossVectors(vD, vN).normalize(); vN.crossVectors(vS, vD);
-      const g = bm.gain ?? 1, widths = [0.24 * g * glow, 0.085 * (0.6 + 0.4 * g), 0.032], cols = ["#7a3cff", "#c79bff", "#ffffff"], alphas = [0.16, 0.5, 1];
-      ms.forEach((m, k) => { m.visible = true; mB.makeBasis(vD, vS, vN); m.quaternion.setFromRotationMatrix(mB); m.position.copy(vA).addScaledVector(vD, len / 2); m.scale.set(len, widths[k], 1);
-        m.material = mat(cols[k], { kind: 7, additive: true, alpha: Math.round(clamp(alphas[k] * (k < 2 ? Math.min(1.5, g) : 1), 0, 1) * 20) / 20, fog: 0.15 }); });
+      const ms = beamMesh(i); vA.set(...bm.a); vB.set(...bm.b); vD.subVectors(vB, vA); const len = vD.length(); vD.normalize(); vM.copy(vA).addScaledVector(vD, len / 2);
+      vN.subVectors(camera.position, vM); const dist = Math.max(0.5, vN.length()), px = dist / pxm; vN.normalize(); vS.crossVectors(vD, vN).normalize(); vN.crossVectors(vS, vD);
+      const g = bm.gain ?? 1, widths = [Math.max(0.34 * g * glow, 22 * px), Math.max(0.1 * (0.6 + 0.4 * g), 9 * px), Math.max(0.04, 4.2 * px)], cols = ["#7a3cff", "#c79bff", "#ffffff"], alphas = [0.22, 0.6, 1];
+      ms.forEach((m, k) => { m.visible = true; mB.makeBasis(vD, vS, vN); m.quaternion.setFromRotationMatrix(mB); m.position.copy(vM); m.scale.set(len, widths[k], 1);
+        m.material = mat(cols[k], { kind: 7, flag: 1, map: k ? coreTex : softTex, additive: true, alpha: Math.round(clamp(alphas[k] * Math.min(1.4, g), 0, 1) * 20) / 20, fog: 0.15 }); });
     });
     for (let i = list.length; i < beams.length; i++) beams[i].forEach((m) => { m.visible = false; });
   }
@@ -248,7 +259,7 @@ export async function createCore(renderer, o = {}) {
   const NS = 5, slabs = Array.from({ length: NS }, () => { const planes = [new THREE.Plane(new THREE.Vector3(0, 0, 1), 0), new THREE.Plane(new THREE.Vector3(0, 0, -1), 0)], cache = new Map(), g = new THREE.Group(); scene.add(g);
     const caps = [new THREE.Group(), new THREE.Group()]; caps.forEach((c) => { scene.add(c); });
     return { planes, g, caps, drones: createDrones({ ...kit, mat: (c, o2) => clipped(mat(c, o2), planes, cache) }, g) }; });
-  const HEATS = ["#ffffff", "#fff3c4", "#ffd27a", "#ffb060", "#ff8a4a", "#e8683f", "#c24a4a"].map((c) => mat(c, { kind: 1, fog: 0.3 }));
+  const HEATS = ["#ffffff", "#fff3c4", "#ffd27a", "#ffb060", "#ff8a4a", "#e8683f", "#c24a4a"];
   // the cut face of the enforcer at c metres along it from its middle (machines/drones.js buildEnforcer says what is where)
   function capShapes(c) {
     const l = [[0, 0, 1.15, 0.95], [0.9, 0.12, 0.6, 0.6, 1], [-0.9, 0.12, 0.6, 0.6, 1]];
@@ -258,20 +269,22 @@ export async function createCore(renderer, o = {}) {
     if (c > -0.5 && c < 0.2) l.push([0, 0.53, 0.95, 0.12]);
     return l;
   }
-  // a cut face: the glowing edge of the cut (it cools), and inside it the machine in section, dark, with what it is full of
-  const gutA = mat("#2a2247", { kind: 1, fog: 0.3 }), gutB = mat("#6d6398", { kind: 1, fog: 0.3 }), gutC = mat("#e8d29a", { kind: 1, fog: 0.3 });
-  function setCap(group, c, heat) {
+  // a cut face: the glowing edge of the cut (it cools), and inside it the machine in section, dark, with what it is
+  // full of. Flat shapes with a feathered edge (their own alpha), so their outlines do not stair-step.
+  const feather = (round) => { const t = canvasTex(256, 256, (c) => { c.clearRect(0, 0, 256, 256); c.filter = "blur(1.6px)"; c.fillStyle = "#fff"; if (round) { c.beginPath(); c.arc(128, 128, 122, 0, 7); c.fill(); } else c.fillRect(5, 5, 246, 246); }); t.premultiplyAlpha = false; return t; };
+  const rectTex = feather(false), discTex = feather(true), flat = (c, round) => { const m = mat(c, { kind: 7, flag: 1, map: round ? discTex : rectTex, fog: 0.3 }); m.depthWrite = true; return m; };
+  const HOT = [0, 1].map((round) => HEATS.map((c) => flat(c, round))), gut = (c) => [flat(c, 0), flat(c, 1)], gutA = gut("#2a2247"), gutB = gut("#6d6398"), gutC = gut("#e8d29a");
+  function setCap(group, c, heat, order) {
     if (group.userData.c !== c) {
-      group.clear(); const r = rng(Math.round(c * 100) + 700), add = (g, m, x, y, z, hot) => { const q = new THREE.Mesh(g, m); q.position.set(x, y, z); q.layers.set(FX); q.frustumCulled = false; q.userData.hot = hot; group.add(q); };
-      for (const [x, y, w, h, round] of capShapes(c)) {
-        add(round ? new THREE.CircleGeometry(w / 2, 20) : new THREE.PlaneGeometry(w, h), HEATS[0], x, y, 0, true);
-        add(round ? new THREE.CircleGeometry(w / 2 - 0.05, 20) : new THREE.PlaneGeometry(w - 0.1, h - 0.1), gutA, x, y, 0.002, false);
-        if (round) { add(new THREE.CircleGeometry(w * 0.28, 16), gutB, x, y, 0.004, false); add(new THREE.CircleGeometry(w * 0.16, 12), gutA, x, y, 0.006, false); }
-        else if (h > 0.5) for (let k = 0; k < 9; k++) { const bw = 0.1 + 0.25 * r(), bh = 0.08 + 0.2 * r(); add(new THREE.PlaneGeometry(bw, bh), k % 4 === 3 ? gutC : gutB, x + (r() - 0.5) * (w - 0.3 - bw), y + (r() - 0.5) * (h - 0.3 - bh), 0.004, false); }
+      group.clear(); const r = rng(Math.round(c * 100) + 700), add = (round, w, h, m, x, y, z, hot) => { const q = new THREE.Mesh(new THREE.PlaneGeometry(w, h), m); q.position.set(x, y, z); q.layers.set(FX); q.frustumCulled = false; q.userData.hot = hot ? 1 + round : 0; q.renderOrder = order + (hot ? 0 : z > 0.003 ? 2 : 1); group.add(q); };
+      for (const [x, y, w, h, round = 0] of capShapes(c)) {
+        add(round, w + 0.04, h + 0.04, HOT[round][0], x, y, 0, true); add(round, w - 0.1, h - 0.1, gutA[round], x, y, 0.002, false);
+        if (round) { add(1, w * 0.56, w * 0.56, gutB[1], x, y, 0.004, false); add(1, w * 0.32, w * 0.32, gutA[1], x, y, 0.006, false); }
+        else if (h > 0.5) for (let k = 0; k < 9; k++) { const bw = 0.1 + 0.25 * r(), bh = 0.08 + 0.2 * r(); add(0, bw, bh, (k % 4 === 3 ? gutC : gutB)[0], x + (r() - 0.5) * (w - 0.3 - bw), y + (r() - 0.5) * (h - 0.3 - bh), 0.004, false); }
       }
       group.userData.c = c;
     }
-    const k = Math.min(HEATS.length - 1, Math.floor((1 - heat) * HEATS.length)); group.children.forEach((m) => { if (m.userData.hot) m.material = HEATS[k]; });
+    const k = Math.min(HEATS.length - 1, Math.floor((1 - heat) * HEATS.length)); group.children.forEach((m) => { if (m.userData.hot) m.material = HOT[m.userData.hot - 1][k]; });
   }
 
   function update(cam, frame, sync, opt = {}) {
@@ -282,7 +295,7 @@ export async function createCore(renderer, o = {}) {
       j.g.position.set(j.at[0] + dr[0] * t, j.at[1] + dr[1] * t, j.at[2] + dr[2] * t); j.g.quaternion.setFromAxisAngle(ax, r() * 6.28 + sp * t); }
     for (const cb of cables) { cb.m.geometry.dispose(); cb.m.geometry = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cablePts(cb, t)), 44, 0.045, 6, false); }
     if (opt.emitters && !turrets) buildTurrets(opt.emitters);
-    flares.forEach((f, i) => { const on = !!opt.emitters?.[i]?.on; f.lens.visible = on; f.halo.visible = on; if (on) { f.halo.quaternion.copy(camera.quaternion); const s = 0.9 * w.beams * (hash(frame >> 1, i) > 0.15 ? 1 : 0.7); f.halo.scale.set(s * 1.5, s, 1); } });
+    flares.forEach((f, i) => { const on = !!opt.emitters?.[i]?.on; f.lens.visible = on; f.halo.visible = on; if (on) { f.halo.quaternion.copy(camera.quaternion); const s = 0.42 * w.beams * (hash(frame >> 1, i) > 0.15 ? 1 : 0.7); f.halo.scale.set(s * 1.5, s, 1); } });
     layBeams(opt.beams ?? [], w.beams);
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
     const sl = opt.slabs;
@@ -292,7 +305,7 @@ export async function createCore(renderer, o = {}) {
       s.planes[0].constant = -(p[2] + lo); s.planes[1].constant = p[2] + hi;
       s.drones.update([{ type: "enforcer", pos: p, yaw: 0, pitch: 0, roll: roll * 180 / Math.PI, eye: 0, thrust: 0, fold: 1, beam: 0, seed: 77 }], frame, sync, camera, { thrust: 0 });
       s.g.traverse((x) => { if (x.isMesh) x.layers.set(FX); });
-      [[lo, j > 0, Math.PI], [hi, j < NS - 1, 0]].forEach(([c, has, turn], k) => { const cg = s.caps[k]; cg.visible = has; if (!has) return; setCap(cg, c, sl.heat ?? 1); cg.position.set(p[0], p[1], p[2] + c + (k ? -0.004 : 0.004)); cg.rotation.set(0, turn, k ? roll : -roll); });
+      [[lo, j > 0, Math.PI], [hi, j < NS - 1, 0]].forEach(([c, has, turn], k) => { const cg = s.caps[k]; cg.visible = has; if (!has) return; setCap(cg, c, sl.heat ?? 1, 20 + j * 4); cg.position.set(p[0], p[1], p[2] + c + (k ? -0.004 : 0.004)); cg.rotation.set(0, turn, k ? roll : -roll); });
     });
     shadows.update(opt.shadows);
     return { scene, camera, wires: w, clear: opt.clear ?? 0xb799ed, post: { inkColor: [0.13, 0.07, 0.3], shadowTint: [0.03, 0.012, 0.07], bloom: 0.75, bloomThreshold: 0.86, diffusion: 0.12, contrast: 0.34, sat: 1.1, inkFar: 0.02, ...opt.post } };

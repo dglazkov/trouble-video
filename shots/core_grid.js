@@ -6,7 +6,7 @@ import { beamsOver, glints, motes } from "./core_fx.js";
 const FRAMES = CUT.face - CUT.grid;
 export function gridCamera(F) {
   const n = noorAt(F), u = (F - CUT.grid) / FRAMES, roll = -0.05 + 0.08 * u;
-  return { pos: [n.x + 2.1 - 0.4 * u, n.y + 2.5 - 0.3 * u, n.z - 3.7], target: [n.x - 0.75, n.y + 1.0, n.z + 3.2], fov: 38, up: [Math.sin(roll), Math.cos(roll), 0] };
+  return { pos: [n.x + 1.5 - 0.3 * u, n.y + 2.5 - 0.3 * u, n.z - 3.7], target: [n.x - 0.35, n.y + 1.0, n.z + 3.2], fov: 38, up: [Math.sin(roll), Math.cos(roll), 0] };
 }
 function frame(f, sync) {
   const F = CUT.grid + f, opt = coreOptions(F), k = beamRim(F);

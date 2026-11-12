@@ -29,11 +29,11 @@ function frame(f, sync) {
     cels: [{ plate, x: px, y: py, scale: k, turn, layer: { tint: [0.97, 0.93, 1.04], rim: [1, 0.95, 1].map((v) => v * (0.55 + 0.6 * flare)), rimDir: [5 + 4 * flare, 4],
       warp: 3.2, warpDir: [0.25, 0.97], warpTime: f2 * 0.16, warpStill: [0.5, 0.47], warpRadius: 0.2 } }],
     under(g) {
-      if (dropOn) beam(g, W * 0.5, topY + dy, -0.07, 9, 0.9 + 0.7 * near(S2));
       if (f >= S3 - 4) { beam(g, W * 0.56, H * 0.4, sa, 8, 0.9 + 0.7 * near(S3)); beam(g, W * 0.4, H * 0.46, -sa - 0.1, 8, 0.9 + 0.7 * near(S3)); }
     },
     overlay(g, cam) {
       motes(g, cam, F, 60, [8, 6, 8], [n.x, n.y + 1.4, n.z]);
+      if (dropOn) beam(g, W * 0.5, topY + dy, -0.05, 7, 0.9 + 0.7 * near(S2));
       if (slashOn) beam(g, W / 2, sy, -0.035, f - S1 === -1 || f === S1 ? 9 : 20, 1.5);
       if (f >= S2 && f < S2 + 6) { const R = [120, 90, 66, 44, 26, 12][f - S2]; g.save(); g.translate(W * 0.5 - 30, topY + 8); g.rotate(0.3); g.fillStyle = HOT; g.beginPath(); for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4, r = i % 2 ? R * 0.13 : R; g.lineTo(Math.cos(a) * r, Math.sin(a) * r); } g.closePath(); g.fill(); g.restore(); }
     } };

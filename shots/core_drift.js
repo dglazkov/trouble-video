@@ -3,6 +3,7 @@
 // away behind. In that mouth an eye opens on a percussion tick (2022); the enforcer comes out after them on the
 // keyboard (2032); and the core's security grid wakes round them, a bank of emitters on each tick of the six that
 // follow (2036-2061). Noor does not look round. The camera rolls a little, slowly: there is no up here.
+import { motes } from "./core_fx.js";
 import { FPS, CUT, CAST, EV, startOf, ease, noorAt, coreOptions, adrift, asDrawn } from "./core_cast.js";
 const FRAMES = CUT.grid - CUT.drift;
 export function driftCamera(F) {
@@ -11,7 +12,7 @@ export function driftCamera(F) {
 }
 function frame(f, sync) {
   const F = CUT.drift + f;
-  return { set: "core", camera: driftCamera(F), options: coreOptions(F), actors: [adrift(F, "front")] };
+  return { set: "core", camera: driftCamera(F), options: coreOptions(F), actors: [adrift(F, "front")], overlay(g, cam) { motes(g, cam, F); } };
 }
 export default { name: "core_drift", start: startOf("drift"), frames: FRAMES, fps: FPS, cutOn: "brass", held: asDrawn,
   marks: [{ at: EV.eye - CUT.drift, what: "an eye in the duct", on: "percussion" }, { at: EV.emerge - CUT.drift, what: "the enforcer comes out", on: "keyboard" },

@@ -18,9 +18,11 @@
 //   close  2151  the enforcer follows the same way in and the grid closes on it: a beam bites on each drum hit
 //                (2156-2191), they tighten (2196, 2201) and go through it (2211). It comes apart in slices as Noor
 //                touches down on the far side (2221), back to it throughout. The kick is the next frame after 2229.
-import { proportions } from "../engine/body.js";
+import { proportions, solve } from "../engine/body.js";
+import { actorPose } from "../engine/actions.js";
 import { ISLAND, LAT } from "../sets/coreplan.js";
 export const FPS = 24;
+export const P = proportions({ height: 1.82, heads: 7.5 });
 export const CUT = { duct: 1893, play: 1923, open: 1952, drift: 1992, grid: 2071, face: 2111, close: 2151, end: 2230 };
 export const startOf = (name) => CUT[name] / FPS;
 export const CAST = { noor: "/kits/noor" };
@@ -35,19 +37,26 @@ const D = Math.PI / 180;
 
 // ---- the place: sets/coreplan.js (the duct to its lip at z = 0, the lattice, the island's deck from z = ISLAND) ----------
 export { ISLAND, LAT } from "../sets/coreplan.js";
-export const P = proportions({ height: 1.82, heads: 7.5 });
 
 // ---- Noor ---------------------------------------------------------------------------------------------------------------
 // Where Noor is (the point under the feet): at the lip, a step off it on 1972, then adrift at SPEED along +Z, rising
 // a little and coming down to the island's deck on 2221. They never turn and never look back.
 export const SPEED = 2.0;
+const ball = (action, phase, side) => solve(P, actorPose({ who: "noor", action, phase })).J[side].ball[2];
+// the step off the lip is one drawing: the figure moves on over the foot that stays planted (the right) by what the two
+// drawings' legs differ, on the step's own note, and is still until it lifts off
+const Z_LIP = -0.3, STEP_ON = ball("core_step", 0, "R") - ball("core_step", 0.5, "R");
+// the touchdown: the boot that comes down skids to a stop (SKID frames), the figure coming on over it by what the
+// landing's two drawings differ, so the standing drawing's foot is where the sliding one ended
+export const SKID = 4, LAND_ON = ball("core_land", 0.4, "L") - ball("core_land", 0.8, "L");
 export function noorAt(F) {
-  const z0 = -0.3, zd = (G) => z0 + SPEED * (G - EV.step) / FPS;
-  if (F <= EV.step) return { x: 0, y: 0, z: z0 };
-  // coming in to the deck the last half second is slower (a foot reaching down), and then they stand
-  const slow = (G) => { const u = clamp((G - (EV.land - 12)) / 12); return zd(Math.min(G, EV.land - 12)) + SPEED * 12 / FPS * (u - 0.3 * u * u); };
-  const G = Math.min(F, EV.land), u = clamp((G - EV.off) / (EV.land - EV.off));
-  return { x: 0.25 * Math.sin(Math.PI * 2 * u) * Math.sin(Math.PI * u), y: 0.9 * Math.sin(Math.PI * u) ** 1.15, z: slow(G) };
+  if (F < EV.step) return { x: 0, y: 0, z: Z_LIP };
+  if (F < EV.off) return { x: 0, y: 0, z: Z_LIP + STEP_ON };
+  const zd = (G) => Z_LIP + STEP_ON + SPEED * (G - EV.off) / FPS;
+  // coming in to the deck the last half second is slower (a foot reaching down)
+  const slow = (G) => { const u = clamp((G - (EV.land - 12)) / 12); return zd(Math.min(G, EV.land - 12)) + SPEED * 12 / FPS * (u - 0.2 * u * u); };
+  const G = Math.min(F, EV.land), u = clamp((G - EV.off) / (EV.land - EV.off)), k = clamp((F - EV.land) / SKID), skid = LAND_ON * (1 - (1 - k) ** 2);
+  return { x: 0.25 * Math.sin(Math.PI * 2 * u) * Math.sin(Math.PI * u), y: 0.9 * Math.sin(Math.PI * u) ** 1.15, z: slow(G) + skid };
 }
 // The drift is drawn four times over for each camera that sees it (the hair and the coat at four moments of one slow
 // billow; the body does not move). From in front the four are a cycle, each held six frames; from behind they are a
@@ -59,7 +68,7 @@ export const asDrawn = (f) => f;      // a shot's `held`: its figures' drawings 
 // It comes down the duct after them (its eye shows in the dark on 2022, its face is at the lip by 2046), follows the
 // same line across, and is inside the lattice when the grid closes: held from the second bite (2161) at z = HELD.
 export const HELD = 9.6;
-const EKEYS = [[1960, -38], [2000, -30], [2022, -8], [2032, -5], [2050, -1.2], [2071, 1.3], [2151, 8.2], [2163, HELD], [2400, HELD]];
+const EKEYS = [[1960, -39], [2000, -36], [2022, -17], [2032, -10.5], [2050, -2.2], [2071, 1.3], [2151, 8.2], [2163, HELD], [2400, HELD]];
 const ezRaw = (F) => { let i = 0; while (i < EKEYS.length - 2 && F > EKEYS[i + 1][0]) i++; const [a, za] = EKEYS[i], [b, zb] = EKEYS[i + 1]; return lerp(za, zb, clamp((F - a) / (b - a))); };
 const ez = (F) => { let s = 0; for (let k = -6; k <= 6; k++) s += ezRaw(F + k); return s / 13; };
 const pathY = (z) => 0.9 * Math.sin(Math.PI * clamp((z - 0.1) / 20.3)) ** 1.15;
@@ -102,16 +111,16 @@ const idleOff = (i, F) => (i % 2 ? 1 : -1) * (3.3 + 1.1 * Math.sin(F * (0.021 + 
 const MISS = [[EV.miss[0], 150, [0.0, 1.92], 1], [EV.miss[1], 270, [0.37, 1.2], -1], [EV.miss[2], 30, [0.0, -0.04], 1]];
 const BEAMS = [];
 MISS.forEach(([on, at, pt, side], i) => { const n = noorAt(on); BEAMS.push({ kind: "miss", i, on, at, z: n.z + 0.1, bank: i, C: [n.x + pt[0], n.y + pt[1]], side }); });
-CUTS.forEach((c, p) => [0, 1].forEach((h) => { const k = p * 2 + h, order = [0, 5, 2, 7, 4, 1, 6, 3][k]; BEAMS.push({ kind: "close", i: 3 + k, on: EV.bite[order], at: [90, 270, 330, 150, 30, 210, 270, 90][k] , z: HELD + c, bank: (k + 1) % 6, side: h ? -1 : 1, order }); }));
-[[7.6, 30], [11.3, 210], [12.2, 90], [13.1, 330], [14.0, 150], [14.9, 270], [15.8, 30], [16.5, 210], [11.8, 330]].forEach(([z, at], k) => BEAMS.push({ kind: "idle", i: 11 + k, z, at, bank: (k + 3) % 6 }));
+CUTS.forEach((c, p) => [0, 1].forEach((h) => { const k = p * 2 + h, order = [0, 5, 2, 7, 4, 1, 6, 3][k]; BEAMS.push({ kind: "close", i: 3 + k, on: EV.bite[order], at: [90, 270, 0, 180, 60, 240, 300, 120][k] , z: HELD + c, bank: (k + 1) % 6, side: h ? -1 : 1, order }); }));
+[[7.6, 0], [11.3, 240], [12.2, 120], [13.1, 300], [14.0, 60], [14.9, 180], [15.8, 30], [16.5, 210], [11.8, 150]].forEach(([z, at], k) => BEAMS.push({ kind: "idle", i: 11 + k, z, at, bank: (k + 3) % 6 }));
 export const EMITTERS = BEAMS.map((b) => ({ at: hexAt(b.at, b.z), deg: b.at, bank: b.bank }));
 // The lattice at song frame F: [{ a, b (ends), near (the point nearest what it threatens), gain 0..1.6, kind, touch: it is on the hull }]
 export function beamsAt(F) {
   const out = [];
   for (const b of BEAMS) {
     const wake = EV.wake[b.bank], E = hexAt(b.at, b.z); if (F < wake) continue;
-    if (F >= EV.cut + 3) continue;
-    let off, C = [0, LAT.y], gain = 0.8, touch = false, flick = F - wake < 4 ? [1.5, 0.2, 1.2, 0.6][F - wake] : 1;
+    if (F >= EV.cut + 6) continue;      // the cut made, they go out over a few frames
+    let off, C = [0, LAT.y], gain = 0.8, touch = false, flick = F - wake < 4 ? [1.5, 0.2, 1.2, 0.6][F - wake] : F > EV.cut + 1 ? [0.75, 0.5, 0.3, 0.14][F - EV.cut - 2] : 1;
     if (b.kind === "miss") {
       // clear of the way; in on the note (five frames, stopping dead); held two; away again
       const far = 3.2 + 0.5 * Math.sin(F * 0.03 + b.i), u = F - b.on; C = b.C;
@@ -133,7 +142,7 @@ export function beamsAt(F) {
   return out;
 }
 // which emitters are awake at F (the set lights their lenses)
-export const awake = (F) => EMITTERS.map((e) => F >= EV.wake[e.bank] && F < EV.cut + 3);
+export const awake = (F) => EMITTERS.map((e) => F >= EV.wake[e.bank] && F < EV.cut + 4);
 // ---- light on Noor: a hard rim that flares as a beam stops by them -------------------------------------------------------
 export function beamRim(F, events = EV.miss) { let k = 0; for (const on of events) k = Math.max(k, Math.exp(-Math.abs(F - on) / 2.2)); return k; }
 // ---- what every shot in the core gives the set (sets/core.js) at song frame F ----------------------------------------------
