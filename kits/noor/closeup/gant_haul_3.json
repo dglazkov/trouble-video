@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: only IFE (the small girl hanging from the backpack) changes: her two LEGS have swapped places, as in the next step of pedalling the air (the leg that was higher is now lower and bent, the one that was lower is now kicked back higher), and her eyes are squeezed shut with her mouth open in a wail; Noor does not change at all",
+ "refs": [
+  "kits/noor/closeup/gant_haul_2.jpg"
+ ],
+ "kind": "edit:plate:gant_haul",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T09:24:00",
+ "from": "kits/noor/closeup/gant_haul_2.jpg"
+}

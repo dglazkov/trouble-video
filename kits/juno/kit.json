@@ -1108,6 +1108,56 @@
      }
     }
    }
+  },
+  "gant_slide": {
+   "views": {
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "gant_slide/side/0.webp",
+       "w": 1700,
+       "h": 1073,
+       "k": 1000.0,
+       "ground": [
+        984.2,
+        1031.1
+       ],
+       "bottom": 1063,
+       "hips": [
+        984.2,
+        787.2
+       ],
+       "head": [
+        1253.9,
+        292.8
+       ],
+       "source": "kits/juno/source/gant_slide/side/take_2.jpg"
+      },
+      "1": {
+       "img": "gant_slide/side/1.webp",
+       "w": 1973,
+       "h": 765,
+       "k": 1000.0,
+       "ground": [
+        985.4,
+        669.6
+       ],
+       "bottom": 756,
+       "hips": [
+        985.4,
+        546.8
+       ],
+       "head": [
+        1358.6,
+        259.1
+       ],
+       "source": "kits/juno/source/gant_slide/side/take_2.jpg"
+      }
+     }
+    }
+   }
   }
  },
  "heroes": {

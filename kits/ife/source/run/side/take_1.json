@@ -1,0 +1,1171 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: 8 posing mannequins in a 4x2 grid, the 8 successive drawings of ONE run cycle (reading left to right, top row then bottom row). Paint the character from the SECOND image (her model sheet) over every mannequin, as 8 finished key drawings by the same animator. The second image only shows what she looks like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 8 figures of the first image, each in its mannequin's pose and place, and nothing else. For each of the 8: keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), so the 8 figures stay the same size as each other. BLUE limbs are her LEFT arm and leg; RED limbs are her RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. She faces and moves toward the viewer's LEFT, seen exactly from the side (her left side toward the viewer, her face in profile). How she does it: she scurries with short quick steps, leaning in, elbows tight and fists pumping high, eyes wide and worried; the backpack computer bounces on her back and its monitor wobbles on its arm, the cables swinging. Each figure has exactly two arms and two legs, and both feet are drawn complete. Wherever her face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. All 8 drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: Ife, a small 14-year-old girl, the smallest of her friends (about five and a half heads tall), with dark brown skin. HAIR: black hair parted in the middle and tied up in two big round afro puffs, one on each side of the top of her head. GLASSES: enormous perfectly round thin-rimmed glasses; the lenses are clear, so her skin and her eyes show through them exactly as the rest of her face does (never tinted, never the background colour). JUMPER: an oversized plain pale-green knitted jumper with a thick rolled turtle neck, ribbed hem and cuffs, and baggy sleeves that come down to her knuckles. SHORTS AND LEGGINGS: short plain grey shorts with a turned-up hem over plain dark navy leggings. SHOES: plain dark-grey canvas trainers with grey laces and grey soles. BACKPACK COMPUTER: a boxy beige retro computer worn on her back as a backpack with two beige shoulder straps over the jumper; from its top a short grey jointed metal arm holds a small beige CRT monitor in the air above HER LEFT shoulder, beside her head, its dark-green screen facing forward with a few rows of small bright-green dashes on it; three short loose cables (red, yellow, blue) hang from the bottom of the pack. FACE: big round dark eyes, small worried eyebrows, a small mouth. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on her. Nothing readable on the screen. Her hands are empty. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap.",
+ "refs": [
+  "kits/ife/source/run/side/layout.png",
+  "out/ref/ife_design.png"
+ ],
+ "kind": "cels:run/side",
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-12T09:16:12",
+ "layout": {
+  "action": "run",
+  "loose": false,
+  "float": false,
+  "prop": null,
+  "view": "side",
+  "yaw": 90,
+  "elev": 5,
+  "W": 2752,
+  "H": 1536,
+  "cols": 4,
+  "rows": 2,
+  "unit": 424,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "box": [
+     0,
+     0,
+     688,
+     768
+    ],
+    "ground": [
+     328.44,
+     701.4
+    ],
+    "joints": {
+     "hips": [
+      328.44,
+      404.77
+     ],
+     "waist": [
+      311.77,
+      356.57
+     ],
+     "chest": [
+      294.05,
+      305.29
+     ],
+     "neckBase": [
+      280.68,
+      266.6
+     ],
+     "headBase": [
+      275.26,
+      234.33
+     ],
+     "head": [
+      283.27,
+      180.22
+     ],
+     "crown": [
+      291.28,
+      126.11
+     ],
+     "L.sh": [
+      289.41,
+      282.79
+     ],
+     "L.elbow": [
+      300.52,
+      375.27
+     ],
+     "L.wrist": [
+      216.43,
+      370.49
+     ],
+     "L.hand": [
+      186.4,
+      368.78
+     ],
+     "L.hip": [
+      326.98,
+      407.5
+     ],
+     "L.knee": [
+      260.82,
+      535.95
+     ],
+     "L.ankle": [
+      231.29,
+      673.1
+     ],
+     "L.heel": [
+      244.47,
+      704.67
+     ],
+     "L.toe": [
+      163.16,
+      682.51
+     ],
+     "R.sh": [
+      280.57,
+      275.36
+     ],
+     "R.elbow": [
+      256.84,
+      363.25
+     ],
+     "R.wrist": [
+      186.34,
+      318.87
+     ],
+     "R.hand": [
+      161.15,
+      303.02
+     ],
+     "R.hip": [
+      329.89,
+      402.04
+     ],
+     "R.knee": [
+      344.34,
+      543.62
+     ],
+     "R.ankle": [
+      469.19,
+      478.16
+     ],
+     "R.heel": [
+      503.51,
+      478.83
+     ],
+     "R.toe": [
+      450.46,
+      544.09
+     ]
+    },
+    "face": [
+     -0.988,
+     -0.144,
+     0.059
+    ]
+   },
+   {
+    "index": 1,
+    "box": [
+     688,
+     0,
+     1376,
+     768
+    ],
+    "ground": [
+     1016.44,
+     701.4
+    ],
+    "joints": {
+     "hips": [
+      1016.44,
+      412.55
+     ],
+     "waist": [
+      999.77,
+      364.34
+     ],
+     "chest": [
+      982.05,
+      313.07
+     ],
+     "neckBase": [
+      968.68,
+      274.38
+     ],
+     "headBase": [
+      963.26,
+      242.11
+     ],
+     "head": [
+      971.56,
+      188.07
+     ],
+     "crown": [
+      979.86,
+      134.02
+     ],
+     "L.sh": [
+      966.51,
+      294.29
+     ],
+     "L.elbow": [
+      934.98,
+      382.06
+     ],
+     "L.wrist": [
+      870.68,
+      327.88
+     ],
+     "L.hand": [
+      847.72,
+      308.53
+     ],
+     "L.hip": [
+      1018.58,
+      415.27
+     ],
+     "L.knee": [
+      979.29,
+      554.32
+     ],
+     "L.ankle": [
+      1046.43,
+      677.68
+     ],
+     "L.heel": [
+      1067.5,
+      704.67
+     ],
+     "L.toe": [
+      983.21,
+      704.67
+     ],
+     "R.sh": [
+      979.47,
+      279.42
+     ],
+     "R.elbow": [
+      998.66,
+      368.45
+     ],
+     "R.wrist": [
+      914.72,
+      372.91
+     ],
+     "R.hand": [
+      884.75,
+      374.5
+     ],
+     "R.hip": [
+      1014.29,
+      409.83
+     ],
+     "R.knee": [
+      938.7,
+      530.76
+     ],
+     "R.ankle": [
+      1073.14,
+      574.78
+     ],
+     "R.heel": [
+      1103.82,
+      590.11
+     ],
+     "R.toe": [
+      1027.74,
+      626.26
+     ]
+    },
+    "face": [
+     -0.987,
+     -0.154,
+     -0.054
+    ]
+   },
+   {
+    "index": 2,
+    "box": [
+     1376,
+     0,
+     2064,
+     768
+    ],
+    "ground": [
+     1704.44,
+     701.4
+    ],
+    "joints": {
+     "hips": [
+      1704.44,
+      381.17
+     ],
+     "waist": [
+      1687.77,
+      332.96
+     ],
+     "chest": [
+      1670.05,
+      281.69
+     ],
+     "neckBase": [
+      1656.68,
+      243
+     ],
+     "headBase": [
+      1651.26,
+      210.73
+     ],
+     "head": [
+      1659.53,
+      156.8
+     ],
+     "crown": [
+      1667.8,
+      102.87
+     ],
+     "L.sh": [
+      1647.51,
+      265.2
+     ],
+     "L.elbow": [
+      1592.05,
+      340.08
+     ],
+     "L.wrist": [
+      1555.34,
+      264.4
+     ],
+     "L.hand": [
+      1542.23,
+      237.36
+     ],
+     "L.hip": [
+      1708.91,
+      383.87
+     ],
+     "L.knee": [
+      1765.25,
+      516.93
+     ],
+     "L.ankle": [
+      1846.2,
+      631.8
+     ],
+     "L.heel": [
+      1879.86,
+      638.52
+     ],
+     "L.toe": [
+      1816.05,
+      693.38
+     ],
+     "R.sh": [
+      1674.47,
+      245.75
+     ],
+     "R.elbow": [
+      1719.27,
+      326.84
+     ],
+     "R.wrist": [
+      1645.36,
+      363.46
+     ],
+     "R.hand": [
+      1618.96,
+      376.53
+     ],
+     "R.hip": [
+      1699.96,
+      378.47
+     ],
+     "R.knee": [
+      1576.52,
+      451.14
+     ],
+     "R.ankle": [
+      1622.91,
+      584.7
+     ],
+     "R.heel": [
+      1645.93,
+      610.06
+     ],
+     "R.toe": [
+      1561.87,
+      616.29
+     ]
+    },
+    "face": [
+     -0.979,
+     -0.16,
+     -0.128
+    ]
+   },
+   {
+    "index": 3,
+    "box": [
+     2064,
+     0,
+     2752,
+     768
+    ],
+    "ground": [
+     2392.44,
+     701.4
+    ],
+    "joints": {
+     "hips": [
+      2392.44,
+      421
+     ],
+     "waist": [
+      2375.77,
+      372.8
+     ],
+     "chest": [
+      2358.05,
+      321.52
+     ],
+     "neckBase": [
+      2344.68,
+      282.83
+     ],
+     "headBase": [
+      2339.26,
+      250.57
+     ],
+     "head": [
+      2347.24,
+      196.8
+     ],
+     "crown": [
+      2355.22,
+      143.03
+     ],
+     "L.sh": [
+      2336.35,
+      304.76
+     ],
+     "L.elbow": [
+      2283.49,
+      381.58
+     ],
+     "L.wrist": [
+      2243.05,
+      307.85
+     ],
+     "L.hand": [
+      2228.61,
+      281.52
+     ],
+     "L.hip": [
+      2396.63,
+      423.71
+     ],
+     "L.knee": [
+      2469.13,
+      548.69
+     ],
+     "L.ankle": [
+      2609.4,
+      565.45
+     ],
+     "L.heel": [
+      2642.68,
+      557.07
+     ],
+     "L.toe": [
+      2608.8,
+      633.96
+     ],
+     "R.sh": [
+      2361.63,
+      285.86
+     ],
+     "R.elbow": [
+      2403.58,
+      368.26
+     ],
+     "R.wrist": [
+      2327.72,
+      401.19
+     ],
+     "R.hand": [
+      2300.63,
+      412.95
+     ],
+     "R.hip": [
+      2388.24,
+      418.3
+     ],
+     "R.knee": [
+      2287.1,
+      519.24
+     ],
+     "R.ankle": [
+      2248.75,
+      655.32
+     ],
+     "R.heel": [
+      2261.93,
+      686.89
+     ],
+     "R.toe": [
+      2180.63,
+      664.74
+     ]
+    },
+    "face": [
+     -0.98,
+     -0.16,
+     -0.119
+    ]
+   },
+   {
+    "index": 4,
+    "box": [
+     0,
+     768,
+     688,
+     1536
+    ],
+    "ground": [
+     328.44,
+     1469.4
+    ],
+    "joints": {
+     "hips": [
+      328.44,
+      1172.77
+     ],
+     "waist": [
+      311.77,
+      1124.57
+     ],
+     "chest": [
+      294.05,
+      1073.29
+     ],
+     "neckBase": [
+      280.68,
+      1034.6
+     ],
+     "headBase": [
+      275.26,
+      1002.33
+     ],
+     "head": [
+      283.27,
+      948.71
+     ],
+     "crown": [
+      291.28,
+      895.08
+     ],
+     "L.sh": [
+      280.57,
+      1053.82
+     ],
+     "L.elbow": [
+      256.84,
+      1143.94
+     ],
+     "L.wrist": [
+      186.34,
+      1098.01
+     ],
+     "L.hand": [
+      161.15,
+      1081.61
+     ],
+     "L.hip": [
+      329.89,
+      1175.5
+     ],
+     "L.knee": [
+      344.34,
+      1319.27
+     ],
+     "L.ankle": [
+      469.19,
+      1252.7
+     ],
+     "L.heel": [
+      503.51,
+      1253.37
+     ],
+     "L.toe": [
+      450.46,
+      1318.63
+     ],
+     "R.sh": [
+      289.41,
+      1040.33
+     ],
+     "R.elbow": [
+      300.52,
+      1130.41
+     ],
+     "R.wrist": [
+      216.43,
+      1125.13
+     ],
+     "R.hand": [
+      186.4,
+      1123.24
+     ],
+     "R.hip": [
+      326.98,
+      1170.04
+     ],
+     "R.knee": [
+      260.82,
+      1296.31
+     ],
+     "R.ankle": [
+      231.29,
+      1434.56
+     ],
+     "R.heel": [
+      244.47,
+      1466.13
+     ],
+     "R.toe": [
+      163.16,
+      1443.98
+     ]
+    },
+    "face": [
+     -0.988,
+     -0.152,
+     -0.033
+    ]
+   },
+   {
+    "index": 5,
+    "box": [
+     688,
+     768,
+     1376,
+     1536
+    ],
+    "ground": [
+     1016.44,
+     1469.4
+    ],
+    "joints": {
+     "hips": [
+      1016.44,
+      1180.55
+     ],
+     "waist": [
+      999.77,
+      1132.34
+     ],
+     "chest": [
+      982.05,
+      1081.07
+     ],
+     "neckBase": [
+      968.68,
+      1042.38
+     ],
+     "headBase": [
+      963.26,
+      1010.11
+     ],
+     "head": [
+      971.56,
+      956.46
+     ],
+     "crown": [
+      979.86,
+      902.8
+     ],
+     "L.sh": [
+      979.47,
+      1057.85
+     ],
+     "L.elbow": [
+      998.66,
+      1149.06
+     ],
+     "L.wrist": [
+      914.72,
+      1154.53
+     ],
+     "L.hand": [
+      884.75,
+      1156.49
+     ],
+     "L.hip": [
+      1014.29,
+      1183.27
+     ],
+     "L.knee": [
+      938.7,
+      1306.4
+     ],
+     "L.ankle": [
+      1073.14,
+      1349.31
+     ],
+     "L.heel": [
+      1103.82,
+      1364.64
+     ],
+     "L.toe": [
+      1027.74,
+      1400.79
+     ],
+     "R.sh": [
+      966.51,
+      1051.87
+     ],
+     "R.elbow": [
+      934.98,
+      1137.7
+     ],
+     "R.wrist": [
+      870.68,
+      1085.38
+     ],
+     "R.hand": [
+      847.72,
+      1066.7
+     ],
+     "R.hip": [
+      1018.58,
+      1177.83
+     ],
+     "R.knee": [
+      979.29,
+      1314.68
+     ],
+     "R.ankle": [
+      1046.43,
+      1439.15
+     ],
+     "R.heel": [
+      1067.5,
+      1466.14
+     ],
+     "R.toe": [
+      983.21,
+      1466.14
+     ]
+    },
+    "face": [
+     -0.987,
+     -0.142,
+     0.08
+    ]
+   },
+   {
+    "index": 6,
+    "box": [
+     1376,
+     768,
+     2064,
+     1536
+    ],
+    "ground": [
+     1704.44,
+     1469.4
+    ],
+    "joints": {
+     "hips": [
+      1704.44,
+      1149.17
+     ],
+     "waist": [
+      1687.77,
+      1100.96
+     ],
+     "chest": [
+      1670.05,
+      1049.69
+     ],
+     "neckBase": [
+      1656.68,
+      1011
+     ],
+     "headBase": [
+      1651.26,
+      978.73
+     ],
+     "head": [
+      1659.53,
+      924.87
+     ],
+     "crown": [
+      1667.8,
+      871
+     ],
+     "L.sh": [
+      1674.47,
+      1023.95
+     ],
+     "L.elbow": [
+      1719.27,
+      1105.76
+     ],
+     "L.wrist": [
+      1645.36,
+      1144.82
+     ],
+     "L.hand": [
+      1618.96,
+      1158.78
+     ],
+     "L.hip": [
+      1699.96,
+      1151.87
+     ],
+     "L.knee": [
+      1576.52,
+      1226.74
+     ],
+     "L.ankle": [
+      1622.91,
+      1359.19
+     ],
+     "L.heel": [
+      1645.93,
+      1384.55
+     ],
+     "L.toe": [
+      1561.87,
+      1390.77
+     ],
+     "R.sh": [
+      1647.51,
+      1023
+     ],
+     "R.elbow": [
+      1592.05,
+      1097.62
+     ],
+     "R.wrist": [
+      1555.34,
+      1024.01
+     ],
+     "R.hand": [
+      1542.23,
+      997.72
+     ],
+     "R.hip": [
+      1708.91,
+      1146.47
+     ],
+     "R.knee": [
+      1765.25,
+      1277.33
+     ],
+     "R.ankle": [
+      1846.2,
+      1393.31
+     ],
+     "R.heel": [
+      1879.86,
+      1400.03
+     ],
+     "R.toe": [
+      1816.05,
+      1454.9
+     ]
+    },
+    "face": [
+     -0.979,
+     -0.136,
+     0.154
+    ]
+   },
+   {
+    "index": 7,
+    "box": [
+     2064,
+     768,
+     2752,
+     1536
+    ],
+    "ground": [
+     2392.44,
+     1469.4
+    ],
+    "joints": {
+     "hips": [
+      2392.44,
+      1189
+     ],
+     "waist": [
+      2375.77,
+      1140.8
+     ],
+     "chest": [
+      2358.05,
+      1089.52
+     ],
+     "neckBase": [
+      2344.68,
+      1050.83
+     ],
+     "headBase": [
+      2339.26,
+      1018.57
+     ],
+     "head": [
+      2347.24,
+      964.5
+     ],
+     "crown": [
+      2355.22,
+      910.44
+     ],
+     "L.sh": [
+      2361.63,
+      1064.09
+     ],
+     "L.elbow": [
+      2403.58,
+      1147.43
+     ],
+     "L.wrist": [
+      2327.72,
+      1182.7
+     ],
+     "L.hand": [
+      2300.63,
+      1195.29
+     ],
+     "L.hip": [
+      2388.24,
+      1191.71
+     ],
+     "L.knee": [
+      2287.1,
+      1294.84
+     ],
+     "L.ankle": [
+      2248.75,
+      1429.81
+     ],
+     "L.heel": [
+      2261.93,
+      1461.39
+     ],
+     "L.toe": [
+      2180.63,
+      1439.23
+     ],
+     "R.sh": [
+      2336.35,
+      1062.53
+     ],
+     "R.elbow": [
+      2283.49,
+      1138.84
+     ],
+     "R.wrist": [
+      2243.05,
+      1067.24
+     ],
+     "R.hand": [
+      2228.61,
+      1041.66
+     ],
+     "R.hip": [
+      2396.63,
+      1186.3
+     ],
+     "R.knee": [
+      2469.13,
+      1309.09
+     ],
+     "R.ankle": [
+      2609.4,
+      1326.95
+     ],
+     "R.heel": [
+      2642.68,
+      1318.58
+     ],
+     "R.toe": [
+      2608.8,
+      1395.47
+     ]
+    },
+    "face": [
+     -0.98,
+     -0.137,
+     0.145
+    ]
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/ife/source/run/side/layout_map.png"
+}

@@ -1,0 +1,451 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: 2 posing mannequins in a 2x1 grid, 2 key drawings of him sliding FEET FIRST along a smooth floor under a closing door, like a baseball slide, moving toward the viewer's LEFT: in the FIRST he has just dropped into the slide, leaning back with one hand trailing on the floor behind, one leg stretched out straight ahead and the other knee bent up; in the SECOND he is flat out, lying right back with the back of the head almost on the floor and both legs long, to get under the door's edge. Hair and loose clothes trail behind him (toward the viewer's right) (reading left to right). Paint the character from the SECOND image (his model sheet) over every mannequin, as 2 finished key drawings by the same animator. The second image only shows what he looks like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 2 figures of the first image, each in its mannequin's pose and place, and nothing else. For each of the 2: keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), so the 2 figures stay the same size as each other. BLUE limbs are his LEFT arm and leg; RED limbs are his RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. He faces and moves toward the viewer's LEFT, seen exactly from the side (his left side toward the viewer, his face in profile). Each figure has exactly two arms and two legs, and both feet are drawn complete. Wherever his face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. All 2 drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: Tane, a 16-year-old boy, stocky and a bit fat with a soft round belly, warm medium-brown skin and thick eyebrows. HAIR: a tall glossy black pompadour swept up and forward, short at the sides and back. COAT: a long plain dark-red coat down to his calves, always worn open, with a high stand-up collar and long sleeves to the wrists; four round gold buttons in a row down the front edge on HIS RIGHT side and nothing else on it; the back of the coat is plain dark red with one centre seam. BELLY WRAP: a white sleeveless undershirt tucked into a wide white cloth wrap wound round his whole belly from chest to waist, drawn with three or four horizontal fold lines. TROUSERS: plain baggy black trousers gathered at the ankles. FEET: bare feet in wooden geta sandals: a plain light-brown wooden block sole with one black V-shaped strap between the toes. HANDS: bare hands, no gloves, no rings. FACE: round cheeks, thick black eyebrows, a wide fearless grin showing his teeth. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on him. No toothpick, no cigarette, no weapon. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap. In the first he is grinning with clenched teeth. In the SECOND he is squeezing under the door: he SUCKS IN HIS BELLY as hard as he can, chest pulled up, cheeks puffed out and lips pressed shut holding his breath, eyes bulging wide; his tall pompadour is pressed back flat. His long dark-red coat trails far out behind him along the floor in both.",
+ "refs": [
+  "kits/tane/source/gant_slide/side/layout.png",
+  "out/ref/tane_design.png"
+ ],
+ "kind": "cels:gant_slide/side",
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-12T09:22:24",
+ "layout": {
+  "action": "gant_slide",
+  "loose": true,
+  "float": true,
+  "prop": null,
+  "view": "side",
+  "yaw": 90,
+  "elev": 5,
+  "W": 2752,
+  "H": 1536,
+  "cols": 2,
+  "rows": 1,
+  "unit": 612,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "box": [
+     0,
+     0,
+     1376,
+     1536
+    ],
+    "ground": [
+     718.07,
+     1040.65
+    ],
+    "joints": {
+     "hips": [
+      718.07,
+      882.01
+     ],
+     "waist": [
+      779.5,
+      818.64
+     ],
+     "chest": [
+      856.95,
+      738.75
+     ],
+     "neckBase": [
+      910.96,
+      683.04
+     ],
+     "headBase": [
+      930.12,
+      635.78
+     ],
+     "head": [
+      887.82,
+      561.74
+     ],
+     "crown": [
+      845.52,
+      487.7
+     ],
+     "L.sh": [
+      876.66,
+      692.23
+     ],
+     "L.elbow": [
+      742.81,
+      771.66
+     ],
+     "L.wrist": [
+      635.11,
+      673.68
+     ],
+     "L.hand": [
+      596.65,
+      638.69
+     ],
+     "L.hip": [
+      718.07,
+      887.46
+     ],
+     "L.knee": [
+      508.38,
+      759.95
+     ],
+     "L.ankle": [
+      432.9,
+      990.4
+     ],
+     "L.heel": [
+      474.01,
+      1032.99
+     ],
+     "L.toe": [
+      329.15,
+      1048.16
+     ],
+     "R.sh": [
+      913.45,
+      706.65
+     ],
+     "R.elbow": [
+      1007.15,
+      834.14
+     ],
+     "R.wrist": [
+      1062.34,
+      968.6
+     ],
+     "R.hand": [
+      1082.06,
+      1016.62
+     ],
+     "R.hip": [
+      718.07,
+      876.57
+     ],
+     "R.knee": [
+      469.78,
+      878.62
+     ],
+     "R.ankle": [
+      226.87,
+      905.01
+     ],
+     "R.heel": [
+      226.74,
+      964.09
+     ],
+     "R.toe": [
+      111.97,
+      874.76
+     ]
+    },
+    "face": [
+     -0.859,
+     0.489,
+     -0.152
+    ]
+   },
+   {
+    "index": 1,
+    "box": [
+     1376,
+     0,
+     2752,
+     1536
+    ],
+    "ground": [
+     2094.07,
+     1040.65
+    ],
+    "joints": {
+     "hips": [
+      2094.07,
+      960.79
+     ],
+     "waist": [
+      2178.18,
+      933.56
+     ],
+     "chest": [
+      2284.21,
+      899.24
+     ],
+     "neckBase": [
+      2358.15,
+      875.31
+     ],
+     "headBase": [
+      2388.23,
+      834.07
+     ],
+     "head": [
+      2329.1,
+      772.64
+     ],
+     "crown": [
+      2269.98,
+      711.2
+     ],
+     "L.sh": [
+      2332.41,
+      880.84
+     ],
+     "L.elbow": [
+      2402,
+      1017.04
+     ],
+     "L.wrist": [
+      2265.58,
+      1065.68
+     ],
+     "L.hand": [
+      2216.86,
+      1083.05
+     ],
+     "L.hip": [
+      2094.07,
+      966.23
+     ],
+     "L.knee": [
+      1854.15,
+      909.67
+     ],
+     "L.ankle": [
+      1624.63,
+      991.93
+     ],
+     "L.heel": [
+      1642.84,
+      1048.16
+     ],
+     "L.toe": [
+      1505.97,
+      998.53
+     ],
+     "R.sh": [
+      2340.35,
+      883.88
+     ],
+     "R.elbow": [
+      2485.84,
+      944.12
+     ],
+     "R.wrist": [
+      2597.59,
+      1037.32
+     ],
+     "R.hand": [
+      2637.5,
+      1070.6
+     ],
+     "R.hip": [
+      2094.07,
+      955.35
+     ],
+     "R.knee": [
+      1845.74,
+      953.07
+     ],
+     "R.ankle": [
+      1601.83,
+      966.77
+     ],
+     "R.heel": [
+      1595.5,
+      1025.51
+     ],
+     "R.toe": [
+      1490.73,
+      924.72
+     ]
+    },
+    "face": [
+     -0.718,
+     0.688,
+     -0.106
+    ]
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/tane/source/gant_slide/side/layout_map.png"
+}

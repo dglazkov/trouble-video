@@ -1,0 +1,451 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: 2 posing mannequins in a 2x1 grid, 2 key drawings of her sliding FEET FIRST along a smooth floor under a closing door, like a baseball slide, moving toward the viewer's LEFT: in the FIRST she has just dropped into the slide, leaning back with one hand trailing on the floor behind, one leg stretched out straight ahead and the other knee bent up; in the SECOND she is flat out, lying right back with the back of the head almost on the floor and both legs long, to get under the door's edge. Hair and loose clothes trail behind her (toward the viewer's right) (reading left to right). Paint the character from the SECOND image (her model sheet) over every mannequin, as 2 finished key drawings by the same animator. The second image only shows what she looks like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 2 figures of the first image, each in its mannequin's pose and place, and nothing else. For each of the 2: keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), so the 2 figures stay the same size as each other. BLUE limbs are her LEFT arm and leg; RED limbs are her RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. She faces and moves toward the viewer's LEFT, seen exactly from the side (her left side toward the viewer, her face in profile). Each figure has exactly two arms and two legs, and both feet are drawn complete. Wherever her face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. All 2 drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: Ife, a small 14-year-old girl, the smallest of her friends (about five and a half heads tall), with dark brown skin. HAIR: black hair parted in the middle and tied up in two big round afro puffs, one on each side of the top of her head. GLASSES: enormous perfectly round thin-rimmed glasses; the lenses are clear, so her skin and her eyes show through them exactly as the rest of her face does (never tinted, never the background colour). JUMPER: an oversized plain pale-green knitted jumper with a thick rolled turtle neck, ribbed hem and cuffs, and baggy sleeves that come down to her knuckles. SHORTS AND LEGGINGS: short plain grey shorts with a turned-up hem over plain dark navy leggings. SHOES: plain dark-grey canvas trainers with grey laces and grey soles. BACKPACK COMPUTER: a boxy beige retro computer worn on her back as a backpack with two beige shoulder straps over the jumper; from its top a short grey jointed metal arm holds a small beige CRT monitor in the air above HER LEFT shoulder, beside her head, its dark-green screen facing forward with a few rows of small bright-green dashes on it; three short loose cables (red, yellow, blue) hang from the bottom of the pack. FACE: big round dark eyes, small worried eyebrows, a small mouth. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on her. Nothing readable on the screen. Her hands are empty. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap. She is terrified in both drawings: eyes squeezed shut behind the round glasses, mouth wide open in a yell, arms pulled in tight; her backpack computer is on her back under her, scraping the floor, its small monitor on its arm beside her head.",
+ "refs": [
+  "kits/ife/source/gant_slide/side/layout.png",
+  "out/ref/ife_design.png"
+ ],
+ "kind": "cels:gant_slide/side",
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-12T09:22:27",
+ "layout": {
+  "action": "gant_slide",
+  "loose": true,
+  "float": true,
+  "prop": null,
+  "view": "side",
+  "yaw": 90,
+  "elev": 5,
+  "W": 2752,
+  "H": 1536,
+  "cols": 2,
+  "rows": 1,
+  "unit": 746,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "box": [
+     0,
+     0,
+     1376,
+     1536
+    ],
+    "ground": [
+     736.61,
+     1032.56
+    ],
+    "joints": {
+     "hips": [
+      736.61,
+      871.04
+     ],
+     "waist": [
+      799.16,
+      806.51
+     ],
+     "chest": [
+      865.69,
+      737.87
+     ],
+     "neckBase": [
+      915.89,
+      686.09
+     ],
+     "headBase": [
+      937.54,
+      632.72
+     ],
+     "head": [
+      889.77,
+      549.11
+     ],
+     "crown": [
+      842,
+      465.5
+     ],
+     "L.sh": [
+      883.86,
+      696.58
+     ],
+     "L.elbow": [
+      747.58,
+      777.46
+     ],
+     "L.wrist": [
+      637.92,
+      677.69
+     ],
+     "L.hand": [
+      598.76,
+      642.07
+     ],
+     "L.hip": [
+      736.61,
+      875.84
+     ],
+     "L.knee": [
+      523.1,
+      746.01
+     ],
+     "L.ankle": [
+      446.25,
+      980.66
+     ],
+     "L.heel": [
+      488.11,
+      1024.02
+     ],
+     "L.toe": [
+      340.62,
+      1039.47
+     ],
+     "R.sh": [
+      915.55,
+      709
+     ],
+     "R.elbow": [
+      1010.95,
+      838.8
+     ],
+     "R.wrist": [
+      1067.15,
+      975.71
+     ],
+     "R.hand": [
+      1087.22,
+      1024.6
+     ],
+     "R.hip": [
+      736.61,
+      866.23
+     ],
+     "R.knee": [
+      483.8,
+      868.31
+     ],
+     "R.ankle": [
+      236.48,
+      895.19
+     ],
+     "R.heel": [
+      236.35,
+      955.35
+     ],
+     "R.toe": [
+      119.48,
+      864.39
+     ]
+    },
+    "face": [
+     -0.859,
+     0.489,
+     -0.152
+    ]
+   },
+   {
+    "index": 1,
+    "box": [
+     1376,
+     0,
+     2752,
+     1536
+    ],
+    "ground": [
+     2112.61,
+     1032.56
+    ],
+    "joints": {
+     "hips": [
+      2112.61,
+      951.24
+     ],
+     "waist": [
+      2198.25,
+      923.52
+     ],
+     "chest": [
+      2289.34,
+      894.04
+     ],
+     "neckBase": [
+      2358.07,
+      871.79
+     ],
+     "headBase": [
+      2392.03,
+      825.22
+     ],
+     "head": [
+      2325.27,
+      755.85
+     ],
+     "crown": [
+      2258.5,
+      686.47
+     ],
+     "L.sh": [
+      2332.48,
+      877.66
+     ],
+     "L.elbow": [
+      2403.33,
+      1016.34
+     ],
+     "L.wrist": [
+      2264.44,
+      1065.86
+     ],
+     "L.hand": [
+      2214.83,
+      1083.55
+     ],
+     "L.hip": [
+      2112.61,
+      956.04
+     ],
+     "L.knee": [
+      1868.33,
+      898.45
+     ],
+     "L.ankle": [
+      1634.64,
+      982.21
+     ],
+     "L.heel": [
+      1653.17,
+      1039.47
+     ],
+     "L.toe": [
+      1513.81,
+      988.94
+     ],
+     "R.sh": [
+      2339.32,
+      880.27
+     ],
+     "R.elbow": [
+      2487.45,
+      941.62
+     ],
+     "R.wrist": [
+      2601.24,
+      1036.51
+     ],
+     "R.hand": [
+      2641.88,
+      1070.4
+     ],
+     "R.hip": [
+      2112.61,
+      946.44
+     ],
+     "R.knee": [
+      1859.77,
+      944.13
+     ],
+     "R.ankle": [
+      1611.42,
+      958.07
+     ],
+     "R.heel": [
+      1604.98,
+      1017.88
+     ],
+     "R.toe": [
+      1498.29,
+      915.25
+     ]
+    },
+    "face": [
+     -0.718,
+     0.688,
+     -0.106
+    ]
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/ife/source/gant_slide/side/layout_map.png"
+}

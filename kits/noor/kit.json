@@ -168,6 +168,172 @@
        "source": "kits/noor/source/run/front/take_3.jpg"
       }
      }
+    },
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "run/side/0.webp",
+       "w": 1041,
+       "h": 1227,
+       "k": 660.0,
+       "ground": [
+        499.6,
+        1185.1
+       ],
+       "bottom": 1215,
+       "hips": [
+        499.6,
+        650.6
+       ],
+       "head": [
+        377.6,
+        179.5
+       ],
+       "source": "kits/noor/source/run/side/take_3.jpg"
+      },
+      "1": {
+       "img": "run/side/1.webp",
+       "w": 879,
+       "h": 1251,
+       "k": 660.0,
+       "ground": [
+        421.4,
+        1209.1
+       ],
+       "bottom": 1238,
+       "hips": [
+        421.4,
+        645.8
+       ],
+       "head": [
+        299.8,
+        174.8
+       ],
+       "source": "kits/noor/source/run/side/take_3.jpg"
+      },
+      "2": {
+       "img": "run/side/2.webp",
+       "w": 1045,
+       "h": 1211,
+       "k": 660.0,
+       "ground": [
+        489.5,
+        1201.1
+       ],
+       "bottom": 1199,
+       "hips": [
+        489.5,
+        615.6
+       ],
+       "head": [
+        367.9,
+        144.9
+       ],
+       "source": "kits/noor/source/run/side/take_3.jpg"
+      },
+      "3": {
+       "img": "run/side/3.webp",
+       "w": 1225,
+       "h": 1081,
+       "k": 660.0,
+       "ground": [
+        636.8,
+        1091.1
+       ],
+       "bottom": 1069,
+       "hips": [
+        636.8,
+        649.6
+       ],
+       "head": [
+        514.7,
+        179.1
+       ],
+       "source": "kits/noor/source/run/side/take_3.jpg"
+      },
+      "4": {
+       "img": "run/side/4.webp",
+       "w": 1043,
+       "h": 1175,
+       "k": 660.0,
+       "ground": [
+        507.3,
+        1145.1
+       ],
+       "bottom": 1163,
+       "hips": [
+        507.3,
+        610.6
+       ],
+       "head": [
+        385.3,
+        140.3
+       ],
+       "source": "kits/noor/source/run/side/take_3.jpg"
+      },
+      "5": {
+       "img": "run/side/5.webp",
+       "w": 843,
+       "h": 1205,
+       "k": 660.0,
+       "ground": [
+        416.3,
+        1177.1
+       ],
+       "bottom": 1193,
+       "hips": [
+        416.3,
+        613.8
+       ],
+       "head": [
+        294.7,
+        143.4
+       ],
+       "source": "kits/noor/source/run/side/take_3.jpg"
+      },
+      "6": {
+       "img": "run/side/6.webp",
+       "w": 1043,
+       "h": 1197,
+       "k": 660.0,
+       "ground": [
+        482.8,
+        1197.1
+       ],
+       "bottom": 1184,
+       "hips": [
+        482.8,
+        611.6
+       ],
+       "head": [
+        361.2,
+        140.9
+       ],
+       "source": "kits/noor/source/run/side/take_3.jpg"
+      },
+      "7": {
+       "img": "run/side/7.webp",
+       "w": 1199,
+       "h": 1065,
+       "k": 660.0,
+       "ground": [
+        627.2,
+        1061.1
+       ],
+       "bottom": 1053,
+       "hips": [
+        627.2,
+        619.6
+       ],
+       "head": [
+        505.1,
+        148.6
+       ],
+       "source": "kits/noor/source/run/side/take_3.jpg"
+      }
+     }
     }
    }
   },
@@ -259,6 +425,56 @@
       }
      },
      "turn": 180
+    }
+   }
+  },
+  "gant_slide": {
+   "views": {
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "gant_slide/side/0.webp",
+       "w": 2424,
+       "h": 1335,
+       "k": 1000.0,
+       "ground": [
+        1125.2,
+        1166.0
+       ],
+       "bottom": 1324,
+       "hips": [
+        1125.2,
+        888.5
+       ],
+       "head": [
+        1480.0,
+        316.0
+       ],
+       "source": "kits/noor/source/gant_slide/side/take_2.jpg"
+      },
+      "1": {
+       "img": "gant_slide/side/1.webp",
+       "w": 2326,
+       "h": 983,
+       "k": 1000.0,
+       "ground": [
+        1124.5,
+        807.4
+       ],
+       "bottom": 972,
+       "hips": [
+        1124.5,
+        667.7
+       ],
+       "head": [
+        1614.0,
+        349.8
+       ],
+       "source": "kits/noor/source/gant_slide/side/take_2.jpg"
+      }
+     }
     }
    }
   }

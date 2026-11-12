@@ -51,8 +51,10 @@ ACTIONS = {
     "runtop": "the {n} successive drawings of ONE run cycle, seen from directly above",
     "charge": "{n} key drawings of a shoulder charge, different from each other: in the FIRST {s} {IS} still running, crouched low, dropping {p} leading LEFT shoulder with the left arm tucked against the chest; in the SECOND {s} {IS} at the moment of impact: launched forward off the ground with BOTH feet in the air behind {o}, the body thrown almost level, the left shoulder driven forward first and the right arm flung straight back",
     "ride": "{n} key drawings of {o} riding a hoverboard at speed, crouched with knees bent and arms out for balance: banking to {p} left, level, and banking to {p} right",
+    "gant_slide": "{n} key drawings of {o} sliding FEET FIRST along a smooth floor under a closing door, like a baseball slide, moving toward the viewer's LEFT: in the FIRST {s} has just dropped into the slide, leaning back with one hand trailing on the floor behind, one leg stretched out straight ahead and the other knee bent up; in the SECOND {s} {IS} flat out, lying right back with the back of the head almost on the floor and both legs long, to get under the door's edge. Hair and loose clothes trail behind {o} (toward the viewer's right)",
     "leap": "{n} key drawings of {o} jumping a gap on a hoverboard, seen from above and behind: first launching upward with the board's nose tilted up, then the top of the jump, knees tucked up, one hand gripping the board's edge and the other arm thrown up",
 }
+
 
 # the descent (shots/desc_*.js): down the stairwell, each in their own way
 ACTIONS.update({

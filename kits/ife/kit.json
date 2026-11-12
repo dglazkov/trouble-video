@@ -168,6 +168,172 @@
        "source": "kits/ife/source/run/front/take_2.jpg"
       }
      }
+    },
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "run/side/0.webp",
+       "w": 757,
+       "h": 1323,
+       "k": 848.0,
+       "ground": [
+        376.7,
+        1286.8
+       ],
+       "bottom": 1311,
+       "hips": [
+        376.7,
+        693.5
+       ],
+       "head": [
+        286.3,
+        244.4
+       ],
+       "source": "kits/ife/source/run/side/take_1.jpg"
+      },
+      "1": {
+       "img": "run/side/1.webp",
+       "w": 715,
+       "h": 1315,
+       "k": 848.0,
+       "ground": [
+        370.9,
+        1280.8
+       ],
+       "bottom": 1303,
+       "hips": [
+        370.9,
+        703.1
+       ],
+       "head": [
+        281.2,
+        254.1
+       ],
+       "source": "kits/ife/source/run/side/take_1.jpg"
+      },
+      "2": {
+       "img": "run/side/2.webp",
+       "w": 759,
+       "h": 1341,
+       "k": 848.0,
+       "ground": [
+        376.4,
+        1322.8
+       ],
+       "bottom": 1330,
+       "hips": [
+        376.4,
+        682.3
+       ],
+       "head": [
+        286.6,
+        233.6
+       ],
+       "source": "kits/ife/source/run/side/take_1.jpg"
+      },
+      "3": {
+       "img": "run/side/3.webp",
+       "w": 991,
+       "h": 1275,
+       "k": 848.0,
+       "ground": [
+        476.8,
+        1274.8
+       ],
+       "bottom": 1262,
+       "hips": [
+        476.8,
+        714.0
+       ],
+       "head": [
+        386.4,
+        265.6
+       ],
+       "source": "kits/ife/source/run/side/take_1.jpg"
+      },
+      "4": {
+       "img": "run/side/4.webp",
+       "w": 789,
+       "h": 1329,
+       "k": 848.0,
+       "ground": [
+        385.4,
+        1306.8
+       ],
+       "bottom": 1317,
+       "hips": [
+        385.4,
+        713.5
+       ],
+       "head": [
+        295.0,
+        265.4
+       ],
+       "source": "kits/ife/source/run/side/take_1.jpg"
+      },
+      "5": {
+       "img": "run/side/5.webp",
+       "w": 729,
+       "h": 1311,
+       "k": 848.0,
+       "ground": [
+        365.8,
+        1288.8
+       ],
+       "bottom": 1299,
+       "hips": [
+        365.8,
+        711.1
+       ],
+       "head": [
+        276.0,
+        262.9
+       ],
+       "source": "kits/ife/source/run/side/take_1.jpg"
+      },
+      "6": {
+       "img": "run/side/6.webp",
+       "w": 761,
+       "h": 1351,
+       "k": 848.0,
+       "ground": [
+        374.1,
+        1346.8
+       ],
+       "bottom": 1339,
+       "hips": [
+        374.1,
+        706.3
+       ],
+       "head": [
+        284.3,
+        257.7
+       ],
+       "source": "kits/ife/source/run/side/take_1.jpg"
+      },
+      "7": {
+       "img": "run/side/7.webp",
+       "w": 999,
+       "h": 1287,
+       "k": 848.0,
+       "ground": [
+        476.2,
+        1274.8
+       ],
+       "bottom": 1275,
+       "hips": [
+        476.2,
+        714.0
+       ],
+       "head": [
+        385.8,
+        265.0
+       ],
+       "source": "kits/ife/source/run/side/take_1.jpg"
+      }
+     }
     }
    }
   },
@@ -256,6 +422,56 @@
         508.0
        ],
        "source": "kits/ife/source/runtop/top/take_2.jpg"
+      }
+     }
+    }
+   }
+  },
+  "gant_slide": {
+   "views": {
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "gant_slide/side/0.webp",
+       "w": 1612,
+       "h": 1148,
+       "k": 1000.0,
+       "ground": [
+        870.2,
+        1102.0
+       ],
+       "bottom": 1140,
+       "hips": [
+        870.2,
+        885.5
+       ],
+       "head": [
+        1075.5,
+        454.0
+       ],
+       "source": "kits/ife/source/gant_slide/side/take_2.jpg"
+      },
+      "1": {
+       "img": "gant_slide/side/1.webp",
+       "w": 1666,
+       "h": 824,
+       "k": 1000.0,
+       "ground": [
+        863.7,
+        683.8
+       ],
+       "bottom": 815,
+       "hips": [
+        863.7,
+        574.8
+       ],
+       "head": [
+        1148.7,
+        312.9
+       ],
+       "source": "kits/ife/source/gant_slide/side/take_2.jpg"
       }
      }
     }

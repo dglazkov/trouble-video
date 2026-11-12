@@ -1,0 +1,451 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: 2 posing mannequins in a 2x1 grid, 2 key drawings of them sliding FEET FIRST along a smooth floor under a closing door, like a baseball slide, moving toward the viewer's LEFT: in the FIRST they has just dropped into the slide, leaning back with one hand trailing on the floor behind, one leg stretched out straight ahead and the other knee bent up; in the SECOND they are flat out, lying right back with the back of the head almost on the floor and both legs long, to get under the door's edge. Hair and loose clothes trail behind them (toward the viewer's right) (reading left to right). Paint the character from the SECOND image (their model sheet) over every mannequin, as 2 finished key drawings by the same animator. The second image only shows what they look like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 2 figures of the first image, each in its mannequin's pose and place, and nothing else. For each of the 2: keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), so the 2 figures stay the same size as each other. BLUE limbs are their LEFT arm and leg; RED limbs are their RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. They face and move toward the viewer's LEFT, seen exactly from the side (their left side toward the viewer, their face in profile). Each figure has exactly two arms and two legs, and both feet are drawn complete. Wherever their face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. All 2 drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: Noor, 16 years old, androgynous, the tallest of the friends: very tall and thin with long legs, a small head and narrow shoulders (seven and a half heads tall), light brown skin. HAIR: perfectly straight black hair down to the waist, parted in the middle, with ONE bold pure-white streak that starts at the parting on THEIR LEFT side and runs the whole length of the hair in front of the left shoulder; all the rest of the hair is black. FACE: narrow and calm, half-lidded deadpan eyes with dark eyeliner, thin straight eyebrows, mouth closed, no expression. COAT: a long plain black coat down to the ankles with a pointed uneven hem, always worn open, plain lapels, long sleeves to the wrists, over a plain black top and plain black trousers; dark-grey and violet-grey shade tones so the folds of the black clothes still show. NECK: a plain black choker and two thin silver chain necklaces. HIP: one thin silver chain hanging in a loop at the hip, and a small grey retro cassette player clipped on THEIR LEFT hip. BOOTS: heavy black lace-up platform boots with thick soles, up to the middle of the shin. HANDS: bare hands with black nails. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on them. No headphones on the head, no hat, no weapon. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap. They are deadpan and unhurried in both drawings: eyes half-lidded, mouth a flat line, as relaxed as if lying on a sofa; the long hair with its white streak and the long coat trail flat along the floor behind them.",
+ "refs": [
+  "kits/noor/source/gant_slide/side/layout.png",
+  "out/ref/noor_design.png"
+ ],
+ "kind": "cels:gant_slide/side",
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-12T09:22:27",
+ "layout": {
+  "action": "gant_slide",
+  "loose": true,
+  "float": true,
+  "prop": null,
+  "view": "side",
+  "yaw": 90,
+  "elev": 5,
+  "W": 2752,
+  "H": 1536,
+  "cols": 2,
+  "rows": 1,
+  "unit": 548,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "box": [
+     0,
+     0,
+     1376,
+     1536
+    ],
+    "ground": [
+     705.06,
+     1019.11
+    ],
+    "joints": {
+     "hips": [
+      705.06,
+      867.04
+     ],
+     "waist": [
+      763.95,
+      806.29
+     ],
+     "chest": [
+      858.03,
+      709.23
+     ],
+     "neckBase": [
+      917.52,
+      647.86
+     ],
+     "headBase": [
+      932.47,
+      611.01
+     ],
+     "head": [
+      899.48,
+      553.29
+     ],
+     "crown": [
+      866.5,
+      495.56
+     ],
+     "L.sh": [
+      888.59,
+      658.22
+     ],
+     "L.elbow": [
+      760.28,
+      734.37
+     ],
+     "L.wrist": [
+      657.04,
+      640.44
+     ],
+     "L.hand": [
+      620.17,
+      606.9
+     ],
+     "L.hip": [
+      705.06,
+      871.56
+     ],
+     "L.knee": [
+      504.04,
+      749.33
+     ],
+     "L.ankle": [
+      431.68,
+      970.25
+     ],
+     "L.heel": [
+      471.09,
+      1011.08
+     ],
+     "L.toe": [
+      332.23,
+      1025.62
+     ],
+     "R.sh": [
+      915.97,
+      668.95
+     ],
+     "R.elbow": [
+      1005.79,
+      791.16
+     ],
+     "R.wrist": [
+      1058.7,
+      920.06
+     ],
+     "R.hand": [
+      1077.6,
+      966.09
+     ],
+     "R.hip": [
+      705.06,
+      862.52
+     ],
+     "R.knee": [
+      467.04,
+      864.48
+     ],
+     "R.ankle": [
+      234.18,
+      889.78
+     ],
+     "R.heel": [
+      234.05,
+      946.42
+     ],
+     "R.toe": [
+      124.02,
+      860.78
+     ]
+    },
+    "face": [
+     -0.859,
+     0.489,
+     -0.152
+    ]
+   },
+   {
+    "index": 1,
+    "box": [
+     1376,
+     0,
+     2752,
+     1536
+    ],
+    "ground": [
+     2081.06,
+     1019.11
+    ],
+    "joints": {
+     "hips": [
+      2081.06,
+      942.55
+     ],
+     "waist": [
+      2161.68,
+      916.46
+     ],
+     "chest": [
+      2290.5,
+      874.76
+     ],
+     "neckBase": [
+      2371.94,
+      848.4
+     ],
+     "headBase": [
+      2395.39,
+      816.25
+     ],
+     "head": [
+      2349.3,
+      768.35
+     ],
+     "crown": [
+      2303.2,
+      720.45
+     ],
+     "L.sh": [
+      2348.12,
+      854.02
+     ],
+     "L.elbow": [
+      2414.83,
+      984.59
+     ],
+     "L.wrist": [
+      2284.06,
+      1031.22
+     ],
+     "L.hand": [
+      2237.35,
+      1047.87
+     ],
+     "L.hip": [
+      2081.06,
+      947.07
+     ],
+     "L.knee": [
+      1851.06,
+      892.85
+     ],
+     "L.ankle": [
+      1631.04,
+      971.71
+     ],
+     "L.heel": [
+      1648.49,
+      1025.62
+     ],
+     "L.toe": [
+      1517.28,
+      978.04
+     ],
+     "R.sh": [
+      2354.03,
+      856.28
+     ],
+     "R.elbow": [
+      2493.5,
+      914.04
+     ],
+     "R.wrist": [
+      2600.63,
+      1003.38
+     ],
+     "R.hand": [
+      2638.89,
+      1035.29
+     ],
+     "R.hip": [
+      2081.06,
+      938.03
+     ],
+     "R.knee": [
+      1843,
+      935.85
+     ],
+     "R.ankle": [
+      1609.18,
+      948.98
+     ],
+     "R.heel": [
+      1603.11,
+      1005.3
+     ],
+     "R.toe": [
+      1502.67,
+      908.67
+     ]
+    },
+    "face": [
+     -0.718,
+     0.688,
+     -0.106
+    ]
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/noor/source/gant_slide/side/layout_map.png"
+}

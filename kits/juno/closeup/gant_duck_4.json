@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: remove the small red scratch marks (three short red strokes) on her cheek, leaving clean plain skin there; nothing else changes",
+ "refs": [
+  "kits/juno/closeup/gant_duck_2.jpg"
+ ],
+ "kind": "edit:plate:gant_duck",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T09:47:57",
+ "from": "kits/juno/closeup/gant_duck_2.jpg"
+}

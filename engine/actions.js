@@ -81,6 +81,13 @@ const CAUGHT = {
   ],
 };
 
+// The gantry section's slide under the last blast door, seen from the left, feet first: (0) dropped into it, leaning
+// back on one hand, the right leg out straight ahead and the left knee up; (1) flat out under the door, lying right
+// back with the head down, both legs long.
+const GANT_SLIDE = [
+  pose({ lean: -44, twist: -12, head: { yaw: 0, pitch: 30, roll: 0 }, arm: { L: arm(58, 28, 74), R: arm(-34, 14, 12) }, leg: { L: leg(122, 104, 8, 6), R: leg(89, 5, 6, -38) } }),
+  pose({ lean: -72, twist: -6, head: { yaw: 0, pitch: 44, roll: 0 }, arm: { L: arm(-30, 20, 100), R: arm(-66, 16, 16) }, leg: { L: leg(104, 34, 8, -20), R: leg(90, 3, 6, -44) } }),
+];
 // cels: how many drawings; pose(i, who): the pose of drawing i (who: the character, for those with a manner);
 // loop: the drawings repeat;
 // loose: a held drawing whose stance is the layout's but whose arms and feet may settle as the painter draws a
@@ -100,6 +107,7 @@ export const ACTIONS = {
   ride: { cels: 3, loop: false, half: false, loose: true, float: true, flip: [2, 1, 0], elev: 14, pose: (i) => RIDE[i] },
   caught: { cels: 4, loop: false, half: false, loose: true, pose: (i, who) => (CAUGHT[who] ?? CAUGHT.juno)[i] },
   leap: { cels: 2, loop: false, half: false, loose: true, float: true, elev: 32, pose: (i) => LEAP[i] },
+  gant_slide: { cels: 2, loop: false, half: false, loose: true, float: true, pose: (i) => GANT_SLIDE[i] },
 };
 
 // ---- the descent (shots/desc_*.js, song 19.9-29.8 s): down the stairwell, each of the four in their own way ---------

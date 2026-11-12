@@ -547,6 +547,56 @@
      }
     }
    }
+  },
+  "gant_slide": {
+   "views": {
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "gant_slide/side/0.webp",
+       "w": 2128,
+       "h": 1380,
+       "k": 1000.0,
+       "ground": [
+        1041.5,
+        1149.4
+       ],
+       "bottom": 1370,
+       "hips": [
+        1041.5,
+        890.1
+       ],
+       "head": [
+        1318.9,
+        366.8
+       ],
+       "source": "kits/tane/source/gant_slide/side/take_2.jpg"
+      },
+      "1": {
+       "img": "gant_slide/side/1.webp",
+       "w": 2105,
+       "h": 965,
+       "k": 1000.0,
+       "ground": [
+        1050.8,
+        847.3
+       ],
+       "bottom": 955,
+       "hips": [
+        1050.8,
+        716.8
+       ],
+       "head": [
+        1434.8,
+        409.4
+       ],
+       "source": "kits/tane/source/gant_slide/side/take_2.jpg"
+      }
+     }
+    }
+   }
   }
  },
  "body": {
