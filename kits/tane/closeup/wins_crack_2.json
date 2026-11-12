@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: he has snapped his head over to the OTHER side: his head is now tilted hard toward the opposite shoulder (the mirror image of the tilt it has now), and his eyes are now OPEN, narrowed, looking straight at the viewer from under his thick brows, with the same wide clenched-teeth grin. His shoulders, coat, collar, shirt and belly wrap stay exactly where they are.",
+ "refs": [
+  "kits/tane/closeup/wins_crack_1.jpg"
+ ],
+ "kind": "edit:plate:wins_crack",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:30:26",
+ "from": "kits/tane/closeup/wins_crack_1.jpg"
+}

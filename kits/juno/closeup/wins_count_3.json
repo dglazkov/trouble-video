@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: her raised hand now holds up THREE fingers, the index, middle and ring fingers straight up side by side, the thumb holding the little finger down: she is counting 'three'; and her face has broken into a big open delighted grin showing her upper teeth, eyes bright. Nothing else changes: the same head position, the same hair, the same arm, the same jacket.",
+ "refs": [
+  "kits/juno/closeup/wins_count_1.jpg"
+ ],
+ "kind": "edit:plate:wins_count",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:30:28",
+ "from": "kits/juno/closeup/wins_count_1.jpg"
+}

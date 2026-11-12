@@ -158,6 +158,50 @@ Object.assign(ACTIONS, {
   desc_heap: { cels: 2, loop: false, half: false, loose: true, float: true, pose: (i, who) => (DESC_HEAP[who] ?? DESC_HEAP.juno)[i] },
 });
 
+// ---- the two wins (shots/wins_*.js, song 62.0-78.46 s) ---------------------------------------------------------------
+// Tane's fight at the dead end, one drawing each (all HERO drawings: each is painted for its shot's own camera):
+// (0) cornered: square to them, fists down, chin down; (1) his foot comes down on the end of a pipe, the hand out for
+// it; (2) the wind-up: the pipe cocked back over his right shoulder in both hands, chest turned away; (3) contact: the
+// arms long, the pipe through the ball; (4) the follow-through: the pipe round over his left shoulder, the back heel
+// up; (5) ready: the pipe low in his right hand, looking up, the left hand open; (6) the catch: the left arm thrown
+// up, the fist shut on a tail; (7) holding it out at arm's length, looking past it; (8) the coil: that fist drawn back
+// over his shoulder; (9) the slam: the arm whipped down and through, a lunge; (10) straightening, the pipe swinging
+// up; (11) the pipe on his shoulder, weight on one leg.
+const WINS_TANE = [
+  pose({ lean: 5, head: { yaw: 0, pitch: 10, roll: 0 }, arm: { L: arm(8, 24, 52), R: arm(8, 26, 48) }, leg: { L: leg(6, 8, 15), R: leg(-6, 8, 15) } }),
+  pose({ lean: 10, twist: -8, head: { yaw: 0, pitch: 16, roll: 0 }, arm: { L: arm(-18, 18, 60), R: arm(34, 46, 30) }, leg: { L: leg(-18, 16, 8, 10), R: leg(34, 22, 10, -4) } }),
+  pose({ lean: -6, twist: -52, pelvisTwist: -16, head: { yaw: 34, pitch: 4, roll: 0 }, arm: { L: arm(64, -24, 104), R: arm(-24, 30, 124) }, leg: { L: leg(30, 26, 12), R: leg(-26, 30, 12, 10) } }),
+  pose({ lean: 14, twist: 30, pelvisTwist: 12, head: { yaw: -18, pitch: -4, roll: 0 }, arm: { L: arm(78, 10, 18), R: arm(84, -12, 14) }, leg: { L: leg(36, 40, 10), R: leg(-36, 10, 10, 34) } }),
+  pose({ lean: -8, twist: 68, pelvisTwist: 26, head: { yaw: -44, pitch: -16, roll: 0 }, arm: { L: arm(112, 40, 112), R: arm(124, -40, 84) }, leg: { L: leg(20, 5, 10), R: leg(-30, 46, 10, 52) } }),
+  pose({ lean: -4, twist: 10, head: { yaw: -6, pitch: -22, roll: 0 }, arm: { L: arm(40, 30, 70), R: arm(-16, 22, 26) }, leg: { L: leg(18, 14, 12), R: leg(-16, 16, 12, 8) } }),
+  pose({ lean: -12, twist: 16, head: { yaw: -8, pitch: -28, roll: 0 }, arm: { L: arm(142, 14, 8), R: arm(-26, 22, 24) }, leg: { L: leg(28, 22, 12), R: leg(-22, 22, 12, 12) } }),
+  pose({ lean: -6, twist: 8, head: { yaw: -20, pitch: 0, roll: 4 }, arm: { L: arm(96, 8, 8), R: arm(-10, 24, 40) }, leg: { L: leg(22, 12, 12), R: leg(-16, 14, 12, 6) } }),
+  pose({ lean: -16, twist: 44, pelvisTwist: 14, head: { yaw: -40, pitch: 0, roll: 0 }, arm: { L: arm(168, 30, 76), R: arm(34, 30, 44) }, leg: { L: leg(16, 30, 12), R: leg(-32, 36, 12, 20) } }),
+  pose({ lean: 36, twist: -44, pelvisTwist: -10, head: { yaw: 30, pitch: -24, roll: 0 }, arm: { L: arm(58, 6, 6), R: arm(-72, 30, 12) }, leg: { L: leg(-34, 16, 10, 40), R: leg(56, 62, 10) } }),
+  pose({ lean: 10, twist: -12, head: { yaw: 10, pitch: 6, roll: 0 }, arm: { L: arm(4, 22, 30), R: arm(26, 22, 50) }, leg: { L: leg(-12, 14, 10, 8), R: leg(22, 26, 10) } }),
+  pose({ lean: -5, twist: -10, head: { yaw: 16, pitch: -4, roll: 4 }, arm: { L: arm(-6, 30, 78), R: arm(42, 26, 142) }, leg: { L: leg(-3, 2, 6), R: leg(12, 18, 12, 4) } }),
+];
+// Juno's: (0) the landing: a deep crouch on the board, a hand down; (1) the skid: the board broadside, her whole
+// body thrown back against it, arms wide; (2) stopped, standing easy on it, a hand on her hip, looking back over her
+// left shoulder; (3) dropping: folded right down over the board's nose, hands going to its edges; (4) flat: lying
+// on the board on her front, chin up, hands on the nose, legs long behind (the board is under her chest: it is not
+// the mannequin's); (5) sitting on the grounded board, leaning back on a hand, twisted to look behind her; (6) the
+// same seat, a hand up at her goggles, pulling them down; (7) a two-fingered salute thrown back over her shoulder.
+const WINS_JUNO = [
+  pose({ lean: 34, board: 1, twist: -20, pelvisTwist: -10, head: { yaw: 8, pitch: -12, roll: 0 }, arm: { L: arm(-30, 70, 30), R: arm(24, 18, 8) }, leg: { L: leg(96, 120, 16), R: leg(70, 126, 16) } }),
+  pose({ lean: 8, board: 1, roll: 30, twist: 10, head: { yaw: 22, pitch: -4, roll: 0 }, arm: { L: arm(10, 82, 20), R: arm(10, 62, 30) }, leg: { L: leg(42, 50, 14), R: leg(4, 56, 14) } }),
+  pose({ lean: 4, board: 1, roll: 6, twist: 14, head: { yaw: 70, pitch: -4, roll: 4 }, arm: { L: arm(-8, 20, 20), R: arm(-10, 36, 84) }, leg: { L: leg(32, 28, 12), R: leg(0, 30, 12) } }),
+  pose({ lean: 54, board: 1, twist: -10, head: { yaw: 0, pitch: -30, roll: 0 }, arm: { L: arm(62, 12, 30), R: arm(42, 12, 40) }, leg: { L: leg(108, 128, 14), R: leg(86, 132, 14) } }),
+  pose({ lean: 86, lift: 0.16, head: { yaw: 0, pitch: 14, roll: 0 }, arm: { L: arm(96, 14, 60), R: arm(96, 14, 60) }, leg: { L: leg(-86, 3, 5, 172), R: leg(-88, 6, 5, 172) } }),
+  pose({ lean: -16, lift: 0.1, twist: -34, head: { yaw: -62, pitch: -4, roll: 0 }, arm: { L: arm(-36, 26, 10), R: arm(58, 8, 44) }, leg: { L: leg(82, 88, 14, -8), R: leg(70, 58, 20, -4) } }),
+  pose({ lean: -6, lift: 0.1, twist: -4, head: { yaw: 0, pitch: 4, roll: 0 }, arm: { L: arm(-30, 24, 12), R: arm(104, 30, 138) }, leg: { L: leg(82, 88, 14, -8), R: leg(70, 58, 20, -4) } }),
+  pose({ lean: -10, lift: 0.1, twist: -8, head: { yaw: 0, pitch: -6, roll: -4 }, arm: { L: arm(-30, 24, 12), R: arm(120, 62, 96) }, leg: { L: leg(82, 88, 14, -8), R: leg(70, 58, 20, -4) } }),
+];
+Object.assign(ACTIONS, {
+  wins_tane: { cels: WINS_TANE.length, loop: false, half: false, loose: true, float: true, pose: (i) => WINS_TANE[i] },
+  wins_juno: { cels: WINS_JUNO.length, loop: false, half: false, loose: true, float: true, pose: (i) => WINS_JUNO[i] },
+});
+
 // ---- the core (shots/core_*.js, song 78.9-92.9 s): Noor crosses the station's weightless core -----------------------
 // Adrift: upright, a little laid back, hands in the coat's pockets, the feet hanging with the toes down, one knee
 // loose. The body does not move: the action's four drawings are four moments of one slow billow of the hair and the

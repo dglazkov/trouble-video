@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: her raised hand now holds up TWO fingers, the index and the middle finger straight up side by side in a V, the thumb folded in across the palm with the other two fingers: she is counting 'two'. Nothing else changes: the same face, the same expression, the same arm.",
+ "refs": [
+  "kits/juno/closeup/wins_count_1.jpg"
+ ],
+ "kind": "edit:plate:wins_count",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T11:30:28",
+ "from": "kits/juno/closeup/wins_count_1.jpg"
+}

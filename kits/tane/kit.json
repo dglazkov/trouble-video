@@ -804,6 +804,342 @@
     "yaw": 84.6,
     "elev": 3.5
    }
+  },
+  "cornered": {
+   "img": "hero/cornered.webp",
+   "w": 621,
+   "h": 1469,
+   "k": 696.0,
+   "ground": [
+    310.5,
+    1327.7
+   ],
+   "bottom": 1456,
+   "hips": [
+    311.2,
+    719.6
+   ],
+   "head": [
+    312.2,
+    255.5
+   ],
+   "source": "kits/tane/source/hero/wins_a/take_1.jpg",
+   "shot": "shots/wins.js",
+   "frame": 49,
+   "action": "wins_tane",
+   "cel": 0,
+   "from": {
+    "yaw": -0.6,
+    "elev": 2
+   }
+  },
+  "stamp": {
+   "img": "hero/stamp.webp",
+   "w": 859,
+   "h": 1327,
+   "k": 696.0,
+   "ground": [
+    413.5,
+    1269.7
+   ],
+   "bottom": 1315,
+   "hips": [
+    414.5,
+    697.5
+   ],
+   "head": [
+    501.3,
+    236.4
+   ],
+   "source": "kits/tane/source/hero/wins_a/take_1.jpg",
+   "shot": "shots/wins.js",
+   "frame": 89,
+   "action": "wins_tane",
+   "cel": 1,
+   "from": {
+    "yaw": -84.2,
+    "elev": 2.3
+   }
+  },
+  "windup": {
+   "img": "hero/windup.webp",
+   "w": 969,
+   "h": 1345,
+   "k": 696.0,
+   "ground": [
+    593.9,
+    1286.7
+   ],
+   "bottom": 1333,
+   "hips": [
+    595.0,
+    715.3
+   ],
+   "head": [
+    566.7,
+    247.6
+   ],
+   "source": "kits/tane/source/hero/wins_a/take_1.jpg",
+   "shot": "shots/wins.js",
+   "frame": 99,
+   "action": "wins_tane",
+   "cel": 2,
+   "from": {
+    "yaw": -84,
+    "elev": 2.5
+   }
+  },
+  "contact": {
+   "img": "hero/contact.webp",
+   "w": 1497,
+   "h": 1271,
+   "k": 696.0,
+   "ground": [
+    544.1,
+    1230.7
+   ],
+   "bottom": 1260,
+   "hips": [
+    544.9,
+    673.6
+   ],
+   "head": [
+    622.0,
+    213.8
+   ],
+   "source": "kits/tane/source/hero/wins_a/take_1.jpg",
+   "shot": "shots/wins.js",
+   "frame": 107,
+   "action": "wins_tane",
+   "cel": 3,
+   "from": {
+    "yaw": -84.7,
+    "elev": 2.7
+   }
+  },
+  "follow": {
+   "img": "hero/follow.webp",
+   "w": 1029,
+   "h": 1359,
+   "k": 696.0,
+   "ground": [
+    682.9,
+    1323.7
+   ],
+   "bottom": 1347,
+   "hips": [
+    685.9,
+    738.1
+   ],
+   "head": [
+    614.6,
+    276.5
+   ],
+   "source": "kits/tane/source/hero/wins_a/take_1.jpg",
+   "shot": "shots/wins.js",
+   "frame": 111,
+   "action": "wins_tane",
+   "cel": 4,
+   "from": {
+    "yaw": -80.4,
+    "elev": 2.6
+   }
+  },
+  "ready": {
+   "img": "hero/ready.webp",
+   "w": 1151,
+   "h": 1433,
+   "k": 696.0,
+   "ground": [
+    718.7,
+    1341.5
+   ],
+   "bottom": 1421,
+   "hips": [
+    722.0,
+    736.5
+   ],
+   "head": [
+    705.5,
+    316.8
+   ],
+   "source": "kits/tane/source/hero/wins_a/take_1.jpg",
+   "shot": "shots/wins.js",
+   "frame": 132,
+   "action": "wins_tane",
+   "cel": 5,
+   "from": {
+    "yaw": -20.4,
+    "elev": -2
+   }
+  },
+  "catch": {
+   "img": "hero/catch.webp",
+   "w": 937,
+   "h": 1417,
+   "k": 676.0,
+   "ground": [
+    527.6,
+    1280.4
+   ],
+   "bottom": 1405,
+   "hips": [
+    531.4,
+    706.8
+   ],
+   "head": [
+    501.0,
+    320.0
+   ],
+   "source": "kits/tane/source/hero/wins_b/take_3.jpg",
+   "shot": "shots/wins.js",
+   "frame": 146,
+   "action": "wins_tane",
+   "cel": 6,
+   "from": {
+    "yaw": -19,
+    "elev": -1.8
+   }
+  },
+  "weigh": {
+   "img": "hero/weigh.webp",
+   "w": 903,
+   "h": 1363,
+   "k": 676.0,
+   "ground": [
+    389.7,
+    1266.4
+   ],
+   "bottom": 1351,
+   "hips": [
+    391.0,
+    698.5
+   ],
+   "head": [
+    354.3,
+    243.7
+   ],
+   "source": "kits/tane/source/hero/wins_b/take_3.jpg",
+   "shot": "shots/wins.js",
+   "frame": 162,
+   "action": "wins_tane",
+   "cel": 7,
+   "from": {
+    "yaw": -80.4,
+    "elev": 2
+   }
+  },
+  "coil": {
+   "img": "hero/coil.webp",
+   "w": 1243,
+   "h": 1293,
+   "k": 676.0,
+   "ground": [
+    589.7,
+    1254.6
+   ],
+   "bottom": 1281,
+   "hips": [
+    591.1,
+    681.4
+   ],
+   "head": [
+    500.0,
+    237.4
+   ],
+   "source": "kits/tane/source/hero/wins_b/take_3.jpg",
+   "shot": "shots/wins.js",
+   "frame": 178,
+   "action": "wins_tane",
+   "cel": 8,
+   "from": {
+    "yaw": -80,
+    "elev": 2.1
+   }
+  },
+  "slam": {
+   "img": "hero/slam.webp",
+   "w": 1401,
+   "h": 1201,
+   "k": 676.0,
+   "ground": [
+    738.5,
+    1097.1
+   ],
+   "bottom": 1189,
+   "hips": [
+    739.9,
+    580.6
+   ],
+   "head": [
+    899.5,
+    194.0
+   ],
+   "source": "kits/tane/source/hero/wins_b/take_3.jpg",
+   "shot": "shots/wins.js",
+   "frame": 186,
+   "action": "wins_tane",
+   "cel": 9,
+   "from": {
+    "yaw": -84.4,
+    "elev": 1.4
+   }
+  },
+  "rise": {
+   "img": "hero/rise.webp",
+   "w": 927,
+   "h": 1413,
+   "k": 676.0,
+   "ground": [
+    518.1,
+    1255.1
+   ],
+   "bottom": 1402,
+   "hips": [
+    518.1,
+    678.5
+   ],
+   "head": [
+    544.9,
+    221.3
+   ],
+   "source": "kits/tane/source/hero/wins_b/take_3.jpg",
+   "shot": "shots/wins.js",
+   "frame": 200,
+   "action": "wins_tane",
+   "cel": 10,
+   "from": {
+    "yaw": -22.5,
+    "elev": 1.9
+   }
+  },
+  "rest": {
+   "img": "hero/rest.webp",
+   "w": 977,
+   "h": 1479,
+   "k": 676.0,
+   "ground": [
+    437.5,
+    1253.5
+   ],
+   "bottom": 1467,
+   "hips": [
+    437.5,
+    658.7
+   ],
+   "head": [
+    417.7,
+    209.5
+   ],
+   "source": "kits/tane/source/hero/wins_b/take_3.jpg",
+   "shot": "shots/wins.js",
+   "frame": 216,
+   "action": "wins_tane",
+   "cel": 11,
+   "from": {
+    "yaw": -22.2,
+    "elev": 2.1
+   }
   }
  }
 }
