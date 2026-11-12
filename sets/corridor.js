@@ -14,6 +14,8 @@
 //   clearStruts [z0, z1]          no struts of a cut wall between these z (where the shot's business is)
 //   doors      { [k]: 0..1 }      how far shut the bulkhead shutter at z = k * 24 is (1 = shut), or [top, bottom] for
 //                                 its two leaves apart. Unlisted shutters rest open and twitch with the `doorChomp` wire.
+//   slabs      { [k]: 0..1 }      a blast door at the bulkhead z = k * 24: one slab the shape of the corridor's section that
+//                                 comes down out of the ceiling (0 up and out of sight, 1 on the floor). Unlisted: there is none.
 //   hubDoors   { A, B, C, D }     the shutters at the hub's mouths: A is the +Z arm, B +X, C -Z, D -X.
 //   alert      0..1               the alarm state: beacons turn and a red wedge sweeps the walls (the klaxon wire adds to it)
 //   drones     [...]              machines/drones.js specs: { type, pos, yaw, ... }
@@ -170,6 +172,17 @@ function textures() {
     kana(c, "シャッター", 250, 70, 100, 15, "#cfd8ff"); latin(c, "24", 130, 190, 150, "#f6a81c", { align: "center" });
     latin(c, "KEEP CLEAR", 512, 500, 74, "#cfd8ff", { align: "center" }); latin(c, "AUTO-SEAL  //  NOX RING  //  GATE 24", 512, 560, 30, "#8f98d8", { align: "center" });
     c.fillStyle = "#15162c"; for (const x of [70, 954]) for (const y of [60, 580]) { c.beginPath(); c.arc(x, y, 14, 0, 7); c.fill(); }
+  });
+  // a blast door: one slab, plated, a hazard band along its foot and chevrons that point at the floor
+  T.slab = canvasTex(1024, 640, (c) => {
+    c.fillStyle = "#454d7c"; c.fillRect(0, 0, 1024, 640);
+    c.fillStyle = "#394070"; for (let i = 0; i < 4; i++) c.fillRect(i * 256 + 6, 0, 122, 640);
+    c.fillStyle = "#2c335c"; for (let i = 0; i < 5; i++) c.fillRect(0, i * 128 + 60, 1024, 7); for (let i = 0; i < 9; i++) c.fillRect(i * 128 - 3, 0, 6, 640);
+    c.save(); c.translate(512, 250); c.rotate(Math.PI / 2); chevrons(c, -130, -330, 300, 660, 3, 34, "#f6a81c"); c.restore();
+    c.fillStyle = "#454d7c"; c.fillRect(300, 150, 424, 150); kana(c, "キケン", 352, 172, 104, 16, "#cfd8ff");
+    latin(c, "BLAST DOOR  //  NOX RING  //  23", 512, 96, 34, "#8f98d8", { align: "center" });
+    hazard(c, 0, 500, 1024, 140, "#f6a81c", "#15162c", 92); c.fillStyle = "#15162c"; c.fillRect(0, 492, 1024, 10);
+    c.fillStyle = "#15162c"; for (const x of [70, 954]) for (const y of [60, 420]) { c.beginPath(); c.arc(x, y, 14, 0, 7); c.fill(); }
   });
   T.stripes = canvasTex(256, 64, (c) => hazard(c, 0, 0, 256, 64, "#f6a81c", "#15162c", 64), { repeat: true });
   return T;
@@ -339,6 +352,7 @@ export async function createCorridor(renderer, o = {}) {
   const leaves = { top: leafGeom([...zig, [2.7, 2.5], [1.7, 3.4], [-1.7, 3.4], [-2.7, 2.5]]), bottom: leafGeom([...zig.slice().reverse(), [-2.7, 0.9], [-2.2, 0], [2.2, 0], [2.7, 0.9]]) };
   const shutterProto = new THREE.Group();
   for (const k of ["top", "bottom"]) { const m = new THREE.Mesh(leaves[k], leafMat); m.frustumCulled = false; m.name = k; shutterProto.add(m); }
+  const slabProto = new THREE.Mesh(leafGeom([[-2.2, 0], [2.2, 0], [2.7, 0.9], [2.7, 2.5], [1.7, 3.4], [1.7, 7.0], [-1.7, 7.0], [-1.7, 3.4], [-2.7, 2.5], [-2.7, 0.9]]).scale(1, 1, 1.24), mat("#fff", { kind: 10, map: T.slab })); slabProto.frustumCulled = false;
   const setShutter = (g, c) => { const [a, b] = Array.isArray(c) ? c : [c, c]; g.children[0].position.y = 1.52 * (1 - clamp(a)); g.children[1].position.y = -1.98 * (1 - clamp(b)); };
 
   // ---- the hub ----------------------------------------------------------------------------------------------------
@@ -388,7 +402,7 @@ export async function createCorridor(renderer, o = {}) {
   const pool = new Pool(scene), armX = new THREE.Group(); armX.rotation.y = Math.PI / 2; scene.add(armX); const poolX = new Pool(armX);
   const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#0b0a2a");
 
-  function module(pl, i, z, cut, doors, chomp, arm, clear) {
+  function module(pl, i, z, cut, doors, chomp, arm, clear, slabs) {
     const bulk = ((i % BULK) + BULK) % BULK === 0 ? 1 : 0, put = (proto) => { const g = pl.use(proto); g.position.z = z; return g; };
     put(P.floor[bulk]); if (hash(i, arm, 9) > 0.5) put(floorArrow);
     if (cut !== "top") put(P.ceil[bulk]);
@@ -400,6 +414,7 @@ export async function createCorridor(renderer, o = {}) {
       const v = variantOf(i, s, arm), n = Math.floor(hash(i, s, arm, 77) * 5); put(P.vari[s][v][n] ?? P.vari[s][v][0]);
     }
     if (bulk) { const g = put(shutterProto); setShutter(g, doors?.[i / BULK] ?? chomp); }
+    if (bulk && slabs && slabs[i / BULK] !== undefined) put(slabProto).position.y = 3.46 * (1 - clamp(slabs[i / BULK]));
   }
 
   function update(cam, frame, sync, opt = {}) {
@@ -414,7 +429,7 @@ export async function createCorridor(renderer, o = {}) {
     G.screens.value = w.screens; G.meters.value = w.meters; G.stars.value = clamp(w.stars, 0, 1.6); G.beam.value = 0.6 + w.hull; G.reels.value = (G.reelAngle = t * 2 + sync.drive({ stem: "keyboard", mode: "count" }, frame) * 0.7);
     pool.begin(); poolX.begin();
     const i0 = Math.floor(cam.pos[2] / M), span = opt.span ?? 24;
-    for (let i = i0 - span; i <= i0 + span; i++) { const z = i * M; if (J && Math.abs(z + M / 2 - J.z) < HUB) continue; module(pool, i, z, opt.cut, opt.doors, w.doorChomp, 0, opt.clearStruts); }
+    for (let i = i0 - span; i <= i0 + span; i++) { const z = i * M; if (J && Math.abs(z + M / 2 - J.z) < HUB) continue; module(pool, i, z, opt.cut, opt.doors, w.doorChomp, 0, opt.clearStruts, opt.slabs); }
     if (J) { armX.position.set(0, 0, J.z); for (let k = 2; k < 16; k++) for (const sgn of [1, -1]) { const i = sgn > 0 ? k : -k - 1; module(poolX, i, i * M, opt.cut === "top" ? "top" : null, null, w.doorChomp, 1); } }
     pool.end(); poolX.end();
     hub.visible = !!J; if (J) { hub.position.set(0, 0, J.z); hubRoof.visible = opt.cut !== "top"; ["A", "B", "C", "D"].forEach((n, k) => setShutter(hubShutters[k], opt.hubDoors?.[n] ?? w.doorChomp)); }
