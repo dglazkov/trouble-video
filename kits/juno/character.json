@@ -1,7 +1,8 @@
 {
  "name": "juno",
- "design": "art/cast/juno_v2.png",
+ "origin": "art/cast/juno_v2.png",
  "style": "art/ref/test_face.png",
+ "design": "kits/juno/design/model_5.jpg",
  "body": {
   "height": 1.6,
   "heads": 6.3,
@@ -47,7 +48,7 @@
     "spheres": [
      {
       "at": [
-       -0.4,
+       0.4,
        0.3,
        0.2
       ],
@@ -55,7 +56,7 @@
      },
      {
       "at": [
-       -0.43,
+       0.43,
        -0.12,
        0.2
       ],
@@ -80,19 +81,105 @@
   }
  },
  "describe": {
-  "character": "Juno, a 15-year-old girl: tan skin, short choppy teal hair with one long side lock hanging in front of her right ear, a small scar through her left eyebrow, round brass flight goggles pushed up on her forehead, chunky headphones resting round her neck, an orange cropped flight jacket with a high stand-up collar worn open over a navy shirt, the jacket sleeves pushed up to the elbows, three plain geometric patches on the jacket (a circle, a square and a triangle in flat colours, no emblems, no text), dark-grey baggy cargo trousers with a cream stripe down the outside of each leg and a cargo pocket on each thigh, red-and-white high-top trainers with no logo, brown fingerless gloves",
-  "parts": {
-   "head": "her head with all her hair and the goggles on the forehead; the head only, cut cleanly under the jaw with NO neck and NO shoulders",
-   "neck": "her bare neck only: a plain tan-skin cylinder with nothing on it",
-   "torso": "her trunk from the collar down to the jacket hem: the orange flight jacket and the near half of its stand-up collar, with what this view shows of the navy shirt and the headphones resting on the collar; NO head, NO neck (the neck opening is empty: magenta shows through it) and NO arms: where an arm would join, draw only the jacket's round armhole seam",
-   "collar_back": "the far half of the stand-up collar: the inside of the orange collar as it shows behind her neck, in the darker shade tone, with the dark headphone band lying along it",
-   "pelvis": "her hips only: the top of the dark-grey cargo trousers with the belt, from the waist down to a plain rounded bottom at the crotch; no legs",
-   "uarm": "an upper arm only: the orange jacket sleeve from the shoulder down to the pushed-up cuff at the elbow; no forearm, no hand",
-   "farm": "a forearm and hand only: bare tan forearm from the elbow, plain rounded end at the elbow, brown fingerless glove, hand relaxed with fingers lightly curled",
-   "thigh": "an UPPER leg only, hip to knee, in the dark-grey cargo trousers: plain rounded ends at the hip and at the knee, NO cuff, NO ankle; the cargo pocket and the cream stripe are on the outer face of the leg only",
-   "shin": "a LOWER leg only, knee to ankle, in the dark-grey cargo trousers: plain rounded end at the knee, gathered cuff at the ankle, no shoe; the cream stripe is on the outer face of the leg only",
-   "shoe": "one red-and-white high-top trainer with white laces and a white sole, no logo, no marks, no leg in it",
-   "bent": "one whole leg sharply bent at the knee, drawn as a single piece from the hip to the ankle cuff in the dark-grey cargo trousers, with folds at the knee; no shoe, no foot"
-  }
- }
+  "who": "Juno, a 15-year-old girl with tan skin",
+  "design": [
+   "HAIR: short choppy teal hair, with ONE long thin lock hanging down in front of her LEFT ear to her collarbone",
+   "GOGGLES: round brass-brown flight goggles with pale teal lenses, always pushed up on her forehead, never over her eyes",
+   "HEADPHONES: chunky grey-brown headphones, always resting round her neck on the collar, never on her ears",
+   "JACKET: a plain orange cropped flight jacket with a high stand-up collar, worn open, sleeves pushed up to the elbows; the back of the jacket is plain orange",
+   "PATCHES: exactly three plain flat one-colour patches on the jacket and nothing else on it: a YELLOW TRIANGLE on the outside of EACH upper sleeve (the same on her left sleeve and on her right sleeve), always with one corner pointing straight up toward the shoulder and a flat base below, and a WHITE CIRCLE on her left chest; each patch is a single flat shape with a black outline and nothing inside it, the same size and in the same place in every drawing",
+   "SHIRT: a plain navy-blue shirt",
+   "GLOVES: plain grey-brown fingerless gloves on both hands (grey-brown, never teal, never green), bare fingers",
+   "TROUSERS: baggy dark-grey cargo trousers with one cream stripe down the outside of each leg and one cargo pocket on the outside of each thigh; gathered cuffs that come down over the tops of the shoes, no bare ankle",
+   "SHOES: red high-top trainers with white toe caps, white laces and white soles, completely plain",
+   "FACE: plain, no scar, no marks; the same calm look with the mouth closed in every drawing"
+  ],
+  "never": "No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on her."
+ },
+ "palette": {
+  "skin": "#cc8e6c",
+  "hair": "#3d7683",
+  "jacket": "#dd7135",
+  "shirt": "#364364",
+  "trousers": "#4f4f55",
+  "stripe": "#f1d6bb",
+  "glove": "#847269",
+  "shoe": "#bd3235",
+  "white": "#eee6df",
+  "patch": "#f8bf3b",
+  "goggles": "#774832",
+  "lens": "#a9d6cf"
+ },
+ "wear": {
+  "hand": [
+   "glove",
+   "skin"
+  ],
+  "farm": [
+   "skin",
+   "jacket",
+   "glove"
+  ],
+  "uarm": [
+   "jacket",
+   "patch"
+  ],
+  "thigh": [
+   "trousers",
+   "stripe"
+  ],
+  "shin": [
+   "trousers",
+   "stripe"
+  ],
+  "shoe": [
+   "shoe",
+   "white",
+   "trousers"
+  ],
+  "hair": [
+   "hair",
+   "goggles",
+   "lens",
+   "skin"
+  ],
+  "torso": [
+   "jacket",
+   "shirt",
+   "white",
+   "glove",
+   "hair",
+   "skin",
+   "patch"
+  ],
+  "pelvis": [
+   "trousers",
+   "stripe",
+   "jacket",
+   "shirt"
+  ]
+ },
+ "accents": [
+  "patch",
+  "white",
+  "lens",
+  "goggles",
+  "glove",
+  "stripe",
+  "shoe",
+  "hair",
+  "shirt"
+ ],
+ "marks": [
+  "patch",
+  "lens"
+ ],
+ "flats": [
+  "skin",
+  "hair",
+  "jacket",
+  "trousers",
+  "glove",
+  "shoe"
+ ]
 }

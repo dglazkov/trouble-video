@@ -1,0 +1,10 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: on all four full-body drawings, lengthen the dark-grey trouser legs so the gathered cuffs come down over the tops of the red shoes: no bare ankle and no skin shows between trouser and shoe. On every glove (also the callout glove) remove the tan rectangle on the back of the hand, so the back of each glove is plain grey-brown. Nothing else changes.",
+ "refs": [
+  "kits/juno/design/model_3.jpg"
+ ],
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-11T22:08:22",
+ "from": "kits/juno/design/model_3.jpg"
+}
