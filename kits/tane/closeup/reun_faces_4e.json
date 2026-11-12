@@ -1,0 +1,12 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style, the same colours and the same flat magenta background: only the outline of the two eyes of TANE (far left, black pompadour, red coat) changes, and nothing else in the whole picture. TANE is SURPRISED and overjoyed: his thick black eyebrows are raised HIGH on his forehead in round arches, and they must stay exactly as they are drawn now, the same shapes in the same place, not lowered, not slanted. Under them his eyes are now perfect round circles, which looks like a children's cartoon. Change each eye from a circle into an ANGULAR eye opened wide in surprise: a thick straight black upper lid line with a sharp pointed outer corner, straight sides, a short flat lower line: a wide, low trapezoid, about three fifths as tall as the circle was and sitting in the lower part of where the circle was. Inside it, white, and a small dark iris with a black pupil in the middle of the white (white visible on both sides of it), looking toward his friends on the right. Between each raised eyebrow and its eye there is a wide band of plain brown skin, wider than before. His open happy smile, nose, cheeks, blush marks, ear and hair stay exactly as they are. IFE, JUNO and NOOR are completely unchanged.",
+ "refs": [
+  "kits/tane/closeup/reun_faces_4.jpg"
+ ],
+ "kind": "edit:edit:edit:plate:reun_faces",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T15:05:39",
+ "from": "kits/tane/closeup/reun_faces_4.jpg",
+ "note": "only Tane's two eyes are taken from this (pipeline/reun_meet_prep.py EYES) into reun_faces_a.png"
+}

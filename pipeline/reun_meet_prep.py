@@ -4,7 +4,11 @@ every time: .venv/bin/python pipeline/reun_meet_prep.py
         take 1; c: Tane and Ife look up, take 2), the edits graded and registered to take 1 (pipeline/match.py), and in
         all three: the second triangle on Juno's near sleeve painted out (the design has one a sleeve), the two brass
         buttons on Tane's cuff painted out (his coat has four down the front and nothing else), and the part of Ife's
-        lens that hangs past her cheek, painted pink by the backdrop behind it, made the pale glass of the rest
+        lens that hangs past her cheek, painted pink by the backdrop behind it, made the pale glass of the rest;
+        and the eyes put on model (EYES below): Tane's, drawn as round cartoon circles in takes 4 and 2, are his own
+        narrow angular ones (edit passes reun_faces_4e, reun_faces_2e), and Juno's irises, brown in take 4, are her teal
+        (edit pass reun_faces_4j). Of each edit only the eye is taken, inside a feathered outline: outside those
+        outlines the plates are the takes as they were. Take 1 (the laugh) has both pairs of eyes shut: nothing to do
   kits/tane/closeup/reun_skid_a.png          Tane and Ife pulling up: the ground line drawn under them taken out
   kits/juno/closeup/reun_skid_juno.png       Juno alone from reun_skid_b_1 (the Noor painted with her walks the wrong way)
 """
@@ -13,6 +17,41 @@ import numpy as np, cv2
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 T = os.path.join(ROOT, "kits/tane/closeup/")
 MAG = (255, 0, 255)  # BGR
+
+# the eyes taken from the edit passes: plate -> (the edit, the outline of one eye in the plate's pixels)
+EYES = {
+    "a": [("reun_faces_4e", [(450, 348), (500, 342), (545, 346), (568, 362), (570, 400), (562, 416), (500, 416), (458, 408)]),     # Tane's left of picture
+          ("reun_faces_4e", [(606, 362), (625, 354), (650, 358), (661, 372), (661, 410), (650, 422), (628, 422), (610, 412)]),     # Tane's right of picture
+          ("reun_faces_4j", [(1722, 553), (1740, 546), (1762, 552), (1766, 575), (1764, 598), (1750, 608), (1732, 604), (1724, 590)]),   # Juno's
+          ("reun_faces_4j", [(1806, 558), (1822, 544), (1860, 544), (1886, 560), (1884, 580), (1870, 598), (1840, 604), (1812, 594)])],
+    "c": [("reun_faces_2e", [(462, 344), (474, 337), (500, 338), (545, 346), (566, 362), (566, 400), (556, 410), (500, 412), (472, 404)]),
+          ("reun_faces_2e", [(606, 372), (622, 358), (650, 358), (661, 372), (661, 405), (650, 416), (628, 418), (610, 408)])],
+}
+EYE_EDITS = {"reun_faces_4.png": ["reun_faces_4e.jpg", "reun_faces_4j.jpg"], "reun_faces_2.png": ["reun_faces_2e.jpg"]}   # each graded and registered to its base
+
+def eye_in(base, edit, poly, feather=1.6, reach=4):
+    """The edit's eye set into the base, inside the outline only (feathered a few pixels): the edit first moved by the
+    shift (half pixels, at most `reach`) that fits it best to the base in a band round the outline, and levelled to the
+    base there, so the skin meets. Outside the outline grown by the feather the base is untouched."""
+    h, w = base.shape[:2]; m = np.zeros((h, w), np.uint8); cv2.fillPoly(m, [np.int32(poly)], 255)
+    k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11, 11)); band = (cv2.dilate(m, k) > 0) & (cv2.erode(m, k) == 0)
+    x0, y0, bw, bh = cv2.boundingRect(np.int32(poly)); p = reach + 12; X0, Y0, X1, Y1 = x0 - p, y0 - p, x0 + bw + p, y0 + bh + p
+    b = base[Y0:Y1, X0:X1].astype(np.float32); e = edit[Y0:Y1, X0:X1].astype(np.float32); bd = band[Y0:Y1, X0:X1]; best = None
+    for dy in np.arange(-reach, reach + .01, .5):
+        for dx in np.arange(-reach, reach + .01, .5):
+            s = cv2.warpAffine(e, np.float32([[1, 0, dx], [0, 1, dy]]), (e.shape[1], e.shape[0]), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+            c = float(np.abs(s - b).max(2)[bd].mean())
+            if best is None or c < best[0]: best = (c, dx, dy, s)
+    c, dx, dy, s = best; d = (b - s)[bd]; ok = np.abs(d).max(1) < 25
+    if ok.sum() > 50: s = np.clip(s + np.median(d[ok], axis=0), 0, 255)
+    a = cv2.GaussianBlur(m, (0, 0), feather).astype(np.float32) / 255; a[a < 0.02] = 0; a = a[Y0:Y1, X0:X1, None]
+    out = base.copy(); out[Y0:Y1, X0:X1] = np.round(b * (1 - a) + s * a).astype(np.uint8)
+    return out, (float(dx), float(dy))
+
+def fix_eyes(im, name):
+    for edit, poly in EYES.get(name, []):
+        im, shift = eye_in(im, cv2.imread(T + edit + ".png"), poly); print(f"reun_faces_{name}: eye from {edit}, moved {shift}, box", cv2.boundingRect(np.int32(poly)))
+    return im
 
 def fix_faces(im):
     im = im.copy()
@@ -36,8 +75,10 @@ def fix_faces(im):
 def main():
     py = sys.executable
     subprocess.run([py, os.path.join(ROOT, "pipeline/match.py"), "--register", T + "reun_faces_1.jpg", T + "reun_faces_4.jpg", T + "reun_faces_2.jpg"], check=True, stdout=subprocess.DEVNULL)
+    for base, edits in EYE_EDITS.items():
+        subprocess.run([py, os.path.join(ROOT, "pipeline/match.py"), "--register", T + base] + [T + e for e in edits], check=True, stdout=subprocess.DEVNULL)
     for name, src in (("a", "reun_faces_4.png"), ("b", "reun_faces_1.jpg"), ("c", "reun_faces_2.png")):
-        cv2.imwrite(T + f"reun_faces_{name}.png", fix_faces(cv2.imread(T + src)))
+        cv2.imwrite(T + f"reun_faces_{name}.png", fix_faces(fix_eyes(cv2.imread(T + src), name)))
     # the ground line: dark pixels in its rows with the backdrop right above them
     a = cv2.imread(T + "reun_skid_a_1.jpg"); dark = a.max(2) < 90; rows = np.where(dark[:, 500:2400].mean(1) > 0.85)[0]
     if len(rows):

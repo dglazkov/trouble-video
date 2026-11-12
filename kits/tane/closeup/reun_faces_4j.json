@@ -1,0 +1,14 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style, the same colours and the same flat magenta background: only the EYES of two people change, nothing else in their faces. TANE (far left, black pompadour, red coat): his two eyes are redrawn in HIS USUAL SHAPE, the shape they have in the SECOND image (the same boy): NARROW, sharp, angular eyes, each a low wide wedge with a thick straight black upper lid line slanting down toward the nose and a small dark iris, about half as tall as they are now. They are NOT big round circles any more. He still looks the same way (toward his friends on the right) and he is still happy: his eyebrows, his open happy smile, his nose, his cheeks and everything else of his face stay exactly as they are. JUNO (teal hair, goggles, orange jacket): the irises of her two eyes are TEAL (the green-blue of her hair, as in the THIRD image, the same girl), not brown; her eyes keep exactly their size, shape, outline, pupils, white highlights and direction of gaze; only the brown of the irises becomes teal. IFE and NOOR are completely unchanged.",
+ "refs": [
+  "kits/tane/closeup/reun_faces_4.jpg",
+  "out/fixes/warden/eyes/ref_tane_eyes.png",
+  "out/fixes/warden/eyes/ref_juno_eyes.png"
+ ],
+ "kind": "edit:edit:edit:plate:reun_faces",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T15:05:39",
+ "from": "kits/tane/closeup/reun_faces_4.jpg",
+ "note": "only Juno's two eyes are taken from this (pipeline/reun_meet_prep.py EYES) into reun_faces_a.png; its Tane (brows pulled down into a scowl) is not used"
+}
