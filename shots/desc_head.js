@@ -1,3 +1,5 @@
+// (Out of the cut since the atrium became a painted vista: shots/desc_out.js holds it through these frames, and
+// shots/descent.js goes from it straight to the lift. Kept as it was, 22.38-23.21 s, should the cut want it back.)
 // Descent 2, 22.38-23.21 s: THE STAIRHEAD, from straight above. The shaft drops away under the picture, flight under
 // flight; the four come in along the walkway from the gantry's door in single file. Tane, Juno and Ife swing right,
 // onto the stairs. Noor, last, does not.

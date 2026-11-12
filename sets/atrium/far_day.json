@@ -1,0 +1,58 @@
+{
+ "painting": "far_day.webp",
+ "for": "sets/atrium.js: the vista, projected from HERO (sets/atriumplan.js)",
+ "frozen_from": "far_2.png",
+ "how": "sets/paint.py freeze --width 4096",
+ "steps": [
+  {
+   "made": "full_a3.png",
+   "prompt": "Paint a finished background painting following the camera angle, perspective and rough layout of the FIRST image (a crude grey-box 3D layout sketch: use it only for the viewpoint, the vanishing point far below, and where the tower stands; redesign all the architecture with far more invention, scale and detail). The view: we float high inside the colossal hollow interior of a far-future space station, looking steeply DOWN a cylindrical atrium kilometres deep. Right of centre a huge faceted core tower plunges away below us to a vanishing point, ringed by balcony decks, cluster of pods, pipes, antenna masts and dark blank display panels. Around it, far away across the void, the curved atrium wall: hundreds of ring-shaped decks stacked one under another, dwindling downward into bright haze, crossed by great vertical ribs and buttresses; a few big blank dark display screens mounted on it. Slender bridges and tube-ways span from the tower to the wall at many levels below, smaller and paler with depth. The left and lower-left of the picture is open void: depth you could fall into, with shafts of daylight from the upper left crossing the haze as flat pale wedge shapes and the bottom lost in luminous pale mist. Vary the wall: bands of different deck heights, garden terraces, large hangar openings, clusters of warm lit windows in irregular groups, never a uniform repeated grid. A strong asymmetrical composition with a sense of overwhelming scale. Style: a hand-painted 1990s cel-anime BACKGROUND painting, gouache poster colour on board, in the manner of the great hand-painted science-fiction megastructure backgrounds of late-80s and 90s anime films. Flat opaque tone areas with crisp hard-edged shadow shapes, two or three confident value steps per surface, clean ruled architectural drawing with thin dark-indigo line work, values and saturation stepping back into pale atmospheric haze layer by layer. Restrained palette: vast cool daylight blue and pale aqua haze in the distance, ivory and cream where the daylight lands, slate-blue and violet in the shade, a few small accents of signal yellow and orange. One clear light direction: hard daylight falling from the upper left, so left-facing surfaces are bright cream and right-facing surfaces are in flat violet shade, with cast shadow shapes. NOT a 3D render, NOT photographic, no soft airbrushed gradients, no texture noise, no lens flare, no bloom, no depth-of-field blur, no film grain. The other reference images are frames of the film this background is for: match their flat saturated cel look and line quality. No people, no characters, no vehicles or aircraft. Absolutely no text, letters, numbers, kanji, logos or signage anywhere: the giant display screens are BLANK flat dark blue-black panels in pale frames. No walkway or bridge attached to the tower at the level of the small plain doorway-height band in the upper part of the tower (that bridge is added later): leave the tower's faces there plain.",
+   "refs": [
+    "out/atrium/gen/guide_wide.png",
+    "out/gantry_stills/gantry_f0012.png",
+    "out/open_stills/open_f0092.png"
+   ],
+   "aspect": "16:9",
+   "size": "4K",
+   "model": "gemini-3.1-flash-image (art/gen.py)"
+  },
+  {
+   "made": "full_b1.png",
+   "prompt": "Paint a finished widescreen background painting. FIRST image: a crude 3D layout sketch; keep its camera angle, its steep downward perspective with the vanishing point far below the bottom edge, and the position and width of the central tower, but redesign everything else. SECOND image: an earlier rough of this painting; keep the idea of its sweeping curved rings, its diagonal shadow and its mounted screens, but make the place AT LEAST TEN TIMES BIGGER and far deeper, and paint it properly. The view: we float high inside the colossal hollow core of a far-future space station, a city-sized cylindrical atrium several kilometres deep, looking steeply down. Right of centre, the huge faceted core tower (each of its balcony decks is one storey; a doorway on it would be a third of the width of one face) plunges away beneath us, dwindling to a thread at the vanishing point, encrusted with balcony decks, pods, tanks, pipe runs, antenna masts and blank display panels. Far away across the void, the curved inner wall of the atrium: HUNDREDS of thin ring-shaped decks stacked one under another, so small that each storey is a hairline and windows are tiny specks in irregular clusters; great vertical ribs, hangar mouths, terraces with trees, huge blank dark display screens; the rings sweep around the picture in big perspective ellipses that get tighter and paler toward the bottom, like looking down a gigantic well. Dozens of slender bridges and transit tubes cross from the tower to the wall at many levels below, each level smaller and paler. The left and lower-left of the picture is open void you could fall into: flat pale wedge-shaped shafts of daylight cross it, and the bottom is lost in glowing mist. Strong asymmetrical composition, overwhelming vertiginous scale. Style: an authentic hand-painted background from a 1988-1995 Japanese animated science-fiction feature film: opaque gouache poster colour on board. Flat opaque tone areas with crisp hard-edged shadow shapes and visible confident brush-cut edges, two or three clear value steps per surface, precise ruled architectural drawing, the line work thin and dark indigo and partly lost in the distance. A FULL value range: deep saturated indigo and violet shadows in the near structures, strong cobalt and cerulean mid-tones, brilliant warm ivory where the daylight lands; then every further layer paler and bluer, stepping back in distinct flat layers into luminous aqua haze. Rich saturated colour like the film frames given as the other references (match their saturation, their indigo shadows and their flat cel look), never pastel, never washed out. One clear light direction: hard daylight from the upper left; a huge hard-edged diagonal cast shadow divides the far wall into a sunlit ivory part and a deep blue shaded part. Accents: small clusters of warm yellow lit windows, signal-orange and yellow hazard trim, a few teal garden terraces. NOT a 3D render, NOT vector clip-art, NOT photographic; no soft airbrush gradients, no noise texture, no lens flare, no bloom, no blur, no film grain. No people, no characters, no vehicles, no aircraft. Absolutely no text, letters, numbers, kanji, logos or signage anywhere: the giant display screens are BLANK flat dark navy panels in pale frames. The tower stands exactly where it stands in the first image, the same width, with flat faces; about a quarter of the way down the picture it has one plain flat wall band with a balcony deck under it and nothing attached to it (a bridge and a doorway are added there later).",
+   "refs": [
+    "out/atrium/gen/guide_wide.png",
+    "out/atrium/gen/full_a3_s.jpg",
+    "out/gantry_stills/gantry_f0012.png",
+    "out/descent_stills/descent_f0006.png"
+   ],
+   "aspect": "16:9",
+   "size": "4K",
+   "model": "gemini-3.1-flash-image (art/gen.py)"
+  },
+  {
+   "made": "full_c2.png",
+   "prompt": "Edit the FIRST image (a hand-painted anime background of a vast space-station atrium seen from above) and return the same painting, same size, same camera, same drawing, every structure exactly where it is, with only these changes: (1) LIGHT ON THE TOWER: the central tower's facets that face the viewer and the right are now in SHADE: flat periwinkle-blue and lavender tones with deeper indigo under each deck, exactly the wall colour of the SECOND image (a frame of the film); only the tower's narrow left-facing facets, the top surfaces of its balcony decks and the tops of its pods and tanks catch the ivory daylight. The tower must read as a strong cool blue-violet shape against the sunlit ivory wall behind it. (2) The large blank pale-blue rectangle in the middle of the tower becomes a flat dark navy blank display screen in a pale frame, like the other screens. (3) The band of the tower about a quarter of the way down, above the balcony deck with the railing, is a plain flat periwinkle wall with a faint panel grid: no pipes or boxes on it. (4) Make the depths deeper: below the bridges the wall's rings continue, dozens more of them, thinner and paler and tighter as they go down, and the tower dwindles far below into luminous aqua mist; keep the bottom-left open and bright. (5) Bridges: the big bridge in the lower right stays sunlit ivory on top; the long bridge on the left stays in deep indigo shadow. Keep the hard diagonal cast shadows on the far wall, the tiny window clusters, the garden terraces, and the gouache look: flat opaque tones, hard edges, thin dark indigo line work. No text, no letters, no people, no vehicles.",
+   "refs": [
+    "out/atrium/gen/full_b1.png",
+    "out/descent_stills/descent_f0006.png"
+   ],
+   "aspect": "16:9",
+   "size": "4K",
+   "model": "gemini-3.1-flash-image (art/gen.py)"
+  },
+  {
+   "made": "far_2.png",
+   "prompt": "Edit this hand-painted anime background. REMOVE the central tower completely, and REMOVE every bridge and walkway that crosses the void (all the long beams running from the tower to the wall, with their supports). Where they were, continue what is behind them: the curved far wall of the atrium with its stacked ring decks, vertical ribs, window clusters, garden terraces, blank dark screens and hard diagonal cast shadows, and at the bottom the rings going on down, tighter and paler, into luminous aqua mist with the bright floor of light far below. The result is the empty atrium: only its surrounding wall and the misty depths, seen from the same viewpoint. Return the same painting at the same size with the same camera; every structure that remains stays exactly, pixel for pixel, where it is and as it is painted (same drawing, same colours, same flat gouache tones, same line work). No text, no people, no vehicles.",
+   "refs": [
+    "out/atrium/gen/full_c2.png"
+   ],
+   "aspect": "16:9",
+   "size": "4K",
+   "model": "gemini-3.1-flash-image (art/gen.py)"
+  }
+ ],
+ "notes": {
+  "guide_wide.png": "the blockout from HERO with the wide lens: node render.mjs shots/atrium_plate.js --frames 0 (sets/atrium.js, guide: true)"
+ },
+ "candidates": "out/atrium/gen/ (not committed): full_a1-3 and full_b1-3 rejected, full_c1 passed over for full_c2; far_1 passed over for far_2; key_1 (a green-screen cut) rejected; far_alarm_1 rejected (it added a bridge), far_alarm_2 passed over for far_alarm_3"
+}
