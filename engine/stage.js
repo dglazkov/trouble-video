@@ -50,6 +50,7 @@ try {
   const sync = await loadSync(), post = new Post(renderer, W, H), sets = {}, cast = {}, plates = {};
   const makers = { corridor: () => import("../sets/corridor.js").then((m) => m.createCorridor(renderer, { width: W, height: H })), market: () => import("../sets/market.js").then((m) => m.createMarket(renderer, { width: W, height: H })),
     vault: () => import("../sets/vault.js").then((m) => m.createVault(renderer, { width: W, height: H })) };
+  makers.gantry = () => import("../sets/gantry.js").then((m) => m.createGantry(renderer, { width: W, height: H }));
   makers.atrium = () => import("../sets/atrium.js").then((m) => m.createAtrium(renderer, { width: W, height: H })); makers.stairwell = () => import("../sets/stairwell.js").then((m) => m.createStairwell(renderer, { width: W, height: H }));
   const need = async (name) => sets[name] ?? (sets[name] = await makers[name]());
   for (const s of shot.sets ?? []) await need(s);
