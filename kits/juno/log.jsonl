@@ -1,0 +1,69 @@
+{"file": "kits/juno/design/model_1.jpg", "kind": "design", "time": "2026-11-11T21:43:13", "ok": true}
+{"file": "kits/juno/design/model_2.jpg", "kind": "design", "time": "2026-11-11T21:43:14", "ok": true}
+{"file": "kits/juno/design/model_1.jpg", "reject": "design draft: patches differ between views (teal bars doubled, triangle and square swap sleeves); a ground line", "by": "hand", "time": "2026-11-11T21:44:39"}
+{"file": "kits/juno/design/model_2.jpg", "reject": "design draft: asymmetric sleeve patches swap sides between the views; led to making the sleeve patches the same on both sides", "by": "hand", "time": "2026-11-11T21:44:39"}
+{"file": "kits/juno/design/model_3.jpg", "kind": "design", "time": "2026-11-11T21:45:11", "ok": true}
+{"file": "kits/juno/design/model_4.jpg", "kind": "design", "time": "2026-11-11T21:45:12", "ok": true}
+{"file": "kits/juno/design/model_5.jpg", "kind": "edit:model", "time": "2026-11-11T22:08:22", "ok": true}
+{"file": "kits/juno/source/run/side/take_1.jpg", "kind": "cels:run/side", "time": "2026-11-11T22:10:36", "ok": true}
+{"file": "kits/juno/source/run/side/take_2.jpg", "kind": "cels:run/side", "time": "2026-11-11T22:10:43", "ok": true}
+{"file": "kits/juno/source/run/side/take_2.jpg", "reject": "count: 7 figures for 8 mannequins; pose/place/facing/palette: drew the model sheet's standing views over the left half instead of the mannequins", "by": "check", "time": "2026-11-11T22:17:39"}
+{"file": "kits/juno/source/run/front34/take_1.jpg", "kind": "cels:run/front34", "time": "2026-11-11T22:18:12", "ok": true}
+{"file": "kits/juno/source/run/back34/take_1.jpg", "kind": "cels:run/back34", "time": "2026-11-11T22:18:32", "ok": true}
+{"file": "kits/juno/source/run/front34/take_1.jpg", "reject": "count: 7 figures for 8 mannequins; pose, place, facing, palette: copied the model sheet's standing figures over the left half", "by": "check", "time": "2026-11-11T22:20:23"}
+{"file": "kits/juno/source/run/front34/take_2.jpg", "kind": "cels:run/front34", "time": "2026-11-11T22:20:25", "ok": false, "error": "HTTP 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Unable to process input image. Please retry or report in https://developers.generativeai.google/guide/troubleshooting\",\n    \"status\": \"INVALID_ARGUMENT\"\n  }\n}\n\n"}
+{"file": "kits/juno/source/run/front34/take_3.jpg", "kind": "cels:run/front34", "time": "2026-11-11T22:20:58", "ok": true}
+{"file": "kits/juno/source/run/front34/take_2.jpg", "kind": "cels:run/front34", "time": "2026-11-11T22:21:03", "ok": true}
+{"file": "kits/juno/source/run/front34/take_2.jpg", "reject": "facing: every face is blank (eyes and mouth are 0.0% of it)", "by": "check", "time": "2026-11-11T22:24:50"}
+{"file": "kits/juno/source/run/front34/take_3.jpg", "reject": "count: 12 figures for 8 mannequins (standing figures from the model sheet drawn between the running ones)", "by": "check", "time": "2026-11-11T22:24:50"}
+{"file": "kits/juno/source/run/front34/take_5.jpg", "kind": "cels:run/front34", "time": "2026-11-11T22:25:24", "ok": true}
+{"file": "kits/juno/source/run/front34/take_4.jpg", "kind": "cels:run/front34", "time": "2026-11-11T22:25:26", "ok": true}
+{"file": "kits/juno/source/run/side/take_3.jpg", "kind": "cels:run/side", "time": "2026-11-11T22:28:12", "ok": true}
+{"file": "kits/juno/source/run/front34/take_6.jpg", "kind": "edit:cels:run/front34", "time": "2026-11-11T22:28:14", "ok": true}
+{"file": "kits/juno/source/run/side/take_5.jpg", "kind": "cels:run/side", "time": "2026-11-11T22:28:16", "ok": true}
+{"file": "kits/juno/source/run/side/take_4.jpg", "kind": "cels:run/side", "time": "2026-11-11T22:28:19", "ok": true}
+{"file": "kits/juno/source/run/side/take_3.jpg", "reject": "pose, place: with an accepted three-quarter-front sheet as an extra reference, drew that sheet's three-quarter figures instead of the side layout (cel 0 covers 70% of its mannequin); palette: skin and shoe drifted", "by": "check", "time": "2026-11-11T22:31:04"}
+{"file": "kits/juno/source/run/side/take_4.jpg", "reject": "pose, place: same as take_3 (copied the extra reference's view); palette: skin and shoe drifted", "by": "check", "time": "2026-11-11T22:31:04"}
+{"file": "kits/juno/source/run/front34/take_6.jpg", "reject": "palette: second 'make details identical' edit pass shifted skin and shoe colour; cel 3 torso 25% in design colours", "by": "check", "time": "2026-11-11T22:31:04"}
+{"file": "kits/juno/source/run/side/take_6.jpg", "kind": "cels:run/side", "time": "2026-11-11T22:31:38", "ok": true}
+{"file": "kits/juno/source/run/side/take_7.jpg", "kind": "cels:run/side", "time": "2026-11-11T22:31:44", "ok": true}
+{"file": "kits/juno/source/run/side/take_6.jpg", "reject": "pose: with the first sheet of four as an extra reference, redrew that sheet's poses (cels 0-3) on the mannequins of cels 4-7: cel 4 covers 27% of the mannequin's hand.L; skin drifted 12", "by": "check", "time": "2026-11-11T22:32:40"}
+{"file": "kits/juno/source/run/side/take_7.jpg", "reject": "count: 3 figures for 4 mannequins", "by": "check", "time": "2026-11-11T22:32:40"}
+{"file": "kits/juno/source/idle/front34/take_1.jpg", "kind": "cels:idle/front34", "time": "2026-11-11T22:33:01", "ok": true}
+{"file": "kits/juno/source/idle/back34/take_1.jpg", "kind": "cels:idle/back34", "time": "2026-11-11T22:33:02", "ok": true}
+{"file": "kits/juno/source/idle/side/take_1.jpg", "kind": "cels:idle/side", "time": "2026-11-11T22:33:02", "ok": true}
+{"file": "kits/juno/source/idle/back34/take_1.jpg", "reject": "palette: the glove is painted #b4a195, 18 from the design's #847269", "by": "check", "time": "2026-11-11T22:33:09"}
+{"file": "kits/juno/source/idle/side/take_1.jpg", "reject": "pose: cel 0: covers 86% of its mannequin", "by": "check", "time": "2026-11-11T22:33:10"}
+{"file": "kits/juno/source/run/side/take_8.jpg", "kind": "cels:run/side", "time": "2026-11-11T22:33:13", "ok": true}
+{"file": "kits/juno/source/idle/side/take_2.jpg", "kind": "cels:idle/side", "time": "2026-11-11T22:33:25", "ok": true}
+{"file": "kits/juno/source/idle/back34/take_2.jpg", "kind": "cels:idle/back34", "time": "2026-11-11T22:33:26", "ok": true}
+{"file": "kits/juno/closeup/slice_run_1.jpg", "kind": "closeup:slice_run", "time": "2026-11-11T22:33:30", "ok": true}
+{"file": "kits/juno/closeup/slice_run_2.jpg", "kind": "closeup:slice_run", "time": "2026-11-11T22:33:30", "ok": true}
+{"file": "kits/juno/source/idle/side/take_2.jpg", "reject": "pose: cel 0: covers 10% of the mannequin's hand.R", "by": "check", "time": "2026-11-11T22:33:33"}
+{"file": "kits/juno/source/idle/back34/take_2.jpg", "reject": "pose: cel 0: 68% of the figure is away from its mannequin; place: cel 0: painted 0.14 body units from its mannequin; palette: cel 0: only 5% of the hand is in the design's colours for it (glove, skin); palette: cel 0: only 0% of the farm is in the design's colours for it (skin, jacket, glove); palette: cel 0: only 20% of the shin is in the design's colours for it (trousers, stripe); palette: cel 0: only 26% of the hair is in the design's colours for it (hair, goggles, lens, skin)", "by": "check", "time": "2026-11-11T22:33:34"}
+{"file": "kits/juno/source/run/side/take_8.jpg", "reject": "passed the checks as they then were, but the far leg is still mannequin red in cels 0-2 and a shin is blue in cel 5 (red is also the shoes' colour, so the mannequin check let it by); led to judging each leg's colours by itself, which now rejects it", "by": "hand", "time": "2026-11-11T22:37:38"}
+{"file": "kits/juno/source/idle/side/take_1.jpg", "reject": "idle pose of the layout itself read as a mannequin with one forearm stuck out; pose changed to arms hanging", "by": "hand", "time": "2026-11-11T22:37:38"}
+{"file": "kits/juno/source/idle/side/take_2.jpg", "reject": "same: layout pose changed", "by": "hand", "time": "2026-11-11T22:37:38"}
+{"file": "kits/juno/source/idle/front34/take_1.jpg", "reject": "passed, but superseded: layout pose changed to arms hanging", "by": "hand", "time": "2026-11-11T22:37:38"}
+{"file": "kits/juno/source/idle/side/take_3.jpg", "kind": "cels:idle/side", "time": "2026-11-11T22:38:02", "ok": true}
+{"file": "kits/juno/source/idle/back34/take_3.jpg", "kind": "cels:idle/back34", "time": "2026-11-11T22:38:04", "ok": true}
+{"file": "kits/juno/source/idle/front34/take_2.jpg", "kind": "cels:idle/front34", "time": "2026-11-11T22:38:04", "ok": true}
+{"file": "kits/juno/closeup/slice_run_2.jpg", "reject": "close-up: grim, eyes forward; not laughing, not glancing back (file removed)", "by": "hand", "time": "2026-11-11T22:38:08"}
+{"file": "kits/juno/closeup/slice_run_1.jpg", "note": "chosen: saved as kits/juno/closeup/slice_run.png", "time": "2026-11-11T22:38:08"}
+{"file": "kits/juno/source/idle/side/take_3.jpg", "reject": "pose: cel 0: covers 46% of the mannequin's shoe.R; palette: cel 0: only 0% of the farm is in the design's colours for it (skin, jacket, glove)", "by": "check", "time": "2026-11-11T22:38:12"}
+{"file": "kits/juno/source/idle/back34/take_3.jpg", "reject": "palette: the glove is painted #b4a59b, 20 from the design's #847269", "by": "check", "time": "2026-11-11T22:38:13"}
+{"file": "kits/juno/source/idle/front34/take_2.jpg", "reject": "pose: cel 0: covers 55% of the mannequin's shoe.L", "by": "check", "time": "2026-11-11T22:38:14"}
+{"file": "kits/juno/source/run/side/take_9.jpg", "kind": "cels:run/side", "time": "2026-11-11T22:38:23", "ok": true}
+{"file": "kits/juno/source/idle/side/take_4.jpg", "kind": "cels:idle/side", "time": "2026-11-11T22:38:28", "ok": true}
+{"file": "kits/juno/source/idle/back34/take_4.jpg", "kind": "cels:idle/back34", "time": "2026-11-11T22:38:31", "ok": true}
+{"file": "kits/juno/source/idle/front34/take_3.jpg", "kind": "cels:idle/front34", "time": "2026-11-11T22:38:31", "ok": true}
+{"file": "kits/juno/source/idle/side/take_4.jpg", "reject": "pose: cel 0: covers 42% of the mannequin's shoe.R; palette: cel 0: only 11% of the hand is in the design's colours for it (glove, skin); palette: cel 0: only 0% of the farm is in the design's colours for it (skin, jacket, glove)", "by": "check", "time": "2026-11-11T22:38:34"}
+{"file": "kits/juno/source/idle/front34/take_3.jpg", "reject": "pose: cel 0: 67% of the figure is away from its mannequin; place: cel 0: painted 0.14 body units from its mannequin; palette: cel 0: only 0% of the hand is in the design's colours for it (glove, skin); palette: cel 0: only 4% of the farm is in the design's colours for it (skin, jacket, glove); palette: cel 0: only 23% of the shoe is in the design's colours for it (shoe, white, trousers); palette: cel 0: 82% of the figure is in none of the design's colours", "by": "check", "time": "2026-11-11T22:38:37"}
+{"file": "kits/juno/source/idle/side/take_5.jpg", "kind": "cels:idle/side", "time": "2026-11-11T22:38:53", "ok": true}
+{"file": "kits/juno/source/idle/front34/take_4.jpg", "kind": "cels:idle/front34", "time": "2026-11-11T22:38:54", "ok": true}
+{"file": "kits/juno/source/idle/side/take_5.jpg", "reject": "pose: cel 0: covers 53% of the mannequin's shoe.R", "by": "check", "time": "2026-11-11T22:38:58"}
+{"file": "kits/juno/source/idle/front34/take_4.jpg", "reject": "pose: cel 0: covers 55% of the mannequin's shoe.L; palette: cel 0: only 12% of the hand is in the design's colours for it (glove, skin); palette: cel 0: only 15% of the farm is in the design's colours for it (skin, jacket, glove)", "by": "check", "time": "2026-11-11T22:38:59"}
+{"file": "kits/juno/source/run/side/take_1.jpg", "time": "2026-11-11T22:46:10", "note": "passed; not chosen: drawn before the reference and wording changed, in a glossier style than the other views, hair 13 from the design"}
+{"file": "kits/juno/source/run/side/take_5.jpg", "time": "2026-11-11T22:46:10", "note": "passed; not chosen: first sheet of four in the two-sheets experiment, whose second sheet failed twice"}
+{"file": "kits/juno/source/run/front34/take_4.jpg", "time": "2026-11-11T22:46:10", "note": "passed; not chosen: eye style changes between its two rows (take_5 holds it)"}
+{"note": "takes that are not in the kit were moved out of the repository, to out/takes/ under the same path", "time": "2026-11-11T22:46:10"}

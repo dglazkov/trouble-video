@@ -42,7 +42,7 @@ export function proportions(spec = {}) {
 }
 
 // ---- poses ---------------------------------------------------------------------------------------------------------
-// A pose is plain numbers (degrees and metres), so two poses blend by interpolating every leaf.
+// A pose is plain numbers (degrees and metres).
 const LIMB = { arm: { swing: 0, out: 0, elbow: 0 }, leg: { swing: 0, out: 0, knee: 0, foot: 0 } };
 export const ZERO = { yaw: 0, x: 0, z: 0, lift: 0, lean: 0, twist: 0, pelvisTwist: 0,
   head: { yaw: 0, pitch: 0, roll: 0 },
@@ -52,19 +52,7 @@ export function pose(over = {}, base = ZERO) {
   for (const k in base) o[k] = typeof base[k] === "object" ? pose(over[k] ?? {}, base[k]) : over[k] ?? base[k];
   return o;
 }
-export function mix(a, b, t) {
-  const o = {};
-  for (const k in a) o[k] = typeof a[k] === "object" ? mix(a[k], b[k], t) : lerp(a[k], b[k], t);
-  return o;
-}
-// Frame held on twos (or any n): what the character's drawing is a function of.
-export const held = (f, n = 2) => Math.floor(f / n) * n;
 export const ease = (t) => { t = clamp(t); return t * t * (3 - 2 * t); };
-
-// The layout pose: every limb straight down, which is how a kit's parts are drawn.
-export const LAYOUT = pose();
-// The A-pose a design turnaround is drawn in: limbs clear of the trunk.
-export const APOSE = pose({ arm: { L: { out: 24, elbow: 6 }, R: { out: 24, elbow: 6 } }, leg: { L: { out: 7 }, R: { out: 7 } } });
 
 // periodic catmull-rom over n keys
 function cr(k, t) {
@@ -94,25 +82,6 @@ export function runPose(p, o = {}) {
   q.flight = fl;
   return pose(q);
 }
-// Standing, breathing and shifting weight a little. t in seconds.
-export function idlePose(t = 0) {
-  const b = Math.sin(t * 2 * Math.PI / 3.2), w = Math.sin(t * 2 * Math.PI / 6.4 + 1);
-  const arm = (s) => ({ swing: 3 + 2 * b * s, out: 9 + 1.5 * b, elbow: 14 + 3 * b });
-  return pose({ lean: 1 + 0.8 * b, twist: 2 * w, head: { yaw: 3 * w, pitch: -1 + 1.5 * b, roll: 0 },
-    arm: { L: arm(1), R: arm(-1) },
-    leg: { L: { swing: 2, out: 6, knee: 3 }, R: { swing: -1, out: 6, knee: 2 } } });
-}
-// Looking back over the left shoulder from a stand.
-export const lookBackPose = (k = 1) => mix(idlePose(0), pose({ lean: 2, twist: 24, pelvisTwist: 6,
-  head: { yaw: 68, pitch: 4, roll: -4 },
-  arm: { L: { swing: -14, out: 12, elbow: 20 }, R: { swing: 16, out: 10, elbow: 34 } },
-  leg: { L: { swing: 2, out: 7, knee: 3 }, R: { swing: -2, out: 6, knee: 4 } } }), k);
-// A braking skid: weight back, front leg braced, arms out for balance.
-export const skidPose = (k = 1) => mix(idlePose(0), pose({ lean: -16, twist: -22, pelvisTwist: -8,
-  head: { yaw: 0, pitch: 8, roll: 0 },
-  arm: { L: { swing: -30, out: 48, elbow: 30 }, R: { swing: 38, out: 40, elbow: 44 } },
-  leg: { L: { swing: 52, out: 8, knee: 22, foot: -26 }, R: { swing: -6, out: 10, knee: 74, foot: 22 } } }), k);
-
 // ---- skeleton ------------------------------------------------------------------------------------------------------
 // solve(P, pose) -> { J: joints, F: frames, vol: volumes, q: the pose }. Joints with a side live under J.L / J.R.
 export function solve(P, q0) {

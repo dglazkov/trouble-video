@@ -45,7 +45,7 @@
     "spheres": [
      {
       "at": [
-       -0.4,
+       0.4,
        0.3,
        0.2
       ],
@@ -53,7 +53,7 @@
      },
      {
       "at": [
-       -0.43,
+       0.43,
        -0.12,
        0.2
       ],
@@ -77,2287 +77,590 @@
    }
   }
  },
- "views": {
-  "front": {
-   "yaw": 0,
-   "parts": {
-    "head": {
-     "kind": "head",
-     "side": null,
-     "img": "front/head.png",
-     "w": 307,
-     "h": 331,
-     "k": 900.0,
-     "joints": {
-      "a": "headBase",
-      "b": "crown",
-      "c": "head"
-     },
-     "pts": {
-      "a": [
-       143.0,
-       283.6
-      ],
-      "b": [
-       143.0,
-       55.0
-      ],
-      "c": [
-       143.0,
-       169.3
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "head",
-     "skull": [
-      143.0,
-      157.9,
-      102.87167891464104
-     ],
-     "faceDir": [
-      0,
-      0
-     ],
-     "variants": {
-      "blink": "front/head@blink.png"
-     }
-    },
-    "neck": {
-     "kind": "neck",
-     "side": null,
-     "img": "front/neck.png",
-     "w": 88,
-     "h": 199,
-     "k": 900.0,
-     "joints": {
-      "a": "neckBase",
-      "b": "headBase"
-     },
-     "pts": {
-      "a": [
-       43.8,
-       139.0
-      ],
-      "b": [
-       43.8,
-       70.4
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_4.jpg",
-     "box": "neck"
-    },
-    "collar_back": {
-     "kind": "collar_back",
-     "side": null,
-     "img": "front/collar_back.png",
-     "w": 238,
-     "h": 94,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase"
-     },
-     "pts": {
-      "a": [
-       118.0,
-       478.6
-      ],
-      "b": [
-       118.0,
-       84.5
-      ]
-     },
-     "src": "kits/juno/source/front/patch_2.jpg",
-     "box": "collar_back"
-    },
-    "torso": {
-     "kind": "torso",
-     "side": null,
-     "img": "front/torso.png",
-     "w": 415,
-     "h": 509,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase",
-      "shL": "L.sh",
-      "shR": "R.sh",
-      "waist": "waist"
-     },
-     "pts": {
-      "a": [
-       202.4,
-       522.5
-      ],
-      "b": [
-       202.4,
-       128.5
-      ],
-      "shL": [
-       346.4,
-       160.2
-      ],
-      "shR": [
-       58.4,
-       160.2
-      ],
-      "waist": [
-       202.4,
-       400.1
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "torso"
-    },
-    "pelvis": {
-     "kind": "pelvis",
-     "side": null,
-     "img": "front/pelvis.png",
-     "w": 358,
-     "h": 353,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "waist",
-      "hipL": "L.hip",
-      "hipR": "R.hip"
-     },
-     "pts": {
-      "a": [
-       177.8,
-       222.8
-      ],
-      "b": [
-       177.8,
-       100.4
-      ],
-      "hipL": [
-       252.7,
-       222.8
-      ],
-      "hipR": [
-       102.9,
-       222.8
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "pelvis"
-    },
-    "uarm_L": {
-     "kind": "uarm",
-     "side": "L",
-     "img": "front/uarm_L.png",
-     "w": 151,
-     "h": 370,
-     "k": 900.0,
-     "joints": {
-      "a": "L.sh",
-      "b": "L.elbow"
-     },
-     "pts": {
-      "a": [
-       76.4,
-       74.4
-      ],
-      "b": [
-       76.4,
-       297.7
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "uarm_L"
-    },
-    "uarm_R": {
-     "kind": "uarm",
-     "side": "R",
-     "img": "front/uarm_R.png",
-     "w": 151,
-     "h": 370,
-     "k": 900.0,
-     "joints": {
-      "a": "R.sh",
-      "b": "R.elbow"
-     },
-     "pts": {
-      "a": [
-       74.5,
-       75.2
-      ],
-      "b": [
-       74.5,
-       298.4
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "uarm_R"
-    },
-    "farm_R": {
-     "kind": "farm",
-     "side": "R",
-     "img": "front/farm_R.png",
-     "w": 118,
-     "h": 384,
-     "k": 900.0,
-     "joints": {
-      "a": "R.elbow",
-      "b": "R.wrist"
-     },
-     "pts": {
-      "a": [
-       54.4,
-       47.7
-      ],
-      "b": [
-       54.4,
-       249.3
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "farm_R"
-    },
-    "shoe_L": {
-     "kind": "shoe",
-     "side": "L",
-     "img": "front/shoe_L.png",
-     "w": 140,
-     "h": 250,
-     "k": 900.0,
-     "joints": {
-      "a": "L.ankle",
-      "b": "L.sole"
-     },
-     "pts": {
-      "a": [
-       70.8,
-       155.7
-      ],
-      "b": [
-       70.8,
-       220.6
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "shoe_L"
-    },
-    "shoe_R": {
-     "kind": "shoe",
-     "side": "R",
-     "img": "front/shoe_R.png",
-     "w": 140,
-     "h": 249,
-     "k": 900.0,
-     "joints": {
-      "a": "R.ankle",
-      "b": "R.sole"
-     },
-     "pts": {
-      "a": [
-       70.6,
-       155.0
-      ],
-      "b": [
-       70.6,
-       219.8
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "shoe_R"
-    },
-    "thigh_R": {
-     "kind": "thigh",
-     "side": "R",
-     "img": "front/thigh_R.png",
-     "w": 202,
-     "h": 517,
-     "k": 900.0,
-     "joints": {
-      "a": "L.hip",
-      "b": "L.knee"
-     },
-     "pts": {
-      "a": [
-       97.1,
-       93.4
-      ],
-      "b": [
-       97.1,
-       439.0
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "thigh_L"
-    },
-    "shin_R": {
-     "kind": "shin",
-     "side": "R",
-     "img": "front/shin_R.png",
-     "w": 162,
-     "h": 477,
-     "k": 900.0,
-     "joints": {
-      "a": "L.knee",
-      "b": "L.ankle"
-     },
-     "pts": {
-      "a": [
-       82.4,
-       75.8
-      ],
-      "b": [
-       67.2,
-       413.8
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "shin_L"
-    },
-    "thigh_L": {
-     "kind": "thigh",
-     "side": "L",
-     "img": "front/thigh_L.png",
-     "w": 201,
-     "h": 517,
-     "k": 900.0,
-     "joints": {
-      "a": "R.hip",
-      "b": "R.knee"
-     },
-     "pts": {
-      "a": [
-       102.4,
-       93.4
-      ],
-      "b": [
-       102.4,
-       439.0
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "thigh_R"
-    },
-    "shin_L": {
-     "kind": "shin",
-     "side": "L",
-     "img": "front/shin_L.png",
-     "w": 162,
-     "h": 477,
-     "k": 900.0,
-     "joints": {
-      "a": "R.knee",
-      "b": "R.ankle"
-     },
-     "pts": {
-      "a": [
-       76.8,
-       75.8
-      ],
-      "b": [
-       92.0,
-       413.8
-      ]
-     },
-     "src": "kits/juno/source/front/sheet_8.jpg",
-     "box": "shin_R"
-    }
-   },
-   "sheet": "kits/juno/source/front/sheet_8.jpg"
-  },
-  "front34": {
-   "yaw": 45,
-   "parts": {
-    "head": {
-     "kind": "head",
-     "side": null,
-     "img": "front34/head.png",
-     "w": 316,
-     "h": 328,
-     "k": 900.0,
-     "joints": {
-      "a": "headBase",
-      "b": "crown",
-      "c": "head"
-     },
-     "pts": {
-      "a": [
-       155.7,
-       269.6
-      ],
-      "b": [
-       155.7,
-       41.0
-      ],
-      "c": [
-       155.7,
-       155.3
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "head",
-     "skull": [
-      155.7,
-      143.9,
-      102.8735632183908
-     ],
-     "faceDir": [
-      -0.7071066411238824,
-      0
-     ],
-     "variants": {
-      "blink": "front34/head@blink.png"
-     }
-    },
-    "neck": {
-     "kind": "neck",
-     "side": null,
-     "img": "front34/neck.png",
-     "w": 92,
-     "h": 203,
-     "k": 900.0,
-     "joints": {
-      "a": "neckBase",
-      "b": "headBase"
-     },
-     "pts": {
-      "a": [
-       45.5,
-       141.1
-      ],
-      "b": [
-       45.5,
-       72.5
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "neck"
-    },
-    "collar_back": {
-     "kind": "collar_back",
-     "side": null,
-     "img": "front34/collar_back.png",
-     "w": 288,
-     "h": 174,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase"
-     },
-     "pts": {
-      "a": [
-       124.8,
-       476.2
-      ],
-      "b": [
-       124.8,
-       82.1
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "collar_back",
-     "warn": "only 69% of the blob is inside its box (merged with a neighbour or misplaced)"
-    },
-    "torso": {
-     "kind": "torso",
-     "side": null,
-     "img": "front34/torso.png",
-     "w": 363,
-     "h": 489,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase",
-      "shL": "L.sh",
-      "shR": "R.sh",
-      "waist": "waist"
-     },
-     "pts": {
-      "a": [
-       162.3,
-       485.1
-      ],
-      "b": [
-       162.3,
-       91.0
-      ],
-      "shL": [
-       264.1,
-       122.7
-      ],
-      "shR": [
-       60.4,
-       122.7
-      ],
-      "waist": [
-       162.3,
-       362.7
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "torso"
-    },
-    "pelvis": {
-     "kind": "pelvis",
-     "side": null,
-     "img": "front34/pelvis.png",
-     "w": 324,
-     "h": 360,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "waist",
-      "hipL": "L.hip",
-      "hipR": "R.hip"
-     },
-     "pts": {
-      "a": [
-       155.8,
-       224.0
-      ],
-      "b": [
-       155.8,
-       101.6
-      ],
-      "hipL": [
-       208.8,
-       224.0
-      ],
-      "hipR": [
-       102.9,
-       224.0
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "pelvis"
-    },
-    "uarm_L": {
-     "kind": "uarm",
-     "side": "L",
-     "img": "front34/uarm_L.png",
-     "w": 164,
-     "h": 368,
-     "k": 900.0,
-     "joints": {
-      "a": "L.sh",
-      "b": "L.elbow"
-     },
-     "pts": {
-      "a": [
-       78.3,
-       73.5
-      ],
-      "b": [
-       78.3,
-       296.7
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "uarm_L"
-    },
-    "farm_L": {
-     "kind": "farm",
-     "side": "L",
-     "img": "front34/farm_L.png",
-     "w": 118,
-     "h": 400,
-     "k": 900.0,
-     "joints": {
-      "a": "L.elbow",
-      "b": "L.wrist"
-     },
-     "pts": {
-      "a": [
-       54.9,
-       47.0
-      ],
-      "b": [
-       54.9,
-       248.7
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "farm_L"
-    },
-    "uarm_R": {
-     "kind": "uarm",
-     "side": "R",
-     "img": "front34/uarm_R.png",
-     "w": 162,
-     "h": 368,
-     "k": 900.0,
-     "joints": {
-      "a": "R.sh",
-      "b": "R.elbow"
-     },
-     "pts": {
-      "a": [
-       77.7,
-       73.5
-      ],
-      "b": [
-       77.7,
-       296.7
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "uarm_R"
-    },
-    "farm_R": {
-     "kind": "farm",
-     "side": "R",
-     "img": "front34/farm_R.png",
-     "w": 118,
-     "h": 400,
-     "k": 900.0,
-     "joints": {
-      "a": "R.elbow",
-      "b": "R.wrist"
-     },
-     "pts": {
-      "a": [
-       60.3,
-       47.0
-      ],
-      "b": [
-       60.3,
-       248.7
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "farm_R"
-    },
-    "shoe_L": {
-     "kind": "shoe",
-     "side": "L",
-     "img": "front34/shoe_L.png",
-     "w": 249,
-     "h": 228,
-     "k": 900.0,
-     "joints": {
-      "a": "L.heel",
-      "b": "L.toe"
-     },
-     "pts": {
-      "a": [
-       189.2,
-       207.3
-      ],
-      "b": [
-       46.7,
-       207.3
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "shoe_L"
-    },
-    "shoe_R": {
-     "kind": "shoe",
-     "side": "R",
-     "img": "front34/shoe_R.png",
-     "w": 237,
-     "h": 231,
-     "k": 900.0,
-     "joints": {
-      "a": "R.heel",
-      "b": "R.toe"
-     },
-     "pts": {
-      "a": [
-       187.4,
-       209.8
-      ],
-      "b": [
-       44.8,
-       209.8
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "shoe_R"
-    },
-    "thigh_L": {
-     "kind": "thigh",
-     "side": "L",
-     "img": "front34/thigh_L.png",
-     "w": 192,
-     "h": 520,
-     "k": 900.0,
-     "joints": {
-      "a": "L.hip",
-      "b": "L.knee"
-     },
-     "pts": {
-      "a": [
-       95.3,
-       94.2
-      ],
-      "b": [
-       95.3,
-       439.8
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "thigh_L"
-    },
-    "shin_L": {
-     "kind": "shin",
-     "side": "L",
-     "img": "front34/shin_L.png",
-     "w": 159,
-     "h": 506,
-     "k": 900.0,
-     "joints": {
-      "a": "L.knee",
-      "b": "L.ankle"
-     },
-     "pts": {
-      "a": [
-       79.3,
-       77.3
-      ],
-      "b": [
-       68.6,
-       415.3
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "shin_L"
-    },
-    "thigh_R": {
-     "kind": "thigh",
-     "side": "R",
-     "img": "front34/thigh_R.png",
-     "w": 198,
-     "h": 520,
-     "k": 900.0,
-     "joints": {
-      "a": "R.hip",
-      "b": "R.knee"
-     },
-     "pts": {
-      "a": [
-       101.7,
-       94.9
-      ],
-      "b": [
-       101.7,
-       440.6
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "thigh_R"
-    },
-    "shin_R": {
-     "kind": "shin",
-     "side": "R",
-     "img": "front34/shin_R.png",
-     "w": 158,
-     "h": 505,
-     "k": 900.0,
-     "joints": {
-      "a": "R.knee",
-      "b": "R.ankle"
-     },
-     "pts": {
-      "a": [
-       78.3,
-       76.5
-      ],
-      "b": [
-       89.0,
-       414.5
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "shin_R"
-    },
-    "bent_L": {
-     "kind": "bent",
-     "side": "L",
-     "img": "front34/bent_L.png",
-     "w": 388,
-     "h": 535,
-     "k": 900.0,
-     "joints": {
-      "hip": "L.hip",
-      "knee": "L.knee",
-      "ankle": "L.ankle"
-     },
-     "pts": {
-      "hip": [
-       294.1,
-       93.3
-      ],
-      "knee": [
-       78.3,
-       255.6
-      ],
-      "ankle": [
-       250.7,
-       472.8
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "bent_L",
-     "pose": {
-      "leg": {
-       "L": {
-        "swing": 62,
-        "knee": 112
-       }
+ "actions": {
+  "run": {
+   "views": {
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "run/side/0.webp",
+       "w": 895,
+       "h": 1283,
+       "k": 788.0,
+       "ground": [
+        483.9,
+        1243.4
+       ],
+       "bottom": 1271,
+       "hips": [
+        483.9,
+        662.3
+       ],
+       "head": [
+        403.9,
+        170.1
+       ],
+       "source": "kits/juno/source/run/side/take_9.jpg"
+      },
+      "1": {
+       "img": "run/side/1.webp",
+       "w": 591,
+       "h": 1285,
+       "k": 788.0,
+       "ground": [
+        402.0,
+        1247.4
+       ],
+       "bottom": 1273,
+       "hips": [
+        402.0,
+        657.1
+       ],
+       "head": [
+        322.6,
+        164.9
+       ],
+       "source": "kits/juno/source/run/side/take_9.jpg"
+      },
+      "2": {
+       "img": "run/side/2.webp",
+       "w": 933,
+       "h": 1291,
+       "k": 788.0,
+       "ground": [
+        444.0,
+        1281.4
+       ],
+       "bottom": 1280,
+       "hips": [
+        444.0,
+        650.5
+       ],
+       "head": [
+        364.5,
+        158.6
+       ],
+       "source": "kits/juno/source/run/side/take_9.jpg"
+      },
+      "3": {
+       "img": "run/side/3.webp",
+       "w": 1201,
+       "h": 1159,
+       "k": 788.0,
+       "ground": [
+        610.5,
+        1169.4
+       ],
+       "bottom": 1147,
+       "hips": [
+        610.5,
+        665.2
+       ],
+       "head": [
+        530.3,
+        173.5
+       ],
+       "source": "kits/juno/source/run/side/take_9.jpg"
+      },
+      "4": {
+       "img": "run/side/4.webp",
+       "w": 901,
+       "h": 1271,
+       "k": 788.0,
+       "ground": [
+        485.6,
+        1245.4
+       ],
+       "bottom": 1258,
+       "hips": [
+        485.6,
+        664.3
+       ],
+       "head": [
+        405.6,
+        172.9
+       ],
+       "source": "kits/juno/source/run/side/take_9.jpg"
+      },
+      "5": {
+       "img": "run/side/5.webp",
+       "w": 579,
+       "h": 1283,
+       "k": 788.0,
+       "ground": [
+        392.2,
+        1257.4
+       ],
+       "bottom": 1270,
+       "hips": [
+        392.2,
+        667.1
+       ],
+       "head": [
+        312.7,
+        175.6
+       ],
+       "source": "kits/juno/source/run/side/take_9.jpg"
+      },
+      "6": {
+       "img": "run/side/6.webp",
+       "w": 929,
+       "h": 1279,
+       "k": 788.0,
+       "ground": [
+        438.5,
+        1281.4
+       ],
+       "bottom": 1268,
+       "hips": [
+        438.5,
+        650.5
+       ],
+       "head": [
+        359.0,
+        158.7
+       ],
+       "source": "kits/juno/source/run/side/take_9.jpg"
+      },
+      "7": {
+       "img": "run/side/7.webp",
+       "w": 1203,
+       "h": 1163,
+       "k": 788.0,
+       "ground": [
+        610.7,
+        1159.4
+       ],
+       "bottom": 1151,
+       "hips": [
+        610.7,
+        655.2
+       ],
+       "head": [
+        530.6,
+        163.0
+       ],
+       "source": "kits/juno/source/run/side/take_9.jpg"
       }
      }
     },
-    "bent_R": {
-     "kind": "bent",
-     "side": "R",
-     "img": "front34/bent_R.png",
-     "w": 389,
-     "h": 534,
-     "k": 900.0,
-     "joints": {
-      "hip": "R.hip",
-      "knee": "R.knee",
-      "ankle": "R.ankle"
-     },
-     "pts": {
-      "hip": [
-       294.0,
-       93.3
-      ],
-      "knee": [
-       78.2,
-       255.6
-      ],
-      "ankle": [
-       272.1,
-       472.8
-      ]
-     },
-     "src": "kits/juno/source/front34/sheet_2.jpg",
-     "box": "bent_R",
-     "pose": {
-      "leg": {
-       "R": {
-        "swing": 62,
-        "knee": 112
-       }
-      }
-     }
-    }
-   },
-   "sheet": "kits/juno/source/front34/sheet_2.jpg"
-  },
-  "side": {
-   "yaw": 90,
-   "parts": {
-    "head": {
-     "kind": "head",
-     "side": null,
-     "img": "side/head.png",
-     "w": 291,
-     "h": 291,
-     "k": 900.0000000000001,
-     "joints": {
-      "a": "headBase",
-      "b": "crown",
-      "c": "head"
-     },
-     "pts": {
-      "a": [
-       134.4,
-       265.2
-      ],
-      "b": [
-       134.4,
-       36.7
-      ],
-      "c": [
-       134.4,
-       150.9
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "head",
-     "skull": [
-      134.4,
-      139.5,
-      102.85714285714286
-     ],
-     "faceDir": [
-      -1,
-      0
-     ],
-     "variants": {
-      "blink": "side/head@blink.png"
-     }
-    },
-    "neck": {
-     "kind": "neck",
-     "side": null,
-     "img": "side/neck.png",
-     "w": 91,
-     "h": 203,
-     "k": 900.0,
-     "joints": {
-      "a": "neckBase",
-      "b": "headBase"
-     },
-     "pts": {
-      "a": [
-       44.4,
-       140.1
-      ],
-      "b": [
-       44.4,
-       71.6
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "neck"
-    },
-    "collar_back": {
-     "kind": "collar_back",
-     "side": null,
-     "img": "side/collar_back.png",
-     "w": 236,
-     "h": 93,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase"
-     },
-     "pts": {
-      "a": [
-       108.0,
-       477.3
-      ],
-      "b": [
-       108.0,
-       83.3
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "collar_back"
-    },
-    "torso": {
-     "kind": "torso",
-     "side": null,
-     "img": "side/torso.png",
-     "w": 286,
-     "h": 473,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase",
-      "shL": "L.sh",
-      "shR": "R.sh",
-      "waist": "waist"
-     },
-     "pts": {
-      "a": [
-       133.5,
-       489.1
-      ],
-      "b": [
-       133.5,
-       95.1
-      ],
-      "shL": [
-       133.5,
-       126.7
-      ],
-      "shR": [
-       133.5,
-       126.7
-      ],
-      "waist": [
-       133.5,
-       366.7
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "torso"
-    },
-    "pelvis": {
-     "kind": "pelvis",
-     "side": null,
-     "img": "side/pelvis.png",
-     "w": 217,
-     "h": 355,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "waist",
-      "hipL": "L.hip",
-      "hipR": "R.hip"
-     },
-     "pts": {
-      "a": [
-       108.2,
-       224.1
-      ],
-      "b": [
-       108.2,
-       101.7
-      ],
-      "hipL": [
-       108.2,
-       224.1
-      ],
-      "hipR": [
-       108.2,
-       224.1
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "pelvis"
-    },
-    "uarm_L": {
-     "kind": "uarm",
-     "side": "L",
-     "img": "side/uarm_L.png",
-     "w": 171,
-     "h": 373,
-     "k": 900.0,
-     "joints": {
-      "a": "L.sh",
-      "b": "L.elbow"
-     },
-     "pts": {
-      "a": [
-       86.1,
-       74.1
-      ],
-      "b": [
-       86.1,
-       297.3
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "uarm_L"
-    },
-    "farm_L": {
-     "kind": "farm",
-     "side": "L",
-     "img": "side/farm_L.png",
-     "w": 118,
-     "h": 376,
-     "k": 900.0,
-     "joints": {
-      "a": "L.elbow",
-      "b": "L.wrist"
-     },
-     "pts": {
-      "a": [
-       56.1,
-       47.8
-      ],
-      "b": [
-       56.1,
-       249.4
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "farm_L"
-    },
-    "uarm_R": {
-     "kind": "uarm",
-     "side": "R",
-     "img": "side/uarm_R.png",
-     "w": 172,
-     "h": 372,
-     "k": 900.0,
-     "joints": {
-      "a": "R.sh",
-      "b": "R.elbow"
-     },
-     "pts": {
-      "a": [
-       83.5,
-       74.1
-      ],
-      "b": [
-       83.5,
-       297.3
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "uarm_R"
-    },
-    "farm_R": {
-     "kind": "farm",
-     "side": "R",
-     "img": "side/farm_R.png",
-     "w": 118,
-     "h": 375,
-     "k": 900.0,
-     "joints": {
-      "a": "R.elbow",
-      "b": "R.wrist"
-     },
-     "pts": {
-      "a": [
-       62.3,
-       47.8
-      ],
-      "b": [
-       62.3,
-       249.4
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "farm_R"
-    },
-    "shoe_L": {
-     "kind": "shoe",
-     "side": "L",
-     "img": "side/shoe_L.png",
-     "w": 304,
-     "h": 234,
-     "k": 900.0,
-     "joints": {
-      "a": "L.heel",
-      "b": "L.toe"
-     },
-     "pts": {
-      "a": [
-       254.7,
-       209.8
-      ],
-      "b": [
-       53.1,
-       209.8
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "shoe_L"
-    },
-    "shoe_R": {
-     "kind": "shoe",
-     "side": "R",
-     "img": "side/shoe_R.png",
-     "w": 304,
-     "h": 234,
-     "k": 900.0,
-     "joints": {
-      "a": "R.heel",
-      "b": "R.toe"
-     },
-     "pts": {
-      "a": [
-       255.0,
-       209.8
-      ],
-      "b": [
-       53.4,
-       209.8
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "shoe_R"
-    },
-    "thigh_L": {
-     "kind": "thigh",
-     "side": "L",
-     "img": "side/thigh_L.png",
-     "w": 194,
-     "h": 520,
-     "k": 900.0,
-     "joints": {
-      "a": "L.hip",
-      "b": "L.knee"
-     },
-     "pts": {
-      "a": [
-       96.1,
-       95.7
-      ],
-      "b": [
-       96.1,
-       441.3
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "thigh_L"
-    },
-    "shin_L": {
-     "kind": "shin",
-     "side": "L",
-     "img": "side/shin_L.png",
-     "w": 166,
-     "h": 515,
-     "k": 900.0,
-     "joints": {
-      "a": "L.knee",
-      "b": "L.ankle"
-     },
-     "pts": {
-      "a": [
-       78.1,
-       78.0
-      ],
-      "b": [
-       78.1,
-       416.1
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "shin_L"
-    },
-    "thigh_R": {
-     "kind": "thigh",
-     "side": "R",
-     "img": "side/thigh_R.png",
-     "w": 194,
-     "h": 520,
-     "k": 900.0,
-     "joints": {
-      "a": "R.hip",
-      "b": "R.knee"
-     },
-     "pts": {
-      "a": [
-       96.2,
-       95.7
-      ],
-      "b": [
-       96.2,
-       441.3
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "thigh_R"
-    },
-    "shin_R": {
-     "kind": "shin",
-     "side": "R",
-     "img": "side/shin_R.png",
-     "w": 159,
-     "h": 515,
-     "k": 900.0,
-     "joints": {
-      "a": "R.knee",
-      "b": "R.ankle"
-     },
-     "pts": {
-      "a": [
-       78.1,
-       78.0
-      ],
-      "b": [
-       78.1,
-       416.1
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "shin_R"
-    },
-    "bent_L": {
-     "kind": "bent",
-     "side": "L",
-     "img": "side/bent_L.png",
-     "w": 476,
-     "h": 536,
-     "k": 900.0,
-     "joints": {
-      "hip": "L.hip",
-      "knee": "L.knee",
-      "ankle": "L.ankle"
-     },
-     "pts": {
-      "hip": [
-       382.8,
-       92.7
-      ],
-      "knee": [
-       77.7,
-       254.9
-      ],
-      "ankle": [
-       336.6,
-       472.2
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "bent_L",
-     "pose": {
-      "leg": {
-       "L": {
-        "swing": 62,
-        "knee": 112
-       }
+    "front34": {
+     "yaw": 45,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "run/front34/0.webp",
+       "w": 597,
+       "h": 1341,
+       "k": 808.0,
+       "ground": [
+        396.3,
+        1285.6
+       ],
+       "bottom": 1329,
+       "hips": [
+        396.3,
+        689.8
+       ],
+       "head": [
+        334.6,
+        190.2
+       ],
+       "source": "kits/juno/source/run/front34/take_5.jpg"
+      },
+      "1": {
+       "img": "run/front34/1.webp",
+       "w": 479,
+       "h": 1339,
+       "k": 808.0,
+       "ground": [
+        305.8,
+        1295.6
+       ],
+       "bottom": 1327,
+       "hips": [
+        305.8,
+        690.3
+       ],
+       "head": [
+        245.1,
+        190.8
+       ],
+       "source": "kits/juno/source/run/front34/take_5.jpg"
+      },
+      "2": {
+       "img": "run/front34/2.webp",
+       "w": 825,
+       "h": 1311,
+       "k": 808.0,
+       "ground": [
+        397.1,
+        1323.6
+       ],
+       "bottom": 1298,
+       "hips": [
+        397.1,
+        676.8
+       ],
+       "head": [
+        338.8,
+        177.3
+       ],
+       "source": "kits/juno/source/run/front34/take_5.jpg"
+      },
+      "3": {
+       "img": "run/front34/3.webp",
+       "w": 1031,
+       "h": 1223,
+       "k": 808.0,
+       "ground": [
+        526.8,
+        1207.6
+       ],
+       "bottom": 1212,
+       "hips": [
+        526.8,
+        690.6
+       ],
+       "head": [
+        470.8,
+        191.4
+       ],
+       "source": "kits/juno/source/run/front34/take_5.jpg"
+      },
+      "4": {
+       "img": "run/front34/4.webp",
+       "w": 753,
+       "h": 1333,
+       "k": 808.0,
+       "ground": [
+        436.7,
+        1287.6
+       ],
+       "bottom": 1322,
+       "hips": [
+        436.7,
+        691.8
+       ],
+       "head": [
+        382.3,
+        192.9
+       ],
+       "source": "kits/juno/source/run/front34/take_5.jpg"
+      },
+      "5": {
+       "img": "run/front34/5.webp",
+       "w": 613,
+       "h": 1329,
+       "k": 808.0,
+       "ground": [
+        409.2,
+        1295.6
+       ],
+       "bottom": 1317,
+       "hips": [
+        409.2,
+        690.3
+       ],
+       "head": [
+        354.6,
+        191.3
+       ],
+       "source": "kits/juno/source/run/front34/take_5.jpg"
+      },
+      "6": {
+       "img": "run/front34/6.webp",
+       "w": 719,
+       "h": 1315,
+       "k": 808.0,
+       "ground": [
+        401.6,
+        1335.6
+       ],
+       "bottom": 1302,
+       "hips": [
+        401.6,
+        688.8
+       ],
+       "head": [
+        344.6,
+        189.5
+       ],
+       "source": "kits/juno/source/run/front34/take_5.jpg"
+      },
+      "7": {
+       "img": "run/front34/7.webp",
+       "w": 813,
+       "h": 1241,
+       "k": 808.0,
+       "ground": [
+        416.4,
+        1215.6
+       ],
+       "bottom": 1229,
+       "hips": [
+        416.4,
+        698.6
+       ],
+       "head": [
+        356.2,
+        199.1
+       ],
+       "source": "kits/juno/source/run/front34/take_5.jpg"
       }
      }
     },
-    "bent_R": {
-     "kind": "bent",
-     "side": "R",
-     "img": "side/bent_R.png",
-     "w": 475,
-     "h": 536,
-     "k": 900.0,
-     "joints": {
-      "hip": "R.hip",
-      "knee": "R.knee",
-      "ankle": "R.ankle"
-     },
-     "pts": {
-      "hip": [
-       380.7,
-       92.7
-      ],
-      "knee": [
-       75.6,
-       254.9
-      ],
-      "ankle": [
-       334.6,
-       472.2
-      ]
-     },
-     "src": "kits/juno/source/side/sheet_2.jpg",
-     "box": "bent_R",
-     "pose": {
-      "leg": {
-       "R": {
-        "swing": 62,
-        "knee": 112
-       }
+    "back34": {
+     "yaw": 135,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "run/back34/0.webp",
+       "w": 827,
+       "h": 1307,
+       "k": 810.0,
+       "ground": [
+        431.4,
+        1285.6
+       ],
+       "bottom": 1296,
+       "hips": [
+        431.4,
+        688.3
+       ],
+       "head": [
+        376.8,
+        177.3
+       ],
+       "source": "kits/juno/source/run/back34/take_1.jpg"
+      },
+      "1": {
+       "img": "run/back34/1.webp",
+       "w": 613,
+       "h": 1331,
+       "k": 810.0,
+       "ground": [
+        402.8,
+        1287.6
+       ],
+       "bottom": 1318,
+       "hips": [
+        402.8,
+        680.8
+       ],
+       "head": [
+        348.1,
+        170.0
+       ],
+       "source": "kits/juno/source/run/back34/take_1.jpg"
+      },
+      "2": {
+       "img": "run/back34/2.webp",
+       "w": 719,
+       "h": 1361,
+       "k": 810.0,
+       "ground": [
+        398.2,
+        1329.6
+       ],
+       "bottom": 1348,
+       "hips": [
+        398.2,
+        681.1
+       ],
+       "head": [
+        341.2,
+        170.4
+       ],
+       "source": "kits/juno/source/run/back34/take_1.jpg"
+      },
+      "3": {
+       "img": "run/back34/3.webp",
+       "w": 815,
+       "h": 1171,
+       "k": 810.0,
+       "ground": [
+        410.5,
+        1203.6
+       ],
+       "bottom": 1159,
+       "hips": [
+        410.5,
+        685.3
+       ],
+       "head": [
+        350.2,
+        174.8
+       ],
+       "source": "kits/juno/source/run/back34/take_1.jpg"
+      },
+      "4": {
+       "img": "run/back34/4.webp",
+       "w": 661,
+       "h": 1291,
+       "k": 810.0,
+       "ground": [
+        396.6,
+        1279.6
+       ],
+       "bottom": 1279,
+       "hips": [
+        396.6,
+        682.3
+       ],
+       "head": [
+        334.8,
+        172.0
+       ],
+       "source": "kits/juno/source/run/back34/take_1.jpg"
+      },
+      "5": {
+       "img": "run/back34/5.webp",
+       "w": 481,
+       "h": 1315,
+       "k": 810.0,
+       "ground": [
+        302.9,
+        1283.6
+       ],
+       "bottom": 1303,
+       "hips": [
+        302.9,
+        676.8
+       ],
+       "head": [
+        242.1,
+        166.5
+       ],
+       "source": "kits/juno/source/run/back34/take_1.jpg"
+      },
+      "6": {
+       "img": "run/back34/6.webp",
+       "w": 837,
+       "h": 1333,
+       "k": 810.0,
+       "ground": [
+        399.5,
+        1313.6
+       ],
+       "bottom": 1321,
+       "hips": [
+        399.5,
+        665.1
+       ],
+       "head": [
+        341.1,
+        154.5
+       ],
+       "source": "kits/juno/source/run/back34/take_1.jpg"
+      },
+      "7": {
+       "img": "run/back34/7.webp",
+       "w": 1045,
+       "h": 1167,
+       "k": 810.0,
+       "ground": [
+        521.3,
+        1189.6
+       ],
+       "bottom": 1155,
+       "hips": [
+        521.3,
+        671.3
+       ],
+       "head": [
+        465.1,
+        160.4
+       ],
+       "source": "kits/juno/source/run/back34/take_1.jpg"
       }
      }
-    }
-   },
-   "sheet": "kits/juno/source/side/sheet_2.jpg"
-  },
-  "back34": {
-   "yaw": 135,
-   "parts": {
-    "head": {
-     "kind": "head",
-     "side": null,
-     "img": "back34/head.png",
-     "w": 294,
-     "h": 321,
-     "k": 900.0,
-     "joints": {
-      "a": "headBase",
-      "b": "crown",
-      "c": "head"
-     },
-     "pts": {
-      "a": [
-       138.6,
-       272.8
-      ],
-      "b": [
-       138.6,
-       44.2
-      ],
-      "c": [
-       138.6,
-       158.5
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "head",
-     "skull": [
-      138.6,
-      147.1,
-      102.84185493460166
-     ],
-     "faceDir": [
-      -0.7071070154577884,
-      0
-     ]
-    },
-    "neck": {
-     "kind": "neck",
-     "side": null,
-     "img": "back34/neck.png",
-     "w": 93,
-     "h": 204,
-     "k": 900.0,
-     "joints": {
-      "a": "neckBase",
-      "b": "headBase"
-     },
-     "pts": {
-      "a": [
-       46.2,
-       141.1
-      ],
-      "b": [
-       46.2,
-       72.5
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "neck"
-    },
-    "torso": {
-     "kind": "torso",
-     "side": null,
-     "img": "back34/torso.png",
-     "w": 376,
-     "h": 474,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase",
-      "shL": "L.sh",
-      "shR": "R.sh",
-      "waist": "waist"
-     },
-     "pts": {
-      "a": [
-       187.7,
-       484.9
-      ],
-      "b": [
-       187.7,
-       90.9
-      ],
-      "shL": [
-       85.9,
-       122.5
-      ],
-      "shR": [
-       289.6,
-       122.5
-      ],
-      "waist": [
-       187.7,
-       362.5
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "torso"
-    },
-    "pelvis": {
-     "kind": "pelvis",
-     "side": null,
-     "img": "back34/pelvis.png",
-     "w": 320,
-     "h": 356,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "waist",
-      "hipL": "L.hip",
-      "hipR": "R.hip"
-     },
-     "pts": {
-      "a": [
-       158.7,
-       225.1
-      ],
-      "b": [
-       158.7,
-       102.6
-      ],
-      "hipL": [
-       105.7,
-       225.1
-      ],
-      "hipR": [
-       211.6,
-       225.1
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "pelvis"
-    },
-    "uarm_L": {
-     "kind": "uarm",
-     "side": "L",
-     "img": "back34/uarm_L.png",
-     "w": 157,
-     "h": 369,
-     "k": 900.0,
-     "joints": {
-      "a": "L.sh",
-      "b": "L.elbow"
-     },
-     "pts": {
-      "a": [
-       78.8,
-       76.2
-      ],
-      "b": [
-       78.8,
-       299.4
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "uarm_L"
-    },
-    "farm_L": {
-     "kind": "farm",
-     "side": "L",
-     "img": "back34/farm_L.png",
-     "w": 116,
-     "h": 354,
-     "k": 900.0,
-     "joints": {
-      "a": "L.elbow",
-      "b": "L.wrist"
-     },
-     "pts": {
-      "a": [
-       56.9,
-       48.2
-      ],
-      "b": [
-       56.9,
-       249.8
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "farm_L"
-    },
-    "uarm_R": {
-     "kind": "uarm",
-     "side": "R",
-     "img": "back34/uarm_R.png",
-     "w": 155,
-     "h": 367,
-     "k": 900.0,
-     "joints": {
-      "a": "R.sh",
-      "b": "R.elbow"
-     },
-     "pts": {
-      "a": [
-       77.5,
-       76.5
-      ],
-      "b": [
-       77.5,
-       299.7
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "uarm_R"
-    },
-    "farm_R": {
-     "kind": "farm",
-     "side": "R",
-     "img": "back34/farm_R.png",
-     "w": 117,
-     "h": 355,
-     "k": 900.0,
-     "joints": {
-      "a": "R.elbow",
-      "b": "R.wrist"
-     },
-     "pts": {
-      "a": [
-       57.4,
-       48.2
-      ],
-      "b": [
-       57.4,
-       249.8
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "farm_R"
-    },
-    "shoe_L": {
-     "kind": "shoe",
-     "side": "L",
-     "img": "back34/shoe_L.png",
-     "w": 240,
-     "h": 247,
-     "k": 900.0,
-     "joints": {
-      "a": "L.heel",
-      "b": "L.toe"
-     },
-     "pts": {
-      "a": [
-       188.1,
-       206.1
-      ],
-      "b": [
-       45.5,
-       206.1
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "shoe_L"
-    },
-    "shoe_R": {
-     "kind": "shoe",
-     "side": "R",
-     "img": "back34/shoe_R.png",
-     "w": 241,
-     "h": 248,
-     "k": 900.0,
-     "joints": {
-      "a": "R.heel",
-      "b": "R.toe"
-     },
-     "pts": {
-      "a": [
-       188.6,
-       207.7
-      ],
-      "b": [
-       46.1,
-       207.7
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "shoe_R"
-    },
-    "thigh_L": {
-     "kind": "thigh",
-     "side": "L",
-     "img": "back34/thigh_L.png",
-     "w": 196,
-     "h": 514,
-     "k": 900.0,
-     "joints": {
-      "a": "L.hip",
-      "b": "L.knee"
-     },
-     "pts": {
-      "a": [
-       98.6,
-       88.3
-      ],
-      "b": [
-       98.6,
-       433.9
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "thigh_L"
-    },
-    "shin_L": {
-     "kind": "shin",
-     "side": "L",
-     "img": "back34/shin_L.png",
-     "w": 161,
-     "h": 479,
-     "k": 900.0,
-     "joints": {
-      "a": "L.knee",
-      "b": "L.ankle"
-     },
-     "pts": {
-      "a": [
-       77.4,
-       77.1
-      ],
-      "b": [
-       88.1,
-       415.2
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "shin_L"
-    },
-    "thigh_R": {
-     "kind": "thigh",
-     "side": "R",
-     "img": "back34/thigh_R.png",
-     "w": 192,
-     "h": 520,
-     "k": 900.0,
-     "joints": {
-      "a": "R.hip",
-      "b": "R.knee"
-     },
-     "pts": {
-      "a": [
-       95.1,
-       94.5
-      ],
-      "b": [
-       95.1,
-       440.1
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "thigh_R"
-    },
-    "shin_R": {
-     "kind": "shin",
-     "side": "R",
-     "img": "back34/shin_R.png",
-     "w": 159,
-     "h": 479,
-     "k": 900.0,
-     "joints": {
-      "a": "R.knee",
-      "b": "R.ankle"
-     },
-     "pts": {
-      "a": [
-       80.5,
-       77.1
-      ],
-      "b": [
-       69.7,
-       415.2
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "shin_R"
-    },
-    "bent_L": {
-     "kind": "bent",
-     "side": "L",
-     "img": "back34/bent_L.png",
-     "w": 391,
-     "h": 538,
-     "k": 900.0,
-     "joints": {
-      "hip": "L.hip",
-      "knee": "L.knee",
-      "ankle": "L.ankle"
-     },
-     "pts": {
-      "hip": [
-       295.9,
-       94.5
-      ],
-      "knee": [
-       80.1,
-       256.7
-      ],
-      "ankle": [
-       274.0,
-       474.0
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "bent_L",
-     "pose": {
-      "leg": {
-       "L": {
-        "swing": 62,
-        "knee": 112
-       }
-      }
-     }
-    },
-    "bent_R": {
-     "kind": "bent",
-     "side": "R",
-     "img": "back34/bent_R.png",
-     "w": 390,
-     "h": 538,
-     "k": 900.0,
-     "joints": {
-      "hip": "R.hip",
-      "knee": "R.knee",
-      "ankle": "R.ankle"
-     },
-     "pts": {
-      "hip": [
-       295.3,
-       94.5
-      ],
-      "knee": [
-       79.5,
-       256.7
-      ],
-      "ankle": [
-       251.9,
-       474.0
-      ]
-     },
-     "src": "kits/juno/source/back34/sheet_3.jpg",
-     "box": "bent_R",
-     "pose": {
-      "leg": {
-       "R": {
-        "swing": 62,
-        "knee": 112
-       }
-      }
-     }
-    },
-    "torso_twp": {
-     "kind": "torso",
-     "side": null,
-     "img": "back34/torso_twp.png",
-     "w": 339,
-     "h": 460,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase",
-      "shL": "L.sh",
-      "shR": "R.sh",
-      "waist": "waist"
-     },
-     "pts": {
-      "a": [
-       158.6,
-       475.1
-      ],
-      "b": [
-       158.6,
-       81.0
-      ],
-      "shL": [
-       93.2,
-       112.7
-      ],
-      "shR": [
-       224.0,
-       112.7
-      ],
-      "waist": [
-       158.6,
-       352.7
-      ]
-     },
-     "src": "kits/juno/source/back34/twist_1.jpg",
-     "box": "torso_twp",
-     "pose": {
-      "twist": 18
-     }
-    },
-    "torso_twn": {
-     "kind": "torso",
-     "side": null,
-     "img": "back34/torso_twn.png",
-     "w": 401,
-     "h": 459,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase",
-      "shL": "L.sh",
-      "shR": "R.sh",
-      "waist": "waist"
-     },
-     "pts": {
-      "a": [
-       200.0,
-       474.3
-      ],
-      "b": [
-       200.0,
-       80.2
-      ],
-      "shL": [
-       71.6,
-       111.9
-      ],
-      "shR": [
-       328.3,
-       111.9
-      ],
-      "waist": [
-       200.0,
-       351.9
-      ]
-     },
-     "src": "kits/juno/source/back34/twist_1.jpg",
-     "box": "torso_twn",
-     "pose": {
-      "twist": -18
-     }
-    }
-   },
-   "sheet": "kits/juno/source/back34/sheet_3.jpg"
-  },
-  "back": {
-   "yaw": 180,
-   "parts": {
-    "head": {
-     "kind": "head",
-     "side": null,
-     "img": "back/head.png",
-     "w": 273,
-     "h": 321,
-     "k": 900.0,
-     "joints": {
-      "a": "headBase",
-      "b": "crown",
-      "c": "head"
-     },
-     "pts": {
-      "a": [
-       130.8,
-       270.2
-      ],
-      "b": [
-       130.8,
-       41.6
-      ],
-      "c": [
-       130.8,
-       155.9
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_2.jpg",
-     "box": "head",
-     "skull": [
-      130.8,
-      144.5,
-      102.86896551724138
-     ],
-     "faceDir": [
-      0,
-      0
-     ]
-    },
-    "neck": {
-     "kind": "neck",
-     "side": null,
-     "img": "back/neck.png",
-     "w": 88,
-     "h": 199,
-     "k": 900.0,
-     "joints": {
-      "a": "neckBase",
-      "b": "headBase"
-     },
-     "pts": {
-      "a": [
-       43.3,
-       138.1
-      ],
-      "b": [
-       43.3,
-       69.5
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_3.jpg",
-     "box": "neck"
-    },
-    "torso": {
-     "kind": "torso",
-     "side": null,
-     "img": "back/torso.png",
-     "w": 422,
-     "h": 473,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "neckBase",
-      "shL": "L.sh",
-      "shR": "R.sh",
-      "waist": "waist"
-     },
-     "pts": {
-      "a": [
-       210.5,
-       483.9
-      ],
-      "b": [
-       210.5,
-       89.9
-      ],
-      "shL": [
-       66.5,
-       121.5
-      ],
-      "shR": [
-       354.5,
-       121.5
-      ],
-      "waist": [
-       210.5,
-       361.5
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_3.jpg",
-     "box": "torso"
-    },
-    "pelvis": {
-     "kind": "pelvis",
-     "side": null,
-     "img": "back/pelvis.png",
-     "w": 358,
-     "h": 355,
-     "k": 900.0,
-     "joints": {
-      "a": "hips",
-      "b": "waist",
-      "hipL": "L.hip",
-      "hipR": "R.hip"
-     },
-     "pts": {
-      "a": [
-       178.6,
-       225.0
-      ],
-      "b": [
-       178.6,
-       102.6
-      ],
-      "hipL": [
-       103.7,
-       225.0
-      ],
-      "hipR": [
-       253.5,
-       225.0
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_3.jpg",
-     "box": "pelvis"
-    },
-    "uarm_L": {
-     "kind": "uarm",
-     "side": "L",
-     "img": "back/uarm_L.png",
-     "w": 155,
-     "h": 364,
-     "k": 900.0,
-     "joints": {
-      "a": "L.sh",
-      "b": "L.elbow"
-     },
-     "pts": {
-      "a": [
-       80.9,
-       73.7
-      ],
-      "b": [
-       80.9,
-       296.9
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_3.jpg",
-     "box": "uarm_L"
-    },
-    "farm_L": {
-     "kind": "farm",
-     "side": "L",
-     "img": "back/farm_L.png",
-     "w": 114,
-     "h": 364,
-     "k": 900.0,
-     "joints": {
-      "a": "L.elbow",
-      "b": "L.wrist"
-     },
-     "pts": {
-      "a": [
-       55.4,
-       46.7
-      ],
-      "b": [
-       55.4,
-       248.3
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_3.jpg",
-     "box": "farm_L"
-    },
-    "uarm_R": {
-     "kind": "uarm",
-     "side": "R",
-     "img": "back/uarm_R.png",
-     "w": 156,
-     "h": 364,
-     "k": 900.0,
-     "joints": {
-      "a": "R.sh",
-      "b": "R.elbow"
-     },
-     "pts": {
-      "a": [
-       73.1,
-       73.7
-      ],
-      "b": [
-       73.1,
-       296.9
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_3.jpg",
-     "box": "uarm_R"
-    },
-    "farm_R": {
-     "kind": "farm",
-     "side": "R",
-     "img": "back/farm_R.png",
-     "w": 113,
-     "h": 353,
-     "k": 900.0,
-     "joints": {
-      "a": "R.elbow",
-      "b": "R.wrist"
-     },
-     "pts": {
-      "a": [
-       55.9,
-       46.0
-      ],
-      "b": [
-       55.9,
-       247.6
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_3.jpg",
-     "box": "farm_R"
-    },
-    "shoe_L": {
-     "kind": "shoe",
-     "side": "L",
-     "img": "back/shoe_L.png",
-     "w": 160,
-     "h": 235,
-     "k": 900.0,
-     "joints": {
-      "a": "L.ankle",
-      "b": "L.sole"
-     },
-     "pts": {
-      "a": [
-       93.2,
-       141.6
-      ],
-      "b": [
-       93.2,
-       206.3
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_3.jpg",
-     "box": "shoe_L"
-    },
-    "shoe_R": {
-     "kind": "shoe",
-     "side": "R",
-     "img": "back/shoe_R.png",
-     "w": 159,
-     "h": 235,
-     "k": 900.0,
-     "joints": {
-      "a": "R.ankle",
-      "b": "R.sole"
-     },
-     "pts": {
-      "a": [
-       65.9,
-       141.6
-      ],
-      "b": [
-       65.9,
-       206.3
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_3.jpg",
-     "box": "shoe_R"
-    },
-    "thigh_R": {
-     "kind": "thigh",
-     "side": "R",
-     "img": "back/thigh_R.png",
-     "w": 201,
-     "h": 516,
-     "k": 900.0,
-     "joints": {
-      "a": "L.hip",
-      "b": "L.knee"
-     },
-     "pts": {
-      "a": [
-       94.7,
-       92.9
-      ],
-      "b": [
-       94.7,
-       438.5
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_2.jpg",
-     "box": "thigh_L"
-    },
-    "shin_R": {
-     "kind": "shin",
-     "side": "R",
-     "img": "back/shin_R.png",
-     "w": 157,
-     "h": 480,
-     "k": 900.0,
-     "joints": {
-      "a": "L.knee",
-      "b": "L.ankle"
-     },
-     "pts": {
-      "a": [
-       76.1,
-       75.2
-      ],
-      "b": [
-       91.4,
-       413.3
-      ]
-     },
-     "src": "kits/juno/source/back/sheet_2.jpg",
-     "box": "shin_L"
-    }
-   },
-   "sheet": "kits/juno/source/back/sheet_3.jpg"
-  }
- },
- "sources": {
-  "chosen": {
-   "front": {
-    "sheet": "sheet_8",
-    "parts": {
-     "neck": "sheet_4",
-     "collar_back": "patch_2",
-     "farm_L": null
-    },
-    "as": {
-     "thigh_L": "thigh_R",
-     "thigh_R": "thigh_L",
-     "shin_L": "shin_R",
-     "shin_R": "shin_L"
-    },
-    "variants": {
-     "head": {
-      "blink": "patch_1"
-     }
-    }
-   },
-   "front34": {
-    "sheet": "sheet_2",
-    "variants": {
-     "head": {
-      "blink": "patch_1"
-     }
-    }
-   },
-   "side": {
-    "sheet": "sheet_2",
-    "variants": {
-     "head": {
-      "blink": "patch_1"
-     }
-    }
-   },
-   "back34": {
-    "sheet": "sheet_3",
-    "more": [
-     "twist_1"
-    ]
-   },
-   "back": {
-    "sheet": "sheet_3",
-    "parts": {
-     "head": "sheet_2",
-     "thigh_L": "sheet_2",
-     "shin_L": "sheet_2",
-     "thigh_R": null,
-     "shin_R": null
-    },
-    "as": {
-     "thigh_L": "thigh_R",
-     "shin_L": "shin_R"
     }
    }
   },
-  "design": "kits/juno/source/turnaround_1.jpg"
+  "idle": {
+   "views": {
+    "front34": {
+     "yaw": 45,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "idle/front34/0.webp",
+       "w": 533,
+       "h": 1736,
+       "k": 1000.0,
+       "ground": [
+        292.6,
+        1692.0
+       ],
+       "bottom": 1729,
+       "hips": [
+        292.6,
+        865.5
+       ],
+       "head": [
+        303.8,
+        227.3
+       ],
+       "source": "kits/juno/source/idle/front34/take_2.jpg"
+      }
+     }
+    },
+    "back34": {
+     "yaw": 135,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "idle/back34/0.webp",
+       "w": 590,
+       "h": 1684,
+       "k": 1000.0,
+       "ground": [
+        293.9,
+        1639.5
+       ],
+       "bottom": 1677,
+       "hips": [
+        293.9,
+        813.1
+       ],
+       "head": [
+        295.1,
+        175.9
+       ],
+       "source": "kits/juno/source/idle/back34/take_4.jpg"
+      }
+     }
+    },
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "idle/side/0.webp",
+       "w": 441,
+       "h": 1687,
+       "k": 1000.0,
+       "ground": [
+        269.0,
+        1648.2
+       ],
+       "bottom": 1680,
+       "hips": [
+        269.0,
+        821.7
+       ],
+       "head": [
+        277.8,
+        184.2
+       ],
+       "source": "kits/juno/source/idle/side/take_5.jpg"
+      }
+     }
+    }
+   }
+  }
  }
 }

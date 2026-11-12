@@ -1,6 +1,5 @@
 // Draws a body's volumes as a solid, shaded, colour-coded dummy: red is the character's right side, blue the left,
-// upper segments dark and lower ones light, so overlapping limbs read as in front or behind. Also draws the same
-// volumes flat (one colour, no outline) for layout templates.
+// upper segments dark and lower ones light, so overlapping limbs read as in front or behind.
 const TONES = {
   trunk: ["#b9b9b9", "#8d8d8d"], pelvis: ["#9a9a9a", "#707070"], neck: ["#d9d9d9", "#ababab"], head: ["#eeeeee", "#c2c2c2"],
   garment: ["#e9d27a", "#b79c45"], hair: ["#cfd8cf", "#9fb0a3"],
@@ -26,14 +25,8 @@ export function hull(spheres, cam) {
 const trace = (ctx, poly) => { ctx.beginPath(); poly.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath(); };
 export const depthOf = (v, cam) => v.spheres.reduce((a, s) => a + cam.project(s.c).z, 0) / v.spheres.length;
 
-// o: { flat: colour } draws every volume in one colour with no outline; otherwise shaded and depth sorted.
-// o.face: { head, Z } adds a nose so the facing reads.
+// Volumes shaded and depth sorted. o: { ink: outline width }
 export function drawVolumes(ctx, vols, cam, o = {}) {
-  if (o.flat) {
-    ctx.fillStyle = o.flat;
-    for (const v of vols) { trace(ctx, hull(v.spheres, cam)); ctx.fill(); }
-    return;
-  }
   const items = vols.map((v) => ({ v, z: depthOf(v, cam), poly: hull(v.spheres, cam) })).sort((a, b) => b.z - a.z);
   const ink = o.ink ?? 3;
   for (const { v, poly } of items) {

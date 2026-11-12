@@ -18,8 +18,9 @@ if not key:
     for line in open(os.path.join(os.path.dirname(__file__), "..", ".env")):
         if line.startswith("GEMINI_API_KEY="):
             key = line.split("=", 1)[1].strip().strip('"\'')
-parts = [{"inline_data": {"mime_type": "image/png", "data": base64.b64encode(open(r, "rb").read()).decode()}}
-         for r in a.ref] + [{"text": a.prompt}]
+mime = lambda b: "image/jpeg" if b[:2] == b"\xff\xd8" else "image/png"
+parts = [{"inline_data": {"mime_type": mime(b), "data": base64.b64encode(b).decode()}}
+         for b in (open(r, "rb").read() for r in a.ref)] + [{"text": a.prompt}]
 body = {"contents": [{"parts": parts}],
         "generationConfig": {"responseModalities": ["IMAGE"],
                              "imageConfig": {"aspectRatio": a.aspect, "imageSize": a.size}}}

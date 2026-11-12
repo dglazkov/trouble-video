@@ -3,7 +3,7 @@
 import { chromium } from "playwright-core";
 import http from "node:http"; import fs from "node:fs"; import path from "node:path";
 
-const TYPES = { ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".json": "application/json", ".png": "image/png", ".jpg": "image/jpeg" };
+const TYPES = { ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".json": "application/json", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp" };
 export const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 
 export async function open(urlPath, { width = 1920, height = 1080 } = {}) {
