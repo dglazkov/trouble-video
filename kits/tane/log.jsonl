@@ -80,15 +80,66 @@
 {"file": "kits/tane/source/hero/wins_b/take_3.jpg", "note": "in the kit (heroes catch, weigh, coil, slam, rise, rest: shots/wins_catch.js, wins_slam.js, wins_rest.js), cut by hand over the checks (loose poses: the figures stand a little off their mannequins). An edit of take_1: the stick and the ring taken out; the coil's face came back redrawn (a grin to the viewer), the rest line for line. His left fist is drawn shut and empty in catch, weigh, coil and slam: the machine he holds is the set's, hung on that fist (shots/wins_tane.js FIST).", "time": "2026-11-12T12:14:27"}
 {"file": "kits/tane/closeup/wins_crack_1.jpg", "note": "in the film (shots/wins_crack.js): the roll of his head, eyes shut", "time": "2026-11-12T12:14:27"}
 {"file": "kits/tane/closeup/wins_crack_2.jpg", "note": "in the film as wins_crack_2.png (graded to wins_crack_1 by pipeline/match.py): an edit of wins_crack_1, the head over the other way and the eyes open", "time": "2026-11-12T12:14:27"}
+{"file": "kits/tane/closeup/fall_side_tane_1.jpg", "kind": "plate:fall_side_tane", "time": "2026-11-12T12:43:39", "ok": true}
+{"file": "kits/tane/closeup/fall_hang_1.jpg", "kind": "plate:fall_hang", "time": "2026-11-12T12:43:45", "ok": true}
+{"file": "kits/tane/closeup/fall_face_tane_1.jpg", "kind": "plate:fall_face_tane", "time": "2026-11-12T12:44:05", "ok": true}
+{"file": "kits/tane/closeup/fall_above_1.jpg", "kind": "plate:fall_above", "time": "2026-11-12T12:44:09", "ok": true}
+{"file": "kits/tane/closeup/fall_below_1.jpg", "kind": "plate:fall_below", "time": "2026-11-12T12:44:11", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_2.jpg", "kind": "plate:fall_ring", "time": "2026-11-12T12:44:19", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_1.jpg", "kind": "plate:fall_ring", "time": "2026-11-12T12:44:20", "ok": true}
+{"file": "kits/tane/closeup/fall_above_2.jpg", "kind": "edit:plate:fall_above", "time": "2026-11-12T12:47:53", "ok": true}
+{"file": "kits/tane/closeup/fall_hang_2.jpg", "kind": "edit:plate:fall_hang", "time": "2026-11-12T12:47:56", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_3.jpg", "kind": "plate:fall_ring", "time": "2026-11-12T12:48:09", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_4.jpg", "kind": "plate:fall_ring", "time": "2026-11-12T12:48:11", "ok": true}
+{"file": "kits/tane/closeup/fall_side_tane_2.jpg", "kind": "edit:plate:fall_side_tane", "time": "2026-11-12T12:48:32", "ok": true}
+{"file": "kits/tane/closeup/fall_props_1.jpg", "kind": "plate:fall_props", "time": "2026-11-12T12:48:36", "ok": true}
+{"file": "kits/tane/closeup/fall_face_tane_2.jpg", "kind": "edit:plate:fall_face_tane", "time": "2026-11-12T12:48:54", "ok": true}
+{"file": "kits/tane/closeup/fall_side_tane_3.jpg", "kind": "edit:plate:fall_side_tane", "time": "2026-11-12T12:48:56", "ok": true}
+{"file": "kits/tane/closeup/fall_below_2.jpg", "kind": "edit:plate:fall_below", "time": "2026-11-12T12:48:58", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_5.jpg", "kind": "edit:plate:fall_ring", "time": "2026-11-12T12:51:13", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_6.jpg", "kind": "edit:plate:fall_ring", "time": "2026-11-12T12:51:25", "ok": true}
+{"file": "kits/tane/closeup/fall_hang_3.jpg", "kind": "edit:edit:plate:fall_hang", "time": "2026-11-12T12:52:16", "ok": true}
+{"file": "kits/tane/closeup/fall_hang_4.jpg", "kind": "edit:edit:plate:fall_hang", "time": "2026-11-12T12:52:16", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_7.jpg", "kind": "edit:edit:plate:fall_ring", "time": "2026-11-12T12:52:33", "ok": true}
+{"file": "kits/tane/closeup/fall_props_2.jpg", "kind": "plate:fall_props", "time": "2026-11-12T12:52:52", "ok": true}
+{"file": "kits/tane/closeup/fall_above_3.jpg", "kind": "edit:edit:plate:fall_above", "time": "2026-11-12T12:52:54", "ok": true}
 {"file": "kits/tane/closeup/brk_face_1.jpg", "kind": "plate:brk_face", "time": "2026-11-12T12:53:08", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_9.jpg", "kind": "edit:edit:edit:plate:fall_ring", "time": "2026-11-12T12:53:29", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_8.jpg", "kind": "edit:edit:edit:plate:fall_ring", "time": "2026-11-12T12:53:32", "ok": true}
 {"file": "kits/tane/closeup/brk_face_1.jpg", "reject": "the pipe is on his right shoulder in his right hand: in the shot before it is on his left, in his left", "by": "hand", "time": "2026-11-12T12:53:46"}
 {"file": "kits/tane/closeup/brk_face_2.jpg", "kind": "plate:brk_face", "time": "2026-11-12T12:54:06", "ok": true}
+{"file": "kits/tane/closeup/reun_skid_a_1.jpg", "kind": "plate:reun_skid_a", "time": "2026-11-12T12:54:51", "ok": true}
+{"file": "kits/tane/closeup/reun_faces_1.jpg", "kind": "plate:reun_faces", "time": "2026-11-12T12:54:55", "ok": true}
 {"file": "kits/tane/closeup/brk_face_2.jpg", "reject": "the pipe is on the wrong shoulder again; kept mirrored as take 3", "by": "hand", "time": "2026-11-12T12:54:57"}
 {"file": "kits/tane/closeup/brk_face_4.jpg", "kind": "edit:plate:brk_face", "time": "2026-11-12T12:55:15", "ok": true}
 {"file": "kits/tane/closeup/brk_face_5.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:55:56", "ok": true}
+{"file": "kits/tane/closeup/reun_faces_3.jpg", "kind": "edit:plate:reun_faces", "time": "2026-11-12T12:56:15", "ok": true}
+{"file": "kits/tane/closeup/reun_faces_2.jpg", "kind": "edit:plate:reun_faces", "time": "2026-11-12T12:56:15", "ok": true}
 {"file": "kits/tane/closeup/brk_face_7.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:03", "ok": true}
 {"file": "kits/tane/closeup/brk_face_6.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:04", "ok": true}
 {"file": "kits/tane/closeup/brk_face_8.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:11", "ok": true}
 {"file": "kits/tane/closeup/brk_face_9.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:13", "ok": true}
+{"file": "kits/tane/closeup/reun_faces_3.jpg", "reject": "the edit for the moment before the laugh: Tane reads as angry (brows down, shouting) where he should be astonished and glad; Juno's irises came back teal (they are brown)", "by": "hand", "time": "2026-11-12T12:57:18"}
+{"file": "kits/tane/closeup/reun_eyes_1.jpg", "kind": "closeup:reun_eyes", "time": "2026-11-12T12:57:35", "ok": true}
+{"file": "kits/tane/closeup/reun_faces_4.jpg", "kind": "edit:edit:plate:reun_faces", "time": "2026-11-12T12:57:38", "ok": true}
+{"file": "kits/tane/closeup/fall_side_tane_5.jpg", "kind": "edit:plate:fall_side_tane", "time": "2026-11-12T12:58:48", "ok": true}
+{"file": "kits/tane/closeup/fall_side_tane_4.jpg", "kind": "edit:plate:fall_side_tane", "time": "2026-11-12T12:58:49", "ok": true}
+{"file": "kits/tane/closeup/fall_above_4.jpg", "kind": "edit:edit:plate:fall_above", "time": "2026-11-12T12:59:07", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_10.jpg", "kind": "edit:edit:edit:plate:fall_ring", "time": "2026-11-12T12:59:18", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_11.jpg", "kind": "edit:edit:edit:plate:fall_ring", "time": "2026-11-12T12:59:21", "ok": true}
+{"file": "kits/tane/closeup/fall_below_3.jpg", "kind": "plate:fall_below", "time": "2026-11-12T12:59:56", "ok": true}
+{"file": "kits/tane/closeup/fall_below_4.jpg", "kind": "edit:plate:fall_below", "time": "2026-11-12T13:00:38", "ok": true}
 {"file": "kits/tane/closeup/brk_back_1.jpg", "kind": "plate:brk_back", "time": "2026-11-12T13:07:40", "ok": true}
 {"file": "kits/tane/closeup/brk_go_1.jpg", "kind": "plate:brk_go", "time": "2026-11-12T13:09:15", "ok": true}
+{"file": "kits/tane/closeup/reun_backs_1.jpg", "kind": "plate:reun_backs", "time": "2026-11-12T13:30:19", "ok": true}
+{"file": "kits/tane/closeup/reun_ready_1.jpg", "kind": "plate:reun_ready", "time": "2026-11-12T13:30:19", "ok": true}
+{"file": "kits/tane/closeup/reun_tane_charge_1.jpg", "kind": "plate:reun_tane_charge", "time": "2026-11-12T13:30:38", "ok": true}
+{"file": "kits/tane/closeup/reun_tane_leap_1.jpg", "kind": "plate:reun_tane_leap", "time": "2026-11-12T13:30:39", "ok": true}
+{"file": "kits/tane/closeup/reun_grin_1.jpg", "kind": "plate:reun_grin", "time": "2026-11-12T13:30:41", "ok": true}
+{"file": "kits/tane/closeup/reun_tane_hit_1.jpg", "kind": "plate:reun_tane_hit", "time": "2026-11-12T13:30:43", "ok": true}
+{"file": "kits/tane/closeup/fall_face_tane_3.jpg", "kind": "edit:plate:fall_face_tane", "time": "2026-11-12T13:30:49", "ok": true}
+{"file": "kits/tane/closeup/reun_grin_2.jpg", "kind": "edit:plate:reun_grin", "time": "2026-11-12T13:32:07", "ok": true}
+{"file": "kits/tane/closeup/fall_hang_7.jpg", "kind": "edit:edit:plate:reun_grin", "time": "2026-11-12T13:53:13", "ok": true}
+{"file": "kits/tane/closeup/fall_hang_6.jpg", "kind": "edit:edit:plate:reun_grin", "time": "2026-11-12T13:53:13", "ok": true}
+{"file": "kits/tane/closeup/fall_hang_6.jpg", "reject": "Ife's raised hand was moved off her glasses and a blot of the key colour left where it was", "by": "hand", "time": "2026-11-12T13:53:38"}
+{"file": "kits/tane/closeup/fall_hang_8.jpg", "kind": "edit:edit:plate:reun_grin", "time": "2026-11-12T13:53:54", "ok": true}

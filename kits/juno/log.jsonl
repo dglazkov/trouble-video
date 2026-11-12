@@ -154,6 +154,7 @@
 {"file": "kits/juno/source/hero/wins_c/take_2.jpg", "kind": "cels:hero/wins_c", "time": "2026-11-12T12:29:44", "ok": true}
 {"file": "kits/juno/source/hero/wins_c/take_3.jpg", "kind": "edit:cels:hero/wins_c", "time": "2026-11-12T12:30:59", "ok": true}
 {"file": "kits/juno/source/hero/wins_a/take_2.jpg", "kind": "edit:cels:hero/wins_a", "time": "2026-11-12T12:34:05", "ok": true}
+{"file": "kits/juno/closeup/fall_side_juno_1.jpg", "kind": "plate:fall_side_juno", "time": "2026-11-12T12:43:38", "ok": true}
 {"file": "kits/juno/source/hero/wins_b/take_3.jpg", "note": "its drop and flat drawings are no longer in the film: the flat drawing's head is cut off at its cell's edge (the cut put her face in the next cell: it showed in shots/wins_under.js as a post slicing through her head), her face is turned down into the board, and both boards carry scratches that read as lettering. Replaced by hero/wins_c (under_drop, under_flat). Its three front drawings stay in use; front_right has a slotted bolt on the board's rim (not lettering, left).", "time": "2026-11-12T12:43:40"}
 {"file": "kits/juno/source/hero/wins_c/take_1.jpg", "note": "rejected: three figures in another arrangement than the two mannequins (a one-column sheet of two)", "time": "2026-11-12T12:43:40"}
 {"file": "kits/juno/source/hero/wins_c/take_2.jpg", "note": "the drawings are right (her face to us in both, grinning, goggles up, the lock streaming) but the boards' edges carry small D, S, C shapes: take_3 is its edit with them painted out", "time": "2026-11-12T12:43:40"}
@@ -161,14 +162,50 @@
 {"file": "kits/juno/source/hero/wins_c/take_3.png", "note": "in the kit (heroes under_drop, under_flat: shots/wins_under.js): take_3.jpg graded to take_2 by pipeline/match.py, and the last specks on the board's edge (five places, each a few pixels) painted out by hand from the steel round them. The flat pose's mannequin was changed for it (engine/actions.js WINS_JUNO[4]: on her elbows, chin up, hands low on the nose): with the hands up beside the head, as it was, the near arm is across her face from this camera.", "time": "2026-11-12T12:43:40"}
 {"file": "kits/juno/source/hero/wins_a/take_2.jpg", "note": "an edit of take_1: the salute drawing's goggle lenses dark, like shades, nothing else", "time": "2026-11-12T12:43:40"}
 {"file": "kits/juno/source/hero/wins_a/shades_1.png", "note": "in the kit (hero shades: the last ten frames of shots/wins_salute.js). Not a generation: take_2.jpg graded and registered to take_1 (pipeline/match.py --register; the edit came back 2.5 px to the right), cut with a sidecar that holds only its salute drawing, named shades.", "time": "2026-11-12T12:43:40"}
+{"file": "kits/tane/closeup/fall_hang_1.jpg", "kind": "plate:fall_hang", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_above_1.jpg", "kind": "plate:fall_above", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_below_1.jpg", "kind": "plate:fall_below", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_ring_2.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_ring_1.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/juno/closeup/fall_face_juno_1.jpg", "kind": "plate:fall_face_juno", "time": "2026-11-12T12:44:42", "ok": true}
+{"file": "kits/juno/closeup/fall_side_juno_2.jpg", "kind": "edit:plate:fall_side_juno", "time": "2026-11-12T12:47:56", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_3.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_ring_4.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/juno/closeup/fall_face_juno_3.jpg", "kind": "edit:plate:fall_face_juno", "time": "2026-11-12T12:49:17", "ok": true}
+{"file": "kits/juno/closeup/fall_face_juno_2.jpg", "kind": "edit:plate:fall_face_juno", "time": "2026-11-12T12:49:22", "ok": true}
+{"file": "kits/juno/closeup/fall_side_juno_3.jpg", "kind": "edit:edit:plate:fall_side_juno", "time": "2026-11-12T12:52:16", "ok": true}
+{"file": "kits/juno/closeup/fall_side_juno_4.jpg", "kind": "edit:edit:plate:fall_side_juno", "time": "2026-11-12T12:52:16", "ok": true}
 {"file": "kits/juno/closeup/brk_face_1.jpg", "kind": "plate:brk_face", "time": "2026-11-12T12:53:08", "ok": true}
 {"file": "kits/juno/closeup/brk_face_2.jpg", "kind": "edit:plate:brk_face", "time": "2026-11-12T12:54:04", "ok": true}
+{"file": "kits/juno/closeup/reun_skid_b_1.jpg", "kind": "plate:reun_skid_b", "time": "2026-11-12T12:54:51", "ok": true}
+{"file": "kits/tane/closeup/reun_faces_1.jpg", "kind": "plate:reun_faces", "note": "painted together with tane; the take is in that kit"}
 {"file": "kits/juno/closeup/brk_face_3.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:55:56", "ok": true}
 {"file": "kits/juno/closeup/brk_face_4.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:55:59", "ok": true}
 {"file": "kits/juno/closeup/brk_face_5.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:56:02", "ok": true}
 {"file": "kits/juno/closeup/brk_face_6.jpg", "kind": "edit:edit:plate:brk_face", "time": "2026-11-12T12:56:08", "ok": true}
 {"file": "kits/juno/closeup/brk_face_7.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:21", "ok": true}
+{"file": "kits/juno/closeup/reun_eyes_1.jpg", "kind": "closeup:reun_eyes", "time": "2026-11-12T12:57:30", "ok": true}
 {"file": "kits/juno/closeup/brk_face_8.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:32", "ok": true}
 {"file": "kits/juno/closeup/brk_face_9.jpg", "kind": "edit:edit:edit:plate:brk_face", "time": "2026-11-12T12:57:43", "ok": true}
+{"file": "kits/juno/closeup/fall_side_juno_5.jpg", "kind": "edit:edit:plate:fall_side_juno", "time": "2026-11-12T12:58:47", "ok": true}
+{"file": "kits/juno/closeup/fall_side_juno_6.jpg", "kind": "edit:edit:plate:fall_side_juno", "time": "2026-11-12T12:59:05", "ok": true}
+{"file": "kits/tane/closeup/fall_below_3.jpg", "kind": "plate:fall_below", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/juno/source/hero/reun_side/take_1.jpg", "kind": "cels:hero/reun_side", "time": "2026-11-12T13:04:00", "ok": true}
+{"file": "kits/juno/source/hero/reun_side/take_1.jpg", "reject": "facing: cel 0: the face is blank (eyes and mouth are 0.3% of it); palette: cel 0: only 25% of the uarm is in the design's colours for it (jacket, patch); pose: cel 1: covers 87% of its mannequin; palette: cel 1: only 7% of the shin.L is in the design's colours for it (trousers, stripe)", "by": "check", "time": "2026-11-12T13:04:08"}
+{"file": "kits/juno/source/hero/reun_side/take_2.jpg", "kind": "cels:hero/reun_side", "time": "2026-11-12T13:04:56", "ok": true}
+{"file": "kits/juno/source/hero/reun_side/take_2.jpg", "reject": "facing: cel 0: the face is blank (eyes and mouth are 0.4% of it); palette: cel 1: only 5% of the shin.L is in the design's colours for it (trousers, stripe)", "by": "check", "time": "2026-11-12T13:05:03"}
+{"file": "kits/juno/source/hero/reun_side/take_3.jpg", "kind": "cels:hero/reun_side", "time": "2026-11-12T13:05:34", "ok": true}
+{"file": "kits/juno/source/hero/reun_wide/take_1.jpg", "kind": "cels:hero/reun_wide", "time": "2026-11-12T13:06:09", "ok": true}
+{"file": "kits/juno/source/hero/reun_wide/take_1.jpg", "reject": "count: 3 figures for 1 mannequins; pose: cel 0: 57% of the figure is away from its mannequin", "by": "check", "time": "2026-11-12T13:06:17"}
+{"file": "kits/juno/source/hero/reun_wide/take_2.jpg", "kind": "cels:hero/reun_wide", "time": "2026-11-12T13:06:43", "ok": true}
+{"file": "kits/juno/source/hero/reun_wide/take_2.jpg", "reject": "mannequin: cel 0: 1.9% of the figure is still mannequin colour", "by": "check", "time": "2026-11-12T13:06:49"}
+{"file": "kits/juno/source/hero/reun_wide/take_3.jpg", "kind": "cels:hero/reun_wide", "time": "2026-11-12T13:07:18", "ok": true}
 {"file": "kits/juno/closeup/brk_go_1.jpg", "kind": "plate:brk_go", "time": "2026-11-12T13:09:15", "ok": true}
 {"file": "kits/juno/closeup/brk_go_2.jpg", "kind": "edit:plate:brk_go", "time": "2026-11-12T13:11:05", "ok": true}
+{"file": "kits/juno/source/hero/reun_wide/take_3.jpg", "reject": "passed the checks and was cut as hero reun_side, but she stands at ease holding a gadget in both hands (her hands are empty, and she is riding flat out): not used; the meet's wide uses reun_side_a, the split-screen's side ride", "by": "hand", "time": "2026-11-12T13:13:17"}
+{"file": "kits/juno/closeup/reun_juno_taunt_1.jpg", "kind": "plate:reun_juno_taunt", "time": "2026-11-12T13:30:15", "ok": true}
+{"file": "kits/juno/closeup/reun_juno_go_1.jpg", "kind": "plate:reun_juno_go", "time": "2026-11-12T13:30:18", "ok": true}
+{"file": "kits/tane/closeup/reun_backs_1.jpg", "kind": "plate:reun_backs", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/reun_ready_1.jpg", "kind": "plate:reun_ready", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/reun_grin_1.jpg", "kind": "plate:reun_grin", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/juno/closeup/fall_face_juno_4.jpg", "kind": "edit:plate:fall_face_juno", "time": "2026-11-12T13:30:51", "ok": true}

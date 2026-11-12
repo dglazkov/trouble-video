@@ -74,14 +74,40 @@
 {"file": "kits/ife/closeup/boom_push_3.jpg", "kind": "edit:plate:boom_push", "time": "2026-11-12T12:29:09", "ok": true}
 {"file": "kits/ife/closeup/boom_push_4.jpg", "kind": "edit:edit:plate:boom_push", "time": "2026-11-12T12:29:36", "ok": true}
 {"file": "kits/ife/closeup/boom_plug_2.jpg", "kind": "edit:plate:boom_plug", "time": "2026-11-12T12:38:02", "ok": true}
+{"file": "kits/ife/closeup/fall_side_ife_1.jpg", "kind": "plate:fall_side_ife", "time": "2026-11-12T12:43:37", "ok": true}
 {"file": "kits/ife/closeup/boom_push_1.jpg", "note": "no longer in the film: its soot is soft, purplish and airbrushed and reads as bruises (nobody is hurt in this film). boom_push_3 is its edit.", "time": "2026-11-12T12:43:40"}
 {"file": "kits/ife/closeup/boom_push_2.jpg", "note": "no longer in the film: carries the same soft marks, and a second one where the hand was; boom_push_4 replaces it", "time": "2026-11-12T12:43:40"}
 {"file": "kits/ife/closeup/boom_push_3.jpg", "note": "in the film as boom_push_3.png (graded and registered by pipeline/match.py --register; shots/boom_end.js): an edit of boom_push_1: the soot is flat hard-edged black smudges with dry-brush tails (forehead, nose, cheek, a smear on a lens) and a curl of smoke off a hair puff", "time": "2026-11-12T12:43:40"}
 {"file": "kits/ife/closeup/boom_push_4.jpg", "note": "in the film as boom_push_4.png (graded to boom_push_3.png): an edit of boom_push_3, her hand lowered; the soot is where it was", "time": "2026-11-12T12:43:40"}
 {"file": "kits/ife/closeup/boom_plug_2.jpg", "note": "in the film as boom_plug_2.png (graded and registered to boom_plug_1; shots/boom_jam.js from the twist-lock on): an edit of boom_plug_1, her grip rolled over the knurled ring as she twists it; the plug is where it was", "time": "2026-11-12T12:43:40"}
+{"file": "kits/tane/closeup/fall_hang_1.jpg", "kind": "plate:fall_hang", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_above_1.jpg", "kind": "plate:fall_above", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_below_1.jpg", "kind": "plate:fall_below", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_ring_2.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_ring_1.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/ife/closeup/fall_face_ife_1.jpg", "kind": "plate:fall_face_ife", "time": "2026-11-12T12:44:42", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_3.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_ring_4.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/ife/closeup/fall_side_ife_2.jpg", "kind": "edit:plate:fall_side_ife", "time": "2026-11-12T12:48:31", "ok": true}
+{"file": "kits/ife/closeup/fall_glass_1.jpg", "kind": "plate:fall_glass", "time": "2026-11-12T12:48:32", "ok": true}
+{"file": "kits/ife/closeup/fall_side_ife_3.jpg", "kind": "edit:plate:fall_side_ife", "time": "2026-11-12T12:48:54", "ok": true}
+{"file": "kits/ife/closeup/fall_face_ife_2.jpg", "kind": "edit:plate:fall_face_ife", "time": "2026-11-12T12:49:18", "ok": true}
+{"file": "kits/ife/closeup/fall_glass_2.jpg", "kind": "edit:plate:fall_glass", "time": "2026-11-12T12:52:52", "ok": true}
 {"file": "kits/ife/closeup/brk_face_2.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:19", "ok": true}
 {"file": "kits/ife/closeup/brk_face_3.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:20", "ok": true}
 {"file": "kits/ife/closeup/brk_face_4.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:25", "ok": true}
 {"file": "kits/ife/closeup/brk_face_5.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:31", "ok": true}
 {"file": "kits/ife/closeup/brk_face_6.jpg", "kind": "edit:edit:edit:plate:boom_push", "time": "2026-11-12T12:53:39", "ok": true}
+{"file": "kits/tane/closeup/reun_skid_a_1.jpg", "kind": "plate:reun_skid_a", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/reun_faces_1.jpg", "kind": "plate:reun_faces", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/ife/closeup/reun_eyes_1.jpg", "kind": "closeup:reun_eyes", "time": "2026-11-12T12:57:35", "ok": true}
+{"file": "kits/ife/closeup/fall_side_ife_5.jpg", "kind": "edit:plate:fall_side_ife", "time": "2026-11-12T12:58:47", "ok": true}
+{"file": "kits/ife/closeup/fall_side_ife_4.jpg", "kind": "edit:plate:fall_side_ife", "time": "2026-11-12T12:58:47", "ok": true}
+{"file": "kits/ife/closeup/fall_face_ife_3.jpg", "kind": "edit:plate:fall_face_ife", "time": "2026-11-12T12:59:06", "ok": true}
+{"file": "kits/tane/closeup/fall_below_3.jpg", "kind": "plate:fall_below", "note": "painted together with tane; the take is in that kit"}
 {"file": "kits/ife/closeup/brk_go_1.jpg", "kind": "plate:brk_go", "time": "2026-11-12T13:09:14", "ok": true}
+{"file": "kits/ife/closeup/reun_ife_box_1.jpg", "kind": "plate:reun_ife_box", "time": "2026-11-12T13:30:13", "ok": true}
+{"file": "kits/ife/closeup/reun_ife_key_1.jpg", "kind": "plate:reun_ife_key", "time": "2026-11-12T13:30:15", "ok": true}
+{"file": "kits/tane/closeup/reun_backs_1.jpg", "kind": "plate:reun_backs", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/reun_ready_1.jpg", "kind": "plate:reun_ready", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/reun_grin_1.jpg", "kind": "plate:reun_grin", "note": "painted together with tane; the take is in that kit"}

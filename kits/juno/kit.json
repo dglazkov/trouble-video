@@ -1916,6 +1916,34 @@
     "yaw": 87.4,
     "elev": 3.9
    }
+  },
+  "reun_side": {
+   "img": "hero/reun_side.webp",
+   "w": 1213,
+   "h": 1787,
+   "k": 1000.0,
+   "ground": [
+    613.1,
+    1660.0
+   ],
+   "bottom": 1773,
+   "hips": [
+    767.3,
+    807.9
+   ],
+   "head": [
+    737.5,
+    206.0
+   ],
+   "source": "kits/juno/source/hero/reun_wide/take_3.jpg",
+   "shot": "shots/reun_meet_edit.js",
+   "frame": 12,
+   "action": "ride",
+   "cel": 1,
+   "from": {
+    "yaw": 62.6,
+    "elev": 12.9
+   }
   }
  }
 }

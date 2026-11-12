@@ -105,9 +105,35 @@
 {"file": "kits/noor/source/hero/land/take_3.jpg", "reject": "take_2 re-keyed: purple spill in every shadow", "by": "hand", "time": "2026-11-12T12:01:01"}
 {"file": "kits/noor/source/hero/land/take_4.jpg", "reject": "passed over for take 5 (the hair falls in three clearer stages)", "by": "hand", "time": "2026-11-12T12:01:01"}
 {"file": "kits/noor/source/hero/front/take_6.jpg", "reject": "passed over for take 7", "by": "hand", "time": "2026-11-12T12:01:01"}
+{"file": "kits/noor/closeup/fall_side_noor_1.jpg", "kind": "plate:fall_side_noor", "time": "2026-11-12T12:43:39", "ok": true}
+{"file": "kits/tane/closeup/fall_hang_1.jpg", "kind": "plate:fall_hang", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_above_1.jpg", "kind": "plate:fall_above", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_below_1.jpg", "kind": "plate:fall_below", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_ring_2.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_ring_1.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/noor/closeup/fall_face_noor_1.jpg", "kind": "plate:fall_face_noor", "time": "2026-11-12T12:44:41", "ok": true}
+{"file": "kits/tane/closeup/fall_ring_3.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/fall_ring_4.jpg", "kind": "plate:fall_ring", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/noor/closeup/fall_side_noor_2.jpg", "kind": "edit:plate:fall_side_noor", "time": "2026-11-12T12:48:32", "ok": true}
+{"file": "kits/noor/closeup/fall_side_noor_3.jpg", "kind": "edit:plate:fall_side_noor", "time": "2026-11-12T12:48:55", "ok": true}
+{"file": "kits/noor/closeup/fall_face_noor_3.jpg", "kind": "edit:plate:fall_face_noor", "time": "2026-11-12T12:49:16", "ok": true}
+{"file": "kits/noor/closeup/fall_face_noor_2.jpg", "kind": "edit:plate:fall_face_noor", "time": "2026-11-12T12:49:17", "ok": true}
 {"file": "kits/noor/closeup/brk_face_1.jpg", "kind": "plate:brk_face", "time": "2026-11-12T12:53:08", "ok": true}
 {"file": "kits/noor/closeup/brk_face_2.jpg", "kind": "edit:plate:brk_face", "time": "2026-11-12T12:54:15", "ok": true}
 {"file": "kits/noor/closeup/brk_face_3.jpg", "kind": "edit:plate:brk_face", "time": "2026-11-12T12:54:18", "ok": true}
 {"file": "kits/noor/closeup/brk_face_4.jpg", "kind": "edit:plate:brk_face", "time": "2026-11-12T12:54:21", "ok": true}
 {"file": "kits/noor/closeup/brk_face_5.jpg", "kind": "edit:plate:brk_face", "time": "2026-11-12T12:54:27", "ok": true}
+{"file": "kits/juno/closeup/reun_skid_b_1.jpg", "kind": "plate:reun_skid_b", "note": "painted together with juno; the take is in that kit"}
+{"file": "kits/tane/closeup/reun_faces_1.jpg", "kind": "plate:reun_faces", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/noor/closeup/reun_stop_noor_1.jpg", "kind": "plate:reun_stop_noor", "time": "2026-11-12T12:56:15", "ok": true}
+{"file": "kits/noor/closeup/reun_eyes_1.jpg", "kind": "closeup:reun_eyes", "time": "2026-11-12T12:57:31", "ok": true}
+{"file": "kits/noor/closeup/reun_eyes_1.jpg", "reject": "a film-strip frame with sprocket holes drawn round the picture, and the figure waist-up and small: the face is too small for a band of eyes", "by": "hand", "time": "2026-11-12T12:59:57"}
+{"file": "kits/tane/closeup/fall_below_3.jpg", "kind": "plate:fall_below", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/noor/closeup/reun_eyes_2.jpg", "kind": "plate:reun_eyes", "time": "2026-11-12T13:00:17", "ok": true}
 {"file": "kits/noor/closeup/brk_go_1.jpg", "kind": "plate:brk_go", "time": "2026-11-12T13:09:16", "ok": true}
+{"file": "kits/tane/closeup/reun_backs_1.jpg", "kind": "plate:reun_backs", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/tane/closeup/reun_ready_1.jpg", "kind": "plate:reun_ready", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/noor/closeup/reun_noor_over_1.jpg", "kind": "plate:reun_noor_over", "time": "2026-11-12T13:30:38", "ok": true}
+{"file": "kits/tane/closeup/reun_grin_1.jpg", "kind": "plate:reun_grin", "note": "painted together with tane; the take is in that kit"}
+{"file": "kits/noor/closeup/reun_noor_walk_1.jpg", "kind": "plate:reun_noor_walk", "time": "2026-11-12T13:30:41", "ok": true}
+{"file": "kits/noor/closeup/fall_face_noor_4.jpg", "kind": "edit:plate:fall_face_noor", "time": "2026-11-12T13:30:50", "ok": true}
