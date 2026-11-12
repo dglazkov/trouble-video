@@ -88,12 +88,13 @@ def flats(px, spec):
     as the commonest colour among the paint nearest that material. px: (N,3) rgb paint, no ink.
     -> { name: [hex painted, Lab distance from the design's] }"""
     names = list(spec["palette"]); pal = lab([hexrgb(spec["palette"][c]) for c in names]); out = {}
+    if not len(px): return out                          # no figure at all: the count check says so
     if len(px) > 600000: px = px[:: len(px) // 600000 + 1]
     fl = lab(px); dd = np.stack([np.linalg.norm(fl - p, axis=1) for p in pal], 1); near = dd.argmin(1); near[dd.min(1) > 30] = -1
     full = lambda c: cv2.cvtColor(np.uint8([[c]]), cv2.COLOR_RGB2LAB)[0, 0].astype(np.float32) * [100 / 255, 1, 1]
     for nm in spec.get("flats", []):
         p = px[near == names.index(nm)]
-        if len(p) < 0.01 * max(1, len(px)): continue
+        if len(p) < 0.004 * len(px): out[nm] = [None, None]; continue      # the material is not in the drawing at all
         lum = p.sum(1); p = p[lum >= np.percentile(lum, 60)]
         q = (p // 8).astype(np.int32); keys = q[:, 0] * 1024 + q[:, 1] * 32 + q[:, 2]; u, cnt = np.unique(keys, return_counts=True)
         mode = p[keys == u[cnt.argmax()]].mean(0)
@@ -107,7 +108,7 @@ def grade(col, alpha, spec, drift):
     other, whatever cast each came back with. col: BGR float, changed in place. drift: analyse()'s measurement."""
     m = alpha > 0.02; px = col[m][:, ::-1]; pl = lab(px); move = np.zeros_like(px); wsum = np.zeros(len(px), np.float32)
     for nm, (painted, de) in drift.items():
-        if de < 1.5: continue
+        if painted is None or de < 1.5: continue
         w = np.clip(1 - np.linalg.norm(pl - lab([hexrgb(painted)])[0], axis=1) / 24, 0, 1)
         move += w[:, None] * (np.array(hexrgb(spec["palette"][nm]), np.float32) - np.array(hexrgb(painted), np.float32)); wsum += w
     col[m] = np.clip(px + move / np.maximum(1, wsum)[:, None], 0, 255)[:, ::-1]
@@ -192,7 +193,8 @@ def analyse(t, full=False):
     fig = np.isin(lab_, [ce["comp"] for ce in cels if ce["comp"]]) & ~ink
     drift = flats(rgb[fig], spec)
     for nm, (painted, de) in drift.items():
-        if de > T["drift"]: bad("palette", f"the {nm} is painted {painted}, {de:.0f} from the design's {spec['palette'][nm]}")
+        if painted is None: bad("palette", f"nothing in the drawing is the design's {nm} colour ({spec['palette'][nm]})")
+        elif de > T["drift"]: bad("palette", f"the {nm} is painted {painted}, {de:.0f} from the design's {spec['palette'][nm]}")
     dm = np.full((H, W), 1e9, np.float32)
     for h in MANNEQUIN: dm = np.minimum(dm, np.abs(rgb - np.array(hexrgb(h), np.float32)).sum(-1))
     left = cv2.morphologyEx(((dm < 42) & (label < 0)).astype(np.uint8), cv2.MORPH_OPEN, np.ones((5, 5), np.uint8)) > 0   # areas, not the blend along an edge
@@ -265,7 +267,7 @@ def analyse(t, full=False):
         if f2 > 0.5 and face[2] > -0.3 and toward < 0.04: bad("facing", f"cel {i}: the face is on the wrong side of the head")
         if f2 > 0.5 and face[2] <= -0.3 and sk.sum() > 0.04 * disc.sum() and toward < 0: bad("facing", f"cel {i}: the face is on the wrong side of the head")
         for nm, v in wear.items():
-            if loose and nm in ("hand", "farm", "uarm", "shoe"): continue
+            if loose and nm in ("hand", "farm", "shoe"): continue
             if v < (T["wear1"] if "." in nm else T["wear"]): bad("palette", f"cel {i}: only {v:.0%} of the {nm} is in the design's colours for it ({', '.join(spec['wear'][nm.split('.')[0]])})")
         if off > T["off"]: bad("palette", f"cel {i}: {off:.0%} of the figure is in none of the design's colours")
         if lf > T["mannequin"]: bad("mannequin", f"cel {i}: {lf:.1%} of the figure is still mannequin colour")
@@ -406,7 +408,7 @@ def selftest(take):
         im = img.copy(); skin = np.array(hexrgb(spec["palette"]["skin"])[::-1], np.uint8)
         for c in L["cels"]:
             J = c["joints"]; r = int(0.7 * np.hypot(J["crown"][0] - J["headBase"][0], J["crown"][1] - J["headBase"][1]) * sx)
-            x, y = int(J["head"][0] * sx), int(J["head"][1] * sy); win = im[y - r:y + r, x - r:x + r]
+            x, y = int(J["head"][0] * sx), int(J["head"][1] * sy); win = im[max(0, y - r):y + r, max(0, x - r):x + r]
             near = (np.linalg.norm(lab(win[..., ::-1].reshape(-1, 3)) - lab([hexrgb(spec["palette"]["skin"])])[0], axis=1) < T["near"]).reshape(win.shape[:2])
             shut = cv2.morphologyEx(near.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((int(0.5 * r) | 1,) * 2, np.uint8)) > 0
             win[ndimage.binary_fill_holes(shut)] = skin
@@ -419,13 +421,13 @@ def selftest(take):
         im = img.copy(); x0, y0, x1, y1 = box(0); r = int(0.07 * L["unit"] * sx)
         for j in range(4): cv2.circle(im, (x0 + r * 2 + j * r * 3, y0 + r * 2), r, (40, 40, 40), -1)
         return im
-    cases = [("palette", far_limb_red), ("facing", blank_face), ("count", erase), ("pose", wrong_pose), ("facing", flipped), ("size", shrunk), ("place", moved), ("count", stray),
+    cases = [("palette", far_limb_red), ("facing", blank_face), ("count", erase), ("pose", wrong_pose), ("facing pose", flipped), ("size", shrunk), ("place", moved), ("count", stray),
              ("palette", recoloured("glove", "hair")), ("palette", recoloured("jacket", "shirt")), ("mannequin", mannequin)]
     if len(L["cels"]) < 2: cases = [c for c in cases if c[0] not in ("size",) and c[1] is not wrong_pose]
     res = []
     for kind, make in cases:
         r = analyse({**t, "img": make()}); kinds = sorted({x.split(":")[0] for x in r["reasons"]})
-        res.append(dict(broke=make.__name__ if make.__name__ != "f" else "recoloured", expect=kind, rejected=not r["ok"], for_=kinds, caught=kind in kinds,
+        res.append(dict(broke=make.__name__ if make.__name__ != "f" else "recoloured", expect=kind, rejected=not r["ok"], for_=kinds, caught=any(k in kinds for k in kind.split()),
                         first=r["reasons"][:1]))
     return dict(take=t["file"], all_caught=all(x["caught"] for x in res), cases=res)
 

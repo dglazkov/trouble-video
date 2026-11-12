@@ -67,3 +67,5 @@
 {"file": "kits/juno/source/run/side/take_5.jpg", "time": "2026-11-11T22:46:10", "note": "passed; not chosen: first sheet of four in the two-sheets experiment, whose second sheet failed twice"}
 {"file": "kits/juno/source/run/front34/take_4.jpg", "time": "2026-11-11T22:46:10", "note": "passed; not chosen: eye style changes between its two rows (take_5 holds it)"}
 {"note": "takes that are not in the kit were moved out of the repository, to out/takes/ under the same path", "time": "2026-11-11T22:46:10"}
+{"file": "kits/juno/source/idle/side/take_5.jpg", "note": "in the kit: rejected while a stand was held to every limb of its mannequin (a foot set down differently); passes now that a held drawing is judged on its stance, place, facing and colours", "time": "2026-11-11T22:51:15"}
+{"file": "kits/juno/source/idle/front34/take_2.jpg", "note": "in the kit: rejected while a stand was held to every limb of its mannequin (a foot set down differently); passes now that a held drawing is judged on its stance, place, facing and colours", "time": "2026-11-11T22:51:15"}

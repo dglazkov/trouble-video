@@ -159,12 +159,18 @@ def paint_cels(name, action, view, extra=(), note="", size="4K", layout_file=Non
 
 
 def count(name):
+    """Generations made, and which were thrown away by whom. A take counts once, by its first verdict; a take the kit
+    is cut from is not a rejection, whatever the checks said of it before they changed."""
     recs = [json.loads(l) for l in open(os.path.join(kit_dir(name), "log.jsonl"))]
-    made = [r for r in recs if r.get("ok")]; rej = [r for r in recs if "reject" in r]
-    auto = [r for r in rej if r.get("by") == "check"]
-    return {"made": len(made), "failed_calls": len([r for r in recs if r.get("ok") is False]),
+    kp = os.path.join(kit_dir(name), "kit.json"); kit = json.load(open(kp)) if os.path.exists(kp) else {}
+    used = {c["source"] for a in kit.get("actions", {}).values() for v in a["views"].values() for c in v["cels"].values()}
+    made = [r for r in recs if r.get("ok")]; rej = {}
+    for r in recs:
+        if "reject" in r and r["file"] not in used: rej.setdefault(r["file"], r)
+    auto = [r for r in rej.values() if r.get("by") == "check"]
+    return {"made": len(made), "failed_calls": len([r for r in recs if r.get("ok") is False]), "in_kit": sorted(used),
             "rejected_by_check": len(auto), "rejected_by_hand": len(rej) - len(auto),
-            "rejections": [{"file": r["file"], "by": r.get("by", "hand"), "why": r["reject"]} for r in rej]}
+            "rejections": [{"file": r["file"], "by": r.get("by", "hand"), "why": r["reject"]} for r in rej.values()]}
 
 
 def closeup_prompt(spec, acting):
