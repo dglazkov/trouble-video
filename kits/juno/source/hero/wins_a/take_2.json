@@ -1,0 +1,990 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY the LAST drawing (bottom right: the girl sitting on her board with her goggles down over her eyes, throwing a two-fingered salute), and in it ONLY the two goggle lenses: they turn DARK, like cool sunglasses. Each lens is one flat near-black (#14141c) with ONE crisp hard-edged white highlight shape (a slanted bar with a small dot beside it) in its upper left, in flat two-tone cel style: no gradient, no reflection picture, no eyes showing through. The brass goggle frames, the strap, her face, her grin, her hair, her hand and everything else in that drawing stay exactly as they are, line for line; the other five drawings are not touched at all.",
+ "refs": [
+  "kits/juno/source/hero/wins_a/take_1.jpg"
+ ],
+ "kind": "edit:cels:hero/wins_a",
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-12T12:34:05",
+ "from": "kits/juno/source/hero/wins_a/take_1.jpg",
+ "layout": {
+  "action": "hero",
+  "hero": {
+   "shot": "shots/wins.js",
+   "who": "juno"
+  },
+  "what": "Juno and her hoverboard. Drawings 1-3 (top row): she lands from a big jump, seen from behind and above. Drawing 1: the LANDING: she slams down in a very deep crouch on the board, knees fully bent, her right hand flat down on the deck of the board and her left arm flung out to the side, hair and jacket flying UP from the drop. Drawing 2: the SKID: she has thrown the board sideways into a power-slide stop: her whole body leans hard back against the slide, both arms flung wide for balance, knees bent, teeth gritted in a delighted grin, hair and jacket whipping. Drawing 3: stopped: she stands easy and upright on the hovering board, a hand on her hip, and has turned her head to look back over her LEFT shoulder straight at the viewer with a cocky grin, one eyebrow up. Drawings 4-6 (bottom row): afterwards she SITS on her hoverboard, which rests flat on the floor with its thrusters off, no flames (these three mannequins have no green slab: draw the board under her as she sits on it, the same flat plank of welded pale steel-grey scrap-metal plates with two small thruster pods under it), knees up in front of her, feet on the floor. Drawing 4: leaning back on her LEFT hand, right forearm resting on her knee, twisted round to look back over her RIGHT shoulder at something behind her, amused, eyebrows up; goggles up on her forehead. Drawing 5: facing forward again, her RIGHT hand up at her forehead pulling the goggles DOWN: they are halfway, at her eyebrows; a smirk. Drawing 6: the goggles are now ON over her eyes (opaque pale teal lenses, each with one white glint), and she throws a casual two-fingered SALUTE with her RIGHT hand, index and middle finger together flicked out from her right temple, elbow out, chin up, a huge grin showing her teeth.",
+  "loose": true,
+  "float": true,
+  "prop": "board",
+  "view": "wins_a",
+  "yaw": null,
+  "elev": null,
+  "W": 2752,
+  "H": 1536,
+  "cols": 3,
+  "rows": 2,
+  "unit": 353,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "name": "land",
+    "frame": 8,
+    "action": "wins_juno",
+    "cel": 0,
+    "from": {
+     "yaw": 158.2,
+     "elev": 27.7
+    },
+    "box": [
+     0,
+     0,
+     917,
+     768
+    ],
+    "ground": [
+     509.03,
+     527.73
+    ],
+    "joints": {
+     "hips": [
+      511.39,
+      405.25
+     ],
+     "waist": [
+      501.99,
+      356.09
+     ],
+     "chest": [
+      489.66,
+      291.67
+     ],
+     "neckBase": [
+      481.28,
+      247.84
+     ],
+     "headBase": [
+      478.67,
+      220.56
+     ],
+     "head": [
+      481.75,
+      183.01
+     ],
+     "crown": [
+      484.94,
+      144.08
+     ],
+     "L.sh": [
+      426.47,
+      271.51
+     ],
+     "L.elbow": [
+      341.36,
+      301.97
+     ],
+     "L.wrist": [
+      322.28,
+      369.45
+     ],
+     "L.hand": [
+      315.66,
+      392.86
+     ],
+     "L.hip": [
+      481.28,
+      407.92
+     ],
+     "L.knee": [
+      402.39,
+      338.49
+     ],
+     "L.ankle": [
+      425.84,
+      465.5
+     ],
+     "L.heel": [
+      432.22,
+      496.69
+     ],
+     "L.toe": [
+      408.13,
+      455.63
+     ],
+     "R.sh": [
+      541.1,
+      249.26
+     ],
+     "R.elbow": [
+      564.96,
+      301.84
+     ],
+     "R.wrist": [
+      568.11,
+      338.91
+     ],
+     "R.hand": [
+      569.18,
+      351.46
+     ],
+     "R.hip": [
+      541.34,
+      402.6
+     ],
+     "R.knee": [
+      529.32,
+      373.75
+     ],
+     "R.ankle": [
+      562.66,
+      491.11
+     ],
+     "R.heel": [
+      569.51,
+      522.75
+     ],
+     "R.toe": [
+      539.93,
+      480.22
+     ]
+    },
+    "face": [
+     -0.278,
+     -0.594,
+     -0.739
+    ],
+    "board": true
+   },
+   {
+    "index": 1,
+    "name": "skid",
+    "frame": 14,
+    "action": "wins_juno",
+    "cel": 1,
+    "from": {
+     "yaw": 51.2,
+     "elev": 8.7
+    },
+    "box": [
+     917,
+     0,
+     1835,
+     768
+    ],
+    "ground": [
+     1306.24,
+     568.32
+    ],
+    "joints": {
+     "hips": [
+      1400.89,
+      378.56
+     ],
+     "waist": [
+      1416.24,
+      337.13
+     ],
+     "chest": [
+      1438.22,
+      277.84
+     ],
+     "neckBase": [
+      1454.53,
+      233.84
+     ],
+     "headBase": [
+      1467.07,
+      204.63
+     ],
+     "head": [
+      1493.26,
+      152.13
+     ],
+     "crown": [
+      1521.02,
+      96.48
+     ],
+     "L.sh": [
+      1507.88,
+      287.65
+     ],
+     "L.elbow": [
+      1597.68,
+      374.68
+     ],
+     "L.wrist": [
+      1555.13,
+      481.22
+     ],
+     "L.hand": [
+      1539.75,
+      519.71
+     ],
+     "L.hip": [
+      1422.05,
+      401.93
+     ],
+     "L.knee": [
+      1324.15,
+      532.95
+     ],
+     "L.ankle": [
+      1288.32,
+      619.38
+     ],
+     "L.heel": [
+      1296.72,
+      630.35
+     ],
+     "L.toe": [
+      1225.96,
+      655.66
+     ],
+     "R.sh": [
+      1396.66,
+      209.48
+     ],
+     "R.elbow": [
+      1310.86,
+      202.19
+     ],
+     "R.wrist": [
+      1236.8,
+      253.04
+     ],
+     "R.hand": [
+      1210.71,
+      270.95
+     ],
+     "R.hip": [
+      1380.74,
+      356.31
+     ],
+     "R.knee": [
+      1305.14,
+      437.54
+     ],
+     "R.ankle": [
+      1360.21,
+      479.23
+     ],
+     "R.heel": [
+      1365.66,
+      491.72
+     ],
+     "R.toe": [
+      1309.32,
+      506.87
+     ]
+    },
+    "face": [
+     -0.374,
+     0.267,
+     0.83
+    ],
+    "board": true
+   },
+   {
+    "index": 2,
+    "name": "lookback",
+    "frame": 24,
+    "action": "wins_juno",
+    "cel": 2,
+    "from": {
+     "yaw": 64.8,
+     "elev": 6.7
+    },
+    "box": [
+     1835,
+     0,
+     2752,
+     768
+    ],
+    "ground": [
+     2314.22,
+     625.03
+    ],
+    "joints": {
+     "hips": [
+      2324.58,
+      358.62
+     ],
+     "waist": [
+      2323.32,
+      310.01
+     ],
+     "chest": [
+      2321.61,
+      244.75
+     ],
+     "neckBase": [
+      2320.43,
+      199.3
+     ],
+     "headBase": [
+      2320.59,
+      170.69
+     ],
+     "head": [
+      2318.3,
+      122.43
+     ],
+     "crown": [
+      2315.98,
+      73.72
+     ],
+     "L.sh": [
+      2360.53,
+      218.12
+     ],
+     "L.elbow": [
+      2387.95,
+      310.25
+     ],
+     "L.wrist": [
+      2375.79,
+      396.53
+     ],
+     "L.hand": [
+      2371.42,
+      427.5
+     ],
+     "L.hip": [
+      2338.16,
+      365.25
+     ],
+     "L.knee": [
+      2277.53,
+      498.26
+     ],
+     "L.ankle": [
+      2261.11,
+      634.44
+     ],
+     "L.heel": [
+      2279.97,
+      655.92
+     ],
+     "L.toe": [
+      2198.98,
+      673.42
+     ],
+     "R.sh": [
+      2283.59,
+      207.09
+     ],
+     "R.elbow": [
+      2259.65,
+      269.58
+     ],
+     "R.wrist": [
+      2191.33,
+      295.32
+     ],
+     "R.hand": [
+      2165.65,
+      305
+     ],
+     "R.hip": [
+      2311.56,
+      352.26
+     ],
+     "R.knee": [
+      2295.03,
+      473.37
+     ],
+     "R.ankle": [
+      2351.09,
+      571.59
+     ],
+     "R.heel": [
+      2366.59,
+      591.07
+     ],
+     "R.toe": [
+      2299,
+      604.13
+     ]
+    },
+    "face": [
+     0.277,
+     -0.03,
+     0.93
+    ],
+    "board": true
+   },
+   {
+    "index": 3,
+    "name": "sit",
+    "frame": 361,
+    "action": "wins_juno",
+    "cel": 5,
+    "from": {
+     "yaw": 61.2,
+     "elev": -2.7
+    },
+    "box": [
+     0,
+     768,
+     917,
+     1536
+    ],
+    "ground": [
+     508.99,
+     1412.7
+    ],
+    "joints": {
+     "hips": [
+      509.24,
+      1177.23
+     ],
+     "waist": [
+      520.69,
+      1131.82
+     ],
+     "chest": [
+      535.44,
+      1073.28
+     ],
+     "neckBase": [
+      545.32,
+      1034.08
+     ],
+     "headBase": [
+      548.38,
+      1008.97
+     ],
+     "head": [
+      550.25,
+      965.83
+     ],
+     "crown": [
+      552.13,
+      922.59
+     ],
+     "L.sh": [
+      540.6,
+      1027.76
+     ],
+     "L.elbow": [
+      588.62,
+      1089.13
+     ],
+     "L.wrist": [
+      626.99,
+      1165.73
+     ],
+     "L.hand": [
+      641.06,
+      1193.82
+     ],
+     "L.hip": [
+      523.7,
+      1177.49
+     ],
+     "L.knee": [
+      411.52,
+      1199.85
+     ],
+     "L.ankle": [
+      423.12,
+      1350.62
+     ],
+     "L.heel": [
+      439.9,
+      1380.46
+     ],
+     "L.toe": [
+      353.57,
+      1379.42
+     ],
+     "R.sh": [
+      544.17,
+      1060.65
+     ],
+     "R.elbow": [
+      479.29,
+      1103.33
+     ],
+     "R.wrist": [
+      410.87,
+      1088.95
+     ],
+     "R.hand": [
+      386.55,
+      1083.84
+     ],
+     "R.hip": [
+      495.63,
+      1176.99
+     ],
+     "R.knee": [
+      369.34,
+      1220.3
+     ],
+     "R.ankle": [
+      343.57,
+      1353.67
+     ],
+     "R.heel": [
+      361.07,
+      1378.71
+     ],
+     "R.toe": [
+      280.28,
+      1383.63
+     ]
+    },
+    "face": [
+     -0.569,
+     0.11,
+     -0.784
+    ],
+    "board": false
+   },
+   {
+    "index": 4,
+    "name": "goggles",
+    "frame": 379,
+    "action": "wins_juno",
+    "cel": 6,
+    "from": {
+     "yaw": 60.9,
+     "elev": -2.5
+    },
+    "box": [
+     917,
+     768,
+     1835,
+     1536
+    ],
+    "ground": [
+     1426.48,
+     1416.2
+    ],
+    "joints": {
+     "hips": [
+      1426.7,
+      1180.71
+     ],
+     "waist": [
+      1431.08,
+      1133.51
+     ],
+     "chest": [
+      1436.78,
+      1072
+     ],
+     "neckBase": [
+      1440.64,
+      1030.38
+     ],
+     "headBase": [
+      1441.83,
+      1004.44
+     ],
+     "head": [
+      1439.16,
+      960.78
+     ],
+     "crown": [
+      1436.48,
+      917.09
+     ],
+     "L.sh": [
+      1465.41,
+      1033.5
+     ],
+     "L.elbow": [
+      1520.78,
+      1104.42
+     ],
+     "L.wrist": [
+      1548.32,
+      1183.88
+     ],
+     "L.hand": [
+      1558.15,
+      1212.23
+     ],
+     "L.hip": [
+      1441.35,
+      1181.11
+     ],
+     "L.knee": [
+      1328.94,
+      1204.31
+     ],
+     "L.ankle": [
+      1340.66,
+      1356.18
+     ],
+     "L.heel": [
+      1357.58,
+      1386.05
+     ],
+     "L.toe": [
+      1270.35,
+      1386.09
+     ],
+     "R.sh": [
+      1416.68,
+      1050.06
+     ],
+     "R.elbow": [
+      1338.86,
+      1034.11
+     ],
+     "R.wrist": [
+      1394.57,
+      1007.83
+     ],
+     "R.hand": [
+      1413.28,
+      999
+     ],
+     "R.hip": [
+      1412.96,
+      1180.34
+     ],
+     "R.knee": [
+      1286.65,
+      1223.81
+     ],
+     "R.ankle": [
+      1260.79,
+      1357.62
+     ],
+     "R.heel": [
+      1278.38,
+      1382.52
+     ],
+     "R.toe": [
+      1197.02,
+      1388.33
+     ]
+    },
+    "face": [
+     -0.9,
+     -0.058,
+     0.48
+    ],
+    "board": false
+   },
+   {
+    "index": 5,
+    "name": "salute",
+    "frame": 389,
+    "action": "wins_juno",
+    "cel": 7,
+    "from": {
+     "yaw": 60.5,
+     "elev": -2.8
+    },
+    "box": [
+     1835,
+     768,
+     2752,
+     1536
+    ],
+    "ground": [
+     2341.52,
+     1413.79
+    ],
+    "joints": {
+     "hips": [
+      2341.75,
+      1178.29
+     ],
+     "waist": [
+      2348.93,
+      1131.72
+     ],
+     "chest": [
+      2358.24,
+      1071.4
+     ],
+     "neckBase": [
+      2364.5,
+      1030.81
+     ],
+     "headBase": [
+      2366.44,
+      1005.31
+     ],
+     "head": [
+      2371.81,
+      962.57
+     ],
+     "crown": [
+      2377.18,
+      919.9
+     ],
+     "L.sh": [
+      2385.78,
+      1032.07
+     ],
+     "L.elbow": [
+      2440.4,
+      1102.2
+     ],
+     "L.wrist": [
+      2468.34,
+      1181.73
+     ],
+     "L.hand": [
+      2478.34,
+      1210.21
+     ],
+     "L.hip": [
+      2356.57,
+      1178.6
+     ],
+     "L.knee": [
+      2244.39,
+      1201.51
+     ],
+     "L.ankle": [
+      2256.05,
+      1354.3
+     ],
+     "L.heel": [
+      2273.02,
+      1384.29
+     ],
+     "L.toe": [
+      2185.24,
+      1384.74
+     ],
+     "R.sh": [
+      2342.49,
+      1051.47
+     ],
+     "R.elbow": [
+      2290.14,
+      1041.53
+     ],
+     "R.wrist": [
+      2321.93,
+      995.01
+     ],
+     "R.hand": [
+      2332.72,
+      979.23
+     ],
+     "R.hip": [
+      2327.87,
+      1178.01
+     ],
+     "R.knee": [
+      2201.69,
+      1221.4
+     ],
+     "R.ankle": [
+      2175.67,
+      1355.42
+     ],
+     "R.heel": [
+      2193.28,
+      1380.31
+     ],
+     "R.toe": [
+      2111.55,
+      1386.48
+     ]
+    },
+    "face": [
+     -0.889,
+     -0.225,
+     0.441
+    ],
+    "board": false
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/juno/source/hero/wins_a/layout_map.png"
+}

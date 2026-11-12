@@ -19,7 +19,7 @@ export const smoke = shot("smoke", { plates: { duck: src("boom_duck_1"), peek: s
         smokeBank(g, W, H, { t: f, cover: 1.0 - 0.8 * ease(f / 11), seed: 4, colors: ["#8a8798", "#5d596c", "#1c1424"], drift: [1.6, 0.6], n: 60 }); ash(g, f); },
       post: { flash: f < 4 ? [0.9, 0.55, 0.25, 0.08][f] : 0, bloom: 0.5, vignette: 0.55, sat: 0.9, ca: 0.0012 } };
   } });
-export const ok = shot("ok", { plates: { push: src("boom_push_1"), calm: src("boom_push_2", "png") }, marks: [{ at: 0, what: "she pushes her glasses up", on: "kick" }, { at: 10, what: "the CRT says OK", on: "kick" }],
+export const ok = shot("ok", { plates: { push: src("boom_push_3", "png"), calm: src("boom_push_4", "png") }, marks: [{ at: 0, what: "she pushes her glasses up", on: "kick" }, { at: 10, what: "the CRT says OK", on: "kick" }],
   frame(f, sync) {
     const L = CUT.ok + f, scale = 0.74 + 0.0012 * f, nudge = f < 4 ? [10, 5, 1, -2][f] : 0, drop = f === 6 ? 5 : f === 7 ? 2 : 0;
     const hung = { x: W * 0.5 + (0.5 - 0.47) * PW * scale, y: H * 0.5 + (0.5 - 0.5) * PH * scale + 26 + nudge + drop, scale }, on = f - 10;

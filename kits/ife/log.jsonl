@@ -71,3 +71,11 @@
 {"file": "kits/ife/closeup/boom_face_5.jpg", "kind": "edit:plate:boom_face", "time": "2026-11-12T11:27:09", "ok": true}
 {"file": "kits/ife/closeup/boom_crt_1.jpg", "kind": "plate:boom_crt", "time": "2026-11-12T11:27:20", "ok": true}
 {"file": "kits/ife/closeup/boom_face_5.jpg", "reject": "edit: the mouth became a whistling pucker with stray marks beside it", "by": "hand", "time": "2026-11-12T11:30:23"}
+{"file": "kits/ife/closeup/boom_push_3.jpg", "kind": "edit:plate:boom_push", "time": "2026-11-12T12:29:09", "ok": true}
+{"file": "kits/ife/closeup/boom_push_4.jpg", "kind": "edit:edit:plate:boom_push", "time": "2026-11-12T12:29:36", "ok": true}
+{"file": "kits/ife/closeup/boom_plug_2.jpg", "kind": "edit:plate:boom_plug", "time": "2026-11-12T12:38:02", "ok": true}
+{"file": "kits/ife/closeup/boom_push_1.jpg", "note": "no longer in the film: its soot is soft, purplish and airbrushed and reads as bruises (nobody is hurt in this film). boom_push_3 is its edit.", "time": "2026-11-12T12:43:40"}
+{"file": "kits/ife/closeup/boom_push_2.jpg", "note": "no longer in the film: carries the same soft marks, and a second one where the hand was; boom_push_4 replaces it", "time": "2026-11-12T12:43:40"}
+{"file": "kits/ife/closeup/boom_push_3.jpg", "note": "in the film as boom_push_3.png (graded and registered by pipeline/match.py --register; shots/boom_end.js): an edit of boom_push_1: the soot is flat hard-edged black smudges with dry-brush tails (forehead, nose, cheek, a smear on a lens) and a curl of smoke off a hair puff", "time": "2026-11-12T12:43:40"}
+{"file": "kits/ife/closeup/boom_push_4.jpg", "note": "in the film as boom_push_4.png (graded to boom_push_3.png): an edit of boom_push_3, her hand lowered; the soot is where it was", "time": "2026-11-12T12:43:40"}
+{"file": "kits/ife/closeup/boom_plug_2.jpg", "note": "in the film as boom_plug_2.png (graded and registered to boom_plug_1; shots/boom_jam.js from the twist-lock on): an edit of boom_plug_1, her grip rolled over the knurled ring as she twists it; the plug is where it was", "time": "2026-11-12T12:43:40"}

@@ -184,7 +184,7 @@ const WINS_TANE = [
 // Juno's: (0) the landing: a deep crouch on the board, a hand down; (1) the skid: the board broadside, her whole
 // body thrown back against it, arms wide; (2) stopped, standing easy on it, a hand on her hip, looking back over her
 // left shoulder; (3) dropping: folded right down over the board's nose, hands going to its edges; (4) flat: lying
-// on the board on her front, chin up, hands on the nose, legs long behind (the board is under her chest: it is not
+// on the board on her front, propped on her elbows, chin up, hands on the nose, legs long behind (the board is under her chest: it is not
 // the mannequin's); (5) sitting on the grounded board, leaning back on a hand, twisted to look behind her; (6) the
 // same seat, a hand up at her goggles, pulling them down; (7) a two-fingered salute thrown back over her shoulder.
 const WINS_JUNO = [
@@ -192,7 +192,7 @@ const WINS_JUNO = [
   pose({ lean: 8, board: 1, roll: 30, twist: 10, head: { yaw: 22, pitch: -4, roll: 0 }, arm: { L: arm(10, 82, 20), R: arm(10, 62, 30) }, leg: { L: leg(42, 50, 14), R: leg(4, 56, 14) } }),
   pose({ lean: 4, board: 1, roll: 6, twist: 14, head: { yaw: 70, pitch: -4, roll: 4 }, arm: { L: arm(-8, 20, 20), R: arm(-10, 36, 84) }, leg: { L: leg(32, 28, 12), R: leg(0, 30, 12) } }),
   pose({ lean: 54, board: 1, twist: -10, head: { yaw: 0, pitch: -30, roll: 0 }, arm: { L: arm(62, 12, 30), R: arm(42, 12, 40) }, leg: { L: leg(108, 128, 14), R: leg(86, 132, 14) } }),
-  pose({ lean: 86, lift: 0.16, head: { yaw: 0, pitch: 14, roll: 0 }, arm: { L: arm(96, 14, 60), R: arm(96, 14, 60) }, leg: { L: leg(-86, 3, 5, 172), R: leg(-88, 6, 5, 172) } }),
+  pose({ lean: 86, lift: 0.16, head: { yaw: 0, pitch: -25, roll: 0 }, arm: { L: arm(60, 14, 40), R: arm(60, 14, 40) }, leg: { L: leg(-86, 3, 5, 172), R: leg(-88, 6, 5, 172) } }),
   pose({ lean: -16, lift: 0.1, twist: -34, head: { yaw: -62, pitch: -4, roll: 0 }, arm: { L: arm(-36, 26, 10), R: arm(58, 8, 44) }, leg: { L: leg(82, 88, 14, -8), R: leg(70, 58, 20, -4) } }),
   pose({ lean: -6, lift: 0.1, twist: -4, head: { yaw: 0, pitch: 4, roll: 0 }, arm: { L: arm(-30, 24, 12), R: arm(104, 30, 138) }, leg: { L: leg(82, 88, 14, -8), R: leg(70, 58, 20, -4) } }),
   pose({ lean: -10, lift: 0.1, twist: -8, head: { yaw: 0, pitch: -6, roll: -4 }, arm: { L: arm(-30, 24, 12), R: arm(120, 62, 96) }, leg: { L: leg(82, 88, 14, -8), R: leg(70, 58, 20, -4) } }),

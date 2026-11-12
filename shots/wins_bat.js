@@ -22,8 +22,9 @@ function frame(f, sync) {
     under(g, cam) { if (f < 1) pipe(g, cam, PIPE[0], PIPE[1]); },
     overlay(g, cam, bodies) {
       const hit = cam.project(BAT_AT), sh = cam.project(bodies[0].J.neckBase);
-      // the pipe, kicked up: it turns end over end from the floor to his hand
-      if (f >= 1 && f < GOT) { const k = f / GOT, c = [0.85 - 0.45 * k, 0.05 + 1.25 * k + 0.5 * Math.sin(Math.PI * k), 20.7 + 0.35 * k], a = 0.2 + k * 7.5, h = 0.45; pipe(g, cam, [c[0], c[1] - Math.sin(a) * h, c[2] - Math.cos(a) * h], [c[0], c[1] + Math.sin(a) * h, c[2] + Math.cos(a) * h]); }
+      // the pipe, kicked up: it turns end over end from the floor to his reaching hand, out in front of him and no
+      // higher than his chest (it is never across his face)
+      if (f >= 1 && f < GOT) { const k = f / GOT, c = [0.85 - 0.45 * k, 0.05 + 0.9 * k + 0.4 * Math.sin(Math.PI * k), 20.66 + 0.1 * k], a = 0.2 + k * 7.5, h = 0.45; pipe(g, cam, [c[0], c[1] - Math.sin(a) * h, c[2] - Math.cos(a) * h], [c[0], c[1] + Math.sin(a) * h, c[2] + Math.cos(a) * h]); }
       if (f < 3) { const p = cam.project([0.6, 0.03, 20.8]); burst(g, p.x, p.y, 46, f + 1, 3, 9); }
       if (f === GOT || f === GOT + 1) { const p = cam.project([TX, 1.45, TZ + 0.2]); burst(g, p.x, p.y, 40, f - GOT + 1, 5, 8); }
       // the swing: one frame of the pipe's whole sweep, low and up through the ball

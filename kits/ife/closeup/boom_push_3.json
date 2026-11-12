@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY the dirt marks on her skin and keep every other line, colour, shape and position in the picture exactly the same (same head, hair, ash-grey puffs' edges, glasses, eyes, hand, clothes, monitor, background). The two soft blurry dark patches on her forehead and on her cheek look like bruises: REMOVE them completely, so the skin under them is her clean flat brown again. In their place paint comic cartoon SOOT, the kind a cartoon character has on their face after something blew up near them: THREE flat, opaque, hard-edged smudges of dull charcoal grey-black (one flat colour, #2b2b2e, with a crisp edge like a paper cut-out, each with a ragged dry-brush tail of two or three short tapering streaks on one side, as if wiped by a sooty thumb): one across the middle of her forehead, one on her cheek on the viewer's right, and a small one on the tip of her nose. Also ONE flat grey-black soot smear across the lower outer corner of the glasses lens on the viewer's right, on the glass. And one small curl of pale grey cartoon smoke (a flat light-grey wisp with an ink outline) rising off the top of the hair puff on the viewer's left. No airbrush, no blur, no soft edges, no gradient, no purple, no red, no brown shading: nothing that looks like a bruise, a graze, a cut or a swelling. She is not hurt, only sooty: it is funny.",
+ "refs": [
+  "kits/ife/closeup/boom_push_1.jpg"
+ ],
+ "kind": "edit:plate:boom_push",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:29:09",
+ "from": "kits/ife/closeup/boom_push_1.jpg"
+}

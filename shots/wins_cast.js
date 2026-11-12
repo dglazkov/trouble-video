@@ -20,11 +20,12 @@
 //   count   1754  she looks back at them (at us: we are one of them) and counts: one, two, three (1754, 1764, 1774)
 //   door    1783  from behind her: the tunnel is a crawlway now, and at the end of it a blast door is coming down
 //   gate    1793  what she sees: the door, rushing at us, drops another notch on the kick
-//   under   1803  from the side: she drops flat on the board and goes under it (1813); it lands on the drum (1818)
+//   under   1803  from the side and ahead, her face to us: she drops flat on the board, chin up, and goes under it
+//                 (1813); it lands on the drum (1818)
 //   pile    1823  from the side still: they go into it one after another, one on every drum hit, and each blow
 //                 stands out of the far side of the plate
 //   salute  1843  her side: the door bulges on every drum hit behind her; goggles down (1863), the salute (1873), the
-//                 last and biggest blow on the last kick (1883), and she has not looked round
+//                 last and biggest blow on the last kick (1883): she has not looked round, and her goggles go dark
 import { ease as E } from "./slice_cast.js";
 export const FPS = 24;
 export const CUT = { land: 1488, corner: 1525, crack: 1553, bat: 1575, catch: 1614, slam: 1644, rest: 1684, tunnel: 1724, count: 1754, door: 1783, gate: 1793, under: 1803, pile: 1823, salute: 1843, end: 1893 };

@@ -33,6 +33,8 @@ import { driveAll } from "../engine/sync.js";
 import { createDrones } from "../machines/drones.js";
 
 export const PM = 8, Z0 = -3, Z1 = 176, HALF = 2.4, ROOF = 4.0, BOX = [-(HALF - 0.14), 1.25, 0.5];      // module; the passage's ends; half width; ceiling; the junction box's socket
+// the socket on the box: its bore and its collar (radii), how far the collar stands out of the cabinet's face, and where its mouth is
+export const SOCKET = { r: 0.058, R: 0.08, out: 0.08, face: BOX[0] + 0.07, mouth: [BOX[0] + 0.15, BOX[1], BOX[2]] };
 export const WIRING = {
   pump: { stem: "bass", mode: "env", floor: 0.35, gain: 1.5 },                      // how fast the flow marks run
   lamps: { stem: "kick", mode: "pulse", decay: 0.22, floor: 0.72, gain: 0.4 },      // ceiling lamps and their pools
@@ -163,7 +165,8 @@ export async function createPlant(renderer, o = {}) {
   // the junction box on the right wall: a yellow-framed cabinet, a socket, four lamps, armoured conduit up to the mains
   { const [bx, by, bz] = BOX, m = (c, o2) => mat(c, o2), wx = -HALF;
     b.box(0.3, 1.5, 1.3, wx + 0.02, by + 0.1, bz, m(haz)); b.box(0.3, 1.3, 1.1, wx + 0.06, by + 0.1, bz, m("#cfd6d2")); b.box(0.06, 0.34, 1.1, wx + 0.2, by + 0.72, bz, stripeMat);
-    b.cyl(0.17, 0.12, bx + 0.04, by, bz, m(steelD), "x", 16); b.cyl(0.11, 0.14, bx + 0.05, by, bz, m(dark, { paint: 0 }), "x", 14);
+    // the socket: a stout collar standing out of the cabinet on a flange, bored to the plug's barrel (SOCKET)
+    b.cyl(SOCKET.R + 0.022, 0.02, bx + 0.08, by, bz, m(steelD), "x", 18); b.cyl(SOCKET.R, SOCKET.out, bx + 0.07 + SOCKET.out / 2, by, bz, m(steel), "x", 18); b.cyl(SOCKET.r, SOCKET.out + 0.004, bx + 0.07 + SOCKET.out / 2, by, bz, m(dark, { paint: 0 }), "x", 16);
     [0, 1, 2, 3].forEach((k) => { b.box(0.06, 0.1, 0.13, bx + 0.05, by + 0.27, bz + 0.33 - k * 0.22, mat(k === 3 ? "#ff3b30" : "#58ff8e", { kind: 1, flag: 4 + k })); });
     b.box(0.05, 0.2, 0.5, bx + 0.05, by - 0.42, bz, m(dark, { paint: 0 }));
     b.cyl(0.07, ROOF - by - 1.6, wx + 0.12, (ROOF + by - 0.1) / 2 + 0.25, bz - 0.5, m(haz), "y", 8);

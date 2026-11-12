@@ -5,11 +5,14 @@ import { FPS, CUT, CAST, TZ, startOf, corridor, ease, wob } from "./wins_cast.js
 import { tane, trio, SHOULDER, SLAM_AT } from "./wins_tane.js";
 import { smoke, sparks } from "./wins_fx.js";
 const FRAMES = CUT.tunnel - CUT.rest, UP = SHOULDER - CUT.rest;
+// what is left of the machines, seen from in front: thrown a little higher than the fight's own cameras had them, so
+// that no piece of one is behind his head as it goes by (an aerial at the height of his eyes read as a pin through it)
+const WRECKS = (F, sync) => trio(F, sync).map((d) => d.broken !== undefined ? { ...d, pos: [d.pos[0], d.pos[1] + 0.7, d.pos[2]] } : d);
 function frame(f, sync) {
   const F = CUT.rest + f, k = ease(f / FRAMES), tap = f >= UP ? Math.exp(-(f - UP) / 2) : 0, settle = Math.exp(-f / 14);
   return { set: "corridor",
     camera: { pos: [1.9 - 0.25 * k, 1.0 + 0.012 * tap * wob(f, 9, 14, 1), 16.9 + 0.5 * k], target: [0.1, 1.08, TZ], fov: 33 - 2.5 * k },
-    options: corridor(F, { alert: 1 - 0.7 * k, drones: trio(F, sync), post: { bgBlur: 0.006, focus: [0.5, 0.5], bloom: 0.95 } }),
+    options: corridor(F, { alert: 1 - 0.7 * k, drones: WRECKS(F, sync), post: { bgBlur: 0.006, focus: [0.5, 0.5], bloom: 0.95 } }),
     // his coat is still moving when we get to him, and settles
     actors: [tane(F, { over: true, layer: { warp: 5 * settle + 1.2, warpDir: [0.2, -1], warpTime: (f - f % 2) * 0.8, warpStill: [0.5, 0.72], warpRadius: 0.13 } })],
     under(g, cam) {      // what is left of the smoke, behind him

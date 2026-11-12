@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY her hand's grip, to show that she has just TWISTED the plug's knurled locking ring a quarter turn to lock it (turning it away from the viewer over the top, like turning a doorknob clockwise): her wrist has rolled over, so her thumb, which lay flat along the top of the ring, is now further over the top and tucked down behind the ring with only its base knuckle showing, and her four fingers, which were curled underneath, have come round and up the near side of the ring so that more of each finger and its fingernail shows, gripping hard. The metal plug itself (the smooth barrel at its tip, the knurled ring's outline, the body and the cable boot behind it) stays in EXACTLY the same place, size and angle as it is, and so do the sleeve, the knitted cuff and the cable: same lines, same colours. Same flat two-tone cel style, same magenta background, a hand with five fingers.",
+ "refs": [
+  "kits/ife/closeup/boom_plug_1.jpg"
+ ],
+ "kind": "edit:plate:boom_plug",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:38:02",
+ "from": "kits/ife/closeup/boom_plug_1.jpg"
+}

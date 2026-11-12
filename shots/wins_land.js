@@ -16,8 +16,9 @@ function juno(f) {
   const p = at(f), base = { who: "juno", x: p[0], y: p[1], z: p[2], steady: 4 };
   if (f < LAND) return { ...base, action: "leap", phase: 1, hero: "leap_apex", view: "back34" };
   if (f < LAND + 4) return { ...base, action: "wins_juno", phase: J(0), hero: "land", view: "back34" };
-  if (f < STOP + 1) return { ...base, action: "wins_juno", phase: J(1), hero: "skid", yaw: 90, view: "side" };
-  if (f < GO) return { ...base, action: "wins_juno", phase: J(2), hero: "lookback", yaw: 90, view: "side" };
+  // broadside, the board's near edge is drawn below where she stands: the deck is not to cut it off
+  if (f < STOP + 1) return { ...base, action: "wins_juno", phase: J(1), hero: "skid", yaw: 90, view: "side", over: true };
+  if (f < GO) return { ...base, action: "wins_juno", phase: J(2), hero: "lookback", yaw: 90, view: "side", over: true };
   return { ...base, action: "ride", phase: 0.5, hero: "ride_mid", view: "back34" };
 }
 // the swarm: over the gap in a stream, past the camera on SWARM, flat out
