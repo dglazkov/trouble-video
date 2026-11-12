@@ -53,6 +53,7 @@ try {
   makers.gantry = () => import("../sets/gantry.js").then((m) => m.createGantry(renderer, { width: W, height: H }));
   makers.atrium = () => import("../sets/atrium.js").then((m) => m.createAtrium(renderer, { width: W, height: H })); makers.stairwell = () => import("../sets/stairwell.js").then((m) => m.createStairwell(renderer, { width: W, height: H }));
   makers.core = () => import("../sets/core.js").then((m) => m.createCore(renderer, { width: W, height: H }));
+  makers.plant = () => import("../sets/plant.js").then((m) => m.createPlant(renderer, { width: W, height: H }));
   const need = async (name) => sets[name] ?? (sets[name] = await makers[name]());
   for (const s of shot.sets ?? []) await need(s);
   for (const [who, base] of Object.entries(shot.cast ?? {})) {
