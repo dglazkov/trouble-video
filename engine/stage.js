@@ -52,6 +52,7 @@ try {
     vault: () => import("../sets/vault.js").then((m) => m.createVault(renderer, { width: W, height: H })) };
   makers.gantry = () => import("../sets/gantry.js").then((m) => m.createGantry(renderer, { width: W, height: H }));
   makers.atrium = () => import("../sets/atrium.js").then((m) => m.createAtrium(renderer, { width: W, height: H })); makers.stairwell = () => import("../sets/stairwell.js").then((m) => m.createStairwell(renderer, { width: W, height: H }));
+  makers.tunnel = () => import("../sets/tunnel.js").then((m) => m.createTunnel(renderer, { width: W, height: H }));
   makers.core = () => import("../sets/core.js").then((m) => m.createCore(renderer, { width: W, height: H }));
   makers.plant = () => import("../sets/plant.js").then((m) => m.createPlant(renderer, { width: W, height: H }));
   const need = async (name) => sets[name] ?? (sets[name] = await makers[name]());
