@@ -8,6 +8,7 @@
 //       actors: [{ who, action, phase, yaw, x, y, z, view, light: {...}, shadow: false, over: true, steady: 3, hero: "name",
 //                  layer: {...engine/post.js LAYER, over what the stage works out: a wobble of hair and cloth} }],
 //       cels: [{ plate, x, y, scale, layer: {...engine/post.js LAYER} }],      plates on the frame: centre (pixels), scale
+//                                                                              (turn: radians; flip: true: mirrored left to right)
 //       backdrop(g, cam, bodies)    a painted background when there is no set (a 2D canvas the size of the frame)
 //       under(g, cam, bodies)       painted over the background, under the characters
 //       overlay(g, cam, bodies)     painted over everything, before the lens
@@ -134,7 +135,7 @@ try {
       if (p.plate) {
         const im = plates[p.plate.plate], k = p.plate.scale ?? 1;
         g.imageSmoothingEnabled = true; g.imageSmoothingQuality = "high";
-        g.translate(p.plate.x ?? W / 2, p.plate.y ?? H / 2); g.rotate(p.plate.turn ?? 0); g.scale(k, k); g.drawImage(im, -im.width / 2, -im.height / 2);
+        g.translate(p.plate.x ?? W / 2, p.plate.y ?? H / 2); g.rotate(p.plate.turn ?? 0); g.scale(p.plate.flip ? -k : k, k); g.drawImage(im, -im.width / 2, -im.height / 2);
         post.cel(s.t, p.plate.layer); return;
       }
       const { a, c, body, pick } = p, q = body.q;

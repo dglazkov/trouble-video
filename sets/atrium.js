@@ -39,13 +39,20 @@
 //   night     0..1                 the lights are out: the place dark indigo under the alarm's red, few windows lit
 //   drop      metres               the whole gantry sunk this far this frame (a machine's weight coming down on it)
 //   hatch     [{ z0, z1, fall, tilt }]   up to two lengths of the gantry's deck let go: the deck is gone between z0 and z1,
-//                                  and the plate that was there is `fall` metres below (omit: not shown), tilted `tilt` radians
+//                                  and the plate that was there is `fall` metres below (omit: not shown), tilted `tilt` radians.
+//                                  closed: true: not yet let go: the plate lies in the deck, a hazard band across each end of it.
+//                                  clamps: null | frames: its four clamps, one at each corner (given at all: shown), blown off that long ago
 //   guide     true | "wall"        the blockout instead of the paintings (shots/atrium_plate.js); "wall": without the core
+//   dents     [{ z, d, w, rock }]  up to four places where the gantry is bent this frame by what stands on it: d metres down at z,
+//                                  over w metres either way (rails, posts, beacons and whatever stands there go with it);
+//                                  rock: metres its posts lean sideways per metre of height. dentAt(z, dents) -> metres down
+//   cut       [{ z, side, age }]   stay cables let go: the one whose foot is at z (16, 32, ... 128) on side +1 | -1 (+X | -X) was
+//                                  cut `age` frames ago. It whips up and away toward the core and hangs there; a stub is left on the deck
 //   gantry    false                no gantry (a guide to paint over)
 //   wiring    { name: wire }       replace wires of WIRING for this frame
 //   markers, shadows, post, clear  as in the other sets
 import * as THREE from "three";
-import { createKit, createShadows, canvasTex, quadGeometry, aim, hash, rng, clamp, lerp, FX } from "./kit.js";
+import { createKit, createShadows, canvasTex, quadGeometry, aim, hash, rng, clamp, lerp, FX, DENTS, DENT_BOX } from "./kit.js";
 import { kana, latin, scanlines, hazard, chevrons, kanaWidth, FONT } from "./sign.js";
 import { driveAll } from "../engine/sync.js";
 import { createDrones } from "../machines/drones.js";
@@ -56,6 +63,8 @@ import { projector, loadPainting, painted, paintedScreen, PROJECT_VS } from "./p
 
 export const RA = 150, RC = 14, DECK = 6, GANTRY = { w: 4.4, len: RA - RC }, DOOR = { w: 3.4, h: 4.2 }, POSTS = 8;      // the shaft's radius and the core's (the axis is at z = -RC); a storey; the gantry; the vault's doorway; metres between beacon posts
 export { HERO } from "./atriumplan.js";
+// how far the gantry's deck is down at z, for dents as options.dents gives them (the same bend sets/kit.js gives the geometry)
+export const dentAt = (z, dents = []) => dents.reduce((a, q) => a + q.d * (0.5 + 0.5 * Math.cos(Math.min(1, Math.abs(z - q.z) / Math.max(0.5, q.w ?? 6)) * Math.PI)), 0);
 export const floorAt = (x, z) => (Math.abs(x) <= GANTRY.w / 2 + 0.1 && z > -9 && z < GANTRY.len ? 0 : null);
 // The station plays the song: each system is one wire from a stem (engine/sync.js drive()).
 export const WIRING = {
@@ -168,7 +177,7 @@ export async function createAtrium(renderer, o = {}) {
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(50, W / H, 0.08, 1200);
   const wallC = "#7c82ae", rib = "#5f6592", coreC = "#8086b2", cream = "#cfccc6", cream2 = "#a5a3ae", steel = "#9aa1bc", steel2 = "#6f7698", dark = "#2c2f4c", yellow = "#f0b81e", orange = "#e8742c", teal = "#58b8b0", lamp = "#fbfff0";
   let b = kit.builder(); const X = [1, 0, 0], Y = [0, 1, 0], TOPY = 156, LOWY = -432, HY = TOPY - LOWY, MY = (TOPY + LOWY) / 2;
-  const rod = (bb, a, c, r, m, seg = 6) => { const A = new THREE.Vector3(...a), C = new THREE.Vector3(...c), d = C.clone().sub(A), len = d.length(); bb.add(new THREE.CylinderGeometry(r, r, len, seg), m, new THREE.Matrix4().compose(A.clone().add(C).multiplyScalar(0.5), new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()), new THREE.Vector3(1, 1, 1))); };
+  const rod = (bb, a, c, r, m, seg = 6, hseg = 1) => { const A = new THREE.Vector3(...a), C = new THREE.Vector3(...c), d = C.clone().sub(A), len = d.length(); bb.add(new THREE.CylinderGeometry(r, r, len, seg, hseg), m, new THREE.Matrix4().compose(A.clone().add(C).multiplyScalar(0.5), new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()), new THREE.Vector3(1, 1, 1))); };
   // round the axis: a matrix that puts something built facing +Z at the gantry's line (out along +Z from the axis) at angle t
   const round = (t) => new THREE.Matrix4().makeTranslation(0, 0, -RC).multiply(new THREE.Matrix4().makeRotationY(t));
   const at = (t, r, y) => [Math.sin(t) * r, y, -RC + Math.cos(t) * r];
@@ -217,19 +226,18 @@ export async function createAtrium(renderer, o = {}) {
   // ---- the gantry: a deck on a truss, pipe rails, a beacon post every eight metres, cables up to the core ---------------
   const blockoutB = b; b = kit.builder();
   {
-    const w = GANTRY.w, L = GANTRY.len, g = new THREE.BoxGeometry(w, 0.1, L), uv = g.attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i), uv.getY(i) * L / w);
+    const w = GANTRY.w, L = GANTRY.len, NS = Math.round(L / 2), g = new THREE.BoxGeometry(w, 0.1, L, 1, 1, NS), long = (bw, bh, x, y, m) => b.add(new THREE.BoxGeometry(bw, bh, L, 1, 1, NS), m, new THREE.Matrix4().makeTranslation(x, y, L / 2 + 2.6)), uv = g.attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i), uv.getY(i) * L / w);
     b.add(g, mat("#fff", { kind: 10, map: T.grate }), new THREE.Matrix4().makeTranslation(0, -0.05, L / 2 + 2.6));
     for (const s of [1, -1]) {
-      b.box(0.24, 0.5, L, s * (w / 2 + 0.06), -0.3, L / 2 + 2.6, mat(steel)); b.box(0.26, 0.12, L, s * (w / 2 + 0.07), -0.02, L / 2 + 2.6, mat(yellow));
-      rod(b, [s * (w / 2), 1.05, 2.7], [s * (w / 2), 1.05, L], 0.04, mat(yellow), 7); rod(b, [s * (w / 2), 0.55, 2.7], [s * (w / 2), 0.55, L], 0.025, mat(steel2), 5);
+      long(0.24, 0.5, s * (w / 2 + 0.06), -0.3, mat(steel)); long(0.26, 0.12, s * (w / 2 + 0.07), -0.02, mat(yellow));
+      rod(b, [s * (w / 2), 1.05, 2.7], [s * (w / 2), 1.05, L], 0.04, mat(yellow), 7, NS); rod(b, [s * (w / 2), 0.55, 2.7], [s * (w / 2), 0.55, L], 0.025, mat(steel2), 5, NS);
       for (let z = 2.7; z <= L; z += 2) rod(b, [s * (w / 2), 0, z], [s * (w / 2), 1.05, z], 0.028, mat(steel2), 5);
-      rod(b, [s * 1.4, -2.2, 2.6], [s * 1.4, -2.2, L], 0.09, mat(steel2), 6);
+      rod(b, [s * 1.4, -2.2, 2.6], [s * 1.4, -2.2, L], 0.09, mat(steel2), 6, NS);
       for (let z = 2.6; z < L; z += 4) { rod(b, [s * (w / 2), -0.5, z], [s * 1.4, -2.2, z + 2], 0.05, mat(steel2), 5); rod(b, [s * 1.4, -2.2, z + 2], [s * (w / 2), -0.5, z + 4], 0.05, mat(steel2), 5); }
       for (let z = POSTS; z <= L; z += POSTS) {
         b.box(0.14, 2.3, 0.14, s * (w / 2 + 0.1), 1.15, z, mat(dark)); b.box(0.3, 0.12, 0.3, s * (w / 2 + 0.1), 2.32, z, mat(dark));
         b.cyl(0.15, 0.3, s * (w / 2 + 0.1), 2.52, z, mat("#ff3426", { kind: 1, flag: 3, fog: 0.5 }), "y", 10); b.box(0.34, 0.06, 0.34, s * (w / 2 + 0.1), 2.7, z, mat(dark));
       }
-      for (let z = 16; z < L; z += 16) rod(b, [s * (w / 2 + 0.1), 0, z], [s * 4.6, 24 + z * 0.62, 0.3], 0.07, mat(dark), 5);
     }
     for (let z = 4; z < L; z += 4) b.box(w + 0.3, 0.16, 0.2, 0, -0.5, z, mat(steel)); for (let z = 4; z <= L; z += 2) rod(b, [-1.4, -2.2, z], [1.4, -2.2, z], 0.04, mat(steel2), 5);
     b.quad([0, 0.012, 3.2], X, [0, 0, -1], w - 0.4, 0.7, mat("#fff", { kind: 10, map: T.hazard, offset: 1 }));
@@ -383,7 +391,31 @@ void main(){ vec2 r = vec2(vW.x, vW.z+${RC.toFixed(1)}); float a = uTurn, c = co
   const haloMat = kit.mat("#ff3a28", { kind: 7, flag: 1, map: haloTex, alpha: 0.85, fog: 0.25 }), halos = [];
   for (let z = POSTS; z <= GANTRY.len; z += POSTS) for (const s of [1, -1]) { const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), haloMat); m.layers.set(FX); m.renderOrder = 12; m.frustumCulled = false; m.position.set(s * (GANTRY.w / 2 + 0.1), 2.52, z); scene.add(m); halos.push(m); }
   const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#252a52");
-  const plates = [0, 1].map(() => { const m = new THREE.Mesh(new THREE.BoxGeometry(1, 0.3, 1), mat("#868eb2")); m.frustumCulled = false; m.visible = false; scene.add(m); const e = new THREE.Mesh(new THREE.BoxGeometry(1.03, 0.1, 1.0), mat(yellow)); e.position.y = 0.12; e.frustumCulled = false; m.add(e); return m; });
+  const plates = [0, 1].map(() => { const m = new THREE.Mesh(new THREE.BoxGeometry(1, 0.3, 1), mat("#868eb2")); m.frustumCulled = false; m.visible = false; scene.add(m); const e = new THREE.Mesh(new THREE.BoxGeometry(1.03, 0.1, 1.0), mat(yellow)); e.position.y = 0.12; e.frustumCulled = false; m.add(e);
+    for (const z of [0.455, -0.455]) { const hz = new THREE.Mesh(new THREE.PlaneGeometry(0.9, 0.07).rotateX(-Math.PI / 2), mat("#fff", { kind: 10, map: T.hazard, offset: 1 })); hz.position.set(0, 0.156, z); hz.frustumCulled = false; m.add(hz); } return m; });
+  // the first hatch's clamps: a block at each corner of its plate, a lamp on it
+  const clamps = [[1, 1], [-1, 1], [1, -1], [-1, -1]].map(([sx, sz]) => { const g = new THREE.Group(), bx = (w, h, d, y, m) => { const q = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); q.position.y = y; q.frustumCulled = false; g.add(q); }; bx(0.46, 0.3, 0.8, 0, mat(dark)); bx(0.5, 0.08, 0.84, 0.17, mat(yellow)); bx(0.16, 0.1, 0.16, 0.26, mat("#ff3426", { kind: 1, fog: 0.4 })); g.visible = false; g.userData = { sx, sz }; scene.add(g); return g; });
+  // the stay cables, each its own (a shot may cut one: options.cut): [z of its foot, side] -> the cable, its whip once cut, the stub left on the deck
+  const STAY_N = 28, stays = [];
+  for (let z = 16; z < GANTRY.len; z += 16) for (const s of [1, -1]) {
+    const A = new THREE.Vector3(s * 4.6, 24 + z * 0.62, 0.3), Bq = new THREE.Vector3(s * (GANTRY.w / 2 + 0.1), 0, z), d = Bq.clone().sub(A), len = d.length();
+    const whole = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, len, 5).applyMatrix4(new THREE.Matrix4().compose(A.clone().add(Bq).multiplyScalar(0.5), new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.clone().normalize()), new THREE.Vector3(1, 1, 1))), mat(dark));
+    const whip = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 1, 5, STAY_N), mat(dark)); whip.userData.base = whip.geometry.attributes.position.array.slice();
+    const stub = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.08, 1, 5).translate(0, 0.5, 0), mat(dark)), shoe = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.24, 0.3), mat(yellow)); shoe.position.copy(Bq).y += 0.1;
+    for (const m of [whole, whip, stub, shoe]) { m.frustumCulled = false; scene.add(m); }
+    stays.push({ z, s, A, B: Bq, len, whole, whip, stub, shoe });
+  }
+  const _v = new THREE.Vector3(), _w = new THREE.Vector3();
+  // a cut stay `age` frames on: it springs back along itself, a wave running up it, and swings in under its anchor on the core
+  function whipStay(st, age, drop) {
+    const P = st.whip.geometry.attributes.position, base = st.whip.userData.base, a2 = age, g = 1 - Math.exp(-a2 / 26), shrink = 1 - 0.1 * (1 - Math.exp(-a2 / 3)), side = _w.set(st.s, 0.25, 0).normalize();
+    const at = (u, out) => { const uu = u * shrink; out.set(st.A.x + (st.B.x - st.A.x) * uu, st.A.y + (st.B.y - st.A.y - drop) * uu, st.A.z + (st.B.z - st.A.z) * uu);
+      const k = g * Math.pow(u, 1.4); out.x += (st.A.x - out.x) * k * 0.9; out.z += (st.A.z - out.z) * k; out.y += (st.A.y - st.len * u * 0.96 - out.y) * k;      // toward hanging straight down from its anchor
+      const wv = Math.sin(u * 16 - a2 * 0.8) * u * u * 5.5 * Math.exp(-a2 / 12) + Math.sin(u * 7 - a2 * 0.33) * u * 2.2 * Math.exp(-a2 / 30) * Math.min(1, a2 / 3); out.addScaledVector(side, wv); out.y += Math.abs(wv) * 0.5 + u * u * 7 * Math.sin(Math.min(1, a2 / 10) * Math.PI) * Math.exp(-a2 / 14); return out; };
+    const c = new THREE.Vector3(), n = new THREE.Vector3(), q = new THREE.Quaternion(), Y = new THREE.Vector3(0, 1, 0);
+    for (let i = 0; i < P.count; i++) { const u = 0.5 - base[i * 3 + 1]; at(u, c); at(Math.min(1, u + 0.01), n).sub(at(Math.max(0, u - 0.01), _v)).normalize(); q.setFromUnitVectors(Y, n.negate()); _v.set(base[i * 3], 0, base[i * 3 + 2]).applyQuaternion(q); P.setXYZ(i, c.x + _v.x, c.y + _v.y, c.z + _v.z); }
+    P.needsUpdate = true; st.whip.geometry.computeVertexNormals();
+  }
   let warden = null;      // the reunion's machine (machines/warden.js), built the first time a shot asks for it
 
   function update(cam, frame, sync, opt = {}) {
@@ -410,7 +442,13 @@ void main(){ vec2 r = vec2(vW.x, vW.z+${RC.toFixed(1)}); float a = uTurn, c = co
     for (const c of craft) { const dt = t - CRAFT_T; c.g.visible = !guide; c.g.position.set(c.p[0] + c.v[0] * dt, c.p[1] + c.v[1] * dt + 0.5 * Math.sin(t * 1.3 + c.p[0]), c.p[2] + c.v[2] * dt); c.g.rotation.set(0, Math.atan2(c.v[0], c.v[2]), 0.1 * Math.sin(t * 0.9 + c.p[2])); c.g.scale.setScalar(c.sc); }
     halos.forEach((m, i) => { const on = m.position.z <= U.uGantry.value, k = Math.floor(m.position.z / POSTS + 0.5), bl = ((U.uBlink.value + k * 0.5) % 1) >= 0.5 ? 1 : 0.5; m.visible = on; if (on) { m.quaternion.copy(camera.quaternion); m.scale.setScalar((0.9 + 0.8 * U.uAlarm.value) * bl * (1 + camera.position.distanceTo(m.position) * 0.012)); } });
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
-    gantryG.position.y = -(opt.drop ?? 0); { const h = opt.hatch ?? []; U.uHatch.value.set(h[0]?.z0 ?? 0, h[0]?.z1 ?? 0, h[1]?.z0 ?? 0, h[1]?.z1 ?? 0); plates.forEach((m, i) => { const q = h[i]; m.visible = !!q && q.fall != null; if (m.visible) { m.scale.set(GANTRY.w + 0.4, 1, q.z1 - q.z0); m.position.set(q.x ?? 0, -0.2 - q.fall, (q.z0 + q.z1) / 2); m.rotation.set(q.tilt ?? 0, 0, q.roll ?? 0); } }); }
+    { const dn = opt.dents ?? []; DENT_BOX.value.set(dn.length ? 9 : 0, -4, 2.9); DENTS.value.forEach((v, i) => { const q = dn[i]; v.set(q?.z ?? 0, q?.d ?? 0, Math.max(0.5, q?.w ?? 6), q?.rock ?? 0); }); }
+    for (const st of stays) { const c = (opt.cut ?? []).find((q) => q.z === st.z && q.side === st.s && q.age >= 0), on = opt.gantry !== false; st.whole.visible = on && !c; st.whip.visible = st.stub.visible = on && !!c; st.shoe.visible = on; st.whole.position.y = -(opt.drop ?? 0); st.shoe.position.y = 0.1 - (opt.drop ?? 0);
+      if (c) { whipStay(st, c.age, opt.drop ?? 0); const k = clamp(c.age / 7); st.stub.position.set(st.B.x, -(opt.drop ?? 0) + 0.1, st.B.z); st.stub.scale.set(1, 1.6, 1); st.stub.rotation.set(-0.3 - 0.5 * k, 0, -st.s * (0.35 + 1.1 * k * k + 0.12 * Math.sin(c.age * 0.9) * Math.exp(-c.age / 8))); } }
+    gantryG.position.y = -(opt.drop ?? 0); { const h = opt.hatch ?? []; const open = (q) => q && !q.closed; U.uHatch.value.set(open(h[0]) ? h[0].z0 : 0, open(h[0]) ? h[0].z1 : 0, open(h[1]) ? h[1].z0 : 0, open(h[1]) ? h[1].z1 : 0);
+      plates.forEach((m, i) => { const q = h[i]; m.visible = !!q && (q.fall != null || !!q.closed); if (m.visible) { m.scale.set(GANTRY.w + (q.closed ? 0.02 : 0.4), 1, q.z1 - q.z0); m.position.set(q.x ?? 0, (q.closed ? -0.141 : -0.2 - q.fall) - (opt.drop ?? 0), (q.z0 + q.z1) / 2); m.rotation.set(q.closed ? 0 : q.tilt ?? 0, 0, q.closed ? 0 : q.roll ?? 0); } });
+      clamps.forEach((g) => { const q = h[0], { sx, sz } = g.userData; g.visible = !!q && q.clamps !== undefined; if (!g.visible) return; const t = q.clamps == null ? 0 : q.clamps / sync.fps, x0 = sx * (GANTRY.w / 2 - 0.02), z0 = sz > 0 ? q.z1 - 0.3 : q.z0 + 0.3;
+        g.position.set(x0 + sx * 4.5 * t, 0.17 - (opt.drop ?? 0) + 6.5 * t - 4.9 * t * t, z0 + sz * 1.6 * t); g.rotation.set(sz * 7 * t, 0, -sx * 9 * t); }); }
     if (opt.warden || warden) (warden ??= createWarden(kit, scene)).update(opt.warden ?? null, frame, sync, camera);
     markers.update(opt.markers); shadows.update(opt.shadows);
     return { scene, camera, wires: w, clear: opt.clear ?? (N > 0.5 ? 0x1a0a22 : 0xb3e6ed), post: { inkColor: [0.1, 0.1, 0.3], shadowTint: [0.01, 0.012, 0.04], bloom: lerp(0.55, 0.3, V), bloomThreshold: lerp(0.78, 0.9, V), diffusion: lerp(0.16, 0.07, V), contrast: lerp(0.42, 0.3, V), sat: lerp(1.14, 1.08, V), inkFar: 0.022, ...opt.post } };
