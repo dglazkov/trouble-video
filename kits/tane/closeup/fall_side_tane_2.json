@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: This is the next drawing of an animation of someone falling fast through the air, the wind rushing up past them. Redraw ONLY the loose things the wind moves, in the next moment of their flapping: every lock and tuft of hair, the flying edges and tails of coats and jackets, loose cables, straps and chains take visibly DIFFERENT wavy shapes (curls bend the other way, cloth edges ripple into new folds, tips flick), still streaming the same way. Faces, expressions, bodies, arms, legs, hands, clothes on the body and all colours stay exactly identical, line for line.",
+ "refs": [
+  "kits/tane/closeup/fall_side_tane_1.jpg"
+ ],
+ "kind": "edit:plate:fall_side_tane",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:48:32",
+ "from": "kits/tane/closeup/fall_side_tane_1.jpg"
+}

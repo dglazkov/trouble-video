@@ -1,0 +1,47 @@
+{
+ "source": "kits/tane/closeup/fall_ring_7.jpg",
+ "size": [
+  4096,
+  4096
+ ],
+ "scale": 0.6,
+ "match": [
+  {
+   "edit": "kits/tane/closeup/fall_ring_10.jpg",
+   "wrote": "kits/tane/closeup/fall_ring_10.png",
+   "before": 4.86,
+   "after": 3.55,
+   "shift": [
+    -0.01,
+    -0.14
+   ],
+   "changed": 3.74
+  },
+  {
+   "edit": "kits/tane/closeup/fall_ring_11.jpg",
+   "wrote": "kits/tane/closeup/fall_ring_11.png",
+   "before": 4.81,
+   "after": 3.69,
+   "shift": [
+    -0.01,
+    -0.12
+   ],
+   "changed": 2.68
+  }
+ ],
+ "sprites": {
+  "ring": {
+   "box": [
+    40,
+    64,
+    4062,
+    4096
+   ],
+   "files": [
+    "ring_0.webp",
+    "ring_1.webp",
+    "ring_2.webp"
+   ]
+  }
+ }
+}

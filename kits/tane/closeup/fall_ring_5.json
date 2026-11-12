@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Juno (the girl with teal hair on the right): her baggy cargo trousers must be DARK CHARCOAL GREY with one cream stripe down the outside of each leg (not cream, not white); the round patch on her chest is a plain flat white circle with nothing inside it; the soles of her red trainers are plain white with no marks or scribbles on them.",
+ "refs": [
+  "kits/tane/closeup/fall_ring_4.jpg"
+ ],
+ "kind": "edit:plate:fall_ring",
+ "aspect": "1:1",
+ "size": "4K",
+ "made": "2026-11-12T12:51:13",
+ "from": "kits/tane/closeup/fall_ring_4.jpg"
+}

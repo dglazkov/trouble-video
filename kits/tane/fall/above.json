@@ -1,0 +1,71 @@
+{
+ "source": "kits/tane/closeup/fall_above_2.jpg",
+ "size": [
+  2752,
+  1536
+ ],
+ "scale": 1.0,
+ "match": [
+  {
+   "edit": "kits/tane/closeup/fall_above_4.jpg",
+   "wrote": "kits/tane/closeup/fall_above_4.png",
+   "before": 4.09,
+   "after": 3.7,
+   "shift": [
+    0.2,
+    -0.01
+   ],
+   "changed": 4.04
+  }
+ ],
+ "sprites": {
+  "tane": {
+   "box": [
+    122,
+    0,
+    1476,
+    923
+   ],
+   "files": [
+    "above_tane_0.webp",
+    "above_tane_1.webp"
+   ]
+  },
+  "ife": {
+   "box": [
+    1520,
+    0,
+    2687,
+    891
+   ],
+   "files": [
+    "above_ife_0.webp",
+    "above_ife_1.webp"
+   ]
+  },
+  "noor": {
+   "box": [
+    214,
+    828,
+    1371,
+    1502
+   ],
+   "files": [
+    "above_noor_0.webp",
+    "above_noor_1.webp"
+   ]
+  },
+  "juno": {
+   "box": [
+    1583,
+    720,
+    2651,
+    1536
+   ],
+   "files": [
+    "above_juno_0.webp",
+    "above_juno_1.webp"
+   ]
+  }
+ }
+}

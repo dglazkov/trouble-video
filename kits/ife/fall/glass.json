@@ -1,0 +1,35 @@
+{
+ "source": "kits/ife/closeup/fall_glass_1.jpg",
+ "size": [
+  2752,
+  1536
+ ],
+ "scale": 1.0,
+ "match": [
+  {
+   "edit": "kits/ife/closeup/fall_glass_2.jpg",
+   "wrote": "kits/ife/closeup/fall_glass_2.png",
+   "before": 2.08,
+   "after": 1.82,
+   "shift": [
+    0.41,
+    -0.26
+   ],
+   "changed": 14.69
+  }
+ ],
+ "sprites": {
+  "glass": {
+   "box": [
+    77,
+    0,
+    2716,
+    1536
+   ],
+   "files": [
+    "glass_0.webp",
+    "glass_1.webp"
+   ]
+  }
+ }
+}

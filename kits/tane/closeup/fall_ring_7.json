@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: The sole of Juno's raised red trainer (upper right) has scribbled letters on it: remove them. The sole is plain white rubber with three simple straight tread lines and nothing else. No letters, numbers or marks anywhere. Nothing else changes.",
+ "refs": [
+  "kits/tane/closeup/fall_ring_6.jpg"
+ ],
+ "kind": "edit:edit:plate:fall_ring",
+ "aspect": "1:1",
+ "size": "4K",
+ "made": "2026-11-12T12:52:33",
+ "from": "kits/tane/closeup/fall_ring_6.jpg"
+}

@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: All four have just noticed that there is no floor under them, and all four LOOK DOWN at their own feet: heads tipped down, eyes looking straight down. Tane's grin is still there but frozen, eyebrows raised; Ife's eyes are huge behind her glasses and her mouth is a tiny line; Noor looks down with the same deadpan half-closed eyes, arms still folded; Juno looks down with her mouth open in a delighted 'oh!'. Their bodies, poses, clothes and places do not change at all.",
+ "refs": [
+  "kits/tane/closeup/fall_hang_2.jpg"
+ ],
+ "kind": "edit:edit:plate:fall_hang",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:52:16",
+ "from": "kits/tane/closeup/fall_hang_2.jpg"
+}

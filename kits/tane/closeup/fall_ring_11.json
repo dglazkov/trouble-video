@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Make the NEXT FRAME of the same animation drawing: a very small change. The wind keeps blowing the same way. Change ONLY the outer edges of what the wind moves: the TIPS of the hair tufts and the free HEM edges of loose cloth are redrawn a little differently, as cloth and hair look one twelfth of a second later: each tip bends slightly the other way, each hem's ripple has moved along a little. Keep the same hairstyle with the same number of tufts and the same overall silhouette; keep straight hair straight and smooth hair smooth (no new curls). Do NOT add anything that is not already in the drawing: no new ribbons, straps, strings, cables, chains, tails, smoke, steam, sparks, speed lines or wind lines, and no torn or frayed edges. Everything else (faces, bodies, limbs, hands, clothes, props, colours, line weight, the flat background) stays exactly identical, line for line. Here: Noor's upswept black-and-white hair tips, the outer edge of Tane's red coat spread above him, the tails of Noor's black coat, Ife's loose cables and the tips of Juno's teal hair.",
+ "refs": [
+  "kits/tane/closeup/fall_ring_7.jpg"
+ ],
+ "kind": "edit:edit:edit:plate:fall_ring",
+ "aspect": "1:1",
+ "size": "4K",
+ "made": "2026-11-12T12:59:21",
+ "from": "kits/tane/closeup/fall_ring_7.jpg"
+}

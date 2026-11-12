@@ -1,0 +1,47 @@
+{
+ "source": "kits/tane/closeup/fall_side_tane_1.jpg",
+ "size": [
+  2752,
+  1536
+ ],
+ "scale": 1.0,
+ "match": [
+  {
+   "edit": "kits/tane/closeup/fall_side_tane_4.jpg",
+   "wrote": "kits/tane/closeup/fall_side_tane_4.png",
+   "before": 2.75,
+   "after": 2.33,
+   "shift": [
+    0.06,
+    -0.4
+   ],
+   "changed": 4.09
+  },
+  {
+   "edit": "kits/tane/closeup/fall_side_tane_5.jpg",
+   "wrote": "kits/tane/closeup/fall_side_tane_5.png",
+   "before": 2.62,
+   "after": 2.31,
+   "shift": [
+    0.16,
+    -0.2
+   ],
+   "changed": 2.1
+  }
+ ],
+ "sprites": {
+  "side": {
+   "box": [
+    104,
+    66,
+    2646,
+    1445
+   ],
+   "files": [
+    "side_0.webp",
+    "side_1.webp",
+    "side_2.webp"
+   ]
+  }
+ }
+}

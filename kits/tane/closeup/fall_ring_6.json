@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: ZOOM OUT: show the same drawing smaller, at about 78 percent of its size, centred in the picture, so that there is a wide margin of plain magenta on all four sides, and COMPLETE what was cut off by the bottom edge: Noor's legs continue down in black trousers to heavy black lace-up platform boots, both boots fully drawn, with the coat tails flying to either side; nothing touches any edge of the picture. Also: Juno (the girl with teal hair on the right): her baggy cargo trousers must be DARK CHARCOAL GREY with one cream stripe down the outside of each leg (not cream, not white); the round patch on her chest is a plain flat white circle with nothing inside it; the soles of her red trainers are plain white with no marks or scribbles on them.",
+ "refs": [
+  "kits/tane/closeup/fall_ring_4.jpg"
+ ],
+ "kind": "edit:plate:fall_ring",
+ "aspect": "1:1",
+ "size": "4K",
+ "made": "2026-11-12T12:51:25",
+ "from": "kits/tane/closeup/fall_ring_4.jpg"
+}

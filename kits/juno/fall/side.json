@@ -1,0 +1,47 @@
+{
+ "source": "kits/juno/closeup/fall_side_juno_2.jpg",
+ "size": [
+  2752,
+  1536
+ ],
+ "scale": 1.0,
+ "match": [
+  {
+   "edit": "kits/juno/closeup/fall_side_juno_5.jpg",
+   "wrote": "kits/juno/closeup/fall_side_juno_5.png",
+   "before": 3.75,
+   "after": 3.43,
+   "shift": [
+    -0.0,
+    -0.0
+   ],
+   "changed": 1.48
+  },
+  {
+   "edit": "kits/juno/closeup/fall_side_juno_6.jpg",
+   "wrote": "kits/juno/closeup/fall_side_juno_6.png",
+   "before": 4.07,
+   "after": 3.51,
+   "shift": [
+    0.25,
+    -0.27
+   ],
+   "changed": 1.86
+  }
+ ],
+ "sprites": {
+  "side": {
+   "box": [
+    633,
+    23,
+    2119,
+    1505
+   ],
+   "files": [
+    "side_0.webp",
+    "side_1.webp",
+    "side_2.webp"
+   ]
+  }
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: All four now look straight OUT at the viewer, the classic cartoon moment before the fall: heads level, eyes on the viewer. Tane gives the viewer a huge fearless grin; Ife's eyes are huge behind her glasses, her mouth is wide open in the start of a scream and a drop of sweat is on her cheek; Noor looks at the viewer with deadpan half-closed eyes, completely unimpressed, arms still folded; Juno beams at the viewer, laughing. Their bodies, poses, clothes and places do not change at all.",
+ "refs": [
+  "kits/tane/closeup/fall_hang_2.jpg"
+ ],
+ "kind": "edit:edit:plate:fall_hang",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:52:16",
+ "from": "kits/tane/closeup/fall_hang_2.jpg"
+}

@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Make the NEXT FRAME of the same animation drawing: a very small change. The wind keeps blowing the same way. Change ONLY the outer edges of what the wind moves: the TIPS of the hair tufts and the free edges of loose cloth are redrawn a little differently, as cloth and hair look one twelfth of a second later: each tip bends slightly the other way, each hem's ripple has moved along a little. Keep the same hairstyle with the same number of tufts and the same overall silhouette; keep straight hair straight and smooth hair smooth (no new curls). Do NOT add anything that is not already in the drawing: no new ribbons, straps, strings, cables, chains, tails, smoke, steam, sparks, speed lines or wind lines, and no torn or frayed edges. Everything else (faces, expressions, bodies, hands, clothes, props, colours, line weight, the flat background) stays exactly identical, line for line. Here: the tips of his upswept pompadour and the two flying collar points of the red coat.",
+ "refs": [
+  "kits/tane/closeup/fall_face_tane_1.jpg"
+ ],
+ "kind": "edit:plate:fall_face_tane",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T13:30:49",
+ "from": "kits/tane/closeup/fall_face_tane_1.jpg"
+}

@@ -1,0 +1,47 @@
+{
+ "source": "kits/ife/closeup/fall_side_ife_1.jpg",
+ "size": [
+  2752,
+  1536
+ ],
+ "scale": 1.0,
+ "match": [
+  {
+   "edit": "kits/ife/closeup/fall_side_ife_4.jpg",
+   "wrote": "kits/ife/closeup/fall_side_ife_4.png",
+   "before": 3.44,
+   "after": 3.03,
+   "shift": [
+    -0.02,
+    0.37
+   ],
+   "changed": 2.03
+  },
+  {
+   "edit": "kits/ife/closeup/fall_side_ife_5.jpg",
+   "wrote": "kits/ife/closeup/fall_side_ife_5.png",
+   "before": 3.68,
+   "after": 3.18,
+   "shift": [
+    0.04,
+    0.56
+   ],
+   "changed": 2.36
+  }
+ ],
+ "sprites": {
+  "side": {
+   "box": [
+    803,
+    0,
+    2185,
+    1510
+   ],
+   "files": [
+    "side_0.webp",
+    "side_1.webp",
+    "side_2.webp"
+   ]
+  }
+ }
+}

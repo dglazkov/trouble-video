@@ -1,0 +1,35 @@
+{
+ "source": "kits/ife/closeup/fall_face_ife_1.jpg",
+ "size": [
+  2752,
+  1536
+ ],
+ "scale": 1.0,
+ "match": [
+  {
+   "edit": "kits/ife/closeup/fall_face_ife_3.jpg",
+   "wrote": "kits/ife/closeup/fall_face_ife_3.png",
+   "before": 2.49,
+   "after": 2.26,
+   "shift": [
+    0.1,
+    0.03
+   ],
+   "changed": 1.87
+  }
+ ],
+ "sprites": {
+  "face": {
+   "box": [
+    33,
+    0,
+    2719,
+    1536
+   ],
+   "files": [
+    "face_0.webp",
+    "face_1.webp"
+   ]
+  }
+ }
+}

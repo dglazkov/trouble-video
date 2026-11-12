@@ -1,0 +1,47 @@
+{
+ "source": "kits/juno/closeup/fall_face_juno_1.jpg",
+ "size": [
+  2752,
+  1536
+ ],
+ "scale": 1.0,
+ "match": [
+  {
+   "edit": "kits/juno/closeup/fall_face_juno_4.jpg",
+   "wrote": "kits/juno/closeup/fall_face_juno_4.png",
+   "before": 3.01,
+   "after": 2.73,
+   "shift": [
+    0.17,
+    0.37
+   ],
+   "changed": 4.97
+  },
+  {
+   "edit": "kits/juno/closeup/fall_face_juno_3.jpg",
+   "wrote": "kits/juno/closeup/fall_face_juno_3.png",
+   "before": 2.85,
+   "after": 2.57,
+   "shift": [
+    0.22,
+    0.06
+   ],
+   "changed": 2.33
+  }
+ ],
+ "sprites": {
+  "face": {
+   "box": [
+    71,
+    0,
+    2752,
+    1536
+   ],
+   "files": [
+    "face_0.webp",
+    "face_1.webp",
+    "face_2.webp"
+   ]
+  }
+ }
+}

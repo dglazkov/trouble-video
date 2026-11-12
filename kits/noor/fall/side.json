@@ -1,0 +1,47 @@
+{
+ "source": "kits/noor/closeup/fall_side_noor_1.jpg",
+ "size": [
+  2752,
+  1536
+ ],
+ "scale": 1.0,
+ "match": [
+  {
+   "edit": "kits/noor/closeup/fall_side_noor_2.jpg",
+   "wrote": "kits/noor/closeup/fall_side_noor_2.png",
+   "before": 5.43,
+   "after": 4.77,
+   "shift": [
+    0.34,
+    0.26
+   ],
+   "changed": 1.35
+  },
+  {
+   "edit": "kits/noor/closeup/fall_side_noor_3.jpg",
+   "wrote": "kits/noor/closeup/fall_side_noor_3.png",
+   "before": 4.84,
+   "after": 3.79,
+   "shift": [
+    0.33,
+    0.03
+   ],
+   "changed": 1.19
+  }
+ ],
+ "sprites": {
+  "side": {
+   "box": [
+    907,
+    4,
+    1893,
+    1523
+   ],
+   "files": [
+    "side_0.webp",
+    "side_1.webp",
+    "side_2.webp"
+   ]
+  }
+ }
+}

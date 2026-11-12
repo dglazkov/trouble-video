@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: She has CAUGHT her glasses and jammed them back on her nose with both hands: the big round glasses now sit on her face a little crooked, her eyes visible through the clear lenses (looking at the viewer, no longer crossed), both hands holding the rims at either side, and her mouth is a wobbly relieved smile. Hair and jumper do not change.",
+ "refs": [
+  "kits/ife/closeup/fall_glass_1.jpg"
+ ],
+ "kind": "edit:plate:fall_glass",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:52:52",
+ "from": "kits/ife/closeup/fall_glass_1.jpg"
+}

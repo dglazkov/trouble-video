@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Her mouth is open even wider in the same whoop and her eyes are squeezed shut with joy (happy closed arcs). Nothing else changes.",
+ "refs": [
+  "kits/juno/closeup/fall_face_juno_1.jpg"
+ ],
+ "kind": "edit:plate:fall_face_juno",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:49:17",
+ "from": "kits/juno/closeup/fall_face_juno_1.jpg"
+}

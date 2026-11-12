@@ -1,0 +1,12 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Juno's board is drawn wrongly as a skateboard with wheels. Redraw ONLY the board as her homemade HOVERBOARD exactly like the one in the reference image: a plain blue-grey riveted metal plank with rounded ends, NO wheels and NO trucks, with two small dark round thruster pods fixed under it; plain metal, no pattern, no writing. Same size, place and angle as the board it replaces. She still holds it tucked under her left arm. Also make Juno's baggy cargo trousers DARK GREY (charcoal) with the cream stripe, as on her model. The other image(s) are reference for the change.",
+ "refs": [
+  "kits/tane/closeup/fall_hang_1.jpg",
+  "out/ref/hoverboard.png"
+ ],
+ "kind": "edit:plate:fall_hang",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T12:47:56",
+ "from": "kits/tane/closeup/fall_hang_1.jpg"
+}

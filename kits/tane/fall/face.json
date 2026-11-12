@@ -1,0 +1,35 @@
+{
+ "source": "kits/tane/closeup/fall_face_tane_1.jpg",
+ "size": [
+  2752,
+  1536
+ ],
+ "scale": 1.0,
+ "match": [
+  {
+   "edit": "kits/tane/closeup/fall_face_tane_3.jpg",
+   "wrote": "kits/tane/closeup/fall_face_tane_3.png",
+   "before": 2.53,
+   "after": 2.12,
+   "shift": [
+    -0.01,
+    -0.01
+   ],
+   "changed": 3.82
+  }
+ ],
+ "sprites": {
+  "face": {
+   "box": [
+    0,
+    0,
+    2752,
+    1536
+   ],
+   "files": [
+    "face_0.webp",
+    "face_1.webp"
+   ]
+  }
+ }
+}
