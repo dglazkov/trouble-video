@@ -37,7 +37,9 @@
 //                                  metres; 0 is the gantry's level): the breakdown takes it from the top of the shaft to the bottom
 //   silhouette 0..1                what is built in front of the painting (the gantry, the machines) goes to black: a shape, and its own lamps
 //   night     0..1                 the lights are out: the place dark indigo under the alarm's red, few windows lit
-//   flex      (z) => metres        the gantry's deck bent this frame (see `bend` below); cut: [z, ...] stays that have snapped
+//   drop      metres               the whole gantry sunk this far this frame (a machine's weight coming down on it)
+//   hatch     [{ z0, z1, fall, tilt }]   up to two lengths of the gantry's deck let go: the deck is gone between z0 and z1,
+//                                  and the plate that was there is `fall` metres below (omit: not shown), tilted `tilt` radians
 //   guide     true | "wall"        the blockout instead of the paintings (shots/atrium_plate.js); "wall": without the core
 //   gantry    false                no gantry (a guide to paint over)
 //   wiring    { name: wire }       replace wires of WIRING for this frame
@@ -68,7 +70,7 @@ export const WIRING = {
 };
 
 const CHUNK = `
-uniform float uHull, uWin, uTwinkle, uRings, uGantry, uAlarm, uBlink, uGuide, uVista, uNight, uSil; uniform sampler2D tMid; uniform mat4 uPaintProj;
+uniform float uHull, uWin, uTwinkle, uRings, uGantry, uAlarm, uBlink, uGuide, uVista, uNight, uSil; uniform sampler2D tMid; uniform mat4 uPaintProj; uniform vec4 uHatch;
 const float RA = 150.0, RC = 14.0;
 vec2 polar(vec3 W){ return vec2(atan(W.x, W.z+RC), length(vec2(W.x, W.z+RC))); }  // the angle round the axis from the gantry's line, and how far out
 // a storey of windows, painted: arc metres round, w metres to a window. Some are lit, warm or pale; which, changes with the strings.
@@ -96,6 +98,7 @@ float setTone(vec3 W, vec3 N){
 }
 vec3 setExtra(vec3 col, vec3 W, vec3 N, float tone){
   vec2 p = polar(W);
+  if(abs(W.x) < 2.52 && W.y > -0.72 && W.y < 0.2 && ((W.z > uHatch.x && W.z < uHatch.y) || (W.z > uHatch.z && W.z < uHatch.w))) discard;      // a length of the gantry's deck gone (options.hatch)
   col *= 1.0-uSil;      // (options.silhouette)
   // the core's face round the doorway, as the camera lets go of it: it becomes the painting of itself (the doorway's own frame does not)
   if(uVista > 0.0 && W.z < 2.75 && W.z > -1.3 && abs(W.x) < 8.7 && !(abs(W.x) < 2.45 && W.y > -0.2 && W.y < 5.75)){
@@ -156,7 +159,7 @@ export async function createAtrium(renderer, o = {}) {
   // the vista's paintings (sets/atrium/*.webp, each with its sidecar): the far plate and the tower with its bridges, by day and in alarm
   const PJ = projector({ pos: HERO.pos, target: HERO.target, fov: HERO.wide }), art = (n, o) => loadPainting(`/sets/atrium/${n}.webp`, o);
   const [farDay, farAlarm, midDay, midAlarm] = await Promise.all([art("far_day", { mirror: true }), art("far_alarm", { mirror: true }), art("mid_day"), art("mid_alarm")]);
-  const U = { uSil: { value: 0 }, uVista: { value: 0 }, tMid: { value: midDay }, uPaintProj: { value: PJ.matrix }, uHull: { value: 1 }, uWin: { value: 1 }, uTwinkle: { value: 0 }, uRings: { value: 0 }, uGantry: { value: -1 }, uAlarm: { value: 0 }, uBlink: { value: 0 }, uGuide: { value: 0 }, uNight: { value: 0 } };
+  const U = { uSil: { value: 0 }, uVista: { value: 0 }, tMid: { value: midDay }, uPaintProj: { value: PJ.matrix }, uHull: { value: 1 }, uWin: { value: 1 }, uTwinkle: { value: 0 }, uRings: { value: 0 }, uGantry: { value: -1 }, uAlarm: { value: 0 }, uBlink: { value: 0 }, uGuide: { value: 0 }, uNight: { value: 0 }, uHatch: { value: new THREE.Vector4(0, 0, 0, 0) } };
   const kit = createKit(CHUNK, U), { shared } = kit, T = textures(), mat = (c, o) => kit.mat(c, o);
   const HAZE = [0.7, 0.9, 0.93], HIGH = [0.3, 0.47, 0.74];
   shared.uFogCol.value.setRGB(...HAZE); shared.uFogDeep.value.setRGB(...HAZE); shared.uFogTop.value.setRGB(...HIGH); shared.uFogH.value.set(4, 150); shared.uFogK.value = 0.002;
@@ -380,6 +383,7 @@ void main(){ vec2 r = vec2(vW.x, vW.z+${RC.toFixed(1)}); float a = uTurn, c = co
   const haloMat = kit.mat("#ff3a28", { kind: 7, flag: 1, map: haloTex, alpha: 0.85, fog: 0.25 }), halos = [];
   for (let z = POSTS; z <= GANTRY.len; z += POSTS) for (const s of [1, -1]) { const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), haloMat); m.layers.set(FX); m.renderOrder = 12; m.frustumCulled = false; m.position.set(s * (GANTRY.w / 2 + 0.1), 2.52, z); scene.add(m); halos.push(m); }
   const drones = createDrones(kit, scene), markers = createMarkers(scene), shadows = createShadows(kit, scene, "#252a52");
+  const plates = [0, 1].map(() => { const m = new THREE.Mesh(new THREE.BoxGeometry(1, 0.3, 1), mat("#868eb2")); m.frustumCulled = false; m.visible = false; scene.add(m); const e = new THREE.Mesh(new THREE.BoxGeometry(1.03, 0.1, 1.0), mat(yellow)); e.position.y = 0.12; e.frustumCulled = false; m.add(e); return m; });
   let warden = null;      // the reunion's machine (machines/warden.js), built the first time a shot asks for it
 
   function update(cam, frame, sync, opt = {}) {
@@ -406,6 +410,7 @@ void main(){ vec2 r = vec2(vW.x, vW.z+${RC.toFixed(1)}); float a = uTurn, c = co
     for (const c of craft) { const dt = t - CRAFT_T; c.g.visible = !guide; c.g.position.set(c.p[0] + c.v[0] * dt, c.p[1] + c.v[1] * dt + 0.5 * Math.sin(t * 1.3 + c.p[0]), c.p[2] + c.v[2] * dt); c.g.rotation.set(0, Math.atan2(c.v[0], c.v[2]), 0.1 * Math.sin(t * 0.9 + c.p[2])); c.g.scale.setScalar(c.sc); }
     halos.forEach((m, i) => { const on = m.position.z <= U.uGantry.value, k = Math.floor(m.position.z / POSTS + 0.5), bl = ((U.uBlink.value + k * 0.5) % 1) >= 0.5 ? 1 : 0.5; m.visible = on; if (on) { m.quaternion.copy(camera.quaternion); m.scale.setScalar((0.9 + 0.8 * U.uAlarm.value) * bl * (1 + camera.position.distanceTo(m.position) * 0.012)); } });
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
+    gantryG.position.y = -(opt.drop ?? 0); { const h = opt.hatch ?? []; U.uHatch.value.set(h[0]?.z0 ?? 0, h[0]?.z1 ?? 0, h[1]?.z0 ?? 0, h[1]?.z1 ?? 0); plates.forEach((m, i) => { const q = h[i]; m.visible = !!q && q.fall != null; if (m.visible) { m.scale.set(GANTRY.w + 0.4, 1, q.z1 - q.z0); m.position.set(q.x ?? 0, -0.2 - q.fall, (q.z0 + q.z1) / 2); m.rotation.set(q.tilt ?? 0, 0, q.roll ?? 0); } }); }
     if (opt.warden || warden) (warden ??= createWarden(kit, scene)).update(opt.warden ?? null, frame, sync, camera);
     markers.update(opt.markers); shadows.update(opt.shadows);
     return { scene, camera, wires: w, clear: opt.clear ?? (N > 0.5 ? 0x1a0a22 : 0xb3e6ed), post: { inkColor: [0.1, 0.1, 0.3], shadowTint: [0.01, 0.012, 0.04], bloom: lerp(0.55, 0.3, V), bloomThreshold: lerp(0.78, 0.9, V), diffusion: lerp(0.16, 0.07, V), contrast: lerp(0.42, 0.3, V), sat: lerp(1.14, 1.08, V), inkFar: 0.022, ...opt.post } };

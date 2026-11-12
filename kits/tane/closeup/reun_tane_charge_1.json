@@ -1,0 +1,14 @@
+{
+ "prompt": "Anime film frame, widescreen, of the character from the FIRST image (his model sheet). A model sheet only shows what a character looks like: do NOT copy its standing figures, its poses or its callouts. The picture holds exactly ONE drawing and nothing else: Tane from the knees up, running straight at the viewer at full tilt, leaning forward, seen from in front at chest height. In his right hand, held low and trailing out behind him to the viewer's left, a plain length of grey steel pipe about as long as his arm (drawn in this picture although his model sheet has no pipe). His left fist is pumped forward. His open coat flies out behind him on both sides, his chin is down and he looks straight at the viewer from under his eyebrows with a wide fearless grin showing his teeth. The designs, exactly as on the model sheets: TANE (the FIRST image): Tane, a 16-year-old boy, stocky and a bit fat with a soft round belly, warm medium-brown skin and thick eyebrows. HAIR: a tall glossy black pompadour swept up and forward, short at the sides and back. COAT: a long plain dark-red coat down to his calves, always worn open, with a high stand-up collar and long sleeves to the wrists; four round gold buttons in a row down the front edge on HIS RIGHT side and nothing else on it; the back of the coat is plain dark red with one centre seam. BELLY WRAP: a white sleeveless undershirt tucked into a wide white cloth wrap wound round his whole belly from chest to waist, drawn with three or four horizontal fold lines. TROUSERS: plain baggy black trousers gathered at the ankles. FEET: bare feet in wooden geta sandals: a plain light-brown wooden block sole with one black V-shaped strap between the toes. HANDS: bare hands, no gloves, no rings. FACE: round cheeks, thick black eyebrows, a wide fearless grin showing his teeth. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on him. No toothpick, no cigarette, no weapon. Style: a 1990s cel anime key frame exactly like the LAST image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, white highlight shapes in eyes and hair, no motion blur, no speed lines, no ground, no shadows on the ground, no scenery, no text, no brand marks. Every hand has five fingers and every figure two arms and two legs. Background: one flat solid pure magenta (#FF00FF) everywhere, also in every gap, and nothing else.",
+ "refs": [
+  "out/ref/tane_design.png",
+  "art/ref/test_face.png"
+ ],
+ "kind": "plate:reun_tane_charge",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T13:30:38",
+ "who": [
+  "tane"
+ ]
+}
