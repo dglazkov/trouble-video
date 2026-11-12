@@ -33,6 +33,9 @@
 //   warden    {...}                machines/warden.js spec: the one enormous machine (the reunion)
 //   block     true                 the built place (the blockout, with its windows) instead of the paintings: for cameras
 //                                  the paintings were not made for (out on the gantry, looking along it, up or down)
+//   out       band                 the painted vista's lights are out on every band of decks above this one (bands are twelve
+//                                  metres; 0 is the gantry's level): the breakdown takes it from the top of the shaft to the bottom
+//   silhouette 0..1                what is built in front of the painting (the gantry, the machines) goes to black: a shape, and its own lamps
 //   night     0..1                 the lights are out: the place dark indigo under the alarm's red, few windows lit
 //   flex      (z) => metres        the gantry's deck bent this frame (see `bend` below); cut: [z, ...] stays that have snapped
 //   guide     true | "wall"        the blockout instead of the paintings (shots/atrium_plate.js); "wall": without the core
@@ -65,7 +68,7 @@ export const WIRING = {
 };
 
 const CHUNK = `
-uniform float uHull, uWin, uTwinkle, uRings, uGantry, uAlarm, uBlink, uGuide, uVista, uNight; uniform sampler2D tMid; uniform mat4 uPaintProj;
+uniform float uHull, uWin, uTwinkle, uRings, uGantry, uAlarm, uBlink, uGuide, uVista, uNight, uSil; uniform sampler2D tMid; uniform mat4 uPaintProj;
 const float RA = 150.0, RC = 14.0;
 vec2 polar(vec3 W){ return vec2(atan(W.x, W.z+RC), length(vec2(W.x, W.z+RC))); }  // the angle round the axis from the gantry's line, and how far out
 // a storey of windows, painted: arc metres round, w metres to a window. Some are lit, warm or pale; which, changes with the strings.
@@ -93,6 +96,7 @@ float setTone(vec3 W, vec3 N){
 }
 vec3 setExtra(vec3 col, vec3 W, vec3 N, float tone){
   vec2 p = polar(W);
+  col *= 1.0-uSil;      // (options.silhouette)
   // the core's face round the doorway, as the camera lets go of it: it becomes the painting of itself (the doorway's own frame does not)
   if(uVista > 0.0 && W.z < 2.75 && W.z > -1.3 && abs(W.x) < 8.7 && !(abs(W.x) < 2.45 && W.y > -0.2 && W.y < 5.75)){
     vec4 q = uPaintProj*vec4(W, 1.0); return mix(col, texture2D(tMid, q.xy/q.w*0.5+0.5).rgb, uVista);
@@ -152,7 +156,7 @@ export async function createAtrium(renderer, o = {}) {
   // the vista's paintings (sets/atrium/*.webp, each with its sidecar): the far plate and the tower with its bridges, by day and in alarm
   const PJ = projector({ pos: HERO.pos, target: HERO.target, fov: HERO.wide }), art = (n, o) => loadPainting(`/sets/atrium/${n}.webp`, o);
   const [farDay, farAlarm, midDay, midAlarm] = await Promise.all([art("far_day", { mirror: true }), art("far_alarm", { mirror: true }), art("mid_day"), art("mid_alarm")]);
-  const U = { uVista: { value: 0 }, tMid: { value: midDay }, uPaintProj: { value: PJ.matrix }, uHull: { value: 1 }, uWin: { value: 1 }, uTwinkle: { value: 0 }, uRings: { value: 0 }, uGantry: { value: -1 }, uAlarm: { value: 0 }, uBlink: { value: 0 }, uGuide: { value: 0 }, uNight: { value: 0 } };
+  const U = { uSil: { value: 0 }, uVista: { value: 0 }, tMid: { value: midDay }, uPaintProj: { value: PJ.matrix }, uHull: { value: 1 }, uWin: { value: 1 }, uTwinkle: { value: 0 }, uRings: { value: 0 }, uGantry: { value: -1 }, uAlarm: { value: 0 }, uBlink: { value: 0 }, uGuide: { value: 0 }, uNight: { value: 0 } };
   const kit = createKit(CHUNK, U), { shared } = kit, T = textures(), mat = (c, o) => kit.mat(c, o);
   const HAZE = [0.7, 0.9, 0.93], HIGH = [0.3, 0.47, 0.74];
   shared.uFogCol.value.setRGB(...HAZE); shared.uFogDeep.value.setRGB(...HAZE); shared.uFogTop.value.setRGB(...HIGH); shared.uFogH.value.set(4, 150); shared.uFogK.value = 0.002;
@@ -289,10 +293,10 @@ export async function createAtrium(renderer, o = {}) {
   // bridge takes pieces of the one above it, and tears it: tried, and worse than a far end that slides a little)
   const MARGIN = { [-66]: 3, [-30]: 3 }, SLAB = (y) => MARGIN[y] ? (5 + 3 * hash(y, 1)) / 2 + MARGIN[y] : 0;
   const LU = { uProj: { value: PJ.matrix }, uHero: { value: PJ.pos }, uRings: U.uRings, uAlarm: U.uAlarm, uBlink: U.uBlink, uTwinkle: U.uTwinkle, uWin: U.uWin, uHaze: { value: new THREE.Color(...HAZE) },
-    uBr: { value: BRIDGES.map(([y, t]) => new THREE.Vector4(y, t, SLAB(y), RC - 0.5)) }, uExpose: { value: 0.93 } };
+    uBr: { value: BRIDGES.map(([y, t]) => new THREE.Vector4(y, t, SLAB(y), RC - 0.5)) }, uExpose: { value: 0.93 }, uOut: { value: 999 } };
   const LAYER_FS = `
 #define NB ${BRIDGES.length}
-uniform sampler2D tDay, tAlarm; uniform mat4 uProj; uniform vec3 uHero, uHaze; uniform float uRings, uAlarm, uBlink, uTwinkle, uWin, uKeyed, uCard, uExpose; uniform vec4 uBr[NB]; varying vec3 vW;
+uniform sampler2D tDay, tAlarm; uniform mat4 uProj; uniform vec3 uHero, uHaze; uniform float uRings, uAlarm, uBlink, uTwinkle, uWin, uKeyed, uCard, uExpose, uOut; uniform vec4 uBr[NB]; varying vec3 vW;
 const float RC = ${RC.toFixed(1)}, RT = ${(RC - 0.5).toFixed(1)}, BAND = ${BAND.toFixed(1)};
 float hash(vec2 p){ vec3 p3 = fract(vec3(p.xyx)*0.1031); p3 += dot(p3, p3.yzx+33.33); return fract((p3.x+p3.y)*p3.z); }
 void main(){
@@ -323,6 +327,7 @@ void main(){
   float bl = 0.84+0.16*step(0.5, fract(uBlink+st*0.5));
   col = mix(col, red.rgb*(0.94+0.1*uAlarm), lit*bl);
   col += vec3(1.0, 0.42, 0.3)*0.4*lit*clamp(1.0-(reach-0.5)/1.6, 0.0, 1.0);
+  if(st > uOut) col = col*vec3(0.13, 0.09, 0.2) + vec3(0.0, 0.002, 0.014);      // the lights are out on this band of decks (options.out)
   gl_FragColor = vec4(col*uExpose*alpha, alpha);
 }`;
   const layerMat = (day, alarm, keyed, card) => new THREE.ShaderMaterial({ vertexShader: PROJECT_VS, fragmentShader: LAYER_FS, uniforms: { ...LU, tDay: { value: day }, tAlarm: { value: alarm }, uKeyed: { value: keyed }, uCard: { value: card } } });
@@ -390,8 +395,10 @@ void main(){ vec2 r = vec2(vW.x, vW.z+${RC.toFixed(1)}); float a = uTurn, c = co
     U.uVista.value = V; faceG.visible = V < 1; frameU.value = frame; hazeU.uTurn.value = t * 0.012; { const k = clamp((A.rings ?? 0) / 12); hazeU.uCol.value.setRGB(lerp(HAZE[0], 1.0, k), lerp(HAZE[1], 0.62, k), lerp(HAZE[2], 0.66, k)); }
     // the geometry in front of the painting takes the alarm's light as the rings turn
     shared.uTintLit.value.setRGB(lerp(1.03, 1.1, reds), lerp(1.03, 0.86, reds), lerp(1.0, 0.8, reds)); shared.uTintMid.value.setRGB(lerp(0.72, 0.82, reds), lerp(0.76, 0.52, reds), lerp(0.96, 0.7, reds)); shared.uTintShade.value.setRGB(lerp(0.4, 0.5, reds), lerp(0.42, 0.24, reds), lerp(0.7, 0.42, reds));
+    LU.uOut.value = opt.out ?? 999; if (opt.out != null) { const k = clamp((6 - opt.out) / 12), h = hazeU.uCol.value; h.setRGB(h.r * (1 - 0.9 * k), h.g * (1 - 0.92 * k), h.b * (1 - 0.8 * k)); }      // the painted vista going dark from the top down, its haze with it
     const N = clamp(opt.night ?? 0); U.uNight.value = N;
     if (N > 0) { const d = (u, to) => u.value.setRGB(lerp(u.value.r, to[0], N), lerp(u.value.g, to[1], N), lerp(u.value.b, to[2], N)); d(shared.uTintLit, [0.62, 0.44, 0.62]); d(shared.uTintMid, [0.36, 0.22, 0.44]); d(shared.uTintShade, [0.17, 0.1, 0.27]); d(shared.uRim, [1.0, 0.36, 0.3]); }
+    U.uSil.value = clamp(opt.silhouette ?? 0);      // what is built (the gantry, a machine) as a shape against the painting
     shared.uFogCol.value.setRGB(lerp(HAZE[0], 0.5, N), lerp(HAZE[1], 0.13, N), lerp(HAZE[2], 0.22, N)); shared.uFogDeep.value.setRGB(lerp(HAZE[0], 0.78, N), lerp(HAZE[1], 0.2, N), lerp(HAZE[2], 0.2, N)); shared.uFogTop.value.setRGB(lerp(HIGH[0], 0.16, N), lerp(HIGH[1], 0.06, N), lerp(HIGH[2], 0.24, N)); shared.uFogK.value = lerp(0.002, 0.0075, N);
     doors.inside.visible = V < 1; doors.flat.visible = V >= 1;
     doors.vault.visible = !guide && (opt.door ?? "vault") === "vault"; doors.stairs.visible = !guide && !doors.vault.visible;

@@ -19,6 +19,7 @@
 //   cut      true                the right wall (x > 0) is taken away from z = cutFrom to cutTo, to watch from the side
 //   cutFrom, cutTo               (default DOOR - 16, DOOR + 12)
 //   sign     { text, small }     what the tunnel's little screens say (default: the tunnel's own notice)
+//   monitor  { c, u, w, h }      a monitor on a bracket: its screen's centre, the way its text runs, its size (metres); the shot draws what it says
 //   alert    0..1                the warning lamps: how hard they burn as their chase runs down the tunnel
 //   drones   [...]               machines/drones.js specs
 //   wiring   { name: wire }      replace wires of WIRING
@@ -211,6 +212,14 @@ export async function createTunnel(renderer, o = {}) {
     faces.forEach((m, f) => { const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute("uv", new THREE.Float32BufferAttribute(f ? uv.map((v, i) => i % 2 ? v : 1 - v) : uv, 2)); g.computeVertexNormals(); m.geometry.dispose(); m.geometry = g; });
   }
   const drones = createDrones(kit, scene), shadows = createShadows(kit, scene, "#04100f");
+  // a monitor on a wall bracket (options.monitor; the breakdown): built when first asked for, where the shot says; its screen is blank
+  let monitorG = null;
+  const monitor = (o) => { if (!o) { if (monitorG) monitorG.visible = false; return; }
+    if (!monitorG) { const c = kit.builder(), n = [-o.u[2], 0, o.u[0]], ry = { ry: Math.atan2(n[0], n[2]) }, at = (d, dy = 0) => [o.c[0] - n[0] * d, o.c[1] + dy, o.c[2] - n[2] * d];
+      c.box(o.w + 0.16, o.h + 0.16, 0.34, ...at(0.18), mat(bone), ry); c.box(o.w + 0.22, 0.07, 0.4, ...at(0.18, o.h / 2 + 0.1), mat(rustC), ry); c.box(0.1, 0.1, 0.5, ...at(0.55), mat(steel), ry);
+      c.quad([o.c[0] + n[0] * 0.006, o.c[1], o.c[2] + n[2] * 0.006], o.u, [0, 1, 0], o.w, o.h, mat("#06120f"));
+      monitorG = c.build(); scene.add(monitorG); }
+    monitorG.visible = true; };
 
   function update(cam, frame, sync, opt = {}) {
     const w = driveAll(sync, WIRING, frame, opt.wiring), alert = opt.alert ?? 0.8;
@@ -220,6 +229,7 @@ export async function createTunnel(renderer, o = {}) {
     G.screens.value = w.screens;
     const key = (opt.sign?.text ?? "") + "|" + (opt.sign?.small ?? ""); if (!signs.has(key)) signs.set(key, signTex(opt.sign?.text ?? "", opt.sign?.small ?? "")); signMat.uniforms.uMap.value = signs.get(key);
     rightCutG.visible = !opt.cut; section.visible = !!opt.cut;
+    if (opt.monitor || monitorG) monitor(opt.monitor);
     const shut = clamp(opt.door ?? 0);
     slab.position.set(0, SLAB.h / 2 + (1 - shut) * (NARROW[1] + 0.02), DOOR); dent(opt.dents ?? []);
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust }); shadows.update(opt.shadows);

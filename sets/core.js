@@ -22,6 +22,7 @@
 //   drones    [...]                     machines/drones.js specs
 //   slabs     { pos, cuts, at: [[dx, dy, dz, roll], ...], heat }   an enforcer cut in slices across its length at `cuts`
 //                                       (metres from its middle), each slice moved by `at`; heat 1..0: how hot the cut faces are
+//   console   true                      a service console stands on the island (sets/coreplan.js CONSOLE): its screen is blank, the shot draws on it
 //   wiring    { name: wire }            replace wires of WIRING
 //   shadows, post                       as in the other sets
 import * as THREE from "three";
@@ -30,7 +31,7 @@ import { kana, latin, hazard, chevrons } from "./sign.js";
 import { driveAll } from "../engine/sync.js";
 import { createDrones } from "../machines/drones.js";
 import { projector, loadPainting, painted, PROJECT_VS } from "./painted.js";
-import { DUCT, ISLAND, LAT, HERO, SUN } from "./coreplan.js";
+import { DUCT, ISLAND, LAT, HERO, SUN, CONSOLE } from "./coreplan.js";
 export { DUCT, ISLAND, LAT, HERO } from "./coreplan.js";
 
 export const WIRING = {
@@ -193,6 +194,12 @@ export async function createCore(renderer, o = {}) {
     b.cyl(0.12, 9, 2.6, 5.5, pz - 2.4, mat(dark), "y", 6, 0.05, { rz: -0.3, rx: -0.2 });
   }
   scene.add(b.build());
+  // a service console on the island (options.console; sets/coreplan.js CONSOLE): hidden unless a shot asks for it
+  const consoleG = (() => { const c = kit.builder(), [x, , z] = CONSOLE.at, n = CONSOLE.n, ry = { ry: Math.atan2(n[0], n[2]) }, S = CONSOLE.screen;
+    c.cyl(0.07, 1.0, x - n[0] * 0.3, 0.5, z - n[2] * 0.3, mat(steel), "y", 8); c.box(0.5, 0.06, 0.5, x - n[0] * 0.3, 0.03, z - n[2] * 0.3, mat(rib), ry);
+    c.box(1.0, 0.8, 0.56, x - n[0] * 0.3, S.c[1], z - n[2] * 0.3, mat(pale), ry); c.box(1.06, 0.1, 0.62, x - n[0] * 0.3, S.c[1] + 0.44, z - n[2] * 0.3, mat(gold), ry);
+    c.quad([S.c[0] + n[0] * 0.012, S.c[1], S.c[2] + n[2] * 0.012], S.u, [0, 1, 0], S.w, S.h, mat("#120a26"));
+    const g = c.build(); g.visible = false; scene.add(g); return g; })();
 
   // ---- the far plate ----------------------------------------------------------------------------------------------------
   const PJ = projector({ pos: HERO.pos, target: HERO.target, fov: HERO.wide });
@@ -298,6 +305,7 @@ export async function createCore(renderer, o = {}) {
     flares.forEach((f, i) => { const on = !!opt.emitters?.[i]?.on; f.lens.visible = on; f.halo.visible = on; if (on) { f.halo.quaternion.copy(camera.quaternion); const s = 0.42 * w.beams * (hash(frame >> 1, i) > 0.15 ? 1 : 0.7); f.halo.scale.set(s * 1.5, s, 1); } });
     layBeams(opt.beams ?? [], w.beams);
     drones.update(opt.drones ?? [], frame, sync, camera, { thrust: w.thrust });
+    consoleG.visible = !!opt.console;
     const sl = opt.slabs;
     slabs.forEach((s, j) => {
       s.g.visible = !!sl; s.caps.forEach((c) => { c.visible = false; }); if (!sl) return;
