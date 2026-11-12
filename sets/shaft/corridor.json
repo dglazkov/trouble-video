@@ -1,0 +1,17 @@
+{
+ "prompt": "Background painting for a 1990s cel anime film, painted in gouache with flat colour shapes, hard-edged shadows and crisp ink-free edges, exactly the style, palette and lighting of the reference image (the reference shows the place; do NOT copy its camera angle, and paint NO people, NO characters and NO robots). SUBJECT: a CUTAWAY CROSS-SECTION, like a doll's house or an architectural section drawing. We are inside a huge vertical shaft of a space station looking straight at one wall of it, perfectly flat-on (an elevation, no tilt, horizontals exactly horizontal), and the wall has been cut open across one whole storey so that we look INTO the room behind it, which recedes away from us in one-point perspective to a vanishing point at the exact centre of the picture: a main CORRIDOR of the station: an eight-sided cobalt-blue passage with heavy orange bulkhead frames repeating into the distance, cyan strip lights, white ceiling light panels, magenta floor-level strips, yellow dashes down the middle of the floor; cobalt blue, cyan, orange, magenta. The room fills the whole picture from the left edge to the right edge. Along the very top edge and the very bottom edge of the picture runs the cut edge of the floor slab above and below: a plain thick dark band of steel and concrete, straight and horizontal, a twentieth of the picture's height each. Far-future space station with retro 1980s hardware. Strong, saturated, luminous colour; the room is lit by its own lights and glows out toward us. No text, no letters, no numbers, no signs with writing, no logos; any screen or sign shows only plain glowing colour or simple bars. No border, no frame, no vignette.",
+ "refs": [
+  "out/set_corridor_test/f0024.png"
+ ],
+ "aspect": "16:9",
+ "size": "2K",
+ "model": "gemini-3.1-flash-image (art/gen.py)",
+ "from": "out/shaft/gen/corridor_1.png",
+ "crop": [
+  0.09,
+  0.13,
+  0.92,
+  0.86
+ ],
+ "note": "the room inside the cut slabs, resized to 2048x1152 (sets/shaft.js lays its own slabs)"
+}
