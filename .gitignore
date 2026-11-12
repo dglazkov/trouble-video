@@ -4,3 +4,13 @@
 node_modules
 # What cargo builds, here and in the Dockerfile.
 target
+# The analysis tools, local to this machine.
+.venv
+# Downloaded tools and rendered output: large, and rebuilt from scripts.
+tools
+out
+# The stems as Suno gave them: large, and what the video reads from them is in analysis/.
+stems
+stems-wav
+stems.zip
+stems-wav.zip

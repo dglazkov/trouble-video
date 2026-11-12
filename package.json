@@ -1,0 +1,10 @@
+{
+  "name": "trouble-video",
+  "private": true,
+  "description": "A procedural anime music video, rendered frame by frame from code.",
+  "type": "module",
+  "devDependencies": {
+    "playwright-core": "^1.65.0",
+    "three": "^0.187.0"
+  }
+}

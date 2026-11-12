@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0"><canvas id="c" width="1024" height="1024"></canvas>
+<script type="module">
+// A posing mannequin: the rig's 3D joints seen from a chosen camera, drawn as colour-coded limbs. It is the layout a key
+// drawing is made over: red is the character's right side, blue the left, so a drawing cannot swap the limbs.
+import { rig } from "/bakeoff/web/character.js";
+const c = document.getElementById("c"), g = c.getContext("2d");
+window.guide = (p, yawDeg, pitchDeg = 8) => {
+  const J = rig(p, { lean: 16, energy: 1, headPitch: 0 });
+  const y = yawDeg * Math.PI / 180, x = pitchDeg * Math.PI / 180;
+  const P = (v) => { // yaw about the vertical, pitch, then a mild perspective; fixed framing, so every pose registers
+    let X = v[0] * Math.cos(y) + v[2] * Math.sin(y), Z = -v[0] * Math.sin(y) + v[2] * Math.cos(y), Y = v[1] - 0.85;
+    const Y2 = Y * Math.cos(x) - Z * Math.sin(x), Z2 = Y * Math.sin(x) + Z * Math.cos(x);
+    const k = 4.2 / (4.2 - Z2); return [512 + X * 430 * k, 520 - Y2 * 430 * k, Z2]; };
+  g.fillStyle = "#ffffff"; g.fillRect(0, 0, 1024, 1024);
+  g.strokeStyle = "#bbbbbb"; g.lineWidth = 3; g.beginPath(); const a = P([-1.2, 0, 0]), b = P([1.2, 0, 0]); g.moveTo(0, (a[1] + b[1]) / 2); g.lineTo(1024, (a[1] + b[1]) / 2); g.stroke();
+  const parts = [];
+  const limb = (A, B, w, col) => { const a = P(A), b = P(B); parts.push({ z: (a[2] + b[2]) / 2, draw() {
+    g.lineCap = "round"; g.strokeStyle = "#222"; g.lineWidth = w + 8; g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
+    g.strokeStyle = col; g.lineWidth = w; g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke(); } }); };
+  const R = ["#e23b3b", "#ff8a8a"], L = ["#2f62e0", "#8fb0ff"];
+  for (const s of [1, -1]) { const C = s > 0 ? R : L, lg = J.legs[s], ar = J.arms[s];
+    limb(lg.hip, lg.knee, 62, C[0]); limb(lg.knee, lg.ankle, 50, C[1]); limb(lg.heel, lg.toe, 40, C[0]);
+    limb(ar.sh, ar.elbow, 46, C[0]); limb(ar.elbow, ar.hand, 38, C[1]); limb(ar.hand, ar.hand, 50, C[0]); }
+  limb(J.hips, J.chest, 120, "#9a9a9a"); limb(J.chest, J.neck, 40, "#c8c8c8");
+  const h = P(J.head), nose = P([J.head[0], J.head[1] - 0.01, J.head[2] + 0.2]);
+  parts.push({ z: h[2], draw() { g.fillStyle = "#e8e8e8"; g.strokeStyle = "#222"; g.lineWidth = 8; g.beginPath(); g.arc(h[0], h[1], 74, 0, 7); g.fill(); g.stroke();
+    g.strokeStyle = "#111"; g.lineWidth = 10; g.beginPath(); g.moveTo(h[0], h[1]); g.lineTo(nose[0], nose[1]); g.stroke(); } });
+  parts.sort((a, b) => a.z - b.z).forEach((p) => p.draw());
+};
+window.ready = true;
+</script>

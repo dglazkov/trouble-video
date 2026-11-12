@@ -1,0 +1,93 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;background:#000"><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// A close-up test: traced cels of one drawing, swapped for expression, warped for hair and breath, on a drawn-in-shader ground.
+const names = ["face", "blink", "shout", "shock", "grin"];
+const gl = document.getElementById("c").getContext("webgl2", { preserveDrawingBuffer: true });
+const load = (src) => new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.src = src; });
+const tex = (img, unit) => { const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img); gl.generateMipmap(gl.TEXTURE_2D);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE); return t; };
+const D = "/out/bakeoff/face/cels/";
+const imgs = await Promise.all([...names.map((n) => load(D + n + ".png")), load(D + "masks.png")]);
+imgs.forEach((im, i) => tex(im, i));
+const vs = `#version 300 es
+in vec2 p; out vec2 v; void main(){ v=p*.5+.5; gl_Position=vec4(p,0,1); }`;
+const fs = `#version 300 es
+precision highp float; in vec2 v; out vec4 o;
+uniform sampler2D cel, masks; uniform float f, f2, zoom, wind, impact, pulse, drop; uniform vec2 shake, look;
+float h(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
+vec2 celUV(vec2 s){ // screen (0..1, y up) to cel uv (y down)
+  vec2 q = (s-.5)*vec2(16./9.,1.); float a = shake.x*.02 + drop*.05; q = mat2(cos(a),-sin(a),sin(a),cos(a))*q;
+  return look + vec2(q.x,-q.y)*zoom + shake*.004; }
+vec4 character(vec2 uv){
+  float t = f2/24.;
+  float sw = texture(masks, uv).g;
+  vec2 d = sw * (vec2(sin(t*5.+uv.y*9.)*.006, cos(t*4.+uv.x*7.)*.003) + wind*vec2(.030+.012*sin(t*19.+uv.y*14.), -.010+.006*sin(t*23.+uv.x*11.)));
+  float below = smoothstep(.50,.75,uv.y); d.y += below*sin(t*3.)*.003*(1.+2.*wind);
+  vec2 u = uv - d;
+  float a = texture(masks, u).r; if(u.x<0.||u.x>1.||u.y<0.||u.y>1.) a = 0.;
+  return vec4(texture(cel, u).rgb, a); }
+vec3 ground(vec2 s){
+  float t = f/24.; vec2 c = s-vec2(.5,.5);
+  vec3 col = mix(vec3(.05,.04,.16), vec3(.16,.08,.34), s.y);
+  // streaking station lights rushing past
+  for(int i=0;i<3;i++){ float fi=float(i); float sp = (1.5+fi*1.3)*(1.+3.*drop);
+    float y = floor(s.y*(14.+fi*9.)); float r = h(vec2(y,fi));
+    float x = fract(s.x*(.6+r) + t*sp*(.5+r) + r*7.);
+    float line = step(.86,r)*smoothstep(.0,.05,x)*smoothstep(.55+.3*r,.2,x);
+    vec3 neon = r>.95 ? vec3(1.,.25,.6) : (r>.9 ? vec3(.2,.95,1.) : vec3(1.,.7,.2));
+    col += neon*line*(.55-.12*fi); }
+  // radial speed lines after the drop
+  float ang = atan(c.y,c.x*16./9.); float rad = length(c*vec2(16./9.,1.));
+  float seg = floor(ang*40./6.2832); float rr = h(vec2(seg, floor(f2*.5)));
+  float sl = step(.72,rr)*smoothstep(.34+.25*rr,.9,rad);
+  col = mix(col, vec3(1.), sl*drop*.85);
+  return col; }
+void main(){
+  vec2 uv = celUV(v);
+  vec4 ch = character(uv); vec3 bg = ground(v);
+  // light wrap: station colour bleeding over the cel's edge, and a cool rim on the windward side
+  float aL = character(uv+vec2(.006,0.)).a; float rim = clamp(ch.a-aL,0.,1.);
+  vec3 c = ch.rgb*mix(vec3(.80,.78,1.0), vec3(1.), .35+.65*smoothstep(.2,.6,v.y));
+  c += rim*vec3(.3,.9,1.)*.9;
+  vec3 col = mix(bg, c, ch.a);
+  if(impact>0.){ float l = dot(ch.rgb, vec3(.3,.59,.11));
+    vec2 cc=v-.5; float ang=atan(cc.y,cc.x*16./9.); float rr=h(vec2(floor(ang*56./6.2832), impact));
+    float sl = step(.55,rr)*smoothstep(.20+.3*rr,.75,length(cc*vec2(16./9.,1.)));
+    vec3 A = impact<1.5 ? vec3(1.) : vec3(.04,.02,.10), B = impact<1.5 ? vec3(.05,.03,.08) : vec3(.2,.95,1.), G = impact<1.5 ? vec3(.93,.10,.22) : vec3(.95,.15,.5);
+    vec3 chc = l>.62 ? A : (l>.30 ? G : B);
+    col = mix(mix(A, B, sl), chc, ch.a); }
+  col += pulse*vec3(.10,.06,.14);
+  // photography: aberration at the edges, vignette, grain
+  vec2 e = (v-.5); float ab = dot(e,e)*.012;
+  col.r = mix(col.r, mix(ground(v+e*ab).r, character(celUV(v+e*ab)).r, character(celUV(v+e*ab)).a), impact>0.?0.:.6);
+  col *= 1.-.55*dot(e,e)*1.6;
+  col += (h(v*vec2(1920.,1080.)+f)-.5)*.045;
+  o = vec4(pow(clamp(col,0.,1.), vec3(.95)),1.); }`;
+const sh = (ty, src) => { const s = gl.createShader(ty); gl.shaderSource(s, src); gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
+const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr); gl.useProgram(pr);
+gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,3,-1,-1,3]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0); gl.bindAttribLocation(pr, 0, "p"); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+const U = (n) => gl.getUniformLocation(pr, n);
+const rnd = (n) => { let x = Math.sin(n * 91.7) * 43758.5453; return x - Math.floor(x); };
+const DROP = 35, BEATS = [45, 55, 65];
+window.renderFrame = (f) => {
+  const f2 = Math.floor(f / 2) * 2;                       // the character is held on twos
+  const state = f2 >= 46 ? "shout" : f >= DROP ? "shock" : f2 >= 28 ? "grin" : (f2 === 14) ? "blink" : "face";
+  const post = Math.max(0, f - DROP);
+  const dropAmt = f >= DROP ? Math.exp(-post / 30) * 0.6 + 0.4 : 0;
+  const hit = f >= DROP ? Math.exp(-post / 5) : 0;
+  let pulse = 0; for (const b of BEATS) if (f >= b) pulse = Math.max(pulse, Math.exp(-(f - b) / 3));
+  const zoom = f < DROP ? 0.66 - 0.05 * (f / DROP) : 0.44 + 0.10 * (1 - Math.exp(-post / 9)) - 0.02 * pulse;
+  gl.uniform1i(U("cel"), names.indexOf(state)); gl.uniform1i(U("masks"), 5);
+  gl.uniform1f(U("f"), f); gl.uniform1f(U("f2"), f2); gl.uniform1f(U("zoom"), zoom);
+  gl.uniform1f(U("wind"), f >= DROP ? 1 : 0.08); gl.uniform1f(U("drop"), f >= DROP + 2 ? dropAmt : 0);
+  gl.uniform1f(U("impact"), f === DROP ? 1 : f === DROP + 1 ? 2 : 0); gl.uniform1f(U("pulse"), f === DROP + 2 ? 1.5 : pulse);
+  gl.uniform2f(U("shake"), (rnd(f) - .5) * 2 * (hit * 6 + pulse * 2), (rnd(f + 500) - .5) * 2 * (hit * 6 + pulse * 2));
+  gl.uniform2f(U("look"), 0.47 + (f < DROP ? 0.02 : 0), 0.40 - (f < DROP ? 0 : 0.01));
+  gl.drawArrays(gl.TRIANGLES, 0, 3); gl.finish();
+};
+window.ready = true;
+</script>
