@@ -1,0 +1,7 @@
+{
+ "prompt": "Anime close-up shot, widescreen film frame, of the character from the FIRST image (same face, hair, skin tone, outfit; the first image is their model sheet). Head and shoulders fill the frame, three-quarter view, mid-sprint: body leaning forward, hair and clothes blown back by speed, a bead or two of sweat. Style: 1990s cel anime key frame exactly like the SECOND image: bold clean black ink outlines, flat colour fills, two tones per material with hard-edged shadows, white highlight shapes in eyes and hair, no gradients, no motion blur, no speed lines, no text, no brand marks. Background: one flat solid pure magenta (#FF00FF) and nothing else. Expression and acting: NOOR is utterly bored despite running for their life: half-lidded eyes, flat closed mouth, not a hair out of place except the long black hair and white streak streaming straight back. Facing screen-left.",
+ "refs": [
+  "kits/noor/design/model_2.png",
+  "art/ref/test_face.png"
+ ]
+}
