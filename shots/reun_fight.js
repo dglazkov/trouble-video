@@ -9,10 +9,12 @@
 //   orbit   377  she rings its head, it slashes (377), rears after her (387) and comes DOWN with both forefeet (397, the
 //                brass) on the one length of deck that IFE is at the controls of
 //   ibox    407  Ife at the pedestal, the forefoot beside her; ikey 417: her CRT says LOCKED; her finger comes down on 427: OPEN
-//   blow    437  the deck's clamps blow, the plate drops, its forelegs go through (437) and its trunk hits the deck (447)
+//   blow    437  seen from the side and above, the plate alone in frame: its four clamps pop off (437), the plate drops out from
+//                under the forefeet that stand on it, the forelegs go down the hole after it, and its trunk hits the deck (447)
 //   tcharge 457  TANE, the pipe out;  tleap 467 up its neck;  thit 477 (kick and brass): the pipe through its back
 //   chain   487  it comes apart on 487, 496, 506, a blast each
-//   nwalk   516  NOOR, who has walked the length of it, comes on at the same pace while it falls round them (526, 536)
+//   nwalk   516  NOOR, who strolled up under its jaws to the lip of the hole while all this went on (she is in the wides:
+//                orbit, blow, chain; noorAt), comes back at the same pace while it falls round them (526, 536)
 //   nover   546  its head comes down in front of them; they step over it (556); its last eye goes out (566)
 //   gone    576  what is left goes over the side; far below, on 586, it blows
 //   grin    596  the four, breathless, grinning (606, 616)
@@ -24,6 +26,7 @@
 // across it just in front of their feet (z 60.85-61.65, still widening); the first hole (z 67.2-73.2) is still open behind them.
 import { camera } from "../engine/body.js";
 import { stance } from "../machines/warden.js";
+import { dentAt } from "../sets/atrium.js";
 import { fireBlast, FIRE } from "../engine/fx.js";
 import { speedLines } from "./slice_fx.js";
 import { kana, latin } from "../sets/sign.js";
@@ -66,7 +69,7 @@ export const junoAt = (L) => {
   const d = ease((L - 389) / 9), down = [-0.4, 0.5, 61];
   return mix3(L < 370 ? mix3(go, orbit, (L - 367) / 3) : orbit, down, d);
 };
-const IFE = [1.25, 0, 64.75], PED = [1.3, 0, 63.7];
+const IFE = [1.25, 0, 64.75], PED = [1.3, 0, 63.7], HEADREST = [0.95, 1.3, 66.7];
 // what the warden is told at L
 export function wardenAt(L) {
   const rise = ease((L - 298) / 18), kb = STEPS.reduce((a, t) => a + hitE(L, t, 2.5) * 0.4, 0);
@@ -78,6 +81,8 @@ export function wardenAt(L) {
     eye: L < 300 ? 0.2 : L < 447 ? 1.3 + 0.5 * hitE(L, 318, 4) : L < 477 ? 0.9 + 0.5 * wob(L, 2.1, 3.3, 4) : 0.5, sway: L >= 377 && L < 397 ? 1 : 0.2 };
   // what it looks at, and its head thrown at it
   s.look = L < 357 ? [0, 1.4, 63] : L < 400 ? junoAt(L) : L < 447 ? [IFE[0], 0.8, IFE[2]] : [0, 1, 62];
+  // from the moment the plate goes its head comes down too: its chin on the deck at the hole's near lip (447), its neck a ramp across the hole
+  if (L >= 438) { const u = ease((L - 438) / 9), b = hitE(L, 447, 2.5); s.head = mix3([IFE[0] - 0.3, 2.9, 66.9], HEADREST, u); s.head[1] += 0.25 * b * Math.abs(Math.cos((L - 447) * 0.9)) + (L >= 447 && L < 477 ? 0.05 * wob(L, 1.7, 2.9, 5) : 0); }
   s.reach = L < 357 ? 0.25 * ease((L - 338) / 12) : L < 397 ? 0.1 : L < 437 ? 0.9 * ease((L - 408) / 22) : 1;
   // the pincer: over the four (348), after Juno (snaps shut on 367 and 377), then cocked
   if (L >= 357 && L < 397) { const j = junoAt(L - 2), sn = Math.max(hitE(L, 367, 30) > 0 && L < 372 ? 1 : 0, L >= 377 && L < 382 ? 1 : 0); s.arm = { to: [j[0] * 0.8, j[1] - 0.5, Math.max(j[2], 66.2)], open: sn ? 0 : 1 }; }
@@ -88,7 +93,6 @@ export function wardenAt(L) {
 }
 // ---- blasts (engine/fx.js, drawn on the frame at their place in the world) --------------------------------------------
 const BLASTS = [
-  { at: 437, p: [2.3, -0.1, 67.6], R: 1.5, seed: 3 }, { at: 437, p: [-2.3, -0.1, 72.8], R: 1.5, seed: 5 }, { at: 440, p: [-2.3, -0.1, 67.6], R: 1.3, seed: 7 }, { at: 442, p: [2.3, -0.1, 72.8], R: 1.3, seed: 9 },
   { at: 477, p: [0, 4.6, 73.9], R: 3.2, seed: 11, big: 1 }, { at: 487, p: [-3.5, 6, 74.5], R: 3.4, seed: 13, big: 1 }, { at: 496, p: [3.2, 5, 78], R: 3.6, seed: 17, big: 1 }, { at: 506, p: [0.3, 2.5, 69], R: 4.2, seed: 19, big: 1 },
   { at: 516, p: [0, 2.4, 73.5], R: 4.4, seed: 23, big: 1 }, { at: 526, p: [-2.5, 3, 77], R: 3.4, seed: 29, big: 1 }, { at: 536, p: [2.4, 1.5, 71], R: 3.2, seed: 31, big: 1 },
 ];
@@ -114,9 +118,54 @@ function whip(g, x0, age, dir = 1, seed = 1) {
   for (const [col, w] of [[INK, 22], ["#3a2a4a", 9]]) { g.strokeStyle = col; g.lineWidth = w; g.lineCap = "round"; g.lineJoin = "round"; g.beginPath(); pts.forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])); g.stroke(); }
   if (age < 4) { g.fillStyle = "#fff6d0"; const [x, y] = pts[1]; g.beginPath(); for (let i = 0; i < 14; i++) { const a = i / 14 * 6.283, r = i % 2 ? 26 : 90 - age * 16; g.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r); } g.fill(); }
 }
+// ---- its weight on the bridge ------------------------------------------------------------------------------------------
+// Every foot that comes down on the deck bends it there (sets/atrium.js `dents`: the deck, its rails and posts dip and
+// spring back, the beacons rock); while it stands the deck sags under its trunk; its fall onto the deck (447) is the hardest.
+export const dentsAt = (L) => {
+  const by = new Map(), put = (z, d, rock = 0) => { const k = Math.round(z * 2) / 2, q = by.get(k) ?? { z, d: 0, w: 5.5, rock: 0 }; q.d += d; q.rock += rock; by.set(k, q); };
+  for (const leg of FEET) for (const [t, q] of leg.steps) { const a = L - t; if (a < 0 || a > 30 || q[1] !== 0) continue; put(q[2], 0.2 * Math.exp(-a / 5) * Math.cos(a * 0.85), 0.012 * Math.exp(-a / 7) * Math.cos(a * 1.4)); }
+  if (L >= 447 && L < 487) { const a = L - 447; put(73.6, 0.45 * Math.exp(-a / 6) * Math.cos(a * 0.7) + 0.14, 0.02 * Math.exp(-a / 8) * Math.cos(a * 1.2)); }
+  const out = [...by.values()].filter((q) => Math.abs(q.d) > 0.004).sort((a, b) => Math.abs(b.d) - Math.abs(a.d)).slice(0, 3);
+  if (L >= 318 && L < 447) out.push({ z: trunkZ(L) - 1, d: 0.1 * ease((L - 318) / 5), w: 11, rock: 0 });
+  return out;
+};
+// the stays it tears out as it comes down: [L, the stay's foot (z), its side]. Once cut a stay is gone for the rest of the film.
+const CUTS = [[318, 80, 1], [320, 80, -1], [397, 64, -1], [399, 64, 1], [447, 96, 1], [496, 96, -1], [506, 112, 1]];
+const cutAt = (L) => CUTS.filter(([t]) => L >= t).map(([t, z, side]) => ({ z, side, age: L - t }));
 // the set at L
-const scene = (L, o = {}) => ({ ...NIGHT, alert: 1.2, warden: o.warden === undefined ? wardenAt(L) : o.warden, drop: 0.35 * hitE(L, 318, 3) * Math.cos((L - 318) * 0.9) + 0.4 * hitE(L, 397, 3) * Math.cos((L - 397) * 0.9) + 0.5 * hitE(L, 447, 3.5) * Math.cos((L - 447) * 0.8) + (L >= 636 ? 0.3 * (1 - Math.exp(-(L - 636) / 1.5)) : 0),
-  hatch: [...(L >= 437 ? [{ z0: HATCH[0], z1: HATCH[1], ...(L < 470 ? { fall: 0.02 + 0.5 * 9.8 * ((L - 437) / FPS) ** 2, tilt: 0.5 * (L - 437) / FPS, roll: 0.3 * (L - 437) / FPS } : {}) }] : []), ...(L >= 636 ? [{ z0: 61.25 - 0.05 - 0.35 * (1 - Math.exp(-(L - 636) / 2.5)), z1: 61.25 + 0.05 + 0.35 * (1 - Math.exp(-(L - 636) / 2.5)) }] : [])], ...o.opt });
+const scene = (L, o = {}) => ({ ...NIGHT, alert: 1.2, warden: o.warden === undefined ? wardenAt(L) : o.warden, dents: dentsAt(L), cut: cutAt(L), drop: 0.35 * hitE(L, 318, 3) * Math.cos((L - 318) * 0.9) + 0.4 * hitE(L, 397, 3) * Math.cos((L - 397) * 0.9) + 0.5 * hitE(L, 447, 3.5) * Math.cos((L - 447) * 0.8) + (L >= 636 ? 0.3 * (1 - Math.exp(-(L - 636) / 1.5)) : 0),
+  hatch: [L < 437 ? { z0: HATCH[0], z1: HATCH[1], closed: true, clamps: null } : { z0: HATCH[0], z1: HATCH[1], ...(L < 480 ? { clamps: L - 437 } : {}), ...(L < 470 ? { fall: plateFall(L), tilt: 0.9 * ((L - 439) / FPS) * (L > 439 ? 1 : 0), roll: 0.25 * (L - 437) / FPS } : {}) },
+    ...(L >= 636 ? [{ z0: 61.25 - 0.05 - 0.35 * (1 - Math.exp(-(L - 636) / 2.5)), z1: 61.25 + 0.05 + 0.35 * (1 - Math.exp(-(L - 636) / 2.5)) }] : [])], ...o.opt });
+// the plate under its forefeet once its clamps are off: it goes down under their weight, faster than a thing merely dropped
+const plateFall = (L) => { const t = (L - 437) / FPS; return 0.02 + 7 * t + 4.9 * t * t; };
+// dust and grit shaken off the deck where a foot has just come down: lobes of dust low along the deck either side of it
+// (on twos, hard-edged), and flecks dropping away under the bridge
+// dust as it is drawn: the union of its lobes inked round, one flat tone of the night's own violet (no modelling: a shape, not balls)
+function dustLobes(g, lobes) {
+  for (const [col, grow, k, dx] of [[INK, 3, 1, 0], ["#3b2542", 0, 1, 0]]) { g.fillStyle = col; g.beginPath(); for (const [x, y, r] of lobes) { const rr = Math.max(0.5, r * k + grow); g.moveTo(x + r * dx + rr, y + r * dx); g.arc(x + r * dx, y + r * dx, rr, 0, 7); } g.fill(); }
+}
+function stomp(g, c, L, o = {}) {
+  for (const [li, leg] of FEET.entries()) for (const [t, q] of leg.steps) {
+    const a = L - t; if (a < 0 || a > 16 || q[1] !== 0 || (o.from && t < o.from)) continue; const p = c.project([q[0], 0, q[2]]); if (p.z < 0.5) continue;
+    const a2 = a - a % 2, k = Math.max(0, 1 - a2 / 16), lobes = [];
+    for (let i = 0; i < 12; i++) { const dir = i % 2 ? 1 : -1, d = (0.3 + 1.7 * rnd(i, t, li)) * (1 - Math.exp(-(a2 + 1) / 3)); lobes.push([p.x + dir * d * p.s * 0.8, p.y - (0.12 + 0.5 * rnd(i, t, li, 2) * (1 - Math.exp(-a2 / 5))) * p.s, (0.07 + 0.17 * rnd(i, t, li, 3)) * (0.5 + 0.5 * k) * p.s * (a2 > 10 ? k * 2.6 : 1)]); }
+    dustLobes(g, lobes);
+    if (o.flecks) { g.fillStyle = INK; for (let i = 0; i < 7; i++) { const tt = a / FPS, x = p.x + (rnd(i, t, li, 5) - 0.5) * 2.4 * p.s, y = p.y + (0.5 + (1 + 3 * rnd(i, t, li, 6)) * tt + 4.9 * tt * tt) * p.s, w = (0.05 + 0.08 * rnd(i, t, li, 7)) * p.s; g.save(); g.translate(x, y); g.rotate(a * (rnd(i, t, 8) - 0.5) * 1.4); g.fillRect(-w, -w * 0.5, w * 2, w); g.restore(); } }
+  }
+}
+// a clamp letting go: a small hard star on its frame and the two after, a few sparks thrown out; no fire, no smoke
+function pop(g, p, age, seed) {
+  if (age < 0 || age > 5) return; const a2 = age - age % 2;
+  if (age < 4) { g.fillStyle = age < 2 ? "#fffbe6" : "#ffd83a"; g.strokeStyle = INK; g.lineWidth = 3; g.beginPath(); for (let i = 0; i < 16; i++) { const a = i / 16 * 6.283 + seed + a2, r = (i % 2 ? 0.22 : 0.75 + 0.5 * rnd(i, a2, seed)) * p.s * (1 - age / 6); g.lineTo(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r * 0.85); } g.closePath(); g.fill(); g.stroke(); }
+  g.strokeStyle = "#fff3c0"; g.lineWidth = 4; g.lineCap = "round"; for (let i = 0; i < 6; i++) { const a = rnd(i, seed) * 6.283, r0 = (0.5 + age * 0.3) * p.s, r1 = r0 + (0.25 + 0.3 * rnd(i, seed, 2)) * p.s; g.beginPath(); g.moveTo(p.x + Math.cos(a) * r0, p.y + Math.sin(a) * r0 * 0.8); g.lineTo(p.x + Math.cos(a) * r1, p.y + Math.sin(a) * r1 * 0.8); g.stroke(); }
+}
+// ---- Noor, all this while ---------------------------------------------------------------------------------------------
+// From the moment Juno goes (357) she strolls up the deck along its left rail, under the machine's jaws, to the lip of the
+// plate, is standing there when it drops (437), and from 506 turns back (nwalk, nover are her own shots). Where she is at L:
+export const noorAt = (L) => { const u = clamp((L - 357) / 78); return [-1.7, 0, lerp(64.2, 65.9, u)]; };
+const NSIDE = { foot: [1400, 1478], m: 0.00141 }, NEDGE = { foot: [1410, 1496], m: 0.00138 };
+// a small figure standing in a wide: hung by its feet on the deck where it is (bent as the deck is), hidden by what is nearer
+const small = (name, cam, at, K, L, o = {}) => { const h = stand(cam, [at[0], -dentAt(at[2], dentsAt(L)) - (o.drop ?? 0), at[2]], K.foot, K.m); return { plate: name, ...h, y: h.y + (o.bob ?? 0), layer: { ...plateLight(o), depth: Math.max(0.1, h.depth - 0.35), ...o.layer } }; };
 const plate = (name, hung, o = {}) => ({ plate: name, ...hung, layer: { ...plateLight(o), depth: 0, ...o.layer } });
 const boil = (f, k = 1.6) => ({ warp: k, warpStill: [0.5, 0.6], warpRadius: 0.3, warpDir: [1, 0.2], warpTime: (f - f % 2) * 0.55 });
 
@@ -124,7 +173,7 @@ const boil = (f, k = 1.6) => ({ warp: k, warpStill: [0.5, 0.6], warpRadius: 0.3,
 export const rise = shot("rise", { cutOn: "brass", marks: [{ at: 0, what: "the brass: something is coming up over the side", on: "brass" }, { at: 5, what: "a claw on the rail", on: "strings" }, { at: 10, what: "another", on: "strings" }, { at: 17, what: "the far side", on: "strings" }],
   frame(f) {
     const L = CUT.rise + f, j = Math.max(hitE(L, 303, 2), hitE(L, 308, 2), hitE(L, 310, 2), hitE(L, 315, 2)), cam = { pos: [-1.3 + wob(L, 2.9, 4.3, 1) * 0.05 * j, 1.25 + wob(L, 3.3, 5.1, 2) * 0.05 * j, 66.5 - 0.03 * f], target: [1.2 - 0.06 * f, 4.4 + 0.12 * f, 82], fov: 52 };
-    return { set: "atrium", camera: cam, options: scene(L), actors: [], post: { vignette: 0.5, flash: [303, 308, 310, 315].includes(L) ? 0.06 : 0, ca: 0.0012 + 0.004 * j } };
+    return { set: "atrium", camera: cam, options: scene(L), actors: [], overlay(g) { stomp(g, cam2(cam), L); }, post: { vignette: 0.5, flash: [303, 308, 310, 315].includes(L) ? 0.06 : 0, ca: 0.0012 + 0.004 * j } };
   } });
 // ---- 318: on the bridge, from behind the four ---------------------------------------------------------------------------
 const BACKS = { foot: [1376, 1492], m: 0.00144 }, READY = { foot: [1392, 1500], m: 0.00133 };
@@ -132,7 +181,7 @@ export const land = shot("land", { plates: { reun_backs: src("tane", "reun_backs
   frame(f) {
     const L = CUT.land + f, s = shake(L, 1.3), cam = { pos: [0.5 + s[0], 0.62 + s[1], 56.6 - 0.02 * f], target: [0.1, 4.3 + 0.02 * f, 80], fov: 50, up: [Math.sin(-0.05 + s[2]), 1, 0] }, o = scene(L);
     return { set: "atrium", camera: cam, options: o, cels: [plate("reun_backs", stand(cam, [0, -o.drop, 61.6], BACKS.foot, BACKS.m), { layer: boil(f, 1.2) })],
-      overlay(g) { lines(g, L, W * 0.5, H * 0.3, "#ffd0c0"); whip(g, 170, L - 318, -1, 1); whip(g, 1760, L - 320, 1, 2); },
+      overlay(g) { lines(g, L, W * 0.5, H * 0.3, "#ffd0c0"); },
       post: { ...hitPost(L, { red: true }), vignette: 0.5 } };
   } });
 // ---- 338: the four ----------------------------------------------------------------------------------------------------
@@ -161,13 +210,14 @@ export const snap = shot("snap", { plates: { reun_juno_taunt: src("juno", "reun_
       post: f === 0 ? { mode: 1, impact: REDIMP } : { flash: f === 1 ? 0.2 : 0, ca: 0.0012 + 0.005 * s, vignette: 0.46 } };
   } });
 // ---- 377: she rings its head; it rears (387) and comes down on the deck (397) --------------------------------------------
-export const orbit = shot("orbit", { plates: { reun_juno_taunt: src("juno", "reun_juno_taunt_1.jpg") }, marks: [{ at: 0, what: "she crosses its face", on: "kick" }, { at: 10, what: "it rears after her", on: "kick" }, { at: 20, what: "both forefeet come down on the deck", on: "kick" }, { at: 20, what: "the slam (the brass too)", on: "brass" }],
+export const orbit = shot("orbit", { plates: { reun_juno_taunt: src("juno", "reun_juno_taunt_1.jpg"), reun_noor_side: src("noor", "reun_noor_side_1.jpg"), reun_ife_box: src("ife", "reun_ife_box_1.jpg") }, marks: [{ at: 0, what: "she crosses its face", on: "kick" }, { at: 10, what: "it rears after her", on: "kick" }, { at: 20, what: "both forefeet come down on the deck", on: "kick" }, { at: 20, what: "the slam (the brass too)", on: "brass" }],
   frame(f) {
-    const L = CUT.orbit + f, s = shake(L, 1.6), j = junoAt(L), a = (L - 367) * 0.21 - 1.2, cam = { pos: [-15 + s[0], 2.2 + s[1], 60.5], target: [0, 5.2 - 1.6 * ease((f - 16) / 8), 72.5], fov: 44, up: [Math.sin(0.04 + s[2]), 1, 0] };
-    return { set: "atrium", camera: cam, options: scene(L),
-      cels: L < 397 ? [(() => { const p = cam2(cam).project(j), k = p.s * 0.00073; return plate("reun_juno_taunt", { x: p.x + (PW / 2 - 1700) * k, y: p.y + (PH / 2 - 1000) * k, scale: k, turn: -0.25 }, { layer: { rim: [0.6, 0.95, 1.0], rimDir: [4, -5], tint: [1, 0.9, 0.88] } }); })()] : [],
-      overlay(g) { lines(g, L, W * 0.52, H * 0.72, "#ffd0c0"); whip(g, 1300, L - 397, -1, 3); whip(g, 500, L - 399, 1, 4);
-        const c = cam2(cam); if (L >= 397) for (const x of [-2.2, 2.2]) { const p = c.project([x, 0, 70.1]); fireBlast(g, { cx: p.x, cy: p.y, s: p.s }, L - 397 + 9, { R: 1.2, seed: 41 + x, floor: 0, wrecks: 0, debris: 5 }); } },
+    const L = CUT.orbit + f, s = shake(L, 1.6), j = junoAt(L), a = (L - 367) * 0.21 - 1.2, cam = { pos: [-15 + s[0], 2.2 + s[1], 60.5], target: [0, 5.2 - 1.6 * ease((f - 16) / 8), 72.5], fov: 44, up: [Math.sin(0.04 + s[2]), 1, 0] }, o = scene(L);
+    return { set: "atrium", camera: cam, options: o,
+      cels: [small("reun_noor_side", cam, noorAt(L), NSIDE, L, { drop: o.drop, bob: -3 * Math.abs(Math.sin((L - 357) * Math.PI / 13)) }), small("reun_ife_box", cam, [IFE[0], 0, IFE[2] - 0.1], IBOX, L, { drop: o.drop }),
+        ...(L < 397 ? [(() => { const p = cam2(cam).project(j), k = p.s * 0.00073; return plate("reun_juno_taunt", { x: p.x + (PW / 2 - 1700) * k, y: p.y + (PH / 2 - 1000) * k, scale: k, turn: -0.25 }, { layer: { rim: [0.6, 0.95, 1.0], rimDir: [4, -5], tint: [1, 0.9, 0.88] } }); })()] : [])],
+      under(g) { const c = cam2(cam); g.save(); g.translate(0, o.drop * c.project(PED).s); pedestal(g, c, 1); g.restore(); stomp(g, c, L, { from: 390, flecks: true }); },
+      overlay(g) { lines(g, L, W * 0.52, H * 0.72, "#ffd0c0"); },
       post: { ...hitPost(L, { red: true }), vignette: 0.46 } };
   } });
 // ---- 407: Ife at the pedestal -------------------------------------------------------------------------------------------
@@ -209,12 +259,22 @@ export const ikey = shot("ikey", { plates: { reun_ife_key: src("ife", "reun_ife_
       post: { flash: f === 0 ? 0.08 : L === 427 ? 0.24 : L === 428 ? 0.08 : 0, vignette: 0.5, ca: 0.0012 + 0.004 * hit } };
   } });
 // ---- 437: the clamps blow ------------------------------------------------------------------------------------------------
-export const blow = shot("blow", { marks: [{ at: 0, what: "the deck's clamps blow; the plate drops; its forelegs go through", on: "kick" }, { at: 10, what: "its trunk hits the deck", on: "kick" }],
+// From the side and a storey up, close on the one length of deck: the plate with a hazard band across each end and a clamp
+// at each corner, its two forefeet standing on it, Noor at its lip. 437: the four clamps pop off (four small stars, no
+// fire). The plate goes down flat under the feet, then tumbles; the hole is the deep's red. The forelegs go after it,
+// straight down; the trunk, with nothing under its front, comes down on the deck's edge on 447.
+export const blow = shot("blow", { plates: { reun_noor_side: src("noor", "reun_noor_side_1.jpg") }, marks: [{ at: 0, what: "the deck's clamps blow; the plate drops; its forelegs go through", on: "kick" }, { at: 10, what: "its trunk hits the deck", on: "kick" }],
   frame(f) {
-    const L = CUT.blow + f, s = shake(L, 1.5), j = hitE(L, 437, 3), cam = { pos: [13 + s[0] + wob(L, 2.9, 4.3, 1) * 0.1 * j, 1.1 + s[1] + wob(L, 3.3, 5.1, 2) * 0.08 * j, 60.5 - 0.03 * f], target: [0, 2.6 - 0.04 * f, 71.5], fov: 46, up: [Math.sin(-0.06 + s[2]), 1, 0] }, c = cam2(cam);
-    return { set: "atrium", camera: cam, options: scene(L), actors: [],
-      overlay(g) { blasts(g, c, L, { only: (b) => b.at < 450 }); if (L >= 447) { for (const x of [-2.2, 2.2]) { const p = c.project([x, 0, 71]); fireBlast(g, { cx: p.x, cy: p.y, s: p.s }, L - 447 + 9, { R: 1.8, seed: 51 + x, floor: 0, wrecks: 0, debris: 8 }); } } lines(g, L, W * 0.55, H * 0.6); whip(g, 700, L - 447, 1, 5); },
-      post: { ...(f === 0 ? { mode: 1, impact: FIREIMP } : L === 447 ? { mode: 1, impact: REDIMP } : { flash: f === 1 ? 0.34 : f === 2 ? 0.12 : L === 448 ? 0.25 : f < 9 ? 0.004 : L > 447 && L < 452 ? 0.004 : 0, ca: 0.0012 + 0.006 * Math.max(j, hitE(L, 447, 3)), bloom: 0.6 + 0.5 * j }), vignette: 0.46 } };
+    const L = CUT.blow + f, j2 = hitE(L, 447, 3), sh = [wob(L, 2.9, 4.3, 1) * 0.16 * j2, wob(L, 3.3, 5.1, 2) * 0.13 * j2, wob(L, 2.1, 3.7, 3) * 0.02 * j2], cam = { pos: [40 + sh[0] * 2, 0.9 + sh[1] * 2, 71.2 + 0.02 * f], target: [0, -0.7 + 1.9 * ease((f - 5) / 5), 72.0 + 0.8 * ease((f - 5) / 5)], fov: 11.5 + 1.5 * ease((f - 5) / 5), up: [Math.sin(-0.02 + sh[2]), 1, 0] }, c = cam2(cam), o = scene(L);
+    return { set: "atrium", camera: cam, options: o, cels: [{ ...small("reun_noor_side", cam, noorAt(L), NSIDE, L, { drop: o.drop }), flip: true }],
+      overlay(g) {
+        for (const [i, [x, z]] of [[2.2, HATCH[0] + 0.3], [-2.2, HATCH[0] + 0.3], [2.2, HATCH[1] - 0.3], [-2.2, HATCH[1] - 0.3]].entries()) pop(g, c.project([x, 0.2, z]), L - 437, 3 + i * 2);
+        if (L >= 447) { const p = c.project([0, 0, 73.6]), a = L - 447, a2 = a - a % 2, k = Math.max(0, 1 - a2 / 14), lobes = [];      // dust off the deck where the trunk came down on it
+          for (let i = 0; i < 16; i++) { const dir = i % 2 ? 1 : -1, d = (0.6 + 3.2 * rnd(i, 7)) * (1 - Math.exp(-(a2 + 1) / 3)); lobes.push([p.x + dir * d * p.s, p.y - (0.1 + 0.7 * rnd(i, 8) * (1 - Math.exp(-(a2 + 1) / 4))) * p.s, (0.14 + 0.26 * rnd(i, 9)) * p.s * (0.4 + 0.6 * k)]); }
+          dustLobes(g, lobes); }
+        if (L >= 447) lines(g, L, W * 0.5, H * 0.55, "#ffd0c0"); else if (f > 0 && f < 9) { g.strokeStyle = "rgba(255,240,225,0.75)"; g.lineCap = "round"; for (let i = 0; i < 16; i++) { const x = W * (0.3 + 0.42 * rnd(i, f - f % 2)), y = H * (0.5 + 0.4 * rnd(i, f - f % 2, 2)), len = 90 + 190 * rnd(i, 3); g.lineWidth = 2 + 3 * rnd(i, 4); g.beginPath(); g.moveTo(x, y); g.lineTo(x - 6, y + len); g.stroke(); } }      // the fall is drawn: strokes straight down, over the hole
+        stomp(g, c, L, { from: 440, flecks: true }); },
+      post: { ...(f === 0 ? { mode: 1, impact: FIREIMP } : L === 447 ? { mode: 1, impact: REDIMP } : { flash: f === 1 ? 0.16 : L === 448 ? 0.25 : L === 449 ? 0.08 : 0, ca: 0.0012 + 0.006 * Math.max(hitE(L, 437, 2), j2), bloom: 0.6 }), vignette: 0.46 } };
   } });
 // ---- 457: Tane ---------------------------------------------------------------------------------------------------------
 export const tcharge = shot("tcharge", { plates: { reun_tane_charge: src("tane", "reun_tane_charge_1.jpg") }, marks: [{ at: 0, what: "Tane, the pipe out", on: "kick" }],
@@ -241,10 +301,10 @@ export const thit = shot("thit", { plates: { reun_tane_hit: src("tane", "reun_ta
       post: { ...(f < 2 ? { mode: 1, impact: FIREIMP } : { flash: f === 2 ? 0.4 : f === 3 ? 0.14 : 0.004, ca: 0.0012 + 0.007 * Math.exp(-f / 3), bloom: 0.9 }), vignette: 0.44 } };
   } });
 // ---- 487: it comes apart -----------------------------------------------------------------------------------------------
-export const chain = shot("chain", { marks: [{ at: 0, what: "a blast: its middle legs and its blades go", on: "kick" }, { at: 9, what: "a blast: its arm, its hind legs", on: "kick" }, { at: 19, what: "a blast: its neck and its head", on: "kick" }],
+export const chain = shot("chain", { plates: { reun_noor_edge: src("noor", "reun_noor_edge_1.jpg") }, marks: [{ at: 0, what: "a blast: its middle legs and its blades go", on: "kick" }, { at: 9, what: "a blast: its arm, its hind legs", on: "kick" }, { at: 19, what: "a blast: its neck and its head", on: "kick" }],
   frame(f) {
     const L = CUT.chain + f, s = shake(L, 2), cam = { pos: [17 + s[0] - 0.05 * f, 9 + s[1] + 0.05 * f, 92 + 0.1 * f], target: [0, 3.4, 74], fov: 46, up: [Math.sin(-0.07 + s[2]), 1, 0] }, c = cam2(cam);
-    return { set: "atrium", camera: cam, options: scene(L), actors: [],
+    return { set: "atrium", camera: cam, options: scene(L), cels: [small("reun_noor_edge", cam, noorAt(L), NEDGE, L, { fire: 0.4 })],
       overlay(g) { blasts(g, c, L, { only: (b) => b.at >= 477 }); lines(g, L, W * 0.5, H * 0.5); whip(g, 400, L - 496, 1, 6); whip(g, 1400, L - 506, -1, 7); },
       post: { ...hitPost(L), vignette: 0.44 } };
   } });
@@ -259,15 +319,20 @@ export const nwalk = shot("nwalk", { plates: { reun_noor_walk: src("noor", "reun
       post: { ...hitPost(L, { impact: f !== 0 }), ...(f === 0 ? { flash: 0.2 } : {}), vignette: 0.5 } };
   } });
 // ---- 546: its head; they step over it ------------------------------------------------------------------------------------
+const GUIDE = typeof location !== "undefined" && /warden_plate/.test(location.search);      // (rendering the plate's guide: the model itself)
 const HEADZ = 64.2, NOVER = { foot: [1010, 1490], m: 0.00138 };
-const headSpec = (L) => { const u = clamp((L - 540) / 6), y = 9 * (1 - u * u) + 0.5 * hitE(L, 546, 2.5) * Math.abs(Math.cos((L - 546) * 0.8)); return { pos: [0.4, y - 4.6, HEADZ + 5.4], yaw: 180, height: 5.6, pitch: 0, deck: { y: -400, half: 0 }, broken: { trunk: 9, back: 9, neck: 9, arm: 9, fan: 9, leg0: 9, leg1: 9, leg2: 9, leg3: 9, leg4: 9, leg5: 9 },
-  look: [-0.6, 3.0, HEADZ - 3 + 0.12 * (L - 546)], eye: L < 566 ? 1.4 - 0.5 * clamp((L - 556) / 10) + 0.3 * wob(L, 2.3, 3.1, 1) : 0.02, reach: 0 }; };
-export const nover = shot("nover", { plates: { reun_noor_walk: src("noor", "reun_noor_walk_1.jpg"), reun_noor_over: src("noor", "reun_noor_over_1.jpg") }, marks: [{ at: 0, what: "its head comes down in front of them", on: "kick" }, { at: 10, what: "Noor steps over it", on: "kick" }, { at: 20, what: "its last eye goes out", on: "kick" }],
+const headSpec = (L) => { const u = clamp((L - 540) / 6), y = 9 * (1 - u * u) + 0.5 * hitE(L, 546, 2.5) * Math.abs(Math.cos((L - 546) * 0.8)); return { pos: [0.1, y - 3.55, HEADZ + 5.4], yaw: 180, height: 5.6, pitch: 0, roll: -9, deck: { y: -400, half: 0 }, broken: { trunk: 9, back: 9, neck: 9, arm: 9, fan: 9, leg0: 9, leg1: 9, leg2: 9, leg3: 9, leg4: 9, leg5: 9 },
+  look: [1.3, 1.5, HEADZ - 3.2], eye: L < 566 ? 1.4 - 0.5 * clamp((L - 556) / 10) + 0.3 * wob(L, 2.3, 3.1, 1) : 0.02, reach: 0 }; };
+// From 556 its head is a DRAWING (machines/warden/head_lit.webp, head_out.webp; pipeline/warden_plate.py): painted over the
+// set's own picture of the 3D head from this camera (shots/warden_plate.js), so it sits on the deck where the model fell;
+// its eyes gutter twice and go out on 566 (the second drawing).
+const HEADCEL = (L) => ({ plate: L >= 566 || L === 561 || L === 564 ? "warden_head_out" : "warden_head_lit", x: W / 2, y: H / 2, scale: W / 3840, depth: 90, layer: { depth: 0, tint: [0.72, 0.58, 0.72], rim: [0, 0, 0], rimDir: [0, 0], gradient: 0 } });
+export const nover = shot("nover", { plates: { reun_noor_walk: src("noor", "reun_noor_walk_1.jpg"), reun_noor_over: src("noor", "reun_noor_over_1.jpg"), warden_head_lit: { src: "/machines/warden/head_lit.webp" }, warden_head_out: { src: "/machines/warden/head_out.webp" } }, marks: [{ at: 0, what: "its head comes down in front of them", on: "kick" }, { at: 10, what: "Noor steps over it", on: "kick" }, { at: 20, what: "its last eye goes out", on: "kick" }],
   frame(f) {
     const L = CUT.nover + f, s = shake(L, 1.2), near = f >= 10, cam = near ? { pos: [1.75, 0.3, HEADZ - 3.4], target: [-0.2, 1.4, HEADZ + 0.2], fov: 52, up: [Math.sin(-0.06), 1, 0] } : { pos: [-0.9 + s[0], 0.5 + s[1], HEADZ - 4.6], target: [0.3, 1.3, HEADZ + 1], fov: 44 }, c = cam2(cam);
     const far = c.project([0.2, 0, HEADZ + 4.6 - 0.05 * f]), g2 = f - 10, nx = 0.25 - 0.012 * g2;
-    return { set: "atrium", camera: cam, options: scene(L, { warden: headSpec(L), opt: { post: { bgBlur: 0.004 } } }),
-      cels: near ? [plate("reun_noor_over", stand(cam, [nx + 0.45, 0, HEADZ - 0.75 - 0.02 * g2], NOVER.foot, NOVER.m), { layer: { rimDir: [-6, 4], ...boil(f, 1.6), warpStill: [0.4, 0.5], warpDir: [1, 0.1] } })]
+    return { set: "atrium", camera: cam, options: scene(L, { warden: near && !GUIDE ? null : headSpec(L), opt: { post: { bgBlur: 0.004 } } }),
+      cels: near ? [HEADCEL(L), plate("reun_noor_over", stand(cam, [nx + 0.45, 0, HEADZ - 0.75 - 0.02 * g2], NOVER.foot, NOVER.m), { layer: { rimDir: [-6, 4], ...boil(f, 1.6), warpStill: [0.4, 0.5], warpDir: [1, 0.1] } })]
         : [plate("reun_noor_walk", { x: far.x, y: far.y - 0.9 * far.s + 4 * Math.sin(f * 0.45), scale: far.s * 0.00125, depth: far.z }, { layer: { depth: far.z - 0.4 } })],
       overlay(g) { lines(g, L, W * 0.5, H * 0.62, "#ffd0c0"); if (L >= 546 && L < 556) { const p = c.project([0.4, 0, HEADZ]); fireBlast(g, { cx: p.x, cy: p.y, s: p.s }, L - 546 + 14, { R: 0.55, seed: 61, floor: 0, wrecks: 0, debris: 8 }); } },
       post: { ...(L === 546 ? { mode: 1, impact: REDIMP } : L === 566 ? { flash: 0.1 } : { flash: L === 547 ? 0.2 : f === 10 ? 0.08 : 0, ca: 0.0012 + 0.004 * newest(L).jolt }), vignette: 0.5, dark: L >= 566 ? 0.12 * ease((L - 566) / 6) : 0 } };

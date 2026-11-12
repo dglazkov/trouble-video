@@ -1,0 +1,10 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same drawing, the same shapes in the same places, the same colours and the same background: every one of the robot's round red glass eyes (the big one in the middle and all the smaller ones round it) has GONE OUT: the glass is now dead and dark, a flat very dark maroon-black with one slightly lighter dull violet crescent of reflection near its upper edge, no red glow, no orange centre, no white glint. Nothing else changes.",
+ "refs": [
+  "machines/warden/src/head_lit.jpg"
+ ],
+ "aspect": "16:9",
+ "size": "4K",
+ "model": "gemini-3.1-flash-image (art/gen.py)",
+ "kind": "edit:plate:warden_head"
+}

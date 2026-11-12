@@ -1,0 +1,11 @@
+{
+ "prompt": "Repaint the FIRST image as a finished hand-drawn 1990s cel-anime key drawing (a mecha close-up as a master mechanical animator of 1990s TV anime would ink and paint it). KEEP THE COMPOSITION EXACTLY: every shape stays where it is, the same size, line for line — the huge wrecked robot head lying on the bridge deck, its big round central eye, its heavy brow, its jaw, each of the smaller eye-pods round it, the blades behind it — and the background (the dark violet wall with rows of small windows and red lights, the two lamp posts, the rails, the violet deck) stays exactly as it is, untouched. Only the DRAWING of the robot head gets better: replace its plain flat low-polygon surfaces with drawn mechanical detail: armour plates with bevelled edges and panel lines, rows of rivets, vent slots, hinge pins, cable bundles and hoses hanging out, dents, edges that are torn and bent where it was ripped apart, scorch marks and scrapes as flat hard-edged shapes, a crack across the glass of one of the small eyes, a thin wisp of smoke. It is built of wreckage: cream-beige plating (scorched) on the box of the head under a dark gunmetal brow, black shrouds with orange collars round the red glass eyes, navy blades with orange tips. Bold confident black-indigo ink outlines of varying weight with interior lines, flat colour fills, exactly two tones per material (a base and one hard-edged shade), a hard thin red-orange rim light along edges, lit from below by red alarm light: the same dark indigo, violet, red and orange palette as the FIRST image, night. The red glass eyes glow: flat red with a hotter orange centre and one small white glint each, no soft bloom. The SECOND image shows the same robot head intact from another angle, only for its design. No gradients, no airbrush, no photographic texture, no 3D render look, no text, no letters, no numbers, no logos.",
+ "refs": [
+  "machines/warden/src/guide_lit.png",
+  "(the skinned head from shots/warden_look.js frame 3)"
+ ],
+ "aspect": "16:9",
+ "size": "4K",
+ "model": "gemini-3.1-flash-image (art/gen.py)",
+ "kind": "plate:warden_head"
+}

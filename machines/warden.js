@@ -151,7 +151,7 @@ export function createWarden(kit, scene) {
     p.cyl(0.05, 2.6, -0.9, 2.5, -1.1, rubber, "y", 6, 0.03); p.bare.ball(0.1, -0.9, 3.82, -1.1, eye); p.cyl(0.04, 1.7, 0.7, 2.1, -1.2, rubber, "y", 5, 0.02, { rz: -0.2 }); p.turn([[0, 0], [0.3, 0.02], [0.34, 0.1], [0, 0.16]], -0.9, 3.0, -1.1, cream, null, 12);
     // the door: bone plate, torn along two edges, lashed on behind the reels like the shell of a crab
     const dw = 3.0, dh = 2.25, dpts = torn(dw, dh, 9, "tr", 0.34).map(([x, y]) => [x + dw / 2, y + dh / 2]);
-    p.add(prismG(dpts, 0.16, 0.04).translate(-dw / 2, -dh / 2, 0), mat("#ffffff", { kind: 12, flag: 1, map: L.door, seam: [1 / dw, 1 / dh] }), xf(0.1, 1.5, -1.95, { ry: Math.PI, rx: 0.42, rz: 0.08, order: "YXZ" }));
+    p.add(prismG(dpts, 0.16, 0.04).translate(-dw / 2, -dh / 2, 0), mat("#ffffff", { kind: 12, flag: 1, map: L.door, seam: [1 / dw, 1 / dh] }), xf(0.1, 1.5, -1.95, { ry: Math.PI, rx: 0.42, rz: 0.08, order: "YXZ" })); p.add(prismG(dpts, 0.08, 0.02).translate(-dw / 2, -dh / 2, -0.12), gun, xf(0.1, 1.5, -1.95, { ry: Math.PI, rx: 0.42, rz: 0.08, order: "YXZ" }));      // (its inner side: plain)
     for (const [x, y] of [[-1.1, 0.7], [1.2, 0.75], [-1.0, 2.2], [1.1, 2.3]]) { p.rod([x * 0.8, y + 0.2, -1.3], [x, y + 0.1, -1.95 - (y - 1.5) * 0.42], 0.06, rubber, 5); }
     p.box(0.9, 1.7, 0.7, 0.6, 1.0, -1.4, scorch, { rx: -0.3 }, 0.1);
     // stacks: two exhausts leaning back, sooted at the lip
