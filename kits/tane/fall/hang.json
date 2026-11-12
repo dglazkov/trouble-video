@@ -1,5 +1,5 @@
 {
- "source": "kits/tane/closeup/fall_hang_2.jpg",
+ "source": "kits/tane/closeup/fall_hang_5.jpg",
  "size": [
   2752,
   1536
@@ -7,35 +7,35 @@
  "scale": 1.0,
  "match": [
   {
-   "edit": "kits/tane/closeup/fall_hang_3.jpg",
-   "wrote": "kits/tane/closeup/fall_hang_3.png",
-   "before": 4.27,
-   "after": 3.78,
+   "edit": "kits/tane/closeup/fall_hang_8.jpg",
+   "wrote": "kits/tane/closeup/fall_hang_8.png",
+   "before": 3.76,
+   "after": 3.3,
    "shift": [
-    0.01,
+    0.21,
     -0.16
    ],
-   "changed": 2.09
+   "changed": 2.4
   },
   {
-   "edit": "kits/tane/closeup/fall_hang_4.jpg",
-   "wrote": "kits/tane/closeup/fall_hang_4.png",
-   "before": 4.23,
-   "after": 3.79,
+   "edit": "kits/tane/closeup/fall_hang_7.jpg",
+   "wrote": "kits/tane/closeup/fall_hang_7.png",
+   "before": 3.85,
+   "after": 3.33,
    "shift": [
-    -0.03,
-    -0.2
+    0.22,
+    -0.22
    ],
-   "changed": 2.97
+   "changed": 2.58
   }
  ],
  "sprites": {
   "hang": {
    "box": [
-    58,
-    77,
-    2752,
-    1516
+    207,
+    23,
+    2503,
+    1536
    ],
    "files": [
     "hang_0.webp",

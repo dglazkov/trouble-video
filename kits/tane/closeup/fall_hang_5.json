@@ -1,0 +1,13 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY the four faces and nothing else: all four now look straight DOWN at the floor at their feet, startled, with their heads tipped a little down: Tane's eyes open wide and his grin gone into a surprised open mouth; Juno's eyes wide, eyebrows up, mouth a small o; Ife's eyes huge behind her glasses, mouth open; Noor's eyes open a little wider than usual, looking down, mouth closed. Every body, arm, hand, the pipe, the board, the clothes and every outline stay exactly as they are, in exactly the same places.",
+ "refs": [
+  "kits/tane/closeup/reun_grin_1.jpg"
+ ],
+ "kind": "edit:plate:reun_grin",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T13:32:07",
+ "from": "kits/tane/closeup/reun_grin_1.jpg",
+ "note": "a copy of kits/tane/closeup/reun_grin_2.jpg, the reunion's last drawing of the four (looking down at the deck): the fall's first shot begins on the same drawing, and its two changes of face are edits of this copy",
+ "copy_of": "kits/tane/closeup/reun_grin_2.jpg"
+}

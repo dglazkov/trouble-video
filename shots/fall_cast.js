@@ -7,8 +7,8 @@
 // by 3805; a SYNTH comes up from 3816 and holds to 3900, dying away by 3945 (its notes are the `other` and `guitar`
 // stems' onsets: 3807 ... 3905); the file is silent from about 3936 and ends at 3955. So the cuts hang on the bass
 // and brass onsets, the events inside the shots on the strings', and the last close-ups on the synth's phrases:
-//   hang    3512  under the bridge, looking up through the hatch where the deck was: the four stand on nothing.
-//                 They look down (3519). They look at us (3525).
+//   hang    3512  the deck is gone and there is a shaft's mouth where it was: the four stand on nothing, looking
+//                 down. They look up at us (3519). Each makes the face they will fall with (3525).
 //   drop    3532  (brass) from the hatch, straight down: they drop away into the shaft and the camera lets go after them
 //   side    3582  (bass) beside them, falling at their speed: each falls in their own way, the station going up past
 //                 them: the plant, the core, the tunnel

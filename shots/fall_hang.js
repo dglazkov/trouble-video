@@ -1,20 +1,24 @@
 // Fall 1, 146.33-147.17 s: THE FLOOR IS GONE. The deck has let go: where it was there is the mouth of a shaft, the
 // slab they stood on is dropping away down it, and the four are standing where they stood, on nothing, over the pit,
-// still grinning. On the strings (3519) all four look down. On the strings again (3525) all four look at us. Then
-// the brass, and the next shot. One drawing of the four together and two edits of it. The pit is the set
+// still looking down at where it was. On the strings (3519) all four look up, at us, blank. On the strings again
+// (3525) each has the face they will fall with: he grins, she laughs, she begins to scream, they sigh. Then the
+// brass, and the next shot. The drawing is the reunion's own last drawing of the four (looking down), so the cut
+// is on a held pose, and the two changes of face are edits of it. The pit is the set
 // (sets/shaft.js, open at the top); what is above its rim (the deck beyond, its rail, the atrium's night) is painted
 // here by the film.
-// JOIN: the shot before (shots/reun_end.js) ends on the bridge with the deck unlocking; this is a cut to a new angle,
-// so nothing has to match but who stands where: ROW, left to right as the camera sees them.
+// JOIN: the shot before (shots/reun_fight.js `unlock`, its last frame stated at the top of that file) is the four in
+// a row across the gantry, facing its camera, from screen left TANE (the pipe on his shoulder), JUNO (the board under
+// her arm), IFE, NOOR, all looking down, the deck dropped 0.3 m under them. This is a cut to a wider, higher angle
+// on the same row in the same drawing (kits/tane/closeup/fall_hang_5.jpg is a copy of their reun_grin_2.jpg).
 import { CUT, EV, W, H, shot, plates, at3d, ease, clamp, rnd } from "./fall_cast.js";
-const ROW = "tane, ife, noor, juno";      // as painted (kits/tane/closeup/fall_hang_2.jpg); repaint the plate if the reunion ends otherwise
-const CAM = { pos: [0.5, 2.25, -7.6], target: [0, 0.78, 0], fov: 23.5 }, R = 8, NIGHT = { tint: [0.9, 0.76, 0.86], rim: [1.0, 0.45, 0.4], rimDir: [0, 7], gradient: 0.2, gradientY: [0.15, 0.6] };
+const ROW = "tane, juno, ife, noor";      // as the reunion leaves them; if its last drawing changes, copy it again and redo the two edits (pipeline/paint.py tane edit ...)
+const CAM = { pos: [0.5, 2.25, -7.6], target: [0, 0.8, 0], fov: 18.5 }, R = 8, NIGHT = { tint: [0.9, 0.76, 0.86], rim: [1.0, 0.45, 0.4], rimDir: [0, 7], gradient: 0.2, gradientY: [0.15, 0.6] };
 const path = (g, l) => { g.beginPath(); l.forEach((p, i) => (i ? g.lineTo(p.x, p.y) : g.moveTo(p.x, p.y))); g.closePath(); };
 function frame(f) {
-  const F = CUT.hang + f, look = F < EV.down ? 0 : F < EV.out ? 2 : 1;
+  const F = CUT.hang + f, look = F < EV.down ? 0 : F < EV.out ? 1 : 2;
   // the breath before the drop: they stretch a hand's width up, as one
   const up = f >= 17 ? [0.012, 0.03, 0.045][f - 17] : 0, jolt = F === EV.down || F === EV.out ? -5 : 0;
-  const c = at3d(CAM, "tane.hang", look, [0, 0.955 + up * 2, 0], 0.00133 * (1 + up), { layer: NIGHT });
+  const c = at3d(CAM, "tane.hang", look, [0, 0.96 + up * 2, 0], 0.00127 * (1 + up), { layer: NIGHT });
   return { set: "shaft", camera: CAM, options: { hatch: 0, rooms: 0.95, lamps: 0.9, fog: 0.02 }, cels: [{ ...c, y: c.y + jolt }],
     under(g, cam) {
       const pr = (x, y, z) => cam.project([x, y, z]);
@@ -46,4 +50,4 @@ function frame(f) {
     post: { flash: f === 0 ? 0.12 : 0, bloom: 0.6, vignette: 0.5, contrast: 0.32 } };
 }
 export default shot("hang", { cutOn: "strings", plates: plates("tane.hang"), row: ROW,
-  marks: [{ at: EV.down - CUT.hang, what: "all four look down", on: "strings" }, { at: EV.out - CUT.hang, what: "all four look at us", on: "strings" }], frame });
+  marks: [{ at: EV.down - CUT.hang, what: "all four look up at us", on: "strings" }, { at: EV.out - CUT.hang, what: "each makes the face they will fall with", on: "strings" }], frame });

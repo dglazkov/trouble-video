@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY the eyes, eyebrows and mouths of the four faces and nothing else: all four now look straight OUT at the viewer instead of down, the classic cartoon pause before a fall, each with a blank stunned face: Tane's eyes round with small pupils on the viewer, mouth a short flat line; Juno's eyes wide on the viewer, mouth a small flat line; Ife's eyes huge behind her glasses on the viewer, her mouth a tiny wobbly line; Noor's half-closed eyes on the viewer, mouth closed, unsurprised. The heads keep exactly the same tilt, position and outline. Every hand stays exactly where it is (Ife's finger stays at her glasses, Juno's hand stays at her goggles, Tane's hand stays on the pipe). Every body, arm, the pipe, the board, the clothes, the hair and every outline stay exactly as they are.",
+ "refs": [
+  "kits/tane/closeup/fall_hang_5.jpg"
+ ],
+ "kind": "edit:edit:plate:reun_grin",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T13:53:54",
+ "from": "kits/tane/closeup/fall_hang_5.jpg"
+}

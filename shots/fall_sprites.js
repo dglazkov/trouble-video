@@ -317,13 +317,13 @@ export const SPRITES = {
    "/kits/tane/fall/hang_1.webp",
    "/kits/tane/fall/hang_2.webp"
   ],
-  "w": 2694,
-  "h": 1439,
+  "w": 2296,
+  "h": 1513,
   "box": [
-   58,
-   77,
-   2752,
-   1516
+   207,
+   23,
+   2503,
+   1536
   ],
   "of": [
    2752,

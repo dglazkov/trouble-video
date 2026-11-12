@@ -1,0 +1,11 @@
+{
+ "prompt": "Edit the FIRST image. Change only this and keep everything else exactly as it is, line for line, the same figures in the same poses, sizes and places, the same style and the same background: Change ONLY the four faces and nothing else: all four have lifted their heads and now look straight OUT at the viewer, each reacting in their own way to being about to fall: Tane's huge fearless toothy grin is back, eyebrows up, delighted; Juno beams with her mouth wide open in a laugh, eyes sparkling; Ife's eyes are huge behind her glasses and her mouth is wide open in the beginning of a scream, tears starting; Noor looks at the viewer with deadpan half-closed eyes and a tiny sigh, mouth closed. Every body, arm, hand, the pipe, the board, the clothes and every outline stay exactly as they are, in exactly the same places.",
+ "refs": [
+  "kits/tane/closeup/fall_hang_5.jpg"
+ ],
+ "kind": "edit:edit:plate:reun_grin",
+ "aspect": "16:9",
+ "size": "2K",
+ "made": "2026-11-12T13:53:13",
+ "from": "kits/tane/closeup/fall_hang_5.jpg"
+}
