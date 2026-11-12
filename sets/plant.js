@@ -107,7 +107,7 @@ export async function createPlant(renderer, o = {}) {
   const steel = "#7fa6c0", steelD = "#4a6a86", slate = "#2c4258", white = "#e9f3f7", ice = "#a9d9ee", haz = "#f4c21f", dark = "#12202e", navy = "#1d3550";
   const stripes = canvasTex(256, 64, (c) => hazard(c, 0, 0, 256, 64, "#f4c21f", "#131c28", 64), { repeat: true });
   const grate = canvasTex(256, 256, (c) => { c.fillStyle = "#3c566e"; c.fillRect(0, 0, 256, 256); c.fillStyle = "#1f3247"; for (let y = 6; y < 256; y += 16) c.fillRect(10, y, 236, 7); c.fillStyle = "#5a7a94"; c.fillRect(0, 0, 256, 5); c.fillRect(0, 0, 5, 256); c.fillRect(124, 0, 8, 256); }, { repeat: true });
-  const stencil = (text, color = "#eaf6fb") => canvasTex(1024, 256, (c) => { kana(c, text, 24, 28, 200, 26, color); });
+  const stencil = (text, color = "#eaf6fb") => canvasTex(1024, 256, (c) => { const s = Math.min(200, Math.floor(976 / (([...text].length - 1) * 1.08 + 1))); kana(c, text, 24, 28 + (200 - s) / 2, s, s * 0.13, color); });      // sized to the plate: five letters at 200 ran off its end (レイキャク lost half its last)
   const stripeMat = mat("#fff", { kind: 10, map: stripes }), grateMat = mat("#fff", { kind: 10, map: grate }), signMat = mat("#fff", { kind: 2, map: signTex(), gain: G.screens });
   const uvq = (b, c, u, v, w, h, m, ru, rv) => { b.quad(c, u, v, w, h, m); const list = b.bins.get(m), uv = list[list.length - 1].attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * ru, uv.getY(i) * rv); };
   const glass = mat("#7fe9ff", { kind: 1, flag: 1 }), lampM = mat("#eefaff", { kind: 1, flag: 2 }), armM = mat("#ffb020", { kind: 1, flag: 3 });

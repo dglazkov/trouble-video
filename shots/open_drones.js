@@ -4,7 +4,7 @@ import { FPS, CUT, CAST, KIDS, EYES, startOf, cues, kid, boil, ease, wob } from 
 import { hanging, RACK } from "../sets/vault.js";
 import { sfx, sfxMark } from "../engine/sfx.js";
 // each eye's sound, small, beside it: [across, up] of the drone's own size from its eye, eye by eye (clear of the screens)
-const PIP = [[0.7, -0.6], [-0.7, -0.65], [0.7, -0.6], [-0.5, -1.2], [0.7, -0.6], [-0.75, -0.55], [0.75, 0.35], [-0.8, -0.5], [-0.55, 0.45]];
+const PIP = [[0.7, -0.6], [-0.7, -0.65], [0.7, -0.6], [-0.5, -1.2], [0.7, -0.6], [-0.75, -0.55], [0.75, 0.35], [-1.25, -0.55], [-0.55, 0.45]];
 const FRAMES = CUT.red - CUT.drones, UP = 283 - CUT.drones;
 // which slot opens on which hit: round the rack from the far side to the near
 const ORDER = [7, 9, 5, 10, 4, 11, 3, 0, 2, 1, 6, 8];

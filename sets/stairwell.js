@@ -89,7 +89,7 @@ vec3 setSpecial(vec3 W, vec3 d, vec2 uv){
 function textures() {
   const T = {};
   // a level's mark on the back wall: its number, large, and what the level is
-  const names = ["ガントリー", "ハイカン", "デンセン", "ポンプ", "レイキャク", "ソウコ", "キカイ", "タンク", "カソウ"];
+  const names = ["ガントリー", "ハイカン", "デンセン", "ポンプ", "レイキャク", "ソウコ", "キカイ", "タンク", "サイカソウ"];      // the bottom level: "saikasou", lowest level (kasou alone is also the word for a cremation)
   T.levels = names.map((n, m) => canvasTex(1024, 384, (c) => {
     latin(c, `S${m}`, 20, 300, 330, "#fff"); c.fillStyle = "#fff"; c.fillRect(470, 60, 14, 264);
     kana(c, n, 520, 70, n.length > 4 ? 92 : 120, n.length > 4 ? 14 : 18, "#fff"); latin(c, `SHAFT 7 // LEVEL ${String(m).padStart(2, "0")}`, 522, 300, 44, "#fff");
@@ -109,7 +109,7 @@ function textures() {
     c.strokeStyle = "#39412f"; c.lineWidth = 5; for (let i = 0; i <= 9; i++) { c.beginPath(); c.moveTo(i * 228, 0); c.lineTo(i * 228, 1600); c.stroke(); } for (let j = 0; j <= 7; j++) { c.beginPath(); c.moveTo(0, j * 229); c.lineTo(2048, j * 229); c.stroke(); }
     hazard(c, X(LIFT.x0 - 0.1), Z(LIFT.z1), (LIFT.x1 - LIFT.x0 + 0.2) * sx, 0.34 * sz, "#f0b81e", "#1c1d16", 52);
     c.strokeStyle = "#d8d2b0"; c.lineWidth = 12; c.strokeRect(X(-4.2), Z(1.9), 6.6 * sx, 2.3 * sz);
-    c.save(); c.translate(X(-0.9), Z(3.05)); latin(c, "S8", -150, 60, 170, "#d8d2b0"); kana(c, "カソウ", 90, -62, 110, 16, "#d8d2b0"); c.restore();
+    c.save(); c.translate(X(-0.9), Z(3.05)); latin(c, "S8", -150, 60, 170, "#d8d2b0"); kana(c, "サイカソウ", 84, -34, 66, 10, "#d8d2b0"); c.restore();
     c.save(); c.translate(X(-3.5), Z(-4.2)); c.rotate(-Math.PI / 2); chevrons(c, -200, -70, 400, 140, 3, 26, "#d8d2b0"); c.restore();
     for (let k = 0; k < 16; k++) { c.fillStyle = "rgba(30,36,24,0.42)"; c.beginPath(); c.ellipse(hash(k, 1) * 2048, hash(k, 2) * 1600, 30 + hash(k, 3) * 90, 10 + hash(k, 4) * 22, hash(k, 5) * 3, 0, 7); c.fill(); }
   });

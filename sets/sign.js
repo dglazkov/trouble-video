@@ -49,12 +49,19 @@ const G = {
   "ワ": [[[.18, .45], [.18, .18], [.82, .18], [.76, .55], [.58, .8], [.35, .94]]],
   "ヌ": [[[.18, .15], [.8, .15], [.62, .55], [.2, .92]], [[.32, .42], [.78, .82]]],
 };
-const DAKU = [[[.76, .0], [.84, .12]], [[.9, -.02], [.98, .1]]];
+// The voicing marks are drawn finer than the letter (MARK of its stroke) and set well apart, so that at the sizes a sign
+// is seen from across a set the two ticks of a dakuten are still two ticks and the ring of a handakuten is still a ring
+// with a hole in it: ブ and プ must never be taken for each other.
+const MARK = 0.62, mark = (l) => l.map((s) => Object.assign(s, { mark: true }));
+const DAKU = mark([[[.73, -.02], [.81, .13]], [[.92, -.05], [1.0, .1]]]);
 const VOICED = { "ガ": "カ", "ギ": "キ", "グ": "ク", "ゲ": "ケ", "ゴ": "コ", "ザ": "サ", "ジ": "シ", "ズ": "ス", "ゼ": "セ", "ダ": "タ", "デ": "テ", "ド": "ト", "バ": "ハ", "ビ": "ヒ", "ブ": "フ", "ボ": "ホ" };
-const RING = [[[.86, .0], [.94, .03], [.97, .1], [.94, .17], [.86, .2], [.78, .17], [.75, .1], [.78, .03], [.86, .0]]];
+const RING = mark([Array.from({ length: 13 }, (_, i) => [.9 + .115 * Math.cos(i * Math.PI / 6), .06 + .115 * Math.sin(i * Math.PI / 6)])]);
 const HALF = { "パ": "ハ", "ピ": "ヒ", "プ": "フ", "ポ": "ホ" };
-const SMALL = { "ッ": "ツ", "ャ": "ヤ", "ァ": "ア", "ィ": "イ", "ェ": "エ", "ォ": "オ" };
-function strokes(ch) {
+const SMALL = { "ッ": "ツ", "ャ": "ヤ", "ュ": "ユ", "ョ": "ヨ", "ァ": "ア", "ィ": "イ", "ェ": "エ", "ォ": "オ" };
+const BAR_DOWN = [[[.5, .1], [.5, .9]]];      // the long-vowel mark in a column: it runs the way the writing runs
+function strokes(ch, vertical) {
+  if (vertical && ch === "ー") return BAR_DOWN;
+  if (vertical && SMALL[ch]) return G[SMALL[ch]].map((s) => s.map(([x, y]) => [0.36 + x * 0.62, 0.02 + y * 0.62]));      // in a column a small letter sits high and to the right
   if (G[ch]) return G[ch];
   if (VOICED[ch]) return [...G[VOICED[ch]], ...DAKU];
   if (HALF[ch]) return [...G[HALF[ch]], ...RING];
@@ -67,7 +74,7 @@ export function kana(ctx, str, x, y, size, lw, color, o = {}) {
   ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.lineCap = o.cap ?? "square"; ctx.lineJoin = "miter";
   [...str].forEach((ch, i) => {
     const ox = o.vertical ? x : x + i * size * (o.pitch ?? 1.08), oy = o.vertical ? y + i * size * (o.pitch ?? 1.08) : y;
-    for (const st of strokes(ch)) { ctx.beginPath(); st.forEach((p, j) => { const px = ox + p[0] * size, py = oy + p[1] * size; j ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }); ctx.stroke(); }
+    for (const st of strokes(ch, o.vertical)) { ctx.lineWidth = st.mark ? lw * (o.marks ?? MARK) : lw; ctx.beginPath(); st.forEach((p, j) => { const px = ox + p[0] * size, py = oy + p[1] * size; j ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }); ctx.stroke(); }
   });
   ctx.restore();
 }

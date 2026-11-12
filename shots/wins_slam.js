@@ -23,7 +23,7 @@ function frame(f, sync) {
       if (since === -1) smear(g, sh.x, sh.y, 0.45 * sh.s, 1.35 * sh.s, 5.3, 6.9, ["#f07a22", "#2a2f55"]);
       if (since === 0) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 130, seed: 41, inner: 160, color: "#07020f", width: 0.026, reach: 0.9 });
       else if (since === 1) speedLines(g, 1920, 1080, { cx: hit.x, cy: hit.y, n: 100, seed: 42, inner: 230, color: "#fff", width: 0.02, reach: 0.9 });
-      sfx(g, { text: "ガンッ", x: 1560, y: 965, size: 116, angle: 0.08, color: since < 2 ? ["#ffffff", "#07020f"] : "tane", age: since, life: 10, shake: 14, seed: 9 });      // the biggest of the three
+      sfx(g, { text: "ガンッ", x: 1560, y: 915, size: 116, angle: 0.08, color: since < 2 ? ["#ffffff", "#07020f"] : "tane", age: since, life: 10, shake: 14, seed: 9 });      // the biggest of the three
       if (since >= 1) { burst(g, hit.x, hit.y, 150, since, 17, 15); sparks(g, cam, SLAM_AT, [0, 4, -10], since - 1, { n: 24, seed: 18, life: 12, spread: 0.9 }); shards(g, cam, BITS, since);
         smoke(g, cam, [SLAM_AT[0], SLAM_AT[1], SLAM_AT[2] - 0.3], since - 2, { size: 0.85, life: 34, n: 16, seed: 16, up: 0.9, drift: [0, 0, -1.6], hot: true }); smoke(g, cam, [SLAM_AT[0], 0.3, SLAM_AT[2] - 1.5], since - 6, { size: 0.5, life: 30, n: 10, seed: 19, up: 0.5, drift: [0, 0, -1.0] }); }
     } };

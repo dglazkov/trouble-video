@@ -179,7 +179,7 @@ function textures() {
   });
   const sign = (w, h, col, bg, draw) => canvasTex(w, h, (c) => { c.fillStyle = bg; c.fillRect(0, 0, w, h); c.strokeStyle = col; c.lineWidth = 6; c.strokeRect(10, 10, w - 20, h - 20); draw(c); scanlines(c, w, h); });
   const names = ["ロウカ", "テープ", "キロク", "ホカン", "コア", "アーカイブ", "デンゲン", "レイキャク"];
-  T.bays = names.map((n, k) => sign(512, 128, "#ffb428", "#1c0d02", (c) => { latin(c, `V-0${k + 1}`, 24, 94, 84, "#ffb428"); kana(c, n, 270, 30, n.length > 4 ? 44 : 64, n.length > 4 ? 7 : 10, "#ffb428"); }));
+  T.bays = names.map((n, k) => sign(512, 128, "#ffb428", "#1c0d02", (c) => { latin(c, `V-0${k + 1}`, 24, 94, 84, "#ffb428"); kana(c, n, n.length > 3 ? 262 : 270, 30, n.length > 3 ? 44 : 64, n.length > 3 ? 7 : 10, "#ffb428"); }));      // four letters at the large size ran off the plate (デンゲン lost its last)
   const st = (str, col = "#fff") => canvasTex(Math.ceil(kanaWidth(str, 104) + 28), 128, (c) => kana(c, str, 14, 12, 104, 17, col));
   T.stencils = ["アーカイブ", "キロク ホカン", "タチイリ キンシ", "テープ", "キケン"].map((s) => ({ tex: st(s), w: kanaWidth(s, 104) / 104 * 0.62 }));
   T.codes = [1, 2, 3, 4, 5, 6, 7, 8].map((k) => canvasTex(288, 128, (c) => latin(c, `V-0${k}`, 4, 104, 104, "#fff")));

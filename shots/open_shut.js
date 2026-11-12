@@ -6,7 +6,7 @@ const FRAMES = CUT.ring - CUT.shut, WIDE = 227 - CUT.shut, START = 178 - CUT.shu
 const HITS = SHUTS.filter(([, hit]) => hit >= CUT.shut && hit < CUT.ring).map(([bay, hit]) => ({ bay, at: hit - CUT.shut }));
 // the slams' sound, lettered on the dark of the reel tower between the bays (nothing is written there): the two behind
 // the four, and the first of the pair on the crash zoom (the second lands seven frames on, under the same word)
-const WORDS = [{ hit: 0, x: 990, y: 250, size: 88, angle: -0.14, seed: 1 }, { hit: 1, x: 1000, y: 330, size: 94, angle: 0.09, seed: 2 }, { hit: 2, x: 968, y: 290, size: 64, angle: -0.2, seed: 3 }];
+const WORDS = [{ hit: 0, x: 990, y: 170, size: 88, angle: -0.14, seed: 1 }, { hit: 1, x: 1000, y: 330, size: 94, angle: 0.09, seed: 2 }, { hit: 2, x: 968, y: 290, size: 64, angle: -0.2, seed: 3 }];
 function frame(f, sync) {
   const F = CUT.shut + f, k = f / FRAMES, jolt = Math.max(...HITS.map((h) => f >= h.at ? Math.exp(-(f - h.at) / 2.2) : 0)), wide = f >= WIDE;
   return { set: "vault",

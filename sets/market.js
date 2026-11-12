@@ -132,7 +132,7 @@ function textures() {
     kana(c, w, 64 - size / 2, 256 - n * size * 0.54, size, size * 0.15, fg, { vertical: true });
   }));
   T.banner = Array.from({ length: 6 }, (_, i) => canvasTex(128, 384, (c) => {
-    const [bg, fg] = CLOTH[i % CLOTH.length], w = WORDS[(i * 7 + 2) % WORDS.length].slice(0, 3), n = [...w].length;
+    const [bg, fg] = CLOTH[i % CLOTH.length], short = WORDS.filter((x) => [...x].length <= 3), w = short[(i * 7 + 2) % short.length], n = [...w].length;      // only words that fit whole: a word cut to three letters (ヤミイ) says nothing
     c.fillStyle = bg; c.fillRect(0, 0, 128, 384); c.fillStyle = fg; c.fillRect(0, 0, 128, 18); c.fillRect(0, 352, 128, 10);
     kana(c, w, 24, 192 - n * 46, 80, 13, fg, { vertical: true, pitch: 1.12 });
   }));

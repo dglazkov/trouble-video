@@ -146,7 +146,7 @@ function textures() {
   T.grate = canvasTex(256, 256, (c) => { c.fillStyle = "#868eb2"; c.fillRect(0, 0, 256, 256); c.fillStyle = "#6d7499"; for (let i = 0; i < 8; i++) c.fillRect(0, i * 32 + 10, 256, 12); c.fillStyle = "#7a82a6"; for (let i = 0; i < 4; i++) c.fillRect(i * 64 + 26, 0, 10, 256); c.fillStyle = "#f0b81e"; c.fillRect(0, 0, 10, 256); c.fillRect(246, 0, 10, 256); }, { repeat: true });
   T.hazard = canvasTex(256, 64, (c) => hazard(c, 0, 0, 256, 64, "#f0b81e", "#1c1d2a", 64), { repeat: true });
   const sign = (w, h, col, bg, draw) => canvasTex(w, h, (c) => { c.fillStyle = bg; c.fillRect(0, 0, w, h); c.strokeStyle = col; c.lineWidth = 6; c.strokeRect(10, 10, w - 20, h - 20); draw(c); scanlines(c, w, h); });
-  T.vault = sign(512, 128, "#ffb428", "#1c0d02", (c) => { latin(c, "V-01", 24, 94, 84, "#ffb428"); kana(c, "アーカイブ", 270, 38, 44, 7, "#ffb428"); });
+  T.vault = sign(512, 128, "#ffb428", "#1c0d02", (c) => { latin(c, "V-01", 24, 94, 84, "#ffb428"); kana(c, "アーカイブ", 262, 38, 44, 7, "#ffb428"); });
   T.stairs = sign(512, 128, "#62ffb0", "#052a1a", (c) => { latin(c, "S8", 30, 96, 92, "#62ffb0"); kana(c, "カイダン", 190, 28, 70, 11, "#62ffb0"); });
   const st = (str) => canvasTex(Math.ceil(kanaWidth(str, 104) + 28), 128, (c) => kana(c, str, 14, 12, 104, 17, "#fff"));
   T.sector = st("セクター"); T.keep = st("タチイリ キンシ"); T.code = canvasTex(420, 128, (c) => latin(c, "R7-D0", 4, 104, 104, "#fff"));
