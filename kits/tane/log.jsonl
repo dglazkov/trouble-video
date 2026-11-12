@@ -42,3 +42,15 @@
 {"file": "kits/tane/closeup/open_face_3.jpg", "kind": "edit:closeup:open_face", "time": "2026-11-12T08:17:49", "ok": false, "error": "no image: {\"candidates\": [{\"content\": {}, \"finishReason\": \"NO_IMAGE\", \"index\": 0}], \"usageMetadata\": {\"promptTokenCount\": 393, \"totalTokenCount\": 393, \"promptTokensDetails\": [{\"modality\": \"TEXT\", \"tokenCount\": 135}, {\"modality\": \"IMAGE\", \"tokenCount\": 258}], \"serviceTier\": \"standard\"}, \"modelVersion\": \"gemini-3.1-flash-image\", \"responseId\": \"rOb1atOCEeXD_PUPnpyEyQc\"}\n"}
 {"file": "kits/tane/closeup/open_face_2.jpg", "kind": "edit:closeup:open_face", "time": "2026-11-12T08:18:03", "ok": true}
 {"file": "kits/tane/closeup/open_face_3.jpg", "kind": "edit:closeup:open_face", "time": "2026-11-12T08:18:11", "ok": true}
+{"file": "kits/tane/source/desc_vault/side/take_1.jpg", "kind": "cels:desc_vault/side", "time": "2026-11-12T09:20:40", "ok": true}
+{"file": "kits/tane/source/desc_vault/side/take_1.jpg", "reject": "pose: cel 2: covers 3% of the mannequin's hand.R; size: cel 1: 1.21 of the others' size", "by": "check", "time": "2026-11-12T09:20:49"}
+{"file": "kits/tane/source/desc_vault/side/take_2.jpg", "kind": "cels:desc_vault/side", "time": "2026-11-12T09:21:19", "ok": true}
+{"file": "kits/tane/source/desc_vault/side/take_2.jpg", "reject": "count: 1 figures for 3 mannequins; count: cels 0 and 1 are one joined figure; count: cels 0 and 2 are one joined figure; pose: cel 0: 91% of the figure is away from its mannequin; palette: cel 0: 81% of the figure is in none of the design's colours", "by": "check", "time": "2026-11-12T09:21:26"}
+{"file": "kits/tane/source/desc_vault/side/take_3.jpg", "kind": "cels:desc_vault/side", "time": "2026-11-12T09:21:57", "ok": true}
+{"file": "kits/tane/source/desc_vault/side/take_3.jpg", "reject": "pose: cel 0: covers 71% of its mannequin; place: cel 0: painted 0.14 body units from its mannequin", "by": "check", "time": "2026-11-12T09:22:04"}
+{"file": "kits/tane/source/hero/desc_heap/take_1.jpg", "kind": "cels:hero/desc_heap", "time": "2026-11-12T09:24:55", "ok": true}
+{"file": "kits/tane/source/hero/desc_heap/take_1.jpg", "reject": "pose: cel 0: covers 17% of the mannequin's hand.R; facing: cel 0: the face is on the wrong side of the head; palette: cel 0: only 4% of the uarm is in the design's colours for it (coat, coatshade); mannequin: cel 0: 5.6% of the figure is still mannequin colour", "by": "check", "time": "2026-11-12T09:25:04"}
+{"file": "kits/tane/source/hero/desc_heap/take_2.jpg", "kind": "cels:hero/desc_heap", "time": "2026-11-12T09:25:35", "ok": true}
+{"file": "kits/tane/source/hero/desc_heap/take_2.jpg", "reject": "pose: cel 0: covers 87% of its mannequin", "by": "check", "time": "2026-11-12T09:25:41"}
+{"file": "kits/tane/source/hero/desc_heap/take_3.jpg", "kind": "cels:hero/desc_heap", "time": "2026-11-12T09:26:09", "ok": true}
+{"file": "kits/tane/source/hero/desc_heap/take_3.jpg", "reject": "pose: cel 0: covers 85% of its mannequin", "by": "check", "time": "2026-11-12T09:26:17"}

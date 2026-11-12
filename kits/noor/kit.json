@@ -440,6 +440,90 @@
     "yaw": -149.5,
     "elev": 1.7
    }
+  },
+  "lift": {
+   "img": "hero/lift.webp",
+   "w": 917,
+   "h": 2084,
+   "k": 1000.0,
+   "ground": [
+    476.3,
+    1899.5
+   ],
+   "bottom": 2078,
+   "hips": [
+    476.3,
+    955.2
+   ],
+   "head": [
+    482.2,
+    200.9
+   ],
+   "source": "kits/noor/source/hero/desc_lift/take_1.jpg",
+   "shot": "shots/desc_gate.js",
+   "frame": 0,
+   "action": "desc_wait",
+   "cel": 0,
+   "from": {
+    "yaw": 0,
+    "elev": 5.4
+   }
+  },
+  "nails": {
+   "img": "hero/nails.webp",
+   "w": 745,
+   "h": 2042,
+   "k": 1000.0,
+   "ground": [
+    353.1,
+    1911.0
+   ],
+   "bottom": 2034,
+   "hips": [
+    348.3,
+    966.0
+   ],
+   "head": [
+    329.9,
+    215.9
+   ],
+   "source": "kits/noor/source/hero/desc_wait/take_3.jpg",
+   "shot": "shots/desc_ding.js",
+   "frame": 20,
+   "action": "desc_wait",
+   "cel": 2,
+   "from": {
+    "yaw": 0.1,
+    "elev": 3.1
+   }
+  },
+  "step": {
+   "img": "hero/step.webp",
+   "w": 695,
+   "h": 2063,
+   "k": 1000.0,
+   "ground": [
+    386.3,
+    1895.5
+   ],
+   "bottom": 2053,
+   "hips": [
+    381.6,
+    982.1
+   ],
+   "head": [
+    374.5,
+    229.9
+   ],
+   "source": "kits/noor/source/hero/desc_wait/take_3.jpg",
+   "shot": "shots/desc_ding.js",
+   "frame": 16,
+   "action": "desc_wait",
+   "cel": 1,
+   "from": {
+    "yaw": 0.3,
+    "elev": 3
+   }
   }
  }
 }

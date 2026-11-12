@@ -54,6 +54,13 @@ ACTIONS = {
     "leap": "{n} key drawings of {o} jumping a gap on a hoverboard, seen from above and behind: first launching upward with the board's nose tilted up, then the top of the jump, knees tucked up, one hand gripping the board's edge and the other arm thrown up",
 }
 
+# the descent (shots/desc_*.js): down the stairwell, each in their own way
+ACTIONS.update({
+    "desc_vault": "{n} key drawings of {o} vaulting down a stairwell from one flight of stairs to the next, different from each other: in the FIRST {s} {IS} diving over a handrail with one hand planted on it, body thrown forward almost level and knees tucked up; in the SECOND {s} {IS} dropping through the air feet first, arms flung up and wide; in the THIRD {s} {IS} landing in a deep crouch, knees fully bent, one fist down beside {p} feet, looking up ahead",
+    "desc_slide": "{n} key drawings of {o} sliding down a staircase handrail standing on it sideways on both feet like a surfer, different from each other: in the FIRST {s} {IS} crouched low with knees bent and both arms out for balance; in the SECOND {s} {IS} in the air, hopping from one rail to the next, knees tucked up high and both arms up; in the THIRD {s} {IS} sliding again in the same crouch but with one arm thrown straight up, {p} head turned to look at the viewer",
+    "desc_steps": "the {n} successive drawings of {o} running DOWN a steep staircase as fast as {s} can, taking every single step: the front foot reaches down to a lower step while the back foot is still on a higher one",
+})
+
 
 def rel(p): return os.path.relpath(p, ROOT)
 

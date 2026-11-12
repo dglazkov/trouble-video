@@ -50,6 +50,7 @@ try {
   const sync = await loadSync(), post = new Post(renderer, W, H), sets = {}, cast = {}, plates = {};
   const makers = { corridor: () => import("../sets/corridor.js").then((m) => m.createCorridor(renderer, { width: W, height: H })), market: () => import("../sets/market.js").then((m) => m.createMarket(renderer, { width: W, height: H })),
     vault: () => import("../sets/vault.js").then((m) => m.createVault(renderer, { width: W, height: H })) };
+  makers.atrium = () => import("../sets/atrium.js").then((m) => m.createAtrium(renderer, { width: W, height: H })); makers.stairwell = () => import("../sets/stairwell.js").then((m) => m.createStairwell(renderer, { width: W, height: H }));
   const need = async (name) => sets[name] ?? (sets[name] = await makers[name]());
   for (const s of shot.sets ?? []) await need(s);
   for (const [who, base] of Object.entries(shot.cast ?? {})) {
@@ -85,7 +86,7 @@ try {
     const shadows = [];
     for (const { a, body } of list) {
       if (a.shadow === false) continue;
-      const q = body.q, floor = set?.floorAt ? set.floorAt(q.x, q.z) : 0; if (floor === null) continue;
+      const q = body.q, floor = set?.floorAt ? set.floorAt(q.x, q.z, q.y ?? 0) : 0; if (floor === null) continue;
       const feet = ["L", "R"].map((s) => body.J[s].ball), c = [(feet[0][0] + feet[1][0] + body.J.hips[0]) / 3, floor, (feet[0][2] + feet[1][2] + body.J.hips[2]) / 3], up = Math.max(0, (q.y ?? 0) - floor), k = Math.max(0, 1 - up / 3);
       shadows.push({ at: c, rx: 0.34 * (0.5 + 0.5 * k), rz: 0.46 * (0.5 + 0.5 * k), yaw: q.yaw, alpha: 0.7 * k });
     }

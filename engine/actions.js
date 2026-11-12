@@ -102,6 +102,54 @@ export const ACTIONS = {
   leap: { cels: 2, loop: false, half: false, loose: true, float: true, elev: 32, pose: (i) => LEAP[i] },
 };
 
+// ---- the descent (shots/desc_*.js, song 19.9-29.8 s): down the stairwell, each of the four in their own way ---------
+// Tane vaults the rails, flight to flight: (0) over a rail, one hand on it, body thrown level, knees tucked; (1) the
+// drop: feet first, arms and coat flung up, looking where he will land; (2) the landing: a deep crouch, a fist down.
+const DESC_VAULT = [
+  pose({ lean: 72, twist: 8, lift: 0.5, head: { yaw: 0, pitch: -48, roll: 0 }, arm: { L: arm(4, 6, 6), R: arm(-70, 40, 30) }, leg: { L: leg(40, 112, 10, 30), R: leg(-52, 70, 14, 55) } }),
+  pose({ lean: -10, lift: 0.3, head: { yaw: 0, pitch: 20, roll: 0 }, arm: { L: arm(160, 20, 25), R: arm(118, 30, 50) }, leg: { L: leg(55, 80, 14, 30), R: leg(-15, 60, 16, 45) } }),
+  pose({ lean: 38, head: { yaw: 0, pitch: -38, roll: 0 }, arm: { L: arm(-55, 34, 50), R: arm(28, 8, 6) }, leg: { L: leg(100, 130, 24, 10), R: leg(80, 128, 26, 28) } }),
+];
+// Juno slides down the handrail on her feet, sideways on, as she rides her board: (0) crouched, arms out; (1) the
+// hop from one flight's rail to the next, tucked, arms up; (2) the slide again, an arm thrown up, looking at us.
+const DESC_SLIDE = [
+  pose({ lean: 16, twist: -30, pelvisTwist: -16, head: { yaw: 10, pitch: -6, roll: 0 }, arm: { L: arm(30, 70, 20), R: arm(-30, 72, 28) }, leg: { L: leg(58, 38, 10, 25), R: leg(6, 82, 12, 20) } }),
+  pose({ lean: 6, twist: 20, lift: 0.3, head: { yaw: -20, pitch: -10, roll: 0 }, arm: { L: arm(140, 30, 20), R: arm(100, 50, 40) }, leg: { L: leg(75, 105, 10), R: leg(55, 110, 14) } }),
+  pose({ lean: 14, twist: -30, pelvisTwist: -16, head: { yaw: 55, pitch: -10, roll: 6 }, arm: { L: arm(34, 64, 24), R: arm(20, 150, 15) }, leg: { L: leg(58, 38, 10, 25), R: leg(6, 82, 12, 20) } }),
+];
+// Ife takes every single step: a patter of four drawings, one per frame (two steps): (0) the left foot down on the
+// next tread, the right still on the one above; (1) the right knee coming through; (2), (3) the same on the other
+// foot. She leans back from the drop, arms out for balance.
+const DESC_STEP = [
+  pose({ lean: -4, twist: 8, head: { yaw: 0, pitch: 14, roll: 0 }, arm: { L: arm(10, 55, 80), R: arm(-20, 60, 70) }, leg: { L: leg(22, 6, 5, -8), R: leg(20, 95, 5, 30) } }),
+  pose({ lean: -2, twist: -4, head: { yaw: 0, pitch: 14, roll: 0 }, arm: { L: arm(-15, 62, 75), R: arm(15, 50, 85) }, leg: { L: leg(2, 22, 5, 0), R: leg(55, 88, 5, 10) } }),
+];
+const swapSides = (p) => pose({ ...p, twist: -p.twist, pelvisTwist: -p.pelvisTwist, head: { yaw: -p.head.yaw, pitch: p.head.pitch, roll: -p.head.roll }, arm: { L: p.arm.R, R: p.arm.L }, leg: { L: p.leg.R, R: p.leg.L } });
+const DESC_STEPS = [DESC_STEP[0], DESC_STEP[1], swapSides(DESC_STEP[0]), swapSides(DESC_STEP[1])];
+// Noor takes the lift: (0) in the cage, arms folded; (1) one step out of it, eyes still on their nails; (2) waiting,
+// weight on one leg, a hand on the hip, examining the nails of the other.
+const DESC_WAIT = [
+  pose({ lean: -2, twist: -4, head: { yaw: 0, pitch: 5, roll: -3 }, arm: { L: arm(30, -4, 112), R: arm(30, -4, 112) }, leg: { L: leg(-2, 1, 3), R: leg(10, 16, 8, 4) } }),
+  pose({ lean: 2, head: { yaw: -8, pitch: 10, roll: 0 }, arm: { L: arm(-12, 8, 14), R: arm(40, 2, 126) }, leg: { L: leg(-20, 12, 4, 20), R: leg(26, 5, 4, -12) } }),
+  pose({ lean: -3, twist: -6, head: { yaw: -10, pitch: 12, roll: 4 }, arm: { L: arm(-12, 24, 62), R: arm(40, 2, 128) }, leg: { L: leg(-1, 1, 4), R: leg(6, 12, 9, 3) } }),
+];
+// The other three arrive in a heap: (0) still in the air (Ife's is drawn: she comes down last, on top); (1) landed:
+// Tane flat on his front, chin up; Juno sitting on him, leaning back on her hands; Ife sitting on top, seeing stars.
+const DESC_HEAP = {
+  tane: [DESC_VAULT[1], pose({ lean: 84, head: { yaw: 50, pitch: -58, roll: 0 }, arm: { L: arm(100, 40, 40), R: arm(80, 50, 70) }, leg: { L: leg(-86, 4, 12, 60), R: leg(-84, 75, 14, 30) } })],
+  juno: [DESC_SLIDE[1], pose({ lean: -14, twist: 12, head: { yaw: 14, pitch: -16, roll: 0 }, arm: { L: arm(-38, 22, 8), R: arm(-28, 26, 14) }, leg: { L: leg(84, 84, 14, -10), R: leg(74, 60, 22, -5) } })],
+  ife: [pose({ lean: 30, lift: 0.3, head: { yaw: 0, pitch: -20, roll: 0 }, arm: { L: arm(150, 40, 30), R: arm(110, 60, 50) }, leg: { L: leg(70, 60, 20), R: leg(10, 100, 20) } }),
+    pose({ lean: 10, head: { yaw: 0, pitch: 6, roll: 16 }, arm: { L: arm(30, 10, 40), R: arm(22, 16, 46) }, leg: { L: leg(82, 86, 20, 0), R: leg(80, 80, 24, 0) } })],
+};
+Object.assign(ACTIONS, {
+  desc_vault: { cels: 3, loop: false, half: false, loose: true, float: true, pose: (i) => DESC_VAULT[i] },
+  desc_slide: { cels: 3, loop: false, half: false, loose: true, float: true, pose: (i) => DESC_SLIDE[i] },
+  desc_steps: { cels: 4, loop: true, half: true, loose: true, float: true, pose: (i) => DESC_STEPS[i] },
+  desc_wait: { cels: 3, loop: false, half: false, loose: true, pose: (i) => DESC_WAIT[i] },
+  desc_cage: { cels: 3, loop: false, half: false, loose: true, float: true, pose: (i) => DESC_WAIT[i] },      // the same drawings while the cage carries them: its floor is the shot's, not the set's
+  desc_heap: { cels: 2, loop: false, half: false, loose: true, float: true, pose: (i, who) => (DESC_HEAP[who] ?? DESC_HEAP.juno)[i] },
+});
+
 // Which drawing of an action a phase (0..1 through the action) is on. A held action of n drawings splits the phase
 // into n equal parts (ride: below 1/3 leaning left, to 2/3 centred, then leaning right; 0, 0.5 and 1 pick them).
 export function celIndex(action, phase = 0) {

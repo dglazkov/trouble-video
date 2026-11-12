@@ -29,6 +29,7 @@ import { ACTIONS, actorPose, celIndex } from "./actions.js";
 import { viewOf } from "./views.js";
 import { hull } from "./mannequin.js";
 import { createSync } from "./sync.js";
+import { floorAt as stairFloor } from "../sets/stairplan.js";
 
 export const LIMITS = {
   stride: 14,         // pixels along the floor a planted foot may be from where the drawing before put it
@@ -43,6 +44,7 @@ export const LIMITS = {
 };
 // the floor of each set that is not flat at 0: (x, z) -> its height, or null where there is none
 const FLOORS = { market: (x, z) => z > 66 && z < 76 ? null : z > 62.4 && z <= 66 && Math.abs(x) < 2.2 ? 0.85 * (z - 62.4) / 3.6 : 0 };      // sets/market.js floorAt (that module needs a renderer)
+FLOORS.stairwell = stairFloor;      // sets/stairplan.js: the tread or deck under someone at about y
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const wrap = (a) => ((a + 180) % 360 + 360) % 360 - 180;
 
@@ -64,7 +66,7 @@ export function walk(shot, sync, kits) {
       const q = body.q, g = hang(c.kit, pick, body, cam), root = cam.project([q.x, q.y, q.z]), A = ACTIONS[on.action], pr = (p) => { const s = cam.project(p); return [s.x, s.y]; };
       // the feet: which are down, and where on the floor
       const feet = {};
-      const floor = FLOORS[fr.set]?.(q.x, q.z) ?? 0;
+      const floor = FLOORS[fr.set]?.(q.x, q.z, q.y) ?? 0;
       if (!A.float && !q.board && floor !== null) for (const s of ["L", "R"]) { const j = body.J[s], low = Math.min(j.heel[1], j.toe[1]) - floor; if (low < 0.012) feet[s] = [j.ball[0], floor, j.ball[2]]; }
       // the box the figure fills
       let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;

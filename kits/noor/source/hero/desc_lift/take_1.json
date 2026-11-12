@@ -1,0 +1,345 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: one posing mannequin, 1 key drawing(s) of them for one film shot: standing still inside a lift, facing the viewer, arms folded across the chest, weight on one leg, face completely deadpan and bored, eyes half-lidded looking straight ahead. Paint the character from the SECOND image (their model sheet) over every mannequin, as a finished key drawing by the same animator. The second image only shows what they look like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 1 figure of the first image, each in its mannequin's pose and place, and nothing else. Keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), BLUE limbs are their LEFT arm and leg; RED limbs are their RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. Each mannequin is drawn in the exact PERSPECTIVE of the film camera of its shot, and the drawing must keep that camera: They are seen from straight in front, at about eye level. Keep each mannequin's foreshortening exactly: what is nearer the camera is drawn bigger, what points away from it is drawn shorter, and the figure's outline matches its mannequin's outline. Do NOT turn the figure to a plainer view. Each figure has exactly two arms and two legs, and both feet are drawn complete. Wherever their face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. The design: Noor, 16 years old, androgynous, the tallest of the friends: very tall and thin with long legs, a small head and narrow shoulders (seven and a half heads tall), light brown skin. HAIR: perfectly straight black hair down to the waist, parted in the middle, with ONE bold pure-white streak that starts at the parting on THEIR LEFT side and runs the whole length of the hair in front of the left shoulder; all the rest of the hair is black. FACE: narrow and calm, half-lidded deadpan eyes with dark eyeliner, thin straight eyebrows, mouth closed, no expression. COAT: a long plain black coat down to the ankles with a pointed uneven hem, always worn open, plain lapels, long sleeves to the wrists, over a plain black top and plain black trousers; dark-grey and violet-grey shade tones so the folds of the black clothes still show. NECK: a plain black choker and two thin silver chain necklaces. HIP: one thin silver chain hanging in a loop at the hip, and a small grey retro cassette player clipped on THEIR LEFT hip. BOOTS: heavy black lace-up platform boots with thick soles, up to the middle of the shin. HANDS: bare hands with black nails. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on them. No headphones on the head, no hat, no weapon. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap. Only the character, nothing else: no lift, no gate, no floor, no props.",
+ "refs": [
+  "kits/noor/source/hero/desc_lift/layout.png",
+  "out/ref/noor_design.png"
+ ],
+ "kind": "cels:hero/desc_lift",
+ "aspect": "3:4",
+ "size": "4K",
+ "made": "2026-11-12T09:24:54",
+ "layout": {
+  "action": "hero",
+  "hero": {
+   "shot": "shots/desc_gate.js",
+   "who": "noor"
+  },
+  "what": "standing still inside a lift, facing the viewer, arms folded across the chest, weight on one leg, face completely deadpan and bored, eyes half-lidded looking straight ahead",
+  "loose": true,
+  "float": true,
+  "prop": null,
+  "view": "desc_lift",
+  "yaw": null,
+  "elev": null,
+  "W": 1792,
+  "H": 2400,
+  "cols": 1,
+  "rows": 1,
+  "unit": 1038,
+  "aspect": "3:4",
+  "cels": [
+   {
+    "index": 0,
+    "name": "lift",
+    "frame": 0,
+    "action": "desc_wait",
+    "cel": 0,
+    "from": {
+     "yaw": 0,
+     "elev": 5.4
+    },
+    "box": [
+     0,
+     0,
+     1792,
+     2400
+    ],
+    "ground": [
+     896.26,
+     2112.58
+    ],
+    "joints": {
+     "hips": [
+      896.26,
+      1132.42
+     ],
+     "waist": [
+      896.26,
+      971.22
+     ],
+     "chest": [
+      896.26,
+      713.88
+     ],
+     "neckBase": [
+      896.26,
+      551.3
+     ],
+     "headBase": [
+      896.26,
+      475.54
+     ],
+     "head": [
+      902.41,
+      349.47
+     ],
+     "crown": [
+      908.6,
+      222.85
+     ],
+     "L.sh": [
+      1069.92,
+      592.59
+     ],
+     "L.elbow": [
+      1042.37,
+      853.11
+     ],
+     "L.wrist": [
+      1002.03,
+      642.89
+     ],
+     "L.hand": [
+      987.1,
+      565.06
+     ],
+     "L.hip": [
+      994.83,
+      1132.42
+     ],
+     "L.knee": [
+      1018.15,
+      1582.45
+     ],
+     "L.ankle": [
+      997.69,
+      2017.7
+     ],
+     "L.heel": [
+      996.64,
+      2086.26
+     ],
+     "L.toe": [
+      1000.84,
+      2150.36
+     ],
+     "R.sh": [
+      723.24,
+      593.3
+     ],
+     "R.elbow": [
+      729.8,
+      852.97
+     ],
+     "R.wrist": [
+      745.66,
+      643.53
+     ],
+     "R.hand": [
+      751.53,
+      565.93
+     ],
+     "R.hip": [
+      797.69,
+      1132.42
+     ],
+     "R.knee": [
+      732.64,
+      1587.09
+     ],
+     "R.ankle": [
+      754.14,
+      2021.57
+     ],
+     "R.heel": [
+      755.74,
+      2084.71
+     ],
+     "R.toe": [
+      749.82,
+      2168.26
+     ]
+    },
+    "face": [
+     -0.042,
+     0.058,
+     0.993
+    ],
+    "board": false
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/noor/source/hero/desc_lift/layout_map.png"
+}

@@ -477,6 +477,76 @@
      "turn": 180
     }
    }
+  },
+  "desc_vault": {
+   "views": {
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "desc_vault/side/0.webp",
+       "w": 1645,
+       "h": 1160,
+       "k": 1000.0,
+       "ground": [
+        713.3,
+        1632.5
+       ],
+       "bottom": 1150,
+       "hips": [
+        713.3,
+        550.0
+       ],
+       "head": [
+        335.9,
+        249.3
+       ],
+       "source": "kits/tane/source/desc_vault/side/take_3.jpg"
+      },
+      "1": {
+       "img": "desc_vault/side/1.webp",
+       "w": 1446,
+       "h": 1959,
+       "k": 1000.0,
+       "ground": [
+        452.7,
+        2200.2
+       ],
+       "bottom": 1948,
+       "hips": [
+        452.7,
+        1159.9
+       ],
+       "head": [
+        491.1,
+        501.4
+       ],
+       "source": "kits/tane/source/desc_vault/side/take_3.jpg"
+      },
+      "2": {
+       "img": "desc_vault/side/2.webp",
+       "w": 1362,
+       "h": 1388,
+       "k": 1000.0,
+       "ground": [
+        610.2,
+        1374.8
+       ],
+       "bottom": 1376,
+       "hips": [
+        610.2,
+        894.6
+       ],
+       "head": [
+        389.5,
+        350.3
+       ],
+       "source": "kits/tane/source/desc_vault/side/take_3.jpg"
+      }
+     }
+    }
+   }
   }
  },
  "body": {
@@ -655,6 +725,34 @@
    "from": {
     "yaw": 41.2,
     "elev": 2.6
+   }
+  },
+  "heap": {
+   "img": "hero/heap.webp",
+   "w": 1871,
+   "h": 786,
+   "k": 1000.0,
+   "ground": [
+    919.0,
+    703.1
+   ],
+   "bottom": 781,
+   "hips": [
+    919.3,
+    482.9
+   ],
+   "head": [
+    483.5,
+    291.1
+   ],
+   "source": "kits/tane/source/hero/desc_heap/take_3.jpg",
+   "shot": "shots/desc_ding.js",
+   "frame": 34,
+   "action": "desc_heap",
+   "cel": 1,
+   "from": {
+    "yaw": 84.6,
+    "elev": 3.5
    }
   }
  }

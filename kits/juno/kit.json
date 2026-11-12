@@ -1038,6 +1038,76 @@
      }
     }
    }
+  },
+  "desc_slide": {
+   "views": {
+    "side": {
+     "yaw": 90,
+     "elev": 5,
+     "cels": {
+      "0": {
+       "img": "desc_slide/side/0.webp",
+       "w": 1374,
+       "h": 1607,
+       "k": 1000.0,
+       "ground": [
+        718.6,
+        1553.8
+       ],
+       "bottom": 1597,
+       "hips": [
+        718.6,
+        866.8
+       ],
+       "head": [
+        600.5,
+        246.7
+       ],
+       "source": "kits/juno/source/desc_slide/side/take_3.jpg"
+      },
+      "1": {
+       "img": "desc_slide/side/1.webp",
+       "w": 835,
+       "h": 1562,
+       "k": 1000.0,
+       "ground": [
+        560.6,
+        1683.9
+       ],
+       "bottom": 1553,
+       "hips": [
+        560.6,
+        885.8
+       ],
+       "head": [
+        532.7,
+        251.9
+       ],
+       "source": "kits/juno/source/desc_slide/side/take_3.jpg"
+      },
+      "2": {
+       "img": "desc_slide/side/2.webp",
+       "w": 1162,
+       "h": 1877,
+       "k": 1000.0,
+       "ground": [
+        686.7,
+        1831.5
+       ],
+       "bottom": 1867,
+       "hips": [
+        686.7,
+        1144.5
+       ],
+       "head": [
+        581.1,
+        520.0
+       ],
+       "source": "kits/juno/source/desc_slide/side/take_3.jpg"
+      }
+     }
+    }
+   }
   }
  },
  "heroes": {
@@ -1319,6 +1389,34 @@
    "from": {
     "yaw": -43.5,
     "elev": 3.1
+   }
+  },
+  "heap": {
+   "img": "hero/heap.webp",
+   "w": 1148,
+   "h": 1519,
+   "k": 1000.0,
+   "ground": [
+    611.5,
+    1402.0
+   ],
+   "bottom": 1511,
+   "hips": [
+    612.0,
+    863.6
+   ],
+   "head": [
+    641.7,
+    236.2
+   ],
+   "source": "kits/juno/source/hero/desc_heap/take_1.jpg",
+   "shot": "shots/desc_ding.js",
+   "frame": 34,
+   "action": "desc_heap",
+   "cel": 1,
+   "from": {
+    "yaw": 16.4,
+    "elev": 3.9
    }
   }
  }

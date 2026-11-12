@@ -1,0 +1,345 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: one posing mannequin, 1 key drawing(s) of him for one film shot: he has just crash-landed and lies flat on his front on the floor, belly down, body stretched out level, arms flopped out ahead of him, one shin kicked up in the air behind him; his chin is on the floor and his face is turned up toward the viewer with a big dazed happy grin, his pompadour bent, his long coat spread flat over his back and legs. Paint the character from the SECOND image (his model sheet) over every mannequin, as a finished key drawing by the same animator. The second image only shows what he looks like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 1 figure of the first image, each in its mannequin's pose and place, and nothing else. Keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), BLUE limbs are his LEFT arm and leg; RED limbs are his RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. Each mannequin is drawn in the exact PERSPECTIVE of the film camera of its shot, and the drawing must keep that camera: He is seen from his LEFT side, at about eye level. Keep each mannequin's foreshortening exactly: what is nearer the camera is drawn bigger, what points away from it is drawn shorter, and the figure's outline matches its mannequin's outline. Do NOT turn the figure to a plainer view. Each figure has exactly two arms and two legs, and both feet are drawn complete. Wherever his face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. The design: Tane, a 16-year-old boy, stocky and a bit fat with a soft round belly, warm medium-brown skin and thick eyebrows. HAIR: a tall glossy black pompadour swept up and forward, short at the sides and back. COAT: a long plain dark-red coat down to his calves, always worn open, with a high stand-up collar and long sleeves to the wrists; four round gold buttons in a row down the front edge on HIS RIGHT side and nothing else on it; the back of the coat is plain dark red with one centre seam. BELLY WRAP: a white sleeveless undershirt tucked into a wide white cloth wrap wound round his whole belly from chest to waist, drawn with three or four horizontal fold lines. TROUSERS: plain baggy black trousers gathered at the ankles. FEET: bare feet in wooden geta sandals: a plain light-brown wooden block sole with one black V-shaped strap between the toes. HANDS: bare hands, no gloves, no rings. FACE: round cheeks, thick black eyebrows, a wide fearless grin showing his teeth. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on him. No toothpick, no cigarette, no weapon. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap. Only the character: no floor, no dust, no stars, no impact marks. His wooden geta sandals stay on his feet.",
+ "refs": [
+  "kits/tane/source/hero/desc_heap/layout.png",
+  "out/ref/tane_design.png"
+ ],
+ "kind": "cels:hero/desc_heap",
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-12T09:25:35",
+ "layout": {
+  "action": "hero",
+  "hero": {
+   "shot": "shots/desc_ding.js",
+   "who": "tane"
+  },
+  "what": "he has just crash-landed and lies flat on his front on the floor, belly down, body stretched out level, arms flopped out ahead of him, one shin kicked up in the air behind him; his chin is on the floor and his face is turned up toward the viewer with a big dazed happy grin, his pompadour bent, his long coat spread flat over his back and legs",
+  "loose": true,
+  "float": true,
+  "prop": null,
+  "view": "desc_heap",
+  "yaw": null,
+  "elev": null,
+  "W": 2752,
+  "H": 1536,
+  "cols": 1,
+  "rows": 1,
+  "unit": 1295,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "name": "heap",
+    "frame": 34,
+    "action": "desc_heap",
+    "cel": 1,
+    "from": {
+     "yaw": 84.6,
+     "elev": 3.5
+    },
+    "box": [
+     0,
+     0,
+     2752,
+     1536
+    ],
+    "ground": [
+     1314.67,
+     1192.61
+    ],
+    "joints": {
+     "hips": [
+      1315.1,
+      907.41
+     ],
+     "waist": [
+      1129.13,
+      888.17
+     ],
+     "chest": [
+      894.58,
+      863.91
+     ],
+     "neckBase": [
+      730.94,
+      846.98
+     ],
+     "headBase": [
+      658.5,
+      766.69
+     ],
+     "head": [
+      750.72,
+      659.01
+     ],
+     "crown": [
+      841.39,
+      553.14
+     ],
+     "L.sh": [
+      793.87,
+      882.79
+     ],
+     "L.elbow": [
+      539.86,
+      863.12
+     ],
+     "L.wrist": [
+      338.18,
+      626.96
+     ],
+     "L.hand": [
+      265.73,
+      542.13
+     ],
+     "L.hip": [
+      1327.72,
+      923.44
+     ],
+     "L.knee": [
+      1862.47,
+      972.79
+     ],
+     "L.ankle": [
+      2383.27,
+      968.98
+     ],
+     "L.heel": [
+      2509.29,
+      951.35
+     ],
+     "L.toe": [
+      2352.36,
+      1222.02
+     ],
+     "R.sh": [
+      764.92,
+      822.29
+     ],
+     "R.elbow": [
+      542.96,
+      830.55
+     ],
+     "R.wrist": [
+      395.25,
+      572.65
+     ],
+     "R.hand": [
+      342.72,
+      480.95
+     ],
+     "R.hip": [
+      1302.71,
+      891.7
+     ],
+     "R.knee": [
+      1790.6,
+      928.48
+     ],
+     "R.ankle": [
+      1976.4,
+      457.49
+     ],
+     "R.heel": [
+      2090.39,
+      503.77
+     ],
+     "R.toe": [
+      1828.07,
+      655.37
+     ]
+    },
+    "face": [
+     -0.318,
+     -0.805,
+     0.426
+    ],
+    "board": false
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/tane/source/hero/desc_heap/layout_map.png"
+}

@@ -1,0 +1,474 @@
+{
+ "prompt": "Edit the FIRST image. It is an animator's layout sheet: 2 posing mannequins in a 2x1 grid, 2 key drawing(s) of them for one film shot: two drawings, different from each other. FIRST drawing: standing waiting, weight on one leg, LEFT hand on the hip, RIGHT hand raised in front of the chest with the fingers curled toward the face, calmly examining their own fingernails, eyes lowered to the nails, face deadpan and bored. SECOND drawing: taking one slow unhurried step forward, the right foot leading, still examining the fingernails of the raised right hand, eyes still on the nails, the left arm hanging loose (reading left to right). Paint the character from the SECOND image (their model sheet) over every mannequin, as 2 finished key drawings by the same animator. The second image only shows what they look like: do not copy its standing figures, its poses or its arrangement; the result holds exactly the 2 figures of the first image, each in its mannequin's pose and place, and nothing else. For each of the 2: keep every limb exactly where the mannequin has it (same joint positions and angles, same lean, same head position, same size and same place in its cell), so the 2 figures stay the same size as each other. BLUE limbs are their LEFT arm and leg; RED limbs are their RIGHT arm and leg; the darker shade is the upper limb, the lighter the lower. Each mannequin is drawn in the exact PERSPECTIVE of the film camera of its shot, and the drawing must keep that camera: drawing 1 is seen from straight in front, at about eye level; drawing 2 is seen from straight in front, at about eye level. Keep each mannequin's foreshortening exactly: what is nearer the camera is drawn bigger, what points away from it is drawn shorter, and the figure's outline matches its mannequin's outline. Do NOT turn the figure to a plainer view. Each figure has exactly two arms and two legs, and both feet are drawn complete. Wherever their face shows it is fully drawn, with eyes, eyebrows, nose and mouth as on the model sheet: never a blank face. All 2 drawings must be the SAME character with IDENTICAL design, colours and details in every drawing: Noor, 16 years old, androgynous, the tallest of the friends: very tall and thin with long legs, a small head and narrow shoulders (seven and a half heads tall), light brown skin. HAIR: perfectly straight black hair down to the waist, parted in the middle, with ONE bold pure-white streak that starts at the parting on THEIR LEFT side and runs the whole length of the hair in front of the left shoulder; all the rest of the hair is black. FACE: narrow and calm, half-lidded deadpan eyes with dark eyeliner, thin straight eyebrows, mouth closed, no expression. COAT: a long plain black coat down to the ankles with a pointed uneven hem, always worn open, plain lapels, long sleeves to the wrists, over a plain black top and plain black trousers; dark-grey and violet-grey shade tones so the folds of the black clothes still show. NECK: a plain black choker and two thin silver chain necklaces. HIP: one thin silver chain hanging in a loop at the hip, and a small grey retro cassette player clipped on THEIR LEFT hip. BOOTS: heavy black lace-up platform boots with thick soles, up to the middle of the shin. HANDS: bare hands with black nails. No pins, no badges, no emblems, no insignia, no stars, no lettering, no numbers, no logos and no brand marks anywhere on them. No headphones on the head, no hat, no weapon. Remove every trace of the mannequins: no blue, red, green or grey mannequin colour may remain. Style as the second image: 1990s cel anime: bold clean black ink outlines of even weight, flat colour fills, two tones per material (a base and one hard-edged shade), no gradients, no texture, no soft shading, no motion blur, no speed lines, no ground, no shadows on the ground, no text, no panel borders. Background: one flat solid pure magenta (#FF00FF) everywhere, also between the legs and inside every gap. Only the character, nothing else: no lift, no gate, no floor, no props. Both drawings show the whole figure from head to boots, the same size.",
+ "refs": [
+  "kits/noor/source/hero/desc_wait/layout.png",
+  "out/ref/noor_design.png"
+ ],
+ "kind": "cels:hero/desc_wait",
+ "aspect": "16:9",
+ "size": "4K",
+ "made": "2026-11-12T09:25:38",
+ "layout": {
+  "action": "hero",
+  "hero": {
+   "shot": "shots/desc_ding.js",
+   "who": "noor"
+  },
+  "what": "two drawings, different from each other. FIRST drawing: standing waiting, weight on one leg, LEFT hand on the hip, RIGHT hand raised in front of the chest with the fingers curled toward the face, calmly examining their own fingernails, eyes lowered to the nails, face deadpan and bored. SECOND drawing: taking one slow unhurried step forward, the right foot leading, still examining the fingernails of the raised right hand, eyes still on the nails, the left arm hanging loose",
+  "loose": true,
+  "float": true,
+  "prop": null,
+  "view": "desc_wait",
+  "yaw": null,
+  "elev": null,
+  "W": 2752,
+  "H": 1536,
+  "cols": 2,
+  "rows": 1,
+  "unit": 673,
+  "aspect": "16:9",
+  "cels": [
+   {
+    "index": 0,
+    "name": "nails",
+    "frame": 20,
+    "action": "desc_wait",
+    "cel": 2,
+    "from": {
+     "yaw": 0.1,
+     "elev": 3.1
+    },
+    "box": [
+     0,
+     0,
+     1376,
+     1536
+    ],
+    "ground": [
+     663.49,
+     1366.69
+    ],
+    "joints": {
+     "hips": [
+      660.29,
+      730.71
+     ],
+     "waist": [
+      659.78,
+      626.41
+     ],
+     "chest": [
+      658.96,
+      459.99
+     ],
+     "neckBase": [
+      658.44,
+      354.89
+     ],
+     "headBase": [
+      658.19,
+      305.9
+     ],
+     "head": [
+      647.89,
+      225.87
+     ],
+     "crown": [
+      637.54,
+      145.41
+     ],
+     "L.sh": [
+      773.91,
+      381.14
+     ],
+     "L.elbow": [
+      856.55,
+      549.05
+     ],
+     "L.wrist": [
+      855.75,
+      663.54
+     ],
+     "L.hand": [
+      855.46,
+      705.44
+     ],
+     "L.hip": [
+      726.14,
+      729.85
+     ],
+     "L.knee": [
+      748.62,
+      1021.45
+     ],
+     "L.ankle": [
+      736.59,
+      1306.48
+     ],
+     "L.heel": [
+      736.48,
+      1355.37
+     ],
+     "L.toe": [
+      738.04,
+      1379.16
+     ],
+     "R.sh": [
+      542.67,
+      382.49
+     ],
+     "R.elbow": [
+      520.81,
+      531.18
+     ],
+     "R.wrist": [
+      527.22,
+      360.49
+     ],
+     "R.hand": [
+      529.53,
+      299.08
+     ],
+     "R.hip": [
+      594.14,
+      731.57
+     ],
+     "R.knee": [
+      547.22,
+      1024.93
+     ],
+     "R.ankle": [
+      562.75,
+      1308.42
+     ],
+     "R.heel": [
+      563.7,
+      1355
+     ],
+     "R.toe": [
+      561.18,
+      1388.09
+     ]
+    },
+    "face": [
+     -0.245,
+     0.194,
+     0.974
+    ],
+    "board": false
+   },
+   {
+    "index": 1,
+    "name": "step",
+    "frame": 16,
+    "action": "desc_wait",
+    "cel": 1,
+    "from": {
+     "yaw": 0.3,
+     "elev": 3
+    },
+    "box": [
+     1376,
+     0,
+     2752,
+     1536
+    ],
+    "ground": [
+     2060.8,
+     1362.93
+    ],
+    "joints": {
+     "hips": [
+      2057.67,
+      748.25
+     ],
+     "waist": [
+      2057.12,
+      644.23
+     ],
+     "chest": [
+      2056.24,
+      477.73
+     ],
+     "neckBase": [
+      2055.69,
+      372.23
+     ],
+     "headBase": [
+      2055.43,
+      323.02
+     ],
+     "head": [
+      2052.89,
+      241.98
+     ],
+     "crown": [
+      2050.34,
+      160.59
+     ],
+     "L.sh": [
+      2172.22,
+      399.1
+     ],
+     "L.elbow": [
+      2199.77,
+      581.56
+     ],
+     "L.wrist": [
+      2204.96,
+      751.9
+     ],
+     "L.hand": [
+      2206.82,
+      812.76
+     ],
+     "L.hip": [
+      2123.57,
+      747.37
+     ],
+     "L.knee": [
+      2145.39,
+      1013.08
+     ],
+     "L.ankle": [
+      2132.65,
+      1235.53
+     ],
+     "L.heel": [
+      2132.53,
+      1264.39
+     ],
+     "L.toe": [
+      2133.61,
+      1340.7
+     ],
+     "R.sh": [
+      1938.52,
+      399.46
+     ],
+     "R.elbow": [
+      1929.67,
+      549.19
+     ],
+     "R.wrist": [
+      1940.4,
+      379.21
+     ],
+     "R.hand": [
+      1944.26,
+      318.03
+     ],
+     "R.hip": [
+      1991.47,
+      749.13
+     ],
+     "R.knee": [
+      1969.36,
+      1025.31
+     ],
+     "R.ankle": [
+      1982.96,
+      1311.83
+     ],
+     "R.heel": [
+      1983.77,
+      1372.4
+     ],
+     "R.toe": [
+      1980.97,
+      1358.85
+     ]
+    },
+    "face": [
+     -0.15,
+     0.163,
+     0.975
+    ],
+    "board": false
+   }
+  ],
+  "classes": {
+   "face": [
+    20,
+    0,
+    255
+   ],
+   "face.L": [
+    20,
+    100,
+    255
+   ],
+   "face.R": [
+    20,
+    200,
+    255
+   ],
+   "hair": [
+    40,
+    0,
+    255
+   ],
+   "hair.L": [
+    40,
+    100,
+    255
+   ],
+   "hair.R": [
+    40,
+    200,
+    255
+   ],
+   "neck": [
+    60,
+    0,
+    255
+   ],
+   "neck.L": [
+    60,
+    100,
+    255
+   ],
+   "neck.R": [
+    60,
+    200,
+    255
+   ],
+   "torso": [
+    80,
+    0,
+    255
+   ],
+   "torso.L": [
+    80,
+    100,
+    255
+   ],
+   "torso.R": [
+    80,
+    200,
+    255
+   ],
+   "pelvis": [
+    100,
+    0,
+    255
+   ],
+   "pelvis.L": [
+    100,
+    100,
+    255
+   ],
+   "pelvis.R": [
+    100,
+    200,
+    255
+   ],
+   "garment": [
+    120,
+    0,
+    255
+   ],
+   "garment.L": [
+    120,
+    100,
+    255
+   ],
+   "garment.R": [
+    120,
+    200,
+    255
+   ],
+   "uarm": [
+    140,
+    0,
+    255
+   ],
+   "uarm.L": [
+    140,
+    100,
+    255
+   ],
+   "uarm.R": [
+    140,
+    200,
+    255
+   ],
+   "farm": [
+    160,
+    0,
+    255
+   ],
+   "farm.L": [
+    160,
+    100,
+    255
+   ],
+   "farm.R": [
+    160,
+    200,
+    255
+   ],
+   "hand": [
+    180,
+    0,
+    255
+   ],
+   "hand.L": [
+    180,
+    100,
+    255
+   ],
+   "hand.R": [
+    180,
+    200,
+    255
+   ],
+   "thigh": [
+    200,
+    0,
+    255
+   ],
+   "thigh.L": [
+    200,
+    100,
+    255
+   ],
+   "thigh.R": [
+    200,
+    200,
+    255
+   ],
+   "shin": [
+    220,
+    0,
+    255
+   ],
+   "shin.L": [
+    220,
+    100,
+    255
+   ],
+   "shin.R": [
+    220,
+    200,
+    255
+   ],
+   "shoe": [
+    240,
+    0,
+    255
+   ],
+   "shoe.L": [
+    240,
+    100,
+    255
+   ],
+   "shoe.R": [
+    240,
+    200,
+    255
+   ]
+  }
+ },
+ "map": "kits/noor/source/hero/desc_wait/layout_map.png"
+}

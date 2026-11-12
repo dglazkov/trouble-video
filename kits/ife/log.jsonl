@@ -24,3 +24,16 @@
 {"file": "kits/ife/closeup/open_face_2.jpg", "kind": "closeup:open_face", "time": "2026-11-12T08:16:12", "ok": true}
 {"file": "kits/ife/closeup/open_face_3.jpg", "kind": "edit:closeup:open_face", "time": "2026-11-12T08:18:06", "ok": true}
 {"file": "kits/ife/closeup/open_face_4.jpg", "kind": "edit:closeup:open_face", "time": "2026-11-12T08:18:08", "ok": true}
+{"file": "kits/ife/source/desc_steps/side/take_1.jpg", "kind": "cels:desc_steps/side", "time": "2026-11-12T09:20:39", "ok": true}
+{"file": "kits/ife/source/desc_steps/side/take_1.jpg", "reject": "count: 3 figures for 4 mannequins; count: cels 0 and 1 are one joined figure; pose: cel 0: covers 87% of its mannequin; pose: cel 0: 53% of the figure is away from its mannequin; pose: cel 2: covers 86% of its mannequin", "by": "check", "time": "2026-11-12T09:20:49"}
+{"file": "kits/ife/source/desc_steps/side/take_2.jpg", "kind": "cels:desc_steps/side", "time": "2026-11-12T09:21:21", "ok": true}
+{"file": "kits/ife/source/desc_steps/side/take_2.jpg", "reject": "count: 1 figures for 4 mannequins; count: cels 0 and 1 are one joined figure; count: cels 0 and 2 are one joined figure; count: cels 0 and 3 are one joined figure; pose: cel 0: covers 25% of the mannequin's farm.R; pose: cel 0: 76% of the figure is away from its mannequin", "by": "check", "time": "2026-11-12T09:21:30"}
+{"file": "kits/ife/source/desc_steps/side/take_3.jpg", "kind": "cels:desc_steps/side", "time": "2026-11-12T09:21:59", "ok": true}
+{"file": "kits/ife/source/desc_steps/side/take_3.jpg", "reject": "count: 2 figures for 4 mannequins; count: cels 0 and 1 are one joined figure; count: cels 2 and 3 are one joined figure; pose: cel 0: 56% of the figure is away from its mannequin; pose: cel 2: 55% of the figure is away from its mannequin", "by": "check", "time": "2026-11-12T09:22:07"}
+{"file": "kits/ife/source/hero/desc_heap/take_1.jpg", "kind": "cels:hero/desc_heap", "time": "2026-11-12T09:24:55", "ok": true}
+{"file": "kits/ife/source/desc_steps/side/take_4.jpg", "kind": "edit:cels:desc_steps/side", "time": "2026-11-12T09:24:57", "ok": true}
+{"file": "kits/ife/source/hero/desc_heap/take_1.jpg", "reject": "pose: cel 0: covers 79% of its mannequin; facing: cel 0: the face is on the wrong side of the head; pose: cel 1: covers 78% of its mannequin", "by": "check", "time": "2026-11-12T09:25:08"}
+{"file": "kits/ife/source/hero/desc_heap/take_2.jpg", "kind": "cels:hero/desc_heap", "time": "2026-11-12T09:25:42", "ok": true}
+{"file": "kits/ife/source/hero/desc_heap/take_2.jpg", "reject": "facing: cel 0: the face is on the wrong side of the head; palette: cel 0: only 27% of the pelvis is in the design's colours for it (shorts, shortsshade, jumper, jumpershade, leggings, pack, packshade); pose: cel 1: covers 83% of its mannequin", "by": "check", "time": "2026-11-12T09:25:53"}
+{"file": "kits/ife/source/hero/desc_heap/take_3.jpg", "kind": "cels:hero/desc_heap", "time": "2026-11-12T09:26:25", "ok": true}
+{"file": "kits/ife/source/hero/desc_heap/take_3.jpg", "reject": "count: 1 stray pieces (13% of a figure); pose: cel 0: covers 88% of its mannequin; facing: cel 0: the face is on the wrong side of the head; palette: cel 0: only 30% of the shin is in the design's colours for it (leggings, skin, skinshade)", "by": "check", "time": "2026-11-12T09:26:34"}
