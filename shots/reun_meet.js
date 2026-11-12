@@ -17,6 +17,7 @@
 // were made ready.
 import { FPS, F0, W, H, PW, PH, CAST, NIGHT, STAND, MEET, COLOR, clamp, lerp, ease, wob, rnd, stand } from "./reun_cast.js";
 import { RUN, STRIDE } from "./open_cast.js";
+import { shards as splitShards } from "./reun_split.js";
 // dust kicked up by a skidding stop (engine/fx.js skid, in the night's colours): a few puffs low at (x, y), thrown the way `dir`
 function dust(g, x, y, s, age, dir = 1, seed = 1) {
   if (age < 0 || age > 16) return; const a2 = age - age % 2;
@@ -52,10 +53,8 @@ function shardsFallback(g, age) {
     g.beginPath(); P.forEach((p, k) => k ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])); g.closePath(); g.stroke(); g.fill();
   }
 }
-// (a request for a module that is not there fails the render, so this part does not ask shots/reun_split.js for its shards: whoever cuts
-// the two together may hand the split-screen's own in here)
-export const breaking = { shards: shardsFallback };
-const shards = (g, age) => breaking.shards(g, age);
+// the split-screen's own last page in pieces (shots/reun_split.js); the fallback above is what stood in for it
+const shards = (g, age) => (splitShards ?? shardsFallback)(g, age);
 
 // ---- the night's light on a whole drawing laid over the set (as sets/atrium.js lights a figure at night), `red` 0..1: the alarm's light from the wall's side ----
 const lit = (depth, o = {}) => { const k = o.red ?? 0, fog = 1 - Math.exp(-depth * 0.0075), b = o.bright ?? 0;
