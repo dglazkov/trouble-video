@@ -11,7 +11,7 @@ function frame(f, sync) {
   const F = CUT.salute + f, since = Math.min(...MINE.map(([h]) => F >= h ? F - h : 99)), kick = MINE.some(([h, i]) => F >= h && F - h === since && (i % 2 === 0)), jolt = Math.exp(-since / 2) * (kick ? 1 : 0.55) * (F >= 1883 ? 1.8 : 1), shake = 0.004 + 0.035 * jolt, k = ease(f / FRAMES);
   const cel = f < GOGGLES ? 5 : f < SALUTE ? 6 : 7;
   return { set: "tunnel",
-    camera: { pos: [0.62 - 0.08 * k + shake * wob(f, 9, 14, 1), 0.78 + shake * wob(f, 11, 17, 2), JZ + 3.25 - 0.3 * k], target: [0.2, 0.86, DOORZ + 1.0], fov: 40 - 2 * k },
+    camera: { pos: [0.02 + shake * wob(f, 9, 14, 1), 0.78 + shake * wob(f, 11, 17, 2), JZ + 3.25 - 0.3 * k], target: [0.02, 0.86, DOORZ + 1.0], fov: 40 - 2 * k },
     options: { alert: 0.5, door: 1, dents: dentsAt(F), drones: [], post: { ca: 0.0012 + 0.005 * jolt, bloom: 0.9 + 0.3 * jolt, flash: F === 1883 ? 0.2 : 0 } },
     actors: [{ who: "juno", action: "wins_juno", view: "front34", phase: J(cel), hero: ["sit", "goggles", "salute"][cel - 5], over: true, yaw: -52, x: -0.32, z: JZ }],
     under(g, cam) {      // at the door, behind her
