@@ -1860,6 +1860,62 @@
     "yaw": 60.5,
     "elev": -2.8
    }
+  },
+  "reun_side_a": {
+   "img": "hero/reun_side_a.webp",
+   "w": 1340,
+   "h": 1640,
+   "k": 1000.0,
+   "ground": [
+    728.9,
+    1680.4
+   ],
+   "bottom": 1631,
+   "hips": [
+    728.9,
+    793.1
+   ],
+   "head": [
+    592.3,
+    182.3
+   ],
+   "source": "kits/juno/source/hero/reun_side/take_3.jpg",
+   "shot": "shots/reun_p_juno.js",
+   "frame": 44,
+   "action": "ride",
+   "cel": 1,
+   "from": {
+    "yaw": 87.4,
+    "elev": 3.8
+   }
+  },
+  "reun_side_b": {
+   "img": "hero/reun_side_b.webp",
+   "w": 1278,
+   "h": 1748,
+   "k": 1000.0,
+   "ground": [
+    719.5,
+    1649.1
+   ],
+   "bottom": 1738,
+   "hips": [
+    729.6,
+    808.4
+   ],
+   "head": [
+    592.9,
+    196.8
+   ],
+   "source": "kits/juno/source/hero/reun_side/take_3.jpg",
+   "shot": "shots/reun_p_juno.js",
+   "frame": 62,
+   "action": "ride",
+   "cel": 0,
+   "from": {
+    "yaw": 87.4,
+    "elev": 3.9
+   }
   }
  }
 }
