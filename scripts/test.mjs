@@ -8,7 +8,7 @@
 //   edit      shots/film.js is the ten sections end to end, 3956 frames
 //   song      analysis/song.py measures a synthetic song (scripts/test_song.py) and finds every kick within a frame;
 //             scripts/starter.mjs writes a starter for it whose marks hold
-//   render    five frames (hello, the slice, the opening) rendered and compared LOOSELY with small committed pictures
+//   render    seven frames (hello, the slice, the opening, two of examples/) rendered and compared LOOSELY with small committed pictures
 //             (test/ref/, 320x180): GPUs and Chrome's software renderer differ in the last bits of some pixels, so
 //             this catches a broken set, a missing drawing or a wrong frame, not a changed shade. Skipped with
 //             --no-render, or when no Chrome is found (and says so). SOFTWARE=1 renders without a GPU.
@@ -28,7 +28,8 @@ const node = (script, a = [], env = {}) => spawnSync(process.execPath, [path.joi
 const out = (r) => (r.stdout?.toString() ?? "") + (r.stderr?.toString() ?? "");
 const SECTIONS = ["open", "descent", "gantry", "slice", "wins", "core", "boom", "breakdown", "reunion", "fall"];
 // engine/motion.mjs findings over its limits in the film as finished (each was looked at and left: an impact, a leap).
-const MOTION = { open: 0, descent: 0, gantry: 1, slice: 16, wins: 4, core: 0, boom: 0, breakdown: 0, reunion: 0, fall: 0, hello: 0 };
+const MOTION = { open: 0, descent: 0, gantry: 1, slice: 16, wins: 4, core: 0, boom: 0, breakdown: 0, reunion: 0, fall: 0, hello: 0, "examples/room": 0, "examples/shot": 0 };
+const fileOf = (s) => s.includes("/") ? `${s}.js` : `shots/${s}.js`;
 
 // engine/motion.mjs ends with "N measurements, M over their limits": M, or null (and a failure) if it did not get that far
 function overLimits(r, what) { const m = out(r).match(/(\d+) measurements, (\d+) over their limits/); if (!m) { fail(`engine/motion.mjs ${what} did not run:\n${out(r).slice(0, 600)}`); return null; } return Number(m[2]); }
@@ -74,9 +75,9 @@ t = section("edit");
 // ---- motion ----------------------------------------------------------------------------------------------------------------
 t = section("motion"); let over = 0;
 for (const [s, limit] of Object.entries(MOTION)) {
-  const bad = overLimits(node("engine/motion.mjs", [`shots/${s}.js`]), `shots/${s}.js`); if (bad === null) continue;
+  const bad = overLimits(node("engine/motion.mjs", [fileOf(s)]), fileOf(s)); if (bad === null) continue;
   over += bad;
-  if (bad > limit) fail(`engine/motion.mjs shots/${s}.js: ${bad} findings over the limits, where there were ${limit}. node engine/motion.mjs shots/${s}.js lists them`);
+  if (bad > limit) fail(`engine/motion.mjs ${fileOf(s)}: ${bad} findings over the limits, where there were ${limit}. node engine/motion.mjs ${fileOf(s)} lists them`);
 }
 done(t, `${over} findings over the limits, none new`);
 
@@ -105,7 +106,7 @@ t = section("song");
 }
 
 // ---- render ----------------------------------------------------------------------------------------------------------------
-const SHOTS = [["hello", [0, 130]], ["slice", [100, 200]], ["open", [120]]];
+const SHOTS = [["hello", [0, 130]], ["slice", [100, 200]], ["open", [120]], ["examples/room", [20]], ["examples/closeup", [7]]];
 if (!noRender) {
   t = section("render");
   let chrome = null; try { chrome = findChrome(); } catch { /* none */ }
@@ -114,11 +115,11 @@ if (!noRender) {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "trouble-render-")), refs = path.join(ROOT, "test/ref"), pairs = [];
     try {
       for (const [s, frames] of SHOTS) {
-        const dir = path.join(tmp, s), r = node("render.mjs", [`shots/${s}.js`, "--frames", frames.join(","), "--out", dir]);
-        if (r.status) { fail(`node render.mjs shots/${s}.js --frames ${frames}:\n${out(r).slice(-700)}`); continue; }
+        const dir = path.join(tmp, path.basename(s)), r = node("render.mjs", [fileOf(s), "--frames", frames.join(","), "--out", dir]);
+        if (r.status) { fail(`node render.mjs ${fileOf(s)} --frames ${frames}:\n${out(r).slice(-700)}`); continue; }
         const info = JSON.parse(r.stdout.toString().trim().split("\n").pop());
-        if (Object.keys(info.dummies).length) fail(`shots/${s}.js: drawn as the posing dummy, no drawing in the kit: ${JSON.stringify(info.dummies)}`);
-        for (const f of frames) pairs.push([path.join(dir, `f${String(f).padStart(4, "0")}.png`), path.join(refs, `${s}_f${String(f).padStart(4, "0")}.png`)]);
+        if (Object.keys(info.dummies).length) fail(`${fileOf(s)}: drawn as the posing dummy, no drawing in the kit: ${JSON.stringify(info.dummies)}`);
+        for (const f of frames) pairs.push([path.join(dir, `f${String(f).padStart(4, "0")}.png`), path.join(refs, `${path.basename(s)}_f${String(f).padStart(4, "0")}.png`)]);
       }
       if (pairs.length) {
         const code = `

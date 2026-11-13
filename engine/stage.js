@@ -69,7 +69,9 @@ try {
   makers.core = () => import("../sets/core.js").then((m) => m.createCore(renderer, { width: W, height: H }));
   makers.plant = () => import("../sets/plant.js").then((m) => m.createPlant(renderer, { width: W, height: H }));
   makers.shaft = () => import("../sets/shaft.js").then((m) => m.createShaft(renderer, { width: W, height: H }));
-  const need = async (name) => sets[name] ?? (sets[name] = await makers[name]());
+  // any other name is a module of that name in sets/ that exports createSet(renderer, { width, height }) (sets/example.js)
+  const other = (name) => import(`../sets/${name}.js`).then((m) => { if (!m.createSet) throw new Error(`sets/${name}.js exports no createSet(renderer, { width, height })`); return m.createSet(renderer, { width: W, height: H }); }, (e) => { throw new Error(`no set "${name}": ${Object.keys(makers).join(", ")} are built in, and sets/${name}.js could not be loaded (${e.message})`); });
+  const need = async (name) => sets[name] ?? (sets[name] = await (makers[name] ?? (() => other(name)))());
   for (const s of shot.sets ?? []) await need(s);
   for (const [who, base] of Object.entries(shot.cast ?? {})) {
     const name = base.split("/").pop(), kit = !KITS || KITS.includes(name) ? await loadKit(base) : { name, body: {}, actions: {} };
