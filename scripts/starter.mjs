@@ -64,10 +64,11 @@ const inClip = kicks.filter((k) => fr(k) >= START && fr(k) < START + CUTS[2]), K
 const beatLen = barLen / 4, BLASTS = [];
 for (let i = i0; i < i0 + nb; i++) { const k = inClip.find((k) => k >= bars[i] - beatLen / 3 && k < bars[i + 1] - beatLen / 3); if (k !== undefined && fr(k) >= START && !BLASTS.includes(fr(k) - START)) BLASTS.push(fr(k) - START); }
 let BEAT0 = 0; beats.forEach((b, i) => { if (Math.abs(b - START / FPS) < Math.abs(beats[BEAT0] - START / FPS)) BEAT0 = i; });
-// steps to a beat: whichever of half, one, two or four makes the run's cycle (two steps) nearest eighteen frames. A run
-// is eight drawings held two frames each, so at sixteen frames a cycle every drawing is used once and a planted foot
-// stays exactly where it is; the further a cycle is from that, the more a foot creeps (engine/motion.mjs measures it).
-const beatFrames = beatLen * FPS, STEPS = [0.5, 1, 2, 4].reduce((a, n) => Math.abs(Math.log(2 * beatFrames / n / 18)) < Math.abs(Math.log(2 * beatFrames / a / 18)) ? n : a);
+// steps to a beat: of half, one, two or four, the most that keeps the run's cycle (two steps) at sixteen frames or more.
+// A run is eight drawings; at sixteen frames a cycle each is held two frames and a planted foot stays exactly where it
+// is. Slower than that each drawing is held longer and feet still hold; faster, drawings are held under two frames and
+// feet creep (engine/motion.mjs measures it), so the starter never goes faster.
+const beatFrames = beatLen * FPS, STEPS = [4, 2, 1, 0.5].find((n) => 2 * beatFrames / n >= 16) ?? 0.5;
 
 // ---- 3. the shot file ----------------------------------------------------------------------------------------------------
 const SPOTS = [[1.1, 0, 0], [-1.3, 1.9, 0.55], [0.6, 3.8, 0.3], [-0.7, 5.7, 0.8]];      // the nearer, the further out to the side
@@ -94,6 +95,8 @@ if (!demo && !KICKS.length) console.log("note: no kick was found in this stretch
 const node = (script, extra, stdio = "inherit") => spawnSync(process.execPath, [path.join(ROOT, script), file, ...extra], { stdio, env: { ...process.env, ...(softwareFlag ? { SOFTWARE: "1" } : {}) } });
 const marks = node("engine/marks.mjs", [], "pipe"), last = (marks.stdout?.toString().trim().split("\n").pop() ?? "");
 console.log("marks: " + last); if (marks.status) { console.error(marks.stdout.toString() + marks.stderr.toString()); fail("a cut or a hit is off the music"); }
+const motion = node("engine/motion.mjs", [], "pipe"), moved = (motion.stdout?.toString() ?? "").match(/(\d+) measurements, (\d+) over their limits/);
+console.log("motion: " + (moved ? `${moved[1]} measurements of feet and drawings, ${moved[2]} over their limits` + (Number(moved[2]) ? `  (node engine/motion.mjs ${rel} lists them: something to look at, not a failure)` : "") : "did not run"));
 if (noRender) { console.log(`not rendered. node render.mjs ${rel}`); process.exit(0); }
 console.log(`rendering ${rel} (${fs.readFileSync(file, "utf8").match(/W = (\d+), H = (\d+)/).slice(1).join("x")}) ...`);
 const tr = Date.now(), r = node("render.mjs", [], "pipe");

@@ -31,7 +31,7 @@ Terms, once:
 | `sets/`, `machines/` | kit | Ten places (`corridor market vault gantry atrium stairwell tunnel core plant shaft`) + `example.js`; `kit.js` (shader, builder), `painted.js`, `sign.js`; drones and the warden |
 | `analysis/song.py`, `kicks.py`, `captions.py` | kit | Measure any song; captions from a word timeline |
 | `scripts/` | kit | `setup.sh`, `doctor.mjs`, `starter.mjs` (+ `starter_shot.txt`), `test.mjs`, `cast_doc.py` |
-| `examples/` | kit | `shot.js` (shortest shot), `room.js` (two characters in the smallest set) |
+| `examples/` | kit | `shot.js` (shortest shot), `room.js` (two characters in the smallest set), `closeup.js` (a plate) |
 | `render.mjs` | kit | The one way a picture is made |
 | `shots/` | **film** | 137 shot files, ten section edits, `film.js` (all of it), `hello.js` (the demo clip) |
 | `audio.wav`, `analysis/*.json`, `analysis/listen.py stems.py lyrics.py`, `subs/`, `docs/lyrics.md`, `docs/japanese.md` | **film** | The demo song (not licensed for reuse), its measurements and how they were made |
@@ -197,6 +197,6 @@ Each of these was learned by getting it wrong. The reason is given so you can ju
 - Renders repeat to the eye, not always to the byte. Of fifty film frames rendered twice the same way, 47 were
   identical files and 3 (atrium, shaft) differed by a few levels in a few hundred pixels, on the untouched original
   code too. A frame rendered in the middle of a long run differs from the same frame rendered alone at the edges
-  of drawings (Chrome resamples a drawing differently once it has drawn it at other sizes), and the split screen's
+  of drawings (it looks like Chrome resampling a drawing differently once it has drawn it at other sizes), and the split screen's
   grain depends on what was rendered before it. None of it is visible; all of it defeats a naive file comparison.
 - There is no CI. `npm test` is the gate; run it before pushing.
