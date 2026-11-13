@@ -1216,6 +1216,846 @@
     "yaw": 30.5,
     "elev": 2.8
    }
+  },
+  "ro_0": {
+   "img": "hero/ro_0.webp",
+   "w": 779,
+   "h": 1325,
+   "k": 746.0,
+   "ground": [
+    415.2,
+    1285.7
+   ],
+   "bottom": 1313,
+   "hips": [
+    360.0,
+    611.8
+   ],
+   "head": [
+    327.7,
+    123.9
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 556,
+   "action": "noor_over",
+   "cel": 0,
+   "from": {
+    "yaw": -34.3,
+    "elev": -10.5
+   }
+  },
+  "ro_1": {
+   "img": "hero/ro_1.webp",
+   "w": 751,
+   "h": 1329,
+   "k": 746.0,
+   "ground": [
+    450.2,
+    1283.3
+   ],
+   "bottom": 1317,
+   "hips": [
+    390.7,
+    607.3
+   ],
+   "head": [
+    356.1,
+    122.8
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 558,
+   "action": "noor_over",
+   "cel": 1,
+   "from": {
+    "yaw": -35.6,
+    "elev": -10.9
+   }
+  },
+  "ro_2": {
+   "img": "hero/ro_2.webp",
+   "w": 683,
+   "h": 1329,
+   "k": 746.0,
+   "ground": [
+    437.8,
+    1289.5
+   ],
+   "bottom": 1317,
+   "hips": [
+    372.8,
+    602.4
+   ],
+   "head": [
+    335.7,
+    122.6
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 560,
+   "action": "noor_over",
+   "cel": 2,
+   "from": {
+    "yaw": -37.1,
+    "elev": -11.2
+   }
+  },
+  "ro_3": {
+   "img": "hero/ro_3.webp",
+   "w": 793,
+   "h": 1319,
+   "k": 746.0,
+   "ground": [
+    452.7,
+    1286.6
+   ],
+   "bottom": 1307,
+   "hips": [
+    382.7,
+    599.4
+   ],
+   "head": [
+    342.8,
+    123.4
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 562,
+   "action": "noor_over",
+   "cel": 3,
+   "from": {
+    "yaw": -38.6,
+    "elev": -11.6
+   }
+  },
+  "ro_4": {
+   "img": "hero/ro_4.webp",
+   "w": 759,
+   "h": 1317,
+   "k": 746.0,
+   "ground": [
+    423.3,
+    1291.4
+   ],
+   "bottom": 1306,
+   "hips": [
+    348.1,
+    603.7
+   ],
+   "head": [
+    305.4,
+    131.7
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 564,
+   "action": "noor_over",
+   "cel": 4,
+   "from": {
+    "yaw": -40.2,
+    "elev": -12
+   }
+  },
+  "ro_5": {
+   "img": "hero/ro_5.webp",
+   "w": 709,
+   "h": 1321,
+   "k": 746.0,
+   "ground": [
+    418.7,
+    1263.3
+   ],
+   "bottom": 1309,
+   "hips": [
+    340.6,
+    597.5
+   ],
+   "head": [
+    294.6,
+    127.0
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 566,
+   "action": "noor_over",
+   "cel": 5,
+   "from": {
+    "yaw": -41.9,
+    "elev": -12.4
+   }
+  },
+  "ro_6": {
+   "img": "hero/ro_6.webp",
+   "w": 683,
+   "h": 1329,
+   "k": 746.0,
+   "ground": [
+    447.9,
+    1260.0
+   ],
+   "bottom": 1317,
+   "hips": [
+    363.6,
+    592.7
+   ],
+   "head": [
+    314.4,
+    126.9
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 568,
+   "action": "noor_over",
+   "cel": 6,
+   "from": {
+    "yaw": -43.7,
+    "elev": -12.8
+   }
+  },
+  "ro_7": {
+   "img": "hero/ro_7.webp",
+   "w": 709,
+   "h": 1325,
+   "k": 746.0,
+   "ground": [
+    417.4,
+    1265.9
+   ],
+   "bottom": 1313,
+   "hips": [
+    325.1,
+    588.8
+   ],
+   "head": [
+    272.4,
+    129.3
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 570,
+   "action": "noor_over",
+   "cel": 7,
+   "from": {
+    "yaw": -45.7,
+    "elev": -13.3
+   }
+  },
+  "ro_8": {
+   "img": "hero/ro_8.webp",
+   "w": 1023,
+   "h": 1301,
+   "k": 746.0,
+   "ground": [
+    438.2,
+    1251.0
+   ],
+   "bottom": 1289,
+   "hips": [
+    338.6,
+    574.6
+   ],
+   "head": [
+    282.1,
+    120.5
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 572,
+   "action": "noor_over",
+   "cel": 8,
+   "from": {
+    "yaw": -47.9,
+    "elev": -13.7
+   }
+  },
+  "ro_9": {
+   "img": "hero/ro_9.webp",
+   "w": 1039,
+   "h": 1275,
+   "k": 746.0,
+   "ground": [
+    461.7,
+    1233.5
+   ],
+   "bottom": 1263,
+   "hips": [
+    354.2,
+    557.7
+   ],
+   "head": [
+    293.7,
+    109.4
+   ],
+   "source": "kits/noor/source/hero/reun_over/take_2.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 574,
+   "action": "noor_over",
+   "cel": 9,
+   "from": {
+    "yaw": -50.1,
+    "elev": -14.2
+   }
+  },
+  "rw_0": {
+   "img": "hero/rw_0.webp",
+   "w": 603,
+   "h": 1381,
+   "k": 664.0,
+   "ground": [
+    307.9,
+    1312.9
+   ],
+   "bottom": 1369,
+   "hips": [
+    308.3,
+    701.3
+   ],
+   "head": [
+    307.5,
+    206.2
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 516,
+   "action": "noor_walk",
+   "cel": 0,
+   "from": {
+    "yaw": 4.5,
+    "elev": 1.3
+   }
+  },
+  "rw_1": {
+   "img": "hero/rw_1.webp",
+   "w": 603,
+   "h": 1381,
+   "k": 664.0,
+   "ground": [
+    305.3,
+    1289.4
+   ],
+   "bottom": 1369,
+   "hips": [
+    305.8,
+    674.4
+   ],
+   "head": [
+    305.0,
+    179.3
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 518,
+   "action": "noor_walk",
+   "cel": 1,
+   "from": {
+    "yaw": 4.9,
+    "elev": 1.4
+   }
+  },
+  "rw_2": {
+   "img": "hero/rw_2.webp",
+   "w": 619,
+   "h": 1381,
+   "k": 664.0,
+   "ground": [
+    310.5,
+    1312.4
+   ],
+   "bottom": 1369,
+   "hips": [
+    311.0,
+    685.0
+   ],
+   "head": [
+    310.3,
+    190.7
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 520,
+   "action": "noor_walk",
+   "cel": 2,
+   "from": {
+    "yaw": 4.9,
+    "elev": 1.1
+   }
+  },
+  "rw_3": {
+   "img": "hero/rw_3.webp",
+   "w": 657,
+   "h": 1381,
+   "k": 664.0,
+   "ground": [
+    330.5,
+    1333.7
+   ],
+   "bottom": 1369,
+   "hips": [
+    331.2,
+    704.4
+   ],
+   "head": [
+    330.4,
+    210.2
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 522,
+   "action": "noor_walk",
+   "cel": 3,
+   "from": {
+    "yaw": 5.2,
+    "elev": 1.2
+   }
+  },
+  "rw_4": {
+   "img": "hero/rw_4.webp",
+   "w": 657,
+   "h": 1379,
+   "k": 664.0,
+   "ground": [
+    329.5,
+    1333.9
+   ],
+   "bottom": 1367,
+   "hips": [
+    330.2,
+    702.3
+   ],
+   "head": [
+    329.5,
+    208.3
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 524,
+   "action": "noor_walk",
+   "cel": 4,
+   "from": {
+    "yaw": 5.3,
+    "elev": 1.2
+   }
+  },
+  "rw_5": {
+   "img": "hero/rw_5.webp",
+   "w": 607,
+   "h": 1363,
+   "k": 664.0,
+   "ground": [
+    309.9,
+    1292.1
+   ],
+   "bottom": 1352,
+   "hips": [
+    310.7,
+    680.4
+   ],
+   "head": [
+    310.0,
+    187.3
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 526,
+   "action": "noor_walk",
+   "cel": 5,
+   "from": {
+    "yaw": 5.4,
+    "elev": 0.8
+   }
+  },
+  "rw_6": {
+   "img": "hero/rw_6.webp",
+   "w": 631,
+   "h": 1365,
+   "k": 664.0,
+   "ground": [
+    316.1,
+    1270.9
+   ],
+   "bottom": 1352,
+   "hips": [
+    317.0,
+    655.8
+   ],
+   "head": [
+    316.2,
+    161.9
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 528,
+   "action": "noor_walk",
+   "cel": 6,
+   "from": {
+    "yaw": 5.9,
+    "elev": 1.2
+   }
+  },
+  "rw_7": {
+   "img": "hero/rw_7.webp",
+   "w": 635,
+   "h": 1365,
+   "k": 664.0,
+   "ground": [
+    314.9,
+    1294.9
+   ],
+   "bottom": 1353,
+   "hips": [
+    315.9,
+    667.5
+   ],
+   "head": [
+    315.2,
+    174.2
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 530,
+   "action": "noor_walk",
+   "cel": 7,
+   "from": {
+    "yaw": 5.8,
+    "elev": 1.2
+   }
+  },
+  "rw_8": {
+   "img": "hero/rw_8.webp",
+   "w": 635,
+   "h": 1363,
+   "k": 664.0,
+   "ground": [
+    321.8,
+    1315.5
+   ],
+   "bottom": 1352,
+   "hips": [
+    322.7,
+    686.1
+   ],
+   "head": [
+    322.1,
+    192.9
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 532,
+   "action": "noor_walk",
+   "cel": 8,
+   "from": {
+    "yaw": 5.9,
+    "elev": 1.2
+   }
+  },
+  "rw_9": {
+   "img": "hero/rw_9.webp",
+   "w": 609,
+   "h": 1363,
+   "k": 664.0,
+   "ground": [
+    300.8,
+    1301.4
+   ],
+   "bottom": 1352,
+   "hips": [
+    301.9,
+    669.8
+   ],
+   "head": [
+    301.2,
+    176.6
+   ],
+   "source": "kits/noor/source/hero/reun_walk/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 534,
+   "action": "noor_walk",
+   "cel": 9,
+   "from": {
+    "yaw": 6.1,
+    "elev": 1.3
+   }
+  },
+  "rs_0": {
+   "img": "hero/rs_0.webp",
+   "w": 693,
+   "h": 1311,
+   "k": 668.0,
+   "ground": [
+    319.5,
+    1254.4
+   ],
+   "bottom": 1300,
+   "hips": [
+    378.8,
+    623.8
+   ],
+   "head": [
+    440.6,
+    119.0
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 377,
+   "action": "noor_walk",
+   "cel": 0,
+   "from": {
+    "yaw": -104.7,
+    "elev": 5.4
+   }
+  },
+  "rs_1": {
+   "img": "hero/rs_1.webp",
+   "w": 665,
+   "h": 1283,
+   "k": 668.0,
+   "ground": [
+    395.6,
+    1264.2
+   ],
+   "bottom": 1271,
+   "hips": [
+    454.1,
+    630.2
+   ],
+   "head": [
+    515.0,
+    125.5
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 379,
+   "action": "noor_walk",
+   "cel": 1,
+   "from": {
+    "yaw": -105.3,
+    "elev": 5.4
+   }
+  },
+  "rs_2": {
+   "img": "hero/rs_2.webp",
+   "w": 501,
+   "h": 1301,
+   "k": 668.0,
+   "ground": [
+    272.2,
+    1275.3
+   ],
+   "bottom": 1289,
+   "hips": [
+    330.9,
+    628.5
+   ],
+   "head": [
+    390.8,
+    124.0
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 381,
+   "action": "noor_walk",
+   "cel": 2,
+   "from": {
+    "yaw": -105.8,
+    "elev": 5.4
+   }
+  },
+  "rs_3": {
+   "img": "hero/rs_3.webp",
+   "w": 535,
+   "h": 1299,
+   "k": 668.0,
+   "ground": [
+    274.3,
+    1275.1
+   ],
+   "bottom": 1287,
+   "hips": [
+    332.1,
+    626.5
+   ],
+   "head": [
+    391.1,
+    121.9
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 383,
+   "action": "noor_walk",
+   "cel": 3,
+   "from": {
+    "yaw": -106.3,
+    "elev": 5.3
+   }
+  },
+  "rs_4": {
+   "img": "hero/rs_4.webp",
+   "w": 725,
+   "h": 1307,
+   "k": 668.0,
+   "ground": [
+    280.2,
+    1281.1
+   ],
+   "bottom": 1295,
+   "hips": [
+    337.1,
+    630.2
+   ],
+   "head": [
+    395.2,
+    125.6
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 385,
+   "action": "noor_walk",
+   "cel": 4,
+   "from": {
+    "yaw": -106.8,
+    "elev": 5.3
+   }
+  },
+  "rs_5": {
+   "img": "hero/rs_5.webp",
+   "w": 739,
+   "h": 1309,
+   "k": 668.0,
+   "ground": [
+    345.0,
+    1275.4
+   ],
+   "bottom": 1298,
+   "hips": [
+    399.2,
+    644.9
+   ],
+   "head": [
+    456.5,
+    139.9
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 387,
+   "action": "noor_walk",
+   "cel": 5,
+   "from": {
+    "yaw": -107.3,
+    "elev": 5.3
+   }
+  },
+  "rs_6": {
+   "img": "hero/rs_6.webp",
+   "w": 745,
+   "h": 1303,
+   "k": 668.0,
+   "ground": [
+    436.8,
+    1264.4
+   ],
+   "bottom": 1290,
+   "hips": [
+    490.3,
+    630.5
+   ],
+   "head": [
+    546.7,
+    125.5
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 389,
+   "action": "noor_walk",
+   "cel": 6,
+   "from": {
+    "yaw": -107.8,
+    "elev": 5.3
+   }
+  },
+  "rs_7": {
+   "img": "hero/rs_7.webp",
+   "w": 511,
+   "h": 1315,
+   "k": 668.0,
+   "ground": [
+    289.9,
+    1268.8
+   ],
+   "bottom": 1303,
+   "hips": [
+    343.4,
+    622.2
+   ],
+   "head": [
+    399.0,
+    117.5
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 391,
+   "action": "noor_walk",
+   "cel": 7,
+   "from": {
+    "yaw": -108.3,
+    "elev": 5.3
+   }
+  },
+  "rs_8": {
+   "img": "hero/rs_8.webp",
+   "w": 485,
+   "h": 1317,
+   "k": 668.0,
+   "ground": [
+    258.6,
+    1270.8
+   ],
+   "bottom": 1305,
+   "hips": [
+    311.2,
+    622.3
+   ],
+   "head": [
+    365.9,
+    117.5
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 393,
+   "action": "noor_walk",
+   "cel": 8,
+   "from": {
+    "yaw": -108.8,
+    "elev": 5.3
+   }
+  },
+  "rs_9": {
+   "img": "hero/rs_9.webp",
+   "w": 641,
+   "h": 1319,
+   "k": 668.0,
+   "ground": [
+    258.9,
+    1271.4
+   ],
+   "bottom": 1307,
+   "hips": [
+    307.6,
+    622.6
+   ],
+   "head": [
+    359.2,
+    118.5
+   ],
+   "source": "kits/noor/source/hero/reun_side/take_1.jpg",
+   "shot": "shots/reunion.js",
+   "frame": 395,
+   "action": "noor_walk",
+   "cel": 9,
+   "from": {
+    "yaw": -109.3,
+    "elev": 5.3
+   }
   }
  }
 }

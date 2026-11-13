@@ -67,7 +67,7 @@ export function walk(shot, sync, kits) {
       const q = body.q, g = hang(c.kit, pick, body, cam), root = cam.project([q.x, q.y, q.z]), A = ACTIONS[on.action], pr = (p) => { const s = cam.project(p); return [s.x, s.y]; };
       // the feet: which are down, and where on the floor
       const feet = {};
-      const floor = FLOORS[fr.set]?.(q.x, q.z, q.y) ?? 0;
+      const floor = a.floor ?? FLOORS[fr.set]?.(q.x, q.z, q.y) ?? 0;      // (an actor's `floor`: the floor under it where the shot has moved it: a deck that bends)
       if (!A.float && !q.board && floor !== null) for (const s of ["L", "R"]) { const j = body.J[s], low = Math.min(j.heel[1], j.toe[1]) - floor; if (low < 0.012) feet[s] = [j.ball[0], floor, j.ball[2]]; }
       // the box the figure fills
       let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
@@ -111,7 +111,7 @@ export function judge(shot, rows) {
         } else {         // a new drawing: against the drawing before it, where that one came on
           const h = hold;
           if (h?.p.feet[s] && b.p.feet[s] && b.p.onScreen) {
-            const v = [b.p.feet[s][0] - h.p.feet[s][0], b.p.feet[s][2] - h.p.feet[s][2]], d = Math.hypot(...v), p0 = b.r.cam.project(h.p.feet[s]), p1 = b.r.cam.project(b.p.feet[s]), px = Math.hypot(p1.x - p0.x, p1.y - p0.y);
+            const v = [b.p.feet[s][0] - h.p.feet[s][0], b.p.feet[s][2] - h.p.feet[s][2]], d = Math.hypot(...v), p0 = b.r.cam.project([h.p.feet[s][0], b.p.feet[s][1], h.p.feet[s][2]]), p1 = b.r.cam.project(b.p.feet[s]), px = Math.hypot(p1.x - p0.x, p1.y - p0.y);      // (along the floor: a floor that has itself moved, a deck jolted under them, carries the foot with it)
             add("stride", b.r, who, px, LIMITS.stride, `${s} foot, planted, is ${px.toFixed(0)} px (${d.toFixed(2)} m) along the floor from where the drawing before put it (f${h.r.f} -> f${b.r.f})`);
             const pl = (plant[s] ??= { r: h.r, v: [0, 0], n: 1 }); pl.v[0] += v[0]; pl.v[1] += v[1]; pl.sum = Math.hypot(...pl.v); pl.n++;
             const q0 = b.r.cam.project([b.p.feet[s][0] - pl.v[0], b.p.feet[s][1], b.p.feet[s][2] - pl.v[1]]); pl.px = Math.hypot(p1.x - q0.x, p1.y - q0.y);

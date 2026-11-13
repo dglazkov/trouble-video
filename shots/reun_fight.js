@@ -24,7 +24,9 @@
 // from screen left to right: TANE x = +1.25 (pipe over his right shoulder), JUNO x = +0.45 (board under her arm, off
 // it), IFE x = -0.35, NOOR x = -1.15. All four look DOWN at the deck. The deck has dropped 0.3 m and a seam has opened
 // across it just in front of their feet (z 60.85-61.65, still widening); the first hole (z 67.2-73.2) is still open behind them.
-import { camera } from "../engine/body.js";
+import { camera, proportions } from "../engine/body.js";
+import { hull } from "../engine/mannequin.js";
+import { walkRoots } from "../engine/actions.js";
 import { stance } from "../machines/warden.js";
 import { dentAt } from "../sets/atrium.js";
 import { fireBlast, FIRE } from "../engine/fx.js";
@@ -98,7 +100,10 @@ const BLASTS = [
 ];
 const KICKS_HIT = [318, 397, 447, 477, 487, 496, 506, 516, 526, 536, 546, 586, 636];
 function blasts(g, c, L, o = {}) {
-  for (const b of BLASTS) { const age = L - b.at; if (age < 0 || age > 60 || (o.only && !o.only(b))) continue; const p = c.project(b.p); if (p.z < 0.5) continue; fireBlast(g, { cx: p.x, cy: p.y, s: p.s }, age, { R: b.R * (o.k ?? 1), seed: b.seed, floor: (DECK.y - b.p[1]) < -4 ? -30 : -(b.p[1] - DECK.y) - 0.1, wrecks: b.big ? 2 : 0, debris: b.big ? 12 : 6 }); }
+  for (const b of BLASTS) { const age = L - b.at; if (age < 0 || age > 60 || (o.only && !o.only(b))) continue; const p = c.project(b.p); if (p.z < 0.5) continue;
+    if (o.deck) { const q = (x, z) => { const s = c.project([x, DECK.y, z]); return [s.x, s.y]; }, zn = c.pos[2] + 0.4, pts = [q(-DECK.half, zn), q(DECK.half, zn), q(DECK.half, b.p[2]), q(-DECK.half, b.p[2])];      // nothing of it is drawn over the deck that is nearer than it
+      g.save(); g.beginPath(); g.rect(0, 0, W, H); pts.forEach((s, i) => i ? g.lineTo(s[0], s[1]) : g.moveTo(s[0], s[1])); g.closePath(); g.clip("evenodd"); }
+    fireBlast(g, { cx: p.x, cy: p.y, s: p.s }, age, { R: b.R * (o.k ?? 1), seed: b.seed, floor: (DECK.y - b.p[1]) < -4 ? -30 : -(b.p[1] - DECK.y) - 0.1, wrecks: b.big ? 2 : 0, debris: b.big ? 12 : 6 }); if (o.deck) g.restore(); }
 }
 const newest = (L) => { const t = KICKS_HIT.filter((x) => x <= L).pop(); return t == null ? { age: 99, jolt: 0 } : { at: t, age: L - t, jolt: Math.exp(-(L - t) / 3) }; };
 const shake = (L, k = 1) => { const j = newest(L).jolt * k; return [wob(L, 2.9, 4.3, 1) * 0.12 * j, wob(L, 3.3, 5.1, 2) * 0.1 * j, wob(L, 2.1, 3.7, 3) * 0.02 * j]; };
@@ -160,9 +165,16 @@ function pop(g, p, age, seed) {
   g.strokeStyle = "#fff3c0"; g.lineWidth = 4; g.lineCap = "round"; for (let i = 0; i < 6; i++) { const a = rnd(i, seed) * 6.283, r0 = (0.5 + age * 0.3) * p.s, r1 = r0 + (0.25 + 0.3 * rnd(i, seed, 2)) * p.s; g.beginPath(); g.moveTo(p.x + Math.cos(a) * r0, p.y + Math.sin(a) * r0 * 0.8); g.lineTo(p.x + Math.cos(a) * r1, p.y + Math.sin(a) * r1 * 0.8); g.stroke(); }
 }
 // ---- Noor, all this while ---------------------------------------------------------------------------------------------
-// From the moment Juno goes (357) she strolls up the deck along its left rail, under the machine's jaws, to the lip of the
-// plate, is standing there when it drops (437), and from 506 turns back (nwalk, nover are her own shots). Where she is at L:
-export const noorAt = (L) => { const u = clamp((L - 357) / 78); return [-1.7, 0, lerp(64.2, 65.9, u)]; };
+// Noor WALKS (engine/actions.js noor_walk, noor_over): drawn steps on the skeleton, on twos, a step every ten frames, so
+// every footfall is on a kick and nothing that goes off round them changes it by a frame. Where they are is where the foot
+// that carries them puts them (walkRoots): a planted boot does not move on the deck.
+// While Juno rings its head (orbit, 377-406) she walks three steps up the deck along its left rail, under the machine's
+// jaws, to the lip of the plate, is standing there when it drops (437), and from 506 turns back (nwalk, nover are her
+// own shots). Where she is at L:
+const NP = proportions({ height: 1.82, heads: 7.5 });      // (Noor's legs: kits/noor/character.json)
+const twos = (f) => f - f % 2;
+const NUP = walkRoots(NP, [...Array(16).keys()].map((h) => ["noor_walk", h % 10]), { yaw: 0, x: -1.7, z: 64.0 });
+export const noorAt = (L) => { const r = NUP[clamp(Math.floor((L - 377) / 2), 0, 15)]; return [r.x, 0, r.z]; };
 const NSIDE = { foot: [1400, 1478], m: 0.00141 }, NEDGE = { foot: [1410, 1496], m: 0.00138 };
 // a small figure standing in a wide: hung by its feet on the deck where it is (bent as the deck is), hidden by what is nearer
 const small = (name, cam, at, K, L, o = {}) => { const h = stand(cam, [at[0], -dentAt(at[2], dentsAt(L)) - (o.drop ?? 0), at[2]], K.foot, K.m); return { plate: name, ...h, y: h.y + (o.bob ?? 0), layer: { ...plateLight(o), depth: Math.max(0.1, h.depth - 0.35), ...o.layer } }; };
@@ -210,11 +222,13 @@ export const snap = shot("snap", { plates: { reun_juno_taunt: src("juno", "reun_
       post: f === 0 ? { mode: 1, impact: REDIMP } : { flash: f === 1 ? 0.2 : 0, ca: 0.0012 + 0.005 * s, vignette: 0.46 } };
   } });
 // ---- 377: she rings its head; it rears (387) and comes down on the deck (397) --------------------------------------------
-export const orbit = shot("orbit", { plates: { reun_juno_taunt: src("juno", "reun_juno_taunt_1.jpg"), reun_noor_side: src("noor", "reun_noor_side_1.jpg"), reun_ife_box: src("ife", "reun_ife_box_1.jpg") }, marks: [{ at: 0, what: "she crosses its face", on: "kick" }, { at: 10, what: "it rears after her", on: "kick" }, { at: 20, what: "both forefeet come down on the deck", on: "kick" }, { at: 20, what: "the slam (the brass too)", on: "brass" }],
+export const orbit = shot("orbit", { held: twos, plates: { reun_juno_taunt: src("juno", "reun_juno_taunt_1.jpg"), reun_ife_box: src("ife", "reun_ife_box_1.jpg") }, marks: [{ at: 0, what: "she crosses its face", on: "kick" }, { at: 10, what: "it rears after her", on: "kick" }, { at: 20, what: "both forefeet come down on the deck", on: "kick" }, { at: 20, what: "the slam (the brass too)", on: "brass" }],
   frame(f) {
     const L = CUT.orbit + f, s = shake(L, 1.6), j = junoAt(L), a = (L - 367) * 0.21 - 1.2, cam = { pos: [-15 + s[0], 2.2 + s[1], 60.5], target: [0, 5.2 - 1.6 * ease((f - 16) / 8), 72.5], fov: 44, up: [Math.sin(0.04 + s[2]), 1, 0] }, o = scene(L);
     return { set: "atrium", camera: cam, options: o,
-      cels: [small("reun_noor_side", cam, noorAt(L), NSIDE, L, { drop: o.drop, bob: -3 * Math.abs(Math.sin((L - 357) * Math.PI / 13)) }), small("reun_ife_box", cam, [IFE[0], 0, IFE[2] - 0.1], IBOX, L, { drop: o.drop }),
+      // Noor walks up the deck, small, under its jaws: the walk's ten drawings from this camera (kits/noor/hero/rs_N), hung on the deck as it bends
+      actors: [(() => { const h = clamp(Math.floor(f / 2), 0, 15), r = NUP[h], l = plateLight(); return { who: "noor", action: "noor_walk", phase: r.cel / 10, hero: "rs_" + r.cel, yaw: 0, x: r.x, z: r.z, y: -dentAt(r.z, dentsAt(L)) - o.drop, floor: -dentAt(r.z, dentsAt(L)) - o.drop, layer: { tint: l.tint, rim: l.rim, rimDir: l.rimDir, gradient: l.gradient } }; })()],
+      cels: [small("reun_ife_box", cam, [IFE[0], 0, IFE[2] - 0.1], IBOX, L, { drop: o.drop }),
         ...(L < 397 ? [(() => { const p = cam2(cam).project(j), k = p.s * 0.00073; return plate("reun_juno_taunt", { x: p.x + (PW / 2 - 1700) * k, y: p.y + (PH / 2 - 1000) * k, scale: k, turn: -0.25 }, { layer: { rim: [0.6, 0.95, 1.0], rimDir: [4, -5], tint: [1, 0.9, 0.88] } }); })()] : [])],
       under(g) { const c = cam2(cam); g.save(); g.translate(0, o.drop * c.project(PED).s); pedestal(g, c, 1); g.restore(); stomp(g, c, L, { from: 390, flecks: true }); },
       overlay(g) { lines(g, L, W * 0.52, H * 0.72, "#ffd0c0"); },
@@ -309,32 +323,65 @@ export const chain = shot("chain", { plates: { reun_noor_edge: src("noor", "reun
       post: { ...hitPost(L), vignette: 0.44 } };
   } });
 // ---- 516: Noor comes on at the same pace ---------------------------------------------------------------------------------
-export const nwalk = shot("nwalk", { plates: { reun_noor_walk: src("noor", "reun_noor_walk_1.jpg") }, marks: [{ at: 0, what: "Noor, at the same pace, as it falls round them", on: "kick" }, { at: 10, what: "a piece comes down behind", on: "kick" }, { at: 20, what: "another, beside", on: "kick" }],
+// NOOR WALKS BACK (nwalk, nover; the walk is said above, at noorAt): every footfall on a kick (516, 526, ... 566). Thirty drawings from the lip of
+// the hole to the far side of the blade that lies across the deck: twenty of the walk (engine/actions.js noor_walk), ten
+// of the step over (noor_over). Each is a hero drawing of the kit, painted for these cameras
+// (kits/noor/hero/rw_N: the walk, from in front; ro_N: the step over, from the low camera by the head).
+const NSTEPS = [...Array(20).keys()].map((h) => ["noor_walk", h % 10]).concat([...Array(10).keys()].map((h) => ["noor_over", h]));
+export const NROOTS = walkRoots(NP, NSTEPS, { yaw: 180, x: -0.1, z: 66.08 });
+const noorWalk = (L, o = {}) => { const r = NROOTS[clamp(Math.floor((L - CUT.nwalk) / 2), 0, 29)], l = plateLight(o);
+  return { who: "noor", action: r.action, phase: r.cel / 10, hero: (r.action === "noor_walk" ? "rw_" : "ro_") + r.cel, yaw: 180, x: r.x, z: r.z, layer: { tint: l.tint, rim: l.rim, rimDir: o.rimDir ?? l.rimDir, gradient: l.gradient }, planted: r.planted, ...(o.over ? { over: true } : {}) }; };
+export const nwalk = shot("nwalk", { held: twos, marks: [{ at: 0, what: "Noor, at the same pace, as it falls round them: a boot comes down", on: "kick" }, { at: 10, what: "a piece comes down behind; the next boot comes down", on: "kick" }, { at: 20, what: "another, beside; the next", on: "kick" }],
   frame(f) {
-    const L = CUT.nwalk + f, s = shake(L, 0.5), z = 67.5 - 0.045 * f, cam = { pos: [0.5 + s[0], 1.45 + s[1], z - 4.2], target: [0.1, 1.5, z + 6], fov: 38 }, c = cam2(cam), step = Math.sin(f * Math.PI / 14);
-    return { set: "atrium", camera: cam, options: scene(L, { opt: { post: { bgBlur: 0.006, focus: [0.5, 0.5] } } }),
-      cels: [plate("reun_noor_walk", { x: W / 2 - 60 + 5 * step, y: H / 2 + 170 - 7 * Math.abs(step), scale: 0.82 }, { fire: 0.6 * newest(L).jolt + 0.25, layer: { rimDir: [6, 4], ...boil(f, 2.4), warpStill: [0.47, 0.72], warpRadius: 0.2, warpDir: [-1, 0.1] } })],
-      under(g) { blasts(g, c, L, { only: (b) => b.at >= 506 }); },
+    const L = CUT.nwalk + f, s = shake(L, 0.5), cam = { pos: [-0.5 + s[0], 1.0 + s[1], 61.38 - 0.0333 * f], target: [-0.1, 1.15, 67.38 - 0.0333 * f], fov: 38 }, c = cam2(cam);
+    return { set: "atrium", camera: cam, options: scene(L, { warden: null, opt: { post: { bgBlur: 0.006, focus: [0.5, 0.5] } } }),      // (its wreck is the blasts' and the slab's here: the model's pieces would slide over the deck under their boots)
+      actors: [noorWalk(L, { fire: 0.6 * newest(L).jolt + 0.25, rimDir: [6, 4], over: true })],      // (over: the wreck coming apart round them is drawn behind them)
+      under(g) { blasts(g, c, L, { only: (b) => b.at >= 506, deck: true }); },
       overlay(g) { const a = L - 526; if (a >= -6 && a < 30) { const y = Math.min(1, (a + 6) / 6), yy = H * (-0.5 + 1.42 * y * y); g.save(); g.translate(W * 0.84, yy); g.rotate(0.5 + 0.02 * Math.max(0, a)); g.fillStyle = INK; g.fillRect(-90, -700, 180, 760); g.fillStyle = "#2a2f55"; g.fillRect(-74, -690, 148, 740); g.fillStyle = "#f07a22"; g.fillRect(-74, -80, 148, 60); g.fillStyle = "#14152b"; g.fillRect(-74, -690, 40, 740); g.restore(); } },
       post: { ...hitPost(L, { impact: f !== 0 }), ...(f === 0 ? { flash: 0.2 } : {}), vignette: 0.5 } };
   } });
 // ---- 546: its head; they step over it ------------------------------------------------------------------------------------
 const GUIDE = typeof location !== "undefined" && /warden_plate/.test(location.search);      // (rendering the plate's guide: the model itself)
-const HEADZ = 64.2, NOVER = { foot: [1010, 1490], m: 0.00138 };
-const headSpec = (L) => { const u = clamp((L - 540) / 6), y = 9 * (1 - u * u) + 0.5 * hitE(L, 546, 2.5) * Math.abs(Math.cos((L - 546) * 0.8)); return { pos: [0.1, y - 3.55, HEADZ + 5.4], yaw: 180, height: 5.6, pitch: 0, roll: -9, deck: { y: -400, half: 0 }, broken: { trunk: 9, back: 9, neck: 9, arm: 9, fan: 9, leg0: 9, leg1: 9, leg2: 9, leg3: 9, leg4: 9, leg5: 9 },
+const HEADZ = 64.2;
+// (seen from the far camera, 546-555, it lies FARSET further up the deck than its drawing does from the near one: Noor is in
+// front of its jaw in both, and no two frames show the difference)
+const FARSET = 0.9;
+const headSpec = (L, dz = 0) => { const u = clamp((L - 540) / 6), y = 9 * (1 - u * u) + 0.5 * hitE(L, 546, 2.5) * Math.abs(Math.cos((L - 546) * 0.8)); return { pos: [0.1, y - 3.55, HEADZ + 5.4 + dz], yaw: 180, height: 5.6, pitch: 0, roll: -9, deck: { y: -400, half: 0 }, broken: { trunk: 9, back: 9, neck: 9, arm: 9, fan: 9, leg0: 9, leg1: 9, leg2: 9, leg3: 9, leg4: 9, leg5: 9 },
   look: [1.3, 1.5, HEADZ - 3.2], eye: L < 566 ? 1.4 - 0.5 * clamp((L - 556) / 10) + 0.3 * wob(L, 2.3, 3.1, 1) : 0.02, reach: 0 }; };
 // From 556 its head is a DRAWING (machines/warden/head_lit.webp, head_out.webp; pipeline/warden_plate.py): painted over the
 // set's own picture of the 3D head from this camera (shots/warden_plate.js), so it sits on the deck where the model fell;
 // its eyes gutter twice and go out on 566 (the second drawing).
 const HEADCEL = (L) => ({ plate: L >= 566 || L === 561 || L === 564 ? "warden_head_out" : "warden_head_lit", x: W / 2, y: H / 2, scale: W / 3840, depth: 90, layer: { depth: 0, tint: [0.72, 0.58, 0.72], rim: [0, 0, 0], rimDir: [0, 0], gradient: 0 } });
-export const nover = shot("nover", { plates: { reun_noor_walk: src("noor", "reun_noor_walk_1.jpg"), reun_noor_over: src("noor", "reun_noor_over_1.jpg"), warden_head_lit: { src: "/machines/warden/head_lit.webp" }, warden_head_out: { src: "/machines/warden/head_out.webp" } }, marks: [{ at: 0, what: "its head comes down in front of them", on: "kick" }, { at: 10, what: "Noor steps over it", on: "kick" }, { at: 20, what: "its last eye goes out", on: "kick" }],
+// THE BLADE: one of its crest's blades, thrown clear when the head came down, lies across the deck in Noor's way (a hand
+// high, in the gap their boots leave for it). It is a cel the shot draws where it lies (engine/stage.js: a drawn cel):
+// in front of the head, in front of Noor until a boot has gone over it, then behind them.
+const BLADE_Z = NROOTS[20].planted.L[2] - 0.25, BLADE = { x0: -1.25, x1: 0.8, z0: BLADE_Z + 0.1, z1: BLADE_Z - 0.08, h: 0.1, d: 0.13 };
+function blade(g, c, L) {
+  const hop = 0.18 * hitE(L, 546, 2) * Math.abs(Math.cos((L - 546) * 0.9)), { h, d } = BLADE, T = 0.62;      // (T: where its taper to the point starts)
+  const P = (u, y, w) => { const p = c.project([lerp(BLADE.x0, BLADE.x1, u), y + hop, lerp(BLADE.z0, BLADE.z1, u) + w]); return [p.x, p.y]; };
+  const poly = (pts, col) => { g.fillStyle = col; g.strokeStyle = INK; g.lineWidth = 4; g.lineJoin = "round"; g.beginPath(); pts.forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])); g.closePath(); g.fill(); g.stroke(); };
+  const n = c.project([0, 0, BLADE_Z + d]).z > c.project([0, 0, BLADE_Z - d]).z ? -d / 2 : d / 2;      // its long face toward the camera
+  poly([P(0, h, -d / 2), P(T, h, -d / 2), P(1, h * 0.35, 0), P(T, h, d / 2), P(0, h, d / 2)], "#36305a");      // the top (its colours are the night's already: it is drawn again over a boot behind it, on the overlay, and the two must agree)
+  poly([P(0, 0, n), P(T, 0, n), P(1, 0, 0), P(1, h * 0.35, 0), P(T, h, n), P(0, h, n)], "#1a1c36");      // the side toward the camera
+  poly([P(T, 0, n), P(1, 0, 0), P(1, h * 0.35, 0), P(T, h, n)], "#a04e1c");      // its edge, still hot
+  poly([P(0.05, h * 0.35, n), P(T - 0.04, h * 0.35, n), P(T - 0.04, h * 0.6, n), P(0.05, h * 0.6, n)], "#9d8e7e");      // the band of its paint
+  poly([P(0, 0, -d / 2), P(0, 0, d / 2), P(-0.02, h * 0.6, d / 2), P(0, h, d / 2), P(0.015, h * 0.5, 0), P(0, h, -d / 2)], "#0e0e1f");      // the torn end
+}
+const bladeCel = (L, over) => ({ draw: (g, c) => blade(g, c, L), depth: over ? 0 : 50, layer: { depth: 0, tint: [1, 1, 1], rim: [0, 0, 0], rimDir: [0, 0], gradient: 0 } });
+export const nover = shot("nover", { held: twos, plates: { warden_head_lit: { src: "/machines/warden/head_lit.webp" }, warden_head_out: { src: "/machines/warden/head_out.webp" } }, marks: [{ at: 0, what: "its head comes down behind Noor; a boot comes down", on: "kick" }, { at: 10, what: "the next boot down, at the blade; the other lifts to go over it", on: "kick" }, { at: 20, what: "the boot comes down beyond the blade; its last eye goes out", on: "kick" }],
   frame(f) {
-    const L = CUT.nover + f, s = shake(L, 1.2), near = f >= 10, cam = near ? { pos: [1.75, 0.3, HEADZ - 3.4], target: [-0.2, 1.4, HEADZ + 0.2], fov: 52, up: [Math.sin(-0.06), 1, 0] } : { pos: [-0.9 + s[0], 0.5 + s[1], HEADZ - 4.6], target: [0.3, 1.3, HEADZ + 1], fov: 44 }, c = cam2(cam);
-    const far = c.project([0.2, 0, HEADZ + 4.6 - 0.05 * f]), g2 = f - 10, nx = 0.25 - 0.012 * g2;
-    return { set: "atrium", camera: cam, options: scene(L, { warden: near && !GUIDE ? null : headSpec(L), opt: { post: { bgBlur: 0.004 } } }),
-      cels: near ? [HEADCEL(L), plate("reun_noor_over", stand(cam, [nx + 0.45, 0, HEADZ - 0.75 - 0.02 * g2], NOVER.foot, NOVER.m), { layer: { rimDir: [-6, 4], ...boil(f, 1.6), warpStill: [0.4, 0.5], warpDir: [1, 0.1] } })]
-        : [plate("reun_noor_walk", { x: far.x, y: far.y - 0.9 * far.s + 4 * Math.sin(f * 0.45), scale: far.s * 0.00125, depth: far.z }, { layer: { depth: far.z - 0.4 } })],
-      overlay(g) { lines(g, L, W * 0.5, H * 0.62, "#ffd0c0"); if (L >= 546 && L < 556) { const p = c.project([0.4, 0, HEADZ]); fireBlast(g, { cx: p.x, cy: p.y, s: p.s }, L - 546 + 14, { R: 0.55, seed: 61, floor: 0, wrecks: 0, debris: 8 }); } },
+    const L = CUT.nover + f, s = shake(L, 1.2), near = f >= 10, cam = near ? { pos: [1.75, 0.3, HEADZ - 3.4], target: [-0.2, 1.4, HEADZ + 0.2], fov: 52, up: [Math.sin(-0.06), 1, 0] } : { pos: [-0.9 + s[0], 0.8 + s[1], HEADZ - 4.6], target: [0.3, 1.3, HEADZ + 1], fov: 44 }, c = cam2(cam);
+    const noor = noorWalk(L, { rimDir: near ? [-6, 4] : [0, 7] });
+    return { set: "atrium", camera: cam, options: scene(L, { warden: near && !GUIDE ? null : headSpec(L, near ? 0 : FARSET), opt: { post: { bgBlur: 0.004 } } }),
+      // the blade: in front of all of Noor until a boot has gone over it (to 561), behind them from then; while the leg left
+      // behind is still behind it (to 569) it is drawn again over that leg alone
+      actors: GUIDE ? [] : [noor], cels: [...(near ? [HEADCEL(L)] : []), ...(GUIDE ? [] : [bladeCel(L, f < 16)])],
+      under(g) { if (L >= 546 && L < 556) { const p = c.project([-1.5, 0, HEADZ + 0.9]); fireBlast(g, { cx: p.x, cy: p.y, s: p.s }, L - 546 + 14, { R: 0.55, seed: 61, floor: 0, wrecks: 0, debris: 8 }); } },
+      overlay(g, cm, bodies) {
+        if (!GUIDE && f >= 16 && f < 24) { g.save(); g.beginPath();
+          for (const v of bodies[0].vol) if (v.side === "L" && (v.part === "shoe" || v.part === "shin")) { const pts = hull(v.spheres.map((s) => ({ c: s.c, r: s.r + 0.07 })), c); pts.forEach((q, i) => i ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1])); g.closePath(); }
+          g.clip(); blade(g, c, L); g.restore(); }
+        lines(g, L, W * 0.5, H * 0.62, "#ffd0c0"); },
       post: { ...(L === 546 ? { mode: 1, impact: REDIMP } : L === 566 ? { flash: 0.1 } : { flash: L === 547 ? 0.2 : f === 10 ? 0.08 : 0, ca: 0.0012 + 0.004 * newest(L).jolt }), vignette: 0.5, dark: L >= 566 ? 0.12 * ease((L - 566) / 6) : 0 } };
   } });
 // ---- 576: what is left goes over the side ------------------------------------------------------------------------------

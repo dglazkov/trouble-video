@@ -63,7 +63,7 @@ window.layout = (spec, action, viewName, o) => {
 // written down per cel is what the others have (the ground point under the root, the joints, the face's direction)
 // plus its name, its frame and the line of sight it was drawn along, so the stage can hang it on that camera and
 // engine/motion.mjs can say how far a frame's camera has moved from it.
-// list: [{ frame, name }]; o: { W, H, cols, aspect, sheet, what, margin }
+// list: [{ frame, name }]; o: { W, H, cols, aspect, sheet, what, margin, stand: the figures stand on a floor (registered by their feet) }
 window.heroLayout = async (spec, shotUrl, list, o) => {
   const shot = (await import(shotUrl)).default, sync = await loadSync(), P = proportions(spec.body), who = spec.name;
   const { W, H } = o, cols = Math.min(o.cols, list.length), rows = Math.ceil(list.length / cols), cw = W / cols, ch = H / rows, m = o.margin ?? 0.08;
@@ -99,7 +99,7 @@ window.heroLayout = async (spec, shotUrl, list, o) => {
   });
   const classes = {};
   for (const n of NAMES) for (const s of [null, "L", "R"]) classes[n + (s ? "." + s : "")] = colourOf(n, s);
-  return { png: png(c), map: png(cm), layout: { action: "hero", hero: { shot: shotUrl.replace(/^\//, ""), who }, what: o.what ?? "", loose: true, float: true, prop: cels.some((x) => x.board) ? "board" : null, view: o.sheet, yaw: null, elev: null, W, H, cols, rows, unit: U, aspect: o.aspect, cels, classes } };
+  return { png: png(c), map: png(cm), layout: { action: "hero", hero: { shot: shotUrl.replace(/^\//, ""), who }, what: o.what ?? "", loose: true, float: !o.stand, prop: cels.some((x) => x.board) ? "board" : null, view: o.sheet, yaw: null, elev: null, W, H, cols, rows, unit: U, aspect: o.aspect, cels, classes } };
 };
 const celOf = (on) => { const A = ACTIONS[on.action], n = A.cels, i = Math.floor((on.phase ?? 0) * n + 1e-9); return A.loop ? ((i % n) + n) % n : Math.min(n - 1, Math.max(0, i)); };
 window.ready = true;

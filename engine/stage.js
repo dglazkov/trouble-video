@@ -9,6 +9,8 @@
 //                  layer: {...engine/post.js LAYER, over what the stage works out: a wobble of hair and cloth} }],
 //       cels: [{ plate, x, y, scale, layer: {...engine/post.js LAYER} }],      plates on the frame: centre (pixels), scale
 //                                                                              (turn: radians; flip: true: mirrored left to right)
+//              { draw(g, cam), depth, layer }                                  or a cel the shot draws on the frame itself (a thing
+//                                                                              lying in the set that a character passes behind and in front of)
 //       backdrop(g, cam, bodies)    a painted background when there is no set (a 2D canvas the size of the frame)
 //       under(g, cam, bodies)       painted over the background, under the characters
 //       overlay(g, cam, bodies)     painted over everything, before the lens
@@ -133,6 +135,7 @@ try {
     cels.forEach((p, i) => {
       const s = sheet(3 + i), g = s.g;
       if (p.plate) {
+        if (p.plate.draw) { p.plate.draw(g, cam); post.cel(s.t, p.plate.layer); return; }
         const im = plates[p.plate.plate], k = p.plate.scale ?? 1;
         g.imageSmoothingEnabled = true; g.imageSmoothingQuality = "high";
         g.translate(p.plate.x ?? W / 2, p.plate.y ?? H / 2); g.rotate(p.plate.turn ?? 0); g.scale(p.plate.flip ? -k : k, k); g.drawImage(im, -im.width / 2, -im.height / 2);

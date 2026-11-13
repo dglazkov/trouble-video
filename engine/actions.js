@@ -2,7 +2,7 @@
 // (a cel) per pose per view, painted over these very poses, so the pose a shot asks for and the drawing shown for it
 // are the same thing by construction. A shot names the action and how far through it the character is:
 //   { who, action, phase, yaw, x, z, y }      y: how high off the ground the whole figure is (a leap's arc)
-import { pose, runPose, runStride, RUN_KEYS } from "./body.js";
+import { pose, solve, runPose, runStride, RUN_KEYS } from "./body.js";
 
 // Standing at ease: weight on her left leg, the right leg loose with its knee forward and the foot turned out, the
 // chest turned a little against the hips, both arms hanging slack (not quite alike), head a little to one side.
@@ -257,3 +257,51 @@ export function actorPose(a) {
 }
 // The drawing that shows cel i when its view is mirrored.
 export const mirrored = (action, i) => { const A = ACTIONS[action]; return A.flip ? A.flip[i] : A.half ? (i + A.cels / 2) % A.cels : i; };
+
+// ---- the reunion's last walk (shots/reun_fight.js nwalk, nover): Noor walks out of the blasts and over the wreck -------
+// A WALK on twos: five drawings a step, ten a cycle (the body is not alike on its two sides, so no drawing serves twice),
+// hands in the coat's pockets, the head level, the chest barely turning against the hips. Each row: [the leg that
+// carries, the leg that swings, the chest's twist]. (0) CONTACT: the carrying leg's heel down ahead, the other toe
+// still down behind; (1) the weight comes onto it, the other heel peels and the foot leaves the deck; (2) PASSING: it
+// stands straight under them, the other knee coming through; (3) the other leg swings out ahead, its own heel starts
+// to lift; (4) the other heel reaches for the deck. Drawings 0-4 are carried on the LEFT leg, 5-9 on the right.
+const WALK = [
+  [leg(17.9, 2, 4, -13), leg(-18.7, 9, 4, 15), 4],
+  [leg(17.4, 16, 4, 0), leg(-15, 44, 4, 52), 3],
+  [leg(3.9, 6, 4, 0), leg(10, 60, 4, 22), 0],
+  [leg(-3.7, 7, 4, 3), leg(26, 42, 4, 0), -3],
+  [leg(-8.8, 12, 4, 12), leg(26, 9, 4, -12), -4],
+];
+// The step OVER something a hand high lying across the way, at the same pace: the swinging knee comes up and the boot
+// is carried over it (1-3), reaches down beyond it (4) and is planted (5: the next row's 0); then the leg left behind
+// is lifted over the same way. Drawings 0-4 carried on the LEFT leg (the right goes over first), 5-9 on the right.
+const STEP_OVER = [
+  WALK[0],
+  [WALK[1][0], leg(6, 84, 6, 44), 3],
+  [WALK[2][0], leg(58, 98, 6, 12), 0],
+  [WALK[3][0], leg(54, 44, 6, -6), -3],
+  [WALK[4][0], leg(30, 9, 5, -13), -4],
+];
+const walking = (rows) => [0, 1].flatMap((h) => rows.map(([carry, swing, tw]) => pose({ lean: 2, twist: h ? -tw : tw, pelvisTwist: h ? tw : -tw, head: { yaw: 0, pitch: 0, roll: 0 },
+  arm: { L: arm(-12, 11, 46), R: arm(-14, 10, 42) }, leg: h ? { R: carry, L: swing } : { L: carry, R: swing } })));
+const NOOR_WALK = walking(WALK), NOOR_OVER = walking(STEP_OVER);
+Object.assign(ACTIONS, {
+  noor_walk: { cels: 10, loop: true, half: false, loose: true, carry: (i) => (i % 10 < 5 ? "L" : "R"), pose: (i) => NOOR_WALK[i] },
+  noor_over: { cels: 10, loop: true, half: false, loose: true, carry: (i) => (i % 10 < 5 ? "L" : "R"), pose: (i) => NOOR_OVER[i] },
+});
+// Where a walker's root is, drawing by drawing, so that the foot that carries them never moves on the floor: from the
+// root at the first drawing, `steps` drawings on ([action, cel] each), heading `yaw`. The carrying foot's ball is held
+// where it came down; at a contact drawing (the action's `carry` changes) the foot behind is still the one held, and
+// the new foot is planted where that drawing puts it. -> [{ action, cel, x, z, planted: { L, R } (ball, on the floor) }]
+export function walkRoots(P, steps, o = {}) {
+  const yaw = (o.yaw ?? 0) * Math.PI / 180, out = []; let x = o.x ?? 0, z = o.z ?? 0, plant = null, side = null;
+  for (const [action, cel] of steps) {
+    const A = ACTIONS[action], b = solve(P, { ...A.pose(cel, o.who), yaw: o.yaw ?? 0, x: 0, z: 0, y: 0 }), s = A.carry(cel), ball = (k) => b.J[k].ball;
+    const hold = plant && side !== s ? side : s;      // a contact: still standing on the foot behind
+    if (plant) { x = plant[hold][0] - ball(hold)[0]; z = plant[hold][2] - ball(hold)[2]; }
+    plant = { ...(plant ?? {}), [hold]: [x + ball(hold)[0], 0, z + ball(hold)[2]] };
+    if (hold !== s || !out.length) plant[s] = [x + ball(s)[0], 0, z + ball(s)[2]];
+    side = s; out.push({ action, cel, x, z, planted: { ...plant } });
+  }
+  return out;
+}
