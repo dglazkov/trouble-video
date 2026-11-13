@@ -1,0 +1,1391 @@
+{
+ "what": "The making-of's music as an edit of the song \"Trouble\" (audio.wav and its stems). Written by stories/makingof/arrange.py; change that, not this.",
+ "sampleRate": 48000,
+ "fps": 24,
+ "duration": 250.0,
+ "frames": 6000,
+ "grid": {
+  "bpm": 144.9988,
+  "beat": 0.4137964898680225,
+  "bar": 1.65518595947209,
+  "songBar0": 0.2403995268987913,
+  "editLead": 0.042,
+  "silenceHeld": 0.02083,
+  "note": "Song bar b's line is at songBar0 + b * bar (bar 31 = the first drop's first kick). Arrangement bar j's line is at j * bar + editLead, plus silenceHeld from bar 8 on (the silence before the voice is that much longer than two bars, which puts the drop's first kick on a whole frame). Edits are editLead before a bar line. A clip plays source time s at out.start + (s - source.start); fades are inside the clip's times. `mix` is audio.wav; other stems are stems-wav/. Gains in dB; `level` is the clip's automation (straight lines in dB between points, held outside them)."
+ },
+ "chapters": [
+  {
+   "n": 1,
+   "name": "Cold open",
+   "bar": 0,
+   "start": 0
+  },
+  {
+   "n": 2,
+   "name": "The prompt",
+   "bar": 7,
+   "start": 11.6283
+  },
+  {
+   "n": 3,
+   "name": "The tools",
+   "bar": 18,
+   "start": 29.8562
+  },
+  {
+   "n": 4,
+   "name": "The first face",
+   "bar": 34,
+   "start": 56.3391
+  },
+  {
+   "n": 5,
+   "name": "The pivot",
+   "bar": 42,
+   "start": 69.5806
+  },
+  {
+   "n": 6,
+   "name": "The cast",
+   "bar": 56,
+   "start": 92.7533
+  },
+  {
+   "n": 7,
+   "name": "Wow",
+   "bar": 77,
+   "start": 127.5121
+  },
+  {
+   "n": 8,
+   "name": "Building the rest",
+   "bar": 95,
+   "start": 157.3055
+  },
+  {
+   "n": 9,
+   "name": "The human eye",
+   "bar": 115,
+   "start": 190.4092
+  },
+  {
+   "n": 10,
+   "name": "Who did what",
+   "bar": 131,
+   "start": 216.8922
+  },
+  {
+   "n": 11,
+   "name": "Fork it",
+   "bar": 139,
+   "start": 230.1337
+  }
+ ],
+ "barLines": [
+  0.042,
+  1.6972,
+  3.3524,
+  5.0076,
+  6.6627,
+  8.3179,
+  9.9731,
+  11.6283,
+  13.3043,
+  14.9595,
+  16.6147,
+  18.2699,
+  19.9251,
+  21.5803,
+  23.2354,
+  24.8906,
+  26.5458,
+  28.201,
+  29.8562,
+  31.5114,
+  33.1666,
+  34.8217,
+  36.4769,
+  38.1321,
+  39.7873,
+  41.4425,
+  43.0977,
+  44.7529,
+  46.408,
+  48.0632,
+  49.7184,
+  51.3736,
+  53.0288,
+  54.684,
+  56.3391,
+  57.9943,
+  59.6495,
+  61.3047,
+  62.9599,
+  64.6151,
+  66.2703,
+  67.9255,
+  69.5806,
+  71.2358,
+  72.891,
+  74.5462,
+  76.2014,
+  77.8566,
+  79.5118,
+  81.1669,
+  82.8221,
+  84.4773,
+  86.1325,
+  87.7877,
+  89.4429,
+  91.0981,
+  92.7533,
+  94.4084,
+  96.0636,
+  97.7188,
+  99.374,
+  101.0292,
+  102.6844,
+  104.3395,
+  105.9947,
+  107.6499,
+  109.3051,
+  110.9603,
+  112.6155,
+  114.2707,
+  115.9259,
+  117.581,
+  119.2362,
+  120.8914,
+  122.5466,
+  124.2018,
+  125.857,
+  127.5121,
+  129.1673,
+  130.8225,
+  132.4777,
+  134.1329,
+  135.7881,
+  137.4433,
+  139.0985,
+  140.7536,
+  142.4088,
+  144.064,
+  145.7192,
+  147.3744,
+  149.0296,
+  150.6848,
+  152.3399,
+  153.9951,
+  155.6503,
+  157.3055,
+  158.9607,
+  160.6159,
+  162.2711,
+  163.9263,
+  165.5814,
+  167.2366,
+  168.8918,
+  170.547,
+  172.2022,
+  173.8574,
+  175.5125,
+  177.1677,
+  178.8229,
+  180.4781,
+  182.1333,
+  183.7885,
+  185.4437,
+  187.0989,
+  188.754,
+  190.4092,
+  192.0644,
+  193.7196,
+  195.3748,
+  197.03,
+  198.6851,
+  200.3403,
+  201.9955,
+  203.6507,
+  205.3059,
+  206.9611,
+  208.6163,
+  210.2715,
+  211.9266,
+  213.5818,
+  215.237,
+  216.8922,
+  218.5474,
+  220.2026,
+  221.8578,
+  223.5129,
+  225.1681,
+  226.8233,
+  228.4785,
+  230.1337,
+  231.7889,
+  233.4441,
+  235.0992,
+  236.7544,
+  238.4096,
+  240.0648,
+  241.72,
+  243.3752,
+  245.0304,
+  246.6855,
+  248.3407,
+  249.9959
+ ],
+ "clips": [
+  {
+   "id": "cold_open",
+   "chapter": 1,
+   "what": "the mix, bars 31-37 of the song",
+   "out": {
+    "start": 0.0,
+    "end": 11.5893,
+    "startFrame": 0.0,
+    "endFrame": 278.14
+   },
+   "source": {
+    "start": 51.5092,
+    "end": 63.0985
+   },
+   "samples": {
+    "out": 0,
+    "source": 2472440,
+    "length": 556286
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 2.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 6.0,
+    "shape": "linear"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "voice_hook",
+   "chapter": 2,
+   "what": "lead vocal stem alone from 0:00, +1 dB to the level it has in the mix: \"You're in deep trouble, mister\"",
+   "out": {
+    "start": 14.7191,
+    "end": 18.3191,
+    "startFrame": 353.26,
+    "endFrame": 439.66
+   },
+   "source": {
+    "start": 0.0,
+    "end": 3.6
+   },
+   "samples": {
+    "out": 706517,
+    "source": 0,
+    "length": 172800
+   },
+   "stems": {
+    "lead_vocals": {
+     "gain_db": 1.0
+    }
+   },
+   "fadeIn": {
+    "ms": 3.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 400.0,
+    "shape": "cosine"
+   },
+   "level": [
+    {
+     "t": 14.7191,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "strings_A",
+   "chapter": 2,
+   "what": "strings stem alone, bars 1-8",
+   "out": {
+    "start": 16.5677,
+    "end": 29.8292,
+    "startFrame": 397.62,
+    "endFrame": 715.9
+   },
+   "source": {
+    "start": 1.8486,
+    "end": 15.1101
+   },
+   "samples": {
+    "out": 795249,
+    "source": 88732,
+    "length": 636552
+   },
+   "stems": {
+    "strings": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 10.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 16.5677,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "tools_G",
+   "chapter": 3,
+   "what": "strings stem, bars 48-55",
+   "out": {
+    "start": 29.7992,
+    "end": 43.0707,
+    "startFrame": 715.18,
+    "endFrame": 1033.7
+   },
+   "source": {
+    "start": 79.6323,
+    "end": 92.9038
+   },
+   "samples": {
+    "out": 1430361,
+    "source": 3822352,
+    "length": 637031
+   },
+   "stems": {
+    "strings": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 29.7992,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "tools_G_keys",
+   "chapter": 3,
+   "what": "keyboard stem (+3 dB), bars 48-55",
+   "out": {
+    "start": 29.8302,
+    "end": 43.0707,
+    "startFrame": 715.92,
+    "endFrame": 1033.7
+   },
+   "source": {
+    "start": 79.6633,
+    "end": 92.9038
+   },
+   "samples": {
+    "out": 1431849,
+    "source": 3823840,
+    "length": 635543
+   },
+   "stems": {
+    "keyboard": {
+     "gain_db": 3
+    }
+   },
+   "fadeIn": {
+    "ms": 20.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 29.8302,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "tools_D",
+   "chapter": 3,
+   "what": "strings (-4 dB) + keyboard (-1 dB) + percussion (-1 dB) high-passed at 300 Hz, bars 23-30: all are louder in the build, held here to the level of the eight bars before",
+   "out": {
+    "start": 43.0407,
+    "end": 56.3121,
+    "startFrame": 1032.98,
+    "endFrame": 1351.49
+   },
+   "source": {
+    "start": 38.2527,
+    "end": 51.5241
+   },
+   "samples": {
+    "out": 2065952,
+    "source": 1836128,
+    "length": 637031
+   },
+   "stems": {
+    "strings": {
+     "gain_db": -4
+    },
+    "keyboard": {
+     "gain_db": -1
+    },
+    "percussion": {
+     "gain_db": -1,
+     "highpass_hz": 300
+    }
+   },
+   "fadeIn": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 43.0407,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "face_C",
+   "chapter": 4,
+   "what": "bass (+1 dB) + synth (-2 dB) + strings (-1 dB) + keyboard (+2 dB) + percussion (+1 dB), bars 15-22: about 1.5 dB over the chapter before",
+   "out": {
+    "start": 56.2821,
+    "end": 69.5536,
+    "startFrame": 1350.77,
+    "endFrame": 1669.29
+   },
+   "source": {
+    "start": 25.0112,
+    "end": 38.2827
+   },
+   "samples": {
+    "out": 2701543,
+    "source": 1200537,
+    "length": 637032
+   },
+   "stems": {
+    "bass": {
+     "gain_db": 1
+    },
+    "synth": {
+     "gain_db": -2
+    },
+    "strings": {
+     "gain_db": -1
+    },
+    "keyboard": {
+     "gain_db": 2
+    },
+    "percussion": {
+     "gain_db": 1
+    }
+   },
+   "fadeIn": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 56.2821,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "brass_pickup",
+   "chapter": 5,
+   "what": "brass stem: the fanfare's pickup (D#-F-F#), two beats before the bar line",
+   "out": {
+    "start": 68.6813,
+    "end": 69.5536,
+    "startFrame": 1648.35,
+    "endFrame": 1669.29
+   },
+   "source": {
+    "start": 78.79,
+    "end": 79.6623
+   },
+   "samples": {
+    "out": 3296703,
+    "source": 3781920,
+    "length": 41872
+   },
+   "stems": {
+    "brass": {
+     "gain_db": -2.0
+    }
+   },
+   "fadeIn": {
+    "ms": 15.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 68.6813,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "fanfare",
+   "chapter": 5,
+   "what": "the mix under text (-2 dB), bars 48-51",
+   "out": {
+    "start": 69.5236,
+    "end": 76.1694,
+    "startFrame": 1668.57,
+    "endFrame": 1828.07
+   },
+   "source": {
+    "start": 79.6323,
+    "end": 86.2781
+   },
+   "samples": {
+    "out": 3337135,
+    "source": 3822352,
+    "length": 318996
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 30.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 20.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "hole_hook",
+   "chapter": 5,
+   "what": "lead vocal stem from bar 67, +1 dB: the breakdown's \"You're in deep trouble, mister\" and its held D#5, 6.5 s",
+   "out": {
+    "start": 76.1594,
+    "end": 82.9635,
+    "startFrame": 1827.83,
+    "endFrame": 1991.12
+   },
+   "source": {
+    "start": 111.0959,
+    "end": 117.9
+   },
+   "samples": {
+    "out": 3655651,
+    "source": 5332601,
+    "length": 326599
+   },
+   "stems": {
+    "lead_vocals": {
+     "gain_db": 1.0
+    }
+   },
+   "fadeIn": {
+    "ms": 10.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 350.0,
+    "shape": "cosine"
+   },
+   "level": [
+    {
+     "t": 76.1594,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "hole_strings",
+   "chapter": 5,
+   "what": "strings stem of bars 67-68 at -8 dB: the held chord under the quote",
+   "out": {
+    "start": 76.1494,
+    "end": 79.4698,
+    "startFrame": 1827.59,
+    "endFrame": 1907.27
+   },
+   "source": {
+    "start": 111.0859,
+    "end": 114.4062
+   },
+   "samples": {
+    "out": 3655171,
+    "source": 5332121,
+    "length": 159377
+   },
+   "stems": {
+    "strings": {
+     "gain_db": -8
+    }
+   },
+   "fadeIn": {
+    "ms": 40.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 500.0,
+    "shape": "cosine"
+   },
+   "level": [
+    {
+     "t": 76.1494,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "restart",
+   "chapter": 5,
+   "what": "the mix from 1.45 s (the swell into bar 1) with the lead vocal stem subtracted: the end of the opening \"mister\" is 11 dB down",
+   "out": {
+    "start": 79.0662,
+    "end": 82.7841,
+    "startFrame": 1897.59,
+    "endFrame": 1986.82
+   },
+   "source": {
+    "start": 1.45,
+    "end": 5.168
+   },
+   "samples": {
+    "out": 3795176,
+    "source": 69600,
+    "length": 178462
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    },
+    "lead_vocals": {
+     "gain_db": 0.95,
+     "polarity": -1
+    }
+   },
+   "fadeIn": {
+    "ms": 300.0,
+    "shape": "cosine"
+   },
+   "fadeOut": {
+    "ms": 8.0,
+    "shape": "linear"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "song_3_30",
+   "chapter": 5,
+   "what": "the mix, bars 3-29 (same recording as the clip before it), ringing 0.4 s into the bar of held breath",
+   "out": {
+    "start": 82.7761,
+    "end": 127.8701,
+    "startFrame": 1986.63,
+    "endFrame": 3068.88
+   },
+   "source": {
+    "start": 5.16,
+    "end": 50.254
+   },
+   "samples": {
+    "out": 3973254,
+    "source": 247678,
+    "length": 2164513
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 8.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 400.0,
+    "shape": "cosine"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    },
+    {
+     "t": 120.8494,
+     "db": -2.0
+    },
+    {
+     "t": 127.4701,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "breath_pickup",
+   "chapter": 7,
+   "what": "lead + backing vocal stems: the first 0.13 s of \"We're\", under which the mix has a drum fill",
+   "out": {
+    "start": 128.1762,
+    "end": 128.3312,
+    "startFrame": 3076.23,
+    "endFrame": 3079.95
+   },
+   "source": {
+    "start": 50.56,
+    "end": 50.715
+   },
+   "samples": {
+    "out": 6152456,
+    "source": 2426880,
+    "length": 7440
+   },
+   "stems": {
+    "lead_vocals": {
+     "gain_db": -5.5
+    },
+    "backing_vocals": {
+     "gain_db": -5.5
+    }
+   },
+   "fadeIn": {
+    "ms": 15.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 30.0,
+    "shape": "linear"
+   },
+   "level": [
+    {
+     "t": 128.1762,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "drop",
+   "chapter": 7,
+   "what": "the mix at full level from 50.70 s (the pickup) through bars 31-47",
+   "out": {
+    "start": 128.3012,
+    "end": 157.2675,
+    "startFrame": 3079.23,
+    "endFrame": 3774.42
+   },
+   "source": {
+    "start": 50.685,
+    "end": 79.6513
+   },
+   "samples": {
+    "out": 6158456,
+    "source": 2432880,
+    "length": 1390384
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 30.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 128.3012,
+     "db": 0
+    }
+   ]
+  },
+  {
+   "id": "runup_H1",
+   "chapter": 8,
+   "what": "the mix, bars 52-63: the run-up, then the loud instrumental",
+   "out": {
+    "start": 157.2595,
+    "end": 177.1297,
+    "startFrame": 3774.23,
+    "endFrame": 4251.11
+   },
+   "source": {
+    "start": 86.2641,
+    "end": 106.1343
+   },
+   "samples": {
+    "out": 7548456,
+    "source": 4140675,
+    "length": 953771
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": 0
+    },
+    {
+     "t": 157.2635,
+     "db": 0
+    },
+    {
+     "t": 160.5739,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "brass_tail",
+   "chapter": 8,
+   "what": "brass stem: the note the pickup in bar 47 was heading for, 0.8 s, fading",
+   "out": {
+    "start": 157.2595,
+    "end": 158.0595,
+    "startFrame": 3774.23,
+    "endFrame": 3793.43
+   },
+   "source": {
+    "start": 79.6433,
+    "end": 80.4433
+   },
+   "samples": {
+    "out": 7548456,
+    "source": 3822880,
+    "length": 38400
+   },
+   "stems": {
+    "brass": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 450.0,
+    "shape": "cosine"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": 0
+    },
+    {
+     "t": 157.2635,
+     "db": 0
+    },
+    {
+     "t": 160.5739,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "H2",
+   "chapter": 8,
+   "what": "the mix, bars 56-63 again",
+   "out": {
+    "start": 177.1217,
+    "end": 190.3712,
+    "startFrame": 4250.92,
+    "endFrame": 4568.91
+   },
+   "source": {
+    "start": 92.8848,
+    "end": 106.1343
+   },
+   "samples": {
+    "out": 8501843,
+    "source": 4458471,
+    "length": 635975
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "pickup_1",
+   "chapter": 9,
+   "what": "lead + backing vocal stems: \"We're in\", the pickup into the final drop",
+   "out": {
+    "start": 189.3954,
+    "end": 190.3712,
+    "startFrame": 4545.49,
+    "endFrame": 4568.91
+   },
+   "source": {
+    "start": 118.4,
+    "end": 119.3758
+   },
+   "samples": {
+    "out": 9090980,
+    "source": 5683200,
+    "length": 46838
+   },
+   "stems": {
+    "lead_vocals": {
+     "gain_db": -5.5
+    },
+    "backing_vocals": {
+     "gain_db": -5.5
+    }
+   },
+   "fadeIn": {
+    "ms": 40.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 8.0,
+    "shape": "linear"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "J1",
+   "chapter": 9,
+   "what": "the mix, bars 72-78: the final drop",
+   "out": {
+    "start": 190.3632,
+    "end": 201.9575,
+    "startFrame": 4568.72,
+    "endFrame": 4846.98
+   },
+   "source": {
+    "start": 119.3678,
+    "end": 130.9621
+   },
+   "samples": {
+    "out": 9137434,
+    "source": 5729654,
+    "length": 556527
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "J1_bar8",
+   "chapter": 9,
+   "what": "the mix, bar 62: four kicks where the song has a gap",
+   "out": {
+    "start": 201.9495,
+    "end": 203.6127,
+    "startFrame": 4846.79,
+    "endFrame": 4886.7
+   },
+   "source": {
+    "start": 102.8159,
+    "end": 104.4791
+   },
+   "samples": {
+    "out": 9693577,
+    "source": 4935165,
+    "length": 79833
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "vocal_tail",
+   "chapter": 9,
+   "what": "lead + backing vocal stems: the held \"trouble\" dies away instead of being cut",
+   "out": {
+    "start": 201.9495,
+    "end": 203.0495,
+    "startFrame": 4846.79,
+    "endFrame": 4873.19
+   },
+   "source": {
+    "start": 130.9541,
+    "end": 132.0541
+   },
+   "samples": {
+    "out": 9693577,
+    "source": 6285796,
+    "length": 52800
+   },
+   "stems": {
+    "lead_vocals": {
+     "gain_db": -5.5
+    },
+    "backing_vocals": {
+     "gain_db": -5.5
+    }
+   },
+   "fadeIn": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 700.0,
+    "shape": "cosine"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "pickup_2",
+   "chapter": 9,
+   "what": "lead + backing vocal stems: \"We're in\", the pickup into the final drop",
+   "out": {
+    "start": 202.6369,
+    "end": 203.6127,
+    "startFrame": 4863.29,
+    "endFrame": 4886.7
+   },
+   "source": {
+    "start": 118.4,
+    "end": 119.3758
+   },
+   "samples": {
+    "out": 9726572,
+    "source": 5683200,
+    "length": 46838
+   },
+   "stems": {
+    "lead_vocals": {
+     "gain_db": -5.5
+    },
+    "backing_vocals": {
+     "gain_db": -5.5
+    }
+   },
+   "fadeIn": {
+    "ms": 40.0,
+    "shape": "linear"
+   },
+   "fadeOut": {
+    "ms": 8.0,
+    "shape": "linear"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    }
+   ]
+  },
+  {
+   "id": "J2_to_end",
+   "chapter": 9,
+   "what": "the mix from bar 72 to the end of the song: final drop, brass, last kick, outro (its last 0.1 s, where it is already silent but for a click, left off)",
+   "out": {
+    "start": 203.6047,
+    "end": 248.9369,
+    "startFrame": 4886.51,
+    "endFrame": 5974.49
+   },
+   "source": {
+    "start": 119.3678,
+    "end": 164.7
+   },
+   "samples": {
+    "out": 9773026,
+    "source": 5729654,
+    "length": 2175946
+   },
+   "stems": {
+    "mix": {
+     "gain_db": 0
+    }
+   },
+   "fadeIn": {
+    "ms": 8.0,
+    "shape": "equal_power"
+   },
+   "fadeOut": {
+    "ms": 60.0,
+    "shape": "cosine"
+   },
+   "level": [
+    {
+     "t": 0.0,
+     "db": -2.0
+    }
+   ]
+  }
+ ],
+ "joins": [
+  {
+   "bar": 0,
+   "kind": "start",
+   "what": "the mix starts 42 ms ahead of the first drop's kick, in the dip before its attack (2 ms fade)",
+   "t": 0.0,
+   "frame": 0.0
+  },
+  {
+   "bar": 7,
+   "kind": "hard cut",
+   "what": "the mix stops on the bar line where the song's own drums stop for the hook; 6 ms fade ending before the next kick's attack",
+   "t": 11.5863,
+   "frame": 278.07
+  },
+  {
+   "bar": 9,
+   "kind": "entry",
+   "what": "the lead vocal stem alone; its pickup \"You're\" starts 0.18 s before the bar line",
+   "t": 14.9175,
+   "frame": 358.02
+  },
+  {
+   "bar": 10,
+   "kind": "entry",
+   "what": "the strings stem enters where it does in the song, under the end of \"mister\"",
+   "t": 16.5727,
+   "frame": 397.74
+  },
+  {
+   "bar": 18,
+   "kind": "crossfade 30 ms",
+   "what": "strings (bar 8, C#) to strings + keyboard (bar 48, D#m): a phrase boundary in both",
+   "t": 29.8142,
+   "frame": 715.54
+  },
+  {
+   "bar": 26,
+   "kind": "crossfade 30 ms",
+   "what": "bar 55 to bar 23, phrase boundary; the percussion stem joins, high-passed at 300 Hz",
+   "t": 43.0557,
+   "frame": 1033.34
+  },
+  {
+   "bar": 34,
+   "kind": "crossfade 30 ms",
+   "what": "bar 30 (thinned out, as before the drop) to bar 15: the bass stem enters with its riff",
+   "t": 56.2971,
+   "frame": 1351.13
+  },
+  {
+   "bar": 42,
+   "kind": "crossfade 30 ms",
+   "what": "stems of bar 22 to the mix at bar 48; the brass stem's pickup hands over to the brass in the mix",
+   "t": 69.5386,
+   "frame": 1668.93
+  },
+  {
+   "bar": 46,
+   "kind": "cut to near silence",
+   "what": "the mix stops (20 ms); the lead vocal stem from bar 67 and that bar's strings at -8 dB carry on (B, the fanfare's last chord)",
+   "t": 76.1594,
+   "frame": 1827.83
+  },
+  {
+   "bar": 48,
+   "kind": "restart",
+   "what": "the mix swells in over 0.3 s under the held note; bar 1's hit lands 0.135 s after the bar line, as in the song",
+   "t": 79.4698,
+   "frame": 1907.27
+  },
+  {
+   "bar": 50,
+   "kind": "same recording",
+   "what": "the lead vocal subtraction ends where the stem is silent (-70 dB)",
+   "t": 82.7801,
+   "frame": 1986.72
+  },
+  {
+   "bar": 77,
+   "kind": "held breath",
+   "what": "the mix fades over 0.4 s; silence; the choir's pickup (vocal stems, then the mix from 50.70 s) is alone before the drop",
+   "t": 127.4701,
+   "frame": 3059.28
+  },
+  {
+   "bar": 78,
+   "kind": "the drop",
+   "what": "no edit: the mix has been running since the pickup",
+   "t": 129.1253,
+   "frame": 3099.01
+  },
+  {
+   "bar": 95,
+   "kind": "crossfade 8 ms",
+   "what": "bar 47 (C#) to bar 52 (F#) of the mix; the brass stem finishes its phrase over the top",
+   "t": 157.2635,
+   "frame": 3774.32
+  },
+  {
+   "bar": 107,
+   "kind": "crossfade 8 ms",
+   "what": "the loud instrumental loops: bar 63 (its fill) back to bar 56",
+   "t": 177.1257,
+   "frame": 4251.02
+  },
+  {
+   "bar": 115,
+   "kind": "crossfade 8 ms",
+   "what": "bar 63 to bar 72; the vocal stems sing the pickup over bar 63's fill",
+   "t": 190.3672,
+   "frame": 4568.81
+  },
+  {
+   "bar": 122,
+   "kind": "crossfade 8 ms",
+   "what": "bar 78 to bar 62 (both C#); the held \"trouble\" carries on in the vocal stems and fades",
+   "t": 201.9535,
+   "frame": 4846.88
+  },
+  {
+   "bar": 123,
+   "kind": "crossfade 8 ms",
+   "what": "bar 62 to bar 72, with the pickup again",
+   "t": 203.6087,
+   "frame": 4886.61
+  }
+ ],
+ "verification": {
+  "kicks": 246,
+  "method1": "best fit of the original mix's 60 ms around each kick against the render, searched over +-20 ms",
+  "worstSamples": 0,
+  "worstMs": 0.0,
+  "worstFrames": 0.0,
+  "worstAt": null,
+  "method2": "onset of the under-120 Hz envelope (half its local height) in the render, against the same in the original mix",
+  "medianMs2": 0.0,
+  "over1Ms2": 1,
+  "worstMs2": 13.2487,
+  "worstFrames2": 0.31797,
+  "worstAt2": [
+   79.60456666666667,
+   1.9884,
+   "restart"
+  ],
+  "gainAtKicks": {
+   "min": 0.757,
+   "max": 1.0
+  }
+ },
+ "master": {
+  "ceiling_dbfs": -1,
+  "limiterMaxReduction_db": 0.0,
+  "peak_dbfs": -4.61,
+  "dither": "triangular, 16 bit; none in silence"
+ }
+}

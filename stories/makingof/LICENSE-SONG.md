@@ -1,0 +1,1 @@
+`audio.wav` here is an arrangement of "Trouble", Dimitri Glazkov's song, and `lyrics.json` has its words: demo only, all rights reserved, on the terms of [LICENSE-SONG.md](../../LICENSE-SONG.md) at the root.
