@@ -2,8 +2,9 @@
 // (L = 0 at song frame 2866); each shot counts its own from its cut.
 // The music, measured (analysis/stems.json): the kick is on every beat from L 0 to 268, once more at 283 (late), then
 // NOTHING until 318 (the held breath; the brass comes in at 298), then every beat to 616, a beat missed, and the LAST
-// KICK OF THE SONG at 636. Lead and backing vocals chant to about 300: "we're in DEEP" (deep on 0, 40, 79),
-// "TROUBLE" (92), and from 143 the chant again and again; after 300 nobody sings: brass, keyboard, synth.
+// KICK OF THE SONG at 636. Lead and backing vocals sing "we're in DEEP" (deep on 0, 39, 79; we're 18, 58; in 25,
+// 65), hold the last "deep", chopped on every beat, to "TROUBLE" (155, its vowel 156) and "trouble" again (235, 237),
+// which dies away by about 320; nobody sings after it: brass, keyboard, synth. (analysis/lyrics.json has the words.)
 //   split   0-208    four routes at once in panels (shots/reun_split.js)
 //   meet    208-298  the panels break; the four on the atrium's gantry from both ends; they see each other (shots/reun_meet.js)
 //   fight   298-596  the warden comes up over the gantry's side on the brass and lands on the kick at 318; the chain

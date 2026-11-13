@@ -11,8 +11,9 @@
 //   eyes   79   the eyes, close (one drawing each, on the run's bob), the wall streaming behind
 //   mid   119   coming at us again, nearer, the camera canted
 //   rush  159   and nearer, until the face is the picture
-// THE STATION SAYS WHAT THE VOICES CHANT, in every place at once, on boards of its own hung in the way (WORDS; each
-// lights on its onset): "we're in DEEP" three times, then TROUBLE.
+// THE STATION SAYS WHAT THE VOICES SING, in every place at once, on boards of its own hung in the way (WORDS; each
+// lights on the frame its word is sung on, analysis/lyrics.json): "we're in DEEP" three times (the first "we're in"
+// is the breakdown's last second), the last DEEP held for three seconds, then TROUBLE, held to the end of the split.
 import { CAST, COLOR, FPS, F0, W, H, PW, PH, clamp, lerp, ease, wob, rnd } from "./reun_cast.js";
 import { STRIDE, RUN } from "./open_cast.js";
 import { edit } from "../engine/edit.js";
@@ -20,10 +21,13 @@ import { kana, latin, kanaWidth } from "../sets/sign.js";
 export { CAST, COLOR, FPS, F0, W, H };
 export const LAYOUT = [0, 40, 79, 119, 159, 208], MODE = ["front", "side", "eyes", "mid", "rush"], KIDS = ["tane", "ife", "noor", "juno"];
 export const modeAt = (L) => { let i = 0; while (i < 4 && L >= LAYOUT[i + 1]) i++; return { i, name: MODE[i], t: L - LAYOUT[i], n: LAYOUT[i + 1] - LAYOUT[i] }; };
-// what the boards say, and the onset each lights on (L; analysis/stems.json: lead and backing vocals)
-const T = { text: "TROUBLE", small: "" }, TK = { text: "", small: "トラブル" };
-export const WORDS = [{ at: 0, text: "DEEP", small: "ディープ" }, { at: 19, text: "WE'RE IN", small: "" }, { at: 40, text: "DEEP", small: "ディープ" }, { at: 58, text: "WE'RE IN", small: "" }, { at: 79, text: "DEEP", small: "ディープ" },
-  { at: 92, ...T }, { at: 143, ...T }, { at: 156, ...TK }, { at: 165, ...T }, { at: 182, ...TK }, { at: 194, ...T }, { at: 207, ...TK }];
+// what the boards say, and the frame each lights on (L): the frame the word is SUNG on (analysis/lyrics.json; shots/reun_split.js
+// holds each to it with a mark). The only words are "we're in deep" three times and "trouble" once (L 155; the choir says it
+// again at L 235, after the panels have broken). `held`: the page is re-cut while the voices are still holding a word, so the
+// first board of the new layout is already saying it (it does not flash on: nothing new is sung).
+const WE = { text: "WE'RE", small: "ウィーア" }, IN = { text: "IN", small: "イン" }, DEEP = { text: "DEEP", small: "ディープ" }, T = { text: "TROUBLE", small: "トラブル" };
+export const WORDS = [{ at: 0, ...DEEP }, { at: 18, ...WE }, { at: 25, ...IN }, { at: 40, ...DEEP }, { at: 58, ...WE }, { at: 65, ...IN }, { at: 79, ...DEEP },
+  { at: 119, ...DEEP, held: true }, { at: 155, ...T }, { at: 159, ...T, held: true }];
 
 // ---- the four places ----------------------------------------------------------------------------------------------------
 // dir: the way they go along Z; v: metres a second; x: where across the passage; z0: where each layout's stretch starts;
@@ -80,7 +84,7 @@ function drawBoard(g, cam, who, w, L) {
   const p = PLACE[who], b = boardAt(who, w), age = L - w.at, sg = (b.u[0] * cam.right[0] + b.u[2] * cam.right[2]) < 0 ? -1 : 1;
   const P = (a, e) => cam.project([b.c[0] + sg * b.u[0] * a * b.w / 2, b.c[1] + e * b.h / 2, b.c[2] + sg * b.u[2] * a * b.w / 2]), tl = P(-1, 1), tr = P(1, 1), bl = P(-1, -1), ce = P(0, 0);
   if (Math.min(tl.z, tr.z, bl.z, ce.z) < 0.6) return;
-  const fog = 1 - Math.exp(-ce.z * p.fogK), on = age >= 0, flash = age === 0;
+  const fog = 1 - Math.exp(-ce.z * p.fogK), on = age >= 0, flash = age === 0 && !w.held;
   g.save(); g.transform((tr.x - tl.x) / 400, (tr.y - tl.y) / 400, (bl.x - tl.x) / 132, (bl.y - tl.y) / 132, tl.x, tl.y);
   g.fillStyle = "#0b0a1e"; g.fillRect(-20, -30, 440, 182); g.fillStyle = p.house; g.fillRect(-14, -16, 428, 162); g.fillStyle = p.trim; g.fillRect(-14, -24, 428, 10);
   g.fillStyle = "#0b0a1e"; for (const x of [70, 330]) g.fillRect(x - 5, -70, 10, 44);      // its hangers
@@ -110,7 +114,7 @@ export function content(who, L) {
   const say = wordAt(L), near = (zz) => Math.round(zz / 24);
   const options = who === "tane" ? { alert: 0.7, doors: Object.fromEntries([-1, 0, 1, 2].map((i) => [near(k.z) + i, 0])), ...(side || eyes ? { cut: "left", clearStruts: [cam.pos[2] - 7, cam.pos[2] + 7] } : {}) }
     : who === "ife" ? {} : who === "noor" ? { drones: [], far: 0.9 }
-    : { door: 0, alert: 0.8, sign: say && say.text ? { text: say.text === "WE'RE IN" ? "IN" : say.text, small: say.small || "トラブル" } : undefined, ...(side || eyes ? { cut: true, cutFrom: cam.pos[2] - 16, cutTo: cam.pos[2] + 16 } : {}) };
+    : { door: 0, alert: 0.8, sign: say && say.text ? { text: say.text, small: say.small } : undefined, ...(side || eyes ? { cut: true, cutFrom: cam.pos[2] - 16, cutTo: cam.pos[2] + 16 } : {}) };
   const boards = (g, c) => { for (const w of WORDS) if (modeAt(w.at).i === m.i && L >= w.at) drawBoard(g, c, who, w, L); };
   const speed = side ? 0.05 : eyes ? 0.085 : 0, post = { bgStreak: [speed * (cam.pos[0] < 0 ? -1 : 1) * p.dir * -1, 0], bgBlur: side || eyes ? 0 : m.name === "rush" ? 0.03 : 0.014, focus: [0.5, 0.5] };
   if (eyes) {

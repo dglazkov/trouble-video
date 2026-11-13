@@ -90,6 +90,7 @@ function frame(f) {
 export { page };
 export default { name: "reun_split", start: F0 / FPS, held: (f) => { const m = modeAt(f); return f - m.t % 2; }, frames: PART.meet - PART.split, fps: FPS, cutOn: "kick", sets: ["corridor", "plant", "core", "tunnel"], cast: CAST, plates: PLATES, frame,
   marks: [{ at: 0, what: "\"DEEP\": the boards light; Tane, the whole frame", on: "kick" }, { at: 10, what: "Ife's strip slams in", on: "kick" }, { at: 20, what: "Noor's strip", on: "kick" }, { at: 30, what: "Juno's strip", on: "kick" },
-    { at: 19, what: "\"we're in\": the boards light", on: "backing_vocals" }, { at: 58, what: "\"we're in\"", on: "backing_vocals" }, { at: 40, what: "the page is re-cut: a cross, from the side; \"DEEP\"", on: "kick" }, { at: 79, what: "re-cut: four bands of eyes; \"DEEP\"", on: "kick" }, { at: 92, what: "\"TROUBLE\" on every board", on: "backing_vocals" },
-    { at: 119, what: "re-cut: four slices", on: "kick" }, { at: 143, what: "\"TROUBLE\"", on: "backing_vocals" }, { at: 156, what: "\"TROUBLE\" (the katakana)", on: "backing_vocals" }, { at: 159, what: "re-cut: the strips begin to close", on: "kick" },
-    { at: 165, what: "\"TROUBLE\"", on: "backing_vocals" }, { at: 182, what: "\"TROUBLE\"", on: "backing_vocals" }, { at: 194, what: "\"TROUBLE\"", on: "backing_vocals" }, { at: 199, what: "the borders shake", on: "kick" }, { at: 207, what: "\"TROUBLE\"", on: "backing_vocals" }] };
+    { at: 40, what: "the page is re-cut: a cross, from the side; \"DEEP\"", on: "kick" }, { at: 79, what: "re-cut: four bands of eyes; \"DEEP\"", on: "kick" },
+    // every word a board lights with is held to the frame it is sung on (the held boards say nothing new)
+    ...WORDS.filter((w) => !w.held).map((w) => ({ at: w.at, what: `the boards say ${w.text}`, on: "lyric", word: w.text })),
+    { at: 119, what: "re-cut: four slices", on: "kick" }, { at: 159, what: "re-cut: the strips begin to close", on: "kick" }, { at: 199, what: "the borders shake", on: "kick" }] };
