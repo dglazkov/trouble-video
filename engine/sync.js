@@ -11,6 +11,12 @@
 //   s.stems.drums { env, since, until, index, hit }   env 0..1 loudness, since = seconds after the last onset
 //                                                      (Infinity before the first), hit = 1 on the onset's frame
 //   sync.drive(spec, frame)  -> number        one wire from a stem to a system; see drive() below
+//   sync.words                                every sung word of the song in order (analysis/lyrics.json, made by
+//                                             analysis/lyrics.py): { word, frame, t, end, voice, phrase, confidence }
+//   sync.phrases                              the phrases they belong to: { id, text, voice, start, end, startFrame, endFrame, words }
+//   sync.wordAt(frame) -> null when nobody is singing, or { word, index, since (frames), phrase, said: [the phrase's words so far] }
+//   A shot that puts a lyric on a screen takes the word and its frame from here (or holds its own frame to it with a
+//   mark `on: "lyric"`, see engine/marks.mjs), so that the words on screen have one source.
 const upper = (a, x) => { let lo = 0, hi = a.length; while (lo < hi) { const m = (lo + hi) >> 1; if (a[m] <= x) lo = m + 1; else hi = m; } return lo; };
 
 export function createSync(listen, stems, o = {}) {
@@ -62,12 +68,19 @@ export function createSync(listen, stems, o = {}) {
     }
     return floor + gain * x;
   }
-  return { fps, beats, sections, stems: Object.keys(S), duration: listen.duration, at, drive, frameOf: (t) => Math.round(t * fps) };
+  const words = o.lyrics?.words ?? [], phrases = o.lyrics?.phrases ?? [], starts = words.map((w) => w.frame), phraseOf = Object.fromEntries(phrases.map((p) => [p.id, p]));
+  function wordAt(frame) {
+    const k = upper(starts, frame) - 1; if (k < 0) return null;
+    const w = words[k], p = phraseOf[w.phrase]; if (frame >= p.endFrame) return null;
+    return { word: w.word, index: k, since: frame - w.frame, phrase: p, said: words.slice(0, k + 1).filter((x) => x.phrase === w.phrase).map((x) => x.word) };
+  }
+  return { fps, beats, sections, stems: Object.keys(S), duration: listen.duration, at, drive, frameOf: (t) => Math.round(t * fps), words, phrases, wordAt };
 }
 
 export async function loadSync(base = "/analysis", o) {
   const [listen, stems] = await Promise.all(["listen.json", "stems.json"].map(async (f) => { const r = await fetch(`${base}/${f}`); if (!r.ok) throw new Error(`sync: ${base}/${f} ${r.status}`); return r.json(); }));
-  return createSync(listen, stems, o);
+  const lyrics = o?.lyrics ?? await fetch(`${base}/lyrics.json`).then((r) => r.ok ? r.json() : null, () => null);      // older checkouts have none
+  return createSync(listen, stems, { ...o, lyrics });
 }
 // A wiring is a plain object of wires; this evaluates all of it for a frame. Overrides replace wires by name.
 export const driveAll = (sync, wiring, frame, over = {}) => { const o = {}; for (const k in wiring) o[k] = sync.drive(over[k] ?? wiring[k], frame); for (const k in over) if (!(k in o)) o[k] = sync.drive(over[k], frame); return o; };

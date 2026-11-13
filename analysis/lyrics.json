@@ -1,0 +1,1210 @@
+{
+ "fps": 24,
+ "source": "analysis/lyrics.py; see its header for the method",
+ "vocabulary": [
+  "You're in deep trouble, mister",
+  "We're in deep trouble"
+ ],
+ "note": "`frame` is the song frame a word starts on (round(t * fps)); `at` the same before rounding; `vowel` (the choir's trouble only) the frame its vowel lands on, after the breath of its tr. A sung word's start is good to about a frame; `confidence` says where it is worse, and is about the TIME only: which word it is is not in doubt anywhere.",
+ "phrases": [
+  {
+   "id": "hook1",
+   "voice": "lead",
+   "text": "You're in deep trouble, mister",
+   "start": 0.015,
+   "end": 2.351,
+   "startFrame": 0,
+   "endFrame": 56,
+   "words": [
+    "You're",
+    "in",
+    "deep",
+    "trouble",
+    "mister"
+   ]
+  },
+  {
+   "id": "choir1a",
+   "voice": "choir",
+   "text": "We're in deep...",
+   "start": 7.515,
+   "end": 9.956,
+   "startFrame": 180,
+   "endFrame": 239,
+   "words": [
+    "We're",
+    "in",
+    "deep"
+   ]
+  },
+  {
+   "id": "choir1b",
+   "voice": "choir",
+   "text": "We're in deep...",
+   "start": 10.826,
+   "end": 13.244,
+   "startFrame": 260,
+   "endFrame": 318,
+   "words": [
+    "We're",
+    "in",
+    "deep"
+   ]
+  },
+  {
+   "id": "choir1c",
+   "voice": "choir",
+   "text": "We're in deep trouble",
+   "start": 14.155,
+   "end": 21.568,
+   "startFrame": 340,
+   "endFrame": 518,
+   "words": [
+    "We're",
+    "in",
+    "deep",
+    "trouble"
+   ]
+  },
+  {
+   "id": "choir1d",
+   "voice": "choir",
+   "text": "Trouble",
+   "start": 21.568,
+   "end": 24.854,
+   "startFrame": 518,
+   "endFrame": 596,
+   "words": [
+    "trouble"
+   ]
+  },
+  {
+   "id": "choir2a",
+   "voice": "choir",
+   "text": "We're in deep...",
+   "start": 50.625,
+   "end": 52.294,
+   "startFrame": 1215,
+   "endFrame": 1255,
+   "words": [
+    "We're",
+    "in",
+    "deep"
+   ]
+  },
+  {
+   "id": "choir2b",
+   "voice": "choir",
+   "text": "We're in deep...",
+   "start": 52.294,
+   "end": 53.946,
+   "startFrame": 1255,
+   "endFrame": 1295,
+   "words": [
+    "We're",
+    "in",
+    "deep"
+   ]
+  },
+  {
+   "id": "choir2c",
+   "voice": "choir",
+   "text": "We're in deep trouble",
+   "start": 53.946,
+   "end": 61.341,
+   "startFrame": 1295,
+   "endFrame": 1472,
+   "words": [
+    "We're",
+    "in",
+    "deep",
+    "trouble"
+   ]
+  },
+  {
+   "id": "choir2d",
+   "voice": "choir",
+   "text": "Trouble",
+   "start": 61.341,
+   "end": 63.277,
+   "startFrame": 1472,
+   "endFrame": 1519,
+   "words": [
+    "trouble"
+   ]
+  },
+  {
+   "id": "hook2",
+   "voice": "lead",
+   "text": "You're in deep trouble, mister",
+   "start": 63.277,
+   "end": 65.535,
+   "startFrame": 1519,
+   "endFrame": 1573,
+   "words": [
+    "You're",
+    "in",
+    "deep",
+    "trouble",
+    "mister"
+   ]
+  },
+  {
+   "id": "choir3a",
+   "voice": "choir",
+   "text": "We're in deep...",
+   "start": 65.535,
+   "end": 67.233,
+   "startFrame": 1573,
+   "endFrame": 1614,
+   "words": [
+    "We're",
+    "in",
+    "deep"
+   ]
+  },
+  {
+   "id": "choir3b",
+   "voice": "choir",
+   "text": "We're in deep...",
+   "start": 67.233,
+   "end": 68.867,
+   "startFrame": 1614,
+   "endFrame": 1653,
+   "words": [
+    "We're",
+    "in",
+    "deep"
+   ]
+  },
+  {
+   "id": "choir3c",
+   "voice": "choir",
+   "text": "We're in deep trouble",
+   "start": 68.867,
+   "end": 76.22,
+   "startFrame": 1653,
+   "endFrame": 1829,
+   "words": [
+    "We're",
+    "in",
+    "deep",
+    "trouble"
+   ]
+  },
+  {
+   "id": "choir3d",
+   "voice": "choir",
+   "text": "Trouble",
+   "start": 76.22,
+   "end": 79.107,
+   "startFrame": 1829,
+   "endFrame": 1899,
+   "words": [
+    "trouble"
+   ]
+  },
+  {
+   "id": "hook3",
+   "voice": "lead",
+   "text": "You're in deep trouble, mister",
+   "start": 111.238,
+   "end": 117.432,
+   "startFrame": 2670,
+   "endFrame": 2818,
+   "words": [
+    "You're",
+    "in",
+    "deep",
+    "trouble",
+    "mister"
+   ]
+  },
+  {
+   "id": "choir4a",
+   "voice": "choir",
+   "text": "We're in deep...",
+   "start": 118.512,
+   "end": 120.163,
+   "startFrame": 2844,
+   "endFrame": 2884,
+   "words": [
+    "We're",
+    "in",
+    "deep"
+   ]
+  },
+  {
+   "id": "choir4b",
+   "voice": "choir",
+   "text": "We're in deep...",
+   "start": 120.163,
+   "end": 121.818,
+   "startFrame": 2884,
+   "endFrame": 2924,
+   "words": [
+    "We're",
+    "in",
+    "deep"
+   ]
+  },
+  {
+   "id": "choir4c",
+   "voice": "choir",
+   "text": "We're in deep trouble",
+   "start": 121.818,
+   "end": 129.187,
+   "startFrame": 2924,
+   "endFrame": 3100,
+   "words": [
+    "We're",
+    "in",
+    "deep",
+    "trouble"
+   ]
+  },
+  {
+   "id": "choir4d",
+   "voice": "choir",
+   "text": "Trouble",
+   "start": 129.187,
+   "end": 132.914,
+   "startFrame": 3100,
+   "endFrame": 3190,
+   "words": [
+    "trouble"
+   ]
+  }
+ ],
+ "words": [
+  {
+   "word": "You're",
+   "t": 0.015,
+   "frame": 0,
+   "at": 0.35,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook1",
+   "confidence": "high",
+   "by": "level",
+   "end": 0.253
+  },
+  {
+   "word": "in",
+   "t": 0.253,
+   "frame": 6,
+   "at": 6.06,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook1",
+   "confidence": "medium",
+   "by": "novelty",
+   "end": 0.621
+  },
+  {
+   "word": "deep",
+   "t": 0.621,
+   "frame": 15,
+   "at": 14.91,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook1",
+   "confidence": "high",
+   "by": "novelty",
+   "end": 0.914
+  },
+  {
+   "word": "trouble",
+   "t": 0.914,
+   "frame": 22,
+   "at": 21.94,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook1",
+   "confidence": "high",
+   "by": "novelty",
+   "end": 1.489
+  },
+  {
+   "word": "mister",
+   "t": 1.489,
+   "frame": 36,
+   "at": 35.74,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook1",
+   "confidence": "medium",
+   "by": "novelty",
+   "end": 2.351
+  },
+  {
+   "word": "We're",
+   "t": 7.515,
+   "frame": 180,
+   "at": 180.35,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1a",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.42,
+   "end": 7.905
+  },
+  {
+   "word": "in",
+   "t": 7.905,
+   "frame": 190,
+   "at": 189.71,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1a",
+   "confidence": "low",
+   "by": "pitch",
+   "spread": 3.74,
+   "end": 8.454
+  },
+  {
+   "word": "deep",
+   "t": 8.454,
+   "frame": 203,
+   "at": 202.88,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1a",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.07,
+   "end": 9.956
+  },
+  {
+   "word": "We're",
+   "t": 10.826,
+   "frame": 260,
+   "at": 259.83,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1b",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.21,
+   "end": 11.228
+  },
+  {
+   "word": "in",
+   "t": 11.228,
+   "frame": 269,
+   "at": 269.47,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1b",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 1.0,
+   "end": 11.768
+  },
+  {
+   "word": "deep",
+   "t": 11.768,
+   "frame": 282,
+   "at": 282.44,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1b",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.21,
+   "end": 13.244
+  },
+  {
+   "word": "We're",
+   "t": 14.155,
+   "frame": 340,
+   "at": 339.73,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1c",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.42,
+   "end": 14.558
+  },
+  {
+   "word": "in",
+   "t": 14.558,
+   "frame": 349,
+   "at": 349.39,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1c",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 0.25,
+   "end": 15.102
+  },
+  {
+   "word": "deep",
+   "t": 15.102,
+   "frame": 362,
+   "at": 362.44,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1c",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.0,
+   "end": 18.268
+  },
+  {
+   "word": "trouble",
+   "t": 18.268,
+   "frame": 438,
+   "at": 438.44,
+   "vowel": 440.91,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1c",
+   "confidence": "high",
+   "by": "novelty",
+   "spread": 0.07,
+   "end": 21.568
+  },
+  {
+   "word": "trouble",
+   "t": 21.568,
+   "frame": 518,
+   "at": 517.64,
+   "vowel": 520.31,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir1d",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.21,
+   "end": 24.854
+  },
+  {
+   "word": "We're",
+   "t": 50.625,
+   "frame": 1215,
+   "at": 1215.01,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2a",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.35,
+   "end": 50.921
+  },
+  {
+   "word": "in",
+   "t": 50.921,
+   "frame": 1222,
+   "at": 1222.11,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2a",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 0.0,
+   "end": 51.465
+  },
+  {
+   "word": "deep",
+   "t": 51.465,
+   "frame": 1235,
+   "at": 1235.15,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2a",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.84,
+   "end": 52.294
+  },
+  {
+   "word": "We're",
+   "t": 52.294,
+   "frame": 1255,
+   "at": 1255.06,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2b",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.21,
+   "end": 52.596
+  },
+  {
+   "word": "in",
+   "t": 52.596,
+   "frame": 1262,
+   "at": 1262.31,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2b",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 0.0,
+   "end": 53.182
+  },
+  {
+   "word": "deep",
+   "t": 53.182,
+   "frame": 1276,
+   "at": 1276.38,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2b",
+   "confidence": "low",
+   "by": "novelty",
+   "spread": 1.25,
+   "end": 53.946
+  },
+  {
+   "word": "We're",
+   "t": 53.946,
+   "frame": 1295,
+   "at": 1294.7,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2c",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.35,
+   "end": 54.229
+  },
+  {
+   "word": "in",
+   "t": 54.229,
+   "frame": 1301,
+   "at": 1301.49,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2c",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 0.25,
+   "end": 54.785
+  },
+  {
+   "word": "deep",
+   "t": 54.785,
+   "frame": 1315,
+   "at": 1314.83,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2c",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.0,
+   "end": 57.942
+  },
+  {
+   "word": "trouble",
+   "t": 57.942,
+   "frame": 1391,
+   "at": 1390.62,
+   "vowel": 1393.99,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2c",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.56,
+   "end": 61.341
+  },
+  {
+   "word": "trouble",
+   "t": 61.341,
+   "frame": 1472,
+   "at": 1472.19,
+   "vowel": 1474.35,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir2d",
+   "confidence": "low",
+   "by": "novelty",
+   "spread": 1.81,
+   "end": 63.277
+  },
+  {
+   "word": "You're",
+   "t": 63.277,
+   "frame": 1519,
+   "at": 1518.65,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook2",
+   "confidence": "high",
+   "by": "novelty",
+   "end": 63.533
+  },
+  {
+   "word": "in",
+   "t": 63.533,
+   "frame": 1525,
+   "at": 1524.78,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook2",
+   "confidence": "high",
+   "by": "novelty",
+   "end": 63.916
+  },
+  {
+   "word": "deep",
+   "t": 63.916,
+   "frame": 1534,
+   "at": 1533.98,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook2",
+   "confidence": "medium",
+   "by": "novelty",
+   "end": 64.244
+  },
+  {
+   "word": "trouble",
+   "t": 64.244,
+   "frame": 1542,
+   "at": 1541.85,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook2",
+   "confidence": "high",
+   "by": "novelty",
+   "end": 64.903
+  },
+  {
+   "word": "mister",
+   "t": 64.903,
+   "frame": 1558,
+   "at": 1557.66,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook2",
+   "confidence": "high",
+   "by": "novelty",
+   "end": 65.535
+  },
+  {
+   "word": "We're",
+   "t": 65.535,
+   "frame": 1573,
+   "at": 1572.85,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3a",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.21,
+   "end": 65.852
+  },
+  {
+   "word": "in",
+   "t": 65.852,
+   "frame": 1580,
+   "at": 1580.44,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3a",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 0.25,
+   "end": 66.405
+  },
+  {
+   "word": "deep",
+   "t": 66.405,
+   "frame": 1594,
+   "at": 1593.73,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3a",
+   "confidence": "high",
+   "by": "novelty",
+   "spread": 0.49,
+   "end": 67.233
+  },
+  {
+   "word": "We're",
+   "t": 67.233,
+   "frame": 1614,
+   "at": 1613.6,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3b",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.84,
+   "end": 67.555
+  },
+  {
+   "word": "in",
+   "t": 67.555,
+   "frame": 1621,
+   "at": 1621.31,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3b",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 0.0,
+   "end": 68.022
+  },
+  {
+   "word": "deep",
+   "t": 68.022,
+   "frame": 1633,
+   "at": 1632.54,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3b",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.7,
+   "end": 68.867
+  },
+  {
+   "word": "We're",
+   "t": 68.867,
+   "frame": 1653,
+   "at": 1652.82,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3c",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.7,
+   "end": 69.252
+  },
+  {
+   "word": "in",
+   "t": 69.252,
+   "frame": 1662,
+   "at": 1662.04,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3c",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 1.25,
+   "end": 69.69
+  },
+  {
+   "word": "deep",
+   "t": 69.69,
+   "frame": 1673,
+   "at": 1672.57,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3c",
+   "confidence": "high",
+   "by": "novelty",
+   "spread": 0.07,
+   "end": 72.885
+  },
+  {
+   "word": "trouble",
+   "t": 72.885,
+   "frame": 1749,
+   "at": 1749.23,
+   "vowel": 1752.15,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3c",
+   "confidence": "low",
+   "by": "novelty",
+   "spread": 1.46,
+   "end": 76.22
+  },
+  {
+   "word": "trouble",
+   "t": 76.22,
+   "frame": 1829,
+   "at": 1829.27,
+   "vowel": 1831.78,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir3d",
+   "confidence": "low",
+   "by": "novelty",
+   "spread": 1.39,
+   "end": 79.107
+  },
+  {
+   "word": "You're",
+   "t": 111.238,
+   "frame": 2670,
+   "at": 2669.71,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook3",
+   "confidence": "high",
+   "by": "level",
+   "end": 111.47
+  },
+  {
+   "word": "in",
+   "t": 111.47,
+   "frame": 2675,
+   "at": 2675.29,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook3",
+   "confidence": "medium",
+   "by": "novelty",
+   "end": 111.984
+  },
+  {
+   "word": "deep",
+   "t": 111.984,
+   "frame": 2688,
+   "at": 2687.62,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook3",
+   "confidence": "high",
+   "by": "novelty",
+   "end": 112.364
+  },
+  {
+   "word": "trouble",
+   "t": 112.364,
+   "frame": 2697,
+   "at": 2696.74,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook3",
+   "confidence": "high",
+   "by": "novelty",
+   "end": 113.067
+  },
+  {
+   "word": "mister",
+   "t": 113.067,
+   "frame": 2714,
+   "at": 2713.6,
+   "voice": "lead",
+   "stems": [
+    "lead"
+   ],
+   "phrase": "hook3",
+   "confidence": "high",
+   "by": "novelty",
+   "end": 117.432
+  },
+  {
+   "word": "We're",
+   "t": 118.512,
+   "frame": 2844,
+   "at": 2844.28,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4a",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.84,
+   "end": 118.841
+  },
+  {
+   "word": "in",
+   "t": 118.841,
+   "frame": 2852,
+   "at": 2852.19,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4a",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 0.25,
+   "end": 119.408
+  },
+  {
+   "word": "deep",
+   "t": 119.408,
+   "frame": 2866,
+   "at": 2865.8,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4a",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.14,
+   "end": 120.163
+  },
+  {
+   "word": "We're",
+   "t": 120.163,
+   "frame": 2884,
+   "at": 2883.92,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4b",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.49,
+   "end": 120.467
+  },
+  {
+   "word": "in",
+   "t": 120.467,
+   "frame": 2891,
+   "at": 2891.21,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4b",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 0.0,
+   "end": 121.056
+  },
+  {
+   "word": "deep",
+   "t": 121.056,
+   "frame": 2905,
+   "at": 2905.34,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4b",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.21,
+   "end": 121.818
+  },
+  {
+   "word": "We're",
+   "t": 121.818,
+   "frame": 2924,
+   "at": 2923.62,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4c",
+   "confidence": "high",
+   "by": "level",
+   "spread": 0.49,
+   "end": 122.117
+  },
+  {
+   "word": "in",
+   "t": 122.117,
+   "frame": 2931,
+   "at": 2930.81,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4c",
+   "confidence": "medium",
+   "by": "pitch",
+   "spread": 0.5,
+   "end": 122.696
+  },
+  {
+   "word": "deep",
+   "t": 122.696,
+   "frame": 2945,
+   "at": 2944.7,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4c",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.07,
+   "end": 125.864
+  },
+  {
+   "word": "trouble",
+   "t": 125.864,
+   "frame": 3021,
+   "at": 3020.73,
+   "vowel": 3022.33,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4c",
+   "confidence": "medium",
+   "by": "novelty",
+   "spread": 0.14,
+   "end": 129.187
+  },
+  {
+   "word": "trouble",
+   "t": 129.187,
+   "frame": 3100,
+   "at": 3100.49,
+   "vowel": 3102.58,
+   "voice": "choir",
+   "stems": [
+    "lead",
+    "backing"
+   ],
+   "phrase": "choir4d",
+   "confidence": "low",
+   "by": "novelty",
+   "spread": 1.25,
+   "end": 132.914
+  }
+ ],
+ "wordless": [
+  {
+   "start": 42.1,
+   "end": 50.5,
+   "note": "a held vowel with no consonant in it: lead, the choir joining at about 45 s"
+  }
+ ]
+}
