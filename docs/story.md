@@ -90,7 +90,7 @@ export default edit("my_film", [intro, chase]);                      // each mus
 ```sh
 node render.mjs shots/slice.js           # one section of the demo: 336 frames -> out/slice.mp4
 node engine/marks.mjs shots/film.js      # 469 marks, 0 off
-npm run film                             # the whole demo film -> out/film.mp4
+npm run film                             # the whole demo film -> out/film.mp4 (3956 frames: 29 minutes, 1.4 GB)
 ```
 
 `edit()` throws if a shot does not start exactly where the previous one ends, so a film has no gaps and no overlaps
