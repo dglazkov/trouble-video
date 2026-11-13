@@ -36,6 +36,7 @@ Terms, once:
 | `shots/` | **film** | 137 shot files, ten section edits, `film.js` (all of it), `hello.js` (the demo clip) |
 | `audio.wav`, `analysis/*.json`, `analysis/listen.py stems.py lyrics.py`, `subs/`, `docs/lyrics.md`, `docs/japanese.md` | **film** | The demo song (not licensed for reuse), its measurements and how they were made |
 | `stories/NAME/` | yours | Where `scripts/starter.mjs` puts a new song's measurements and first shot. Put a fork's film here |
+| `stories/makingof/` | **film** | The making-of video, as a story: `film.js` (the edit), `chapters.js` `script.js` `lib.js`, `ledger.json` (every word on screen), `footage/`, `check.mjs`; its song is the demo song re-arranged (`arrange.py`) |
 | `bakeoff/`, `art/` | history | Early experiments; `art/ref/test_face.png` is still the pipeline's style reference, `art/gen.py` its image call |
 | `out/`, `.venv/`, `node_modules/`, `.env`, `tools/`, stems | never committed | |
 
@@ -131,7 +132,7 @@ Each of these was learned by getting it wrong. The reason is given so you can ju
 11. **No text, brand marks or real-looking insignia inside generated art.** The model invents them, they change
     between drawings, and they may resemble real marks.
 12. **Passing the automatic checks is not acceptance.** They catch a limb off its layout or a colour off the design
-    (about 110 of 355 takes); they passed a sheet where Juno held an invented gadget. A person looks at every
+    (98 of the 379 logged takes); they passed a sheet where Juno held an invented gadget. A person looks at every
     drawing that goes in.
 13. **Change an expression by editing the accepted drawing, then register and grade the edit to its base**
     (`pipeline/match.py`): edits come back two or three pixels off and a few levels off in colour, which jumps

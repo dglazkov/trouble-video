@@ -120,19 +120,39 @@ Three different things are in this repository, under three different terms:
 
 ## How it was made
 
-The film was built in two days (97 commits) by an AI coding agent, Claude, directed by Dimitri Glazkov, who chose
-the story, watched each section and sent it back until it was right. The song is his.
+The film was built in one session of about 22 hours, from the first message to "honestly, it's perfect" (91 commits
+by then; 105 once the repository had been made forkable), by an AI coding agent, Claude, directed by Dimitri Glazkov,
+who chose the story, watched each section and sent it back until it was right. The song is his. There is a making-of
+video, cut from the session's own record: see "The making-of" below.
 
 The drawings were **generated, not drawn by hand**: every character sheet, close-up and painted background was made
 with Google's Gemini image model ("Nano Banana 2") from prompts written for this project, over layouts rendered from
 the project's own 3D skeleton and sets, and then selected, edited, colour-graded, keyed, cut and composited by the
-pipeline in this repository. About 400 character images were requested and 355 came back; roughly four in ten of those were thrown away, 110
-by automatic checks (a limb off its layout, a colour off the design) and 44 by a person looking. Every
+pipeline in this repository. The kits' logs record 379 character images generated, of which 137 were thrown away: 98 by automatic checks (a limb
+off its layout, a colour off the design) and 39 by a person looking. Counting what the logs do not cover (the first
+tests and designs, the crowd, the painted backgrounds, the boss), about 480 to 500 images were generated in all; that
+total is an estimate, not a logged figure. Every
 take is kept in `kits/*/source/` and `kits/*/closeup/` with its prompt beside it, and `kits/*/log.jsonl` says what
 was rejected and why. Nothing is generated when the film renders: a render is deterministic code over frozen art.
 
 `bakeoff/` holds the first day's experiments (Blender against the browser, a puppet made of separately drawn parts
 that was rejected); it is kept as history and nothing uses it.
+
+## The making-of
+
+`stories/makingof/` is a four-minute making-of, rendered by the same engine as a story of its own: eleven chapters of
+quotes from the session, the footage of each stage (the bake-off, the rejected puppet, the first whole drawings, the
+owner's screenshots and their fixes) and a running tally of who had which idea, cut to the song rebuilt from its stems.
+
+```sh
+npm run film                                  # the making-of shows passages of the film from out/film/frames/
+npm run makingof                              # stories/makingof/film.js -> out/makingof/makingof.mp4 (6000 frames)
+node stories/makingof/check.mjs               # its quotes against the transcript, its numbers against the stats
+```
+
+Every word on screen is in `stories/makingof/ledger.json`, with who said it and when; `script.js` says when each is
+shown, in frames read from the music's measurements; `footage/` (46 MB of WebP) is the footage that is not the film
+itself, at the size it is shown. The terminal in it is a recreation from the transcript: there was no screen recording.
 
 ## Credits
 
