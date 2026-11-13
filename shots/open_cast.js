@@ -49,12 +49,15 @@ export const CADENCE = Object.fromEntries(KIDS.map((who) => [who, STRIDE[who] * 
 // what the vault is doing at song frame F, whatever shot is looking: the cues every shot starts from
 const SHUT = [[3, 178], [2, 204], [4, 227], [1, 234], [5, 244], [6, 249], [7, 254]];      // [bay, the frame its shutter lands on]
 export const EYES = [283, 291, 303, 309, 314, 319, 324, 329, 334];                        // the frames the drones' eyes open on
-const WORDS = [[2, "YOU'RE"], [11, "IN"], [16, "DEEP"], [23, "TROUBLE,"], [37, "MISTER."], [56, ""], [178, "WE'RE"], [190, "IN"], [203, "DEEP"], [260, "WE'RE"], [270, "IN"], [283, "DEEP"], [340, "WE'RE"], [350, "IN"], [363, "DEEP"], [442, "TROUBLE"]];
+// What the screens say, and the song frame each word comes on: the frame it is SUNG on (analysis/lyrics.json; LYRIC_MARKS
+// holds each to it). The last TROUBLE is the title card's cut, a frame after the choir's vowel.
+const WORDS = [[0, "YOU'RE"], [6, "IN"], [15, "DEEP"], [22, "TROUBLE,"], [36, "MISTER."], [56, ""], [180, "WE'RE"], [190, "IN"], [203, "DEEP"], [260, "WE'RE"], [270, "IN"], [283, "DEEP"], [340, "WE'RE"], [350, "IN"], [363, "DEEP"], [442, "TROUBLE"]];
+export const LYRIC_MARKS = WORDS.filter(([f, w]) => w && f < 442).map(([f, w]) => ({ at: f, what: `the screens say ${w}`, on: "lyric", word: w }));
 export function cues(F) {
   let text = ""; for (const [f, w] of WORDS) if (F >= f) text = w;
   const small = { "TROUBLE,": "トラブル", "MISTER.": "ミスター", DEEP: "ディープ", TROUBLE: "トラブル" }[text];      // the station says it twice
   const red = F < CUT.red ? 0 : Math.min(3, 1 + Math.floor((F - CUT.red) / 4)), deep = F >= 363 && F < 442;
-  return { wake: { first: F >= 2 ? (F - 2) / FPS : -1, rest: F >= 41 ? (F - 41) / FPS : -1 }, swivel: F < 41 ? 0 : Math.min(1, (F - 41) / 16),
+  return { wake: { first: F / FPS, rest: F >= 41 ? (F - 41) / FPS : -1 }, swivel: F < 41 ? 0 : Math.min(1, (F - 41) / 16),
     speech: { text, small, alarm: F >= CUT.red ? 1 : 0, glitch: deep ? 0.35 : 0 }, doors: Object.fromEntries(SHUT.map(([k, hit]) => [k, slam(F, hit)])),
     racks: ease((F - 256) / 26), red, alert: F >= CUT.red ? 0.8 : 0 };
 }
