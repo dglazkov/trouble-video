@@ -1,5 +1,5 @@
 // The whole film, 0:00-2:44.8: the ten sections cut together in order.
-//   node render.mjs shots/film.js              -> out/film.mp4 (3956 frames; about 25 minutes on a laptop GPU)
+//   node render.mjs shots/film.js              -> out/film.mp4 (3956 frames; 29 minutes on a laptop GPU, 1.4 GB)
 //   node engine/marks.mjs shots/film.js        every cut and hit of the film against the song
 // An edit of edits is the edit of all their shots (engine/edit.js), so each frame here is the frame its section renders
 // on its own. A film of your own is the same file with your sections in it.
