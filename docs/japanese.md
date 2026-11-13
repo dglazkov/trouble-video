@@ -38,14 +38,16 @@ The small ッ at the end of a sound word is a cut-off: it makes the sound abrupt
 
 ## What the station's screens say (under the English word, as the song says it)
 
+Every one of these comes on with the word it glosses, on the frame that word is sung (docs/lyrics.md has the table).
+
 | Text | Reading | Meaning | Where | Verdict |
 |---|---|---|---|---|
-| トラブル | toraburu | "Trouble" | Vault screens 0:01, 0:18; atrium screens 0:21–0:29; corridor board 1:04 | Correct |
-| ミスター | misutaa | "Mister" | Vault screens 0:01.5; corridor board 1:04.7 | Correct |
-| ディープ | diipu | "Deep" | Vault screens 0:08–0:18; gantry board 0:32–0:38; corridor board 1:04–1:10 | Correct. プ (pu) must not read as ブ (bu): the ring was a blob at screen size, now an open ring (fix 3). On the gantry and corridor boards it is written downwards, where its long mark was sideways (fix 1) |
-| ウィーア | wiia | "We're" | Gantry board 0:31–0:37; corridor board 1:05–1:09 | Acceptable: a clipped spelling of "we're" by sound (the full "we are" would be ウィーアー). Long mark and small ィ fixed for downward writing (fixes 1, 2) |
-| ユーア | yuua | "You're" | Corridor board 1:03.7 | Acceptable, as above. Long mark fixed (fix 1) |
-| イン | in | "In" | Gantry board, corridor board | Correct |
+| トラブル | toraburu | "Trouble" | Vault screens 0:00.9, 0:18; atrium screens 0:21–0:29; corridor board 1:04.3; the service tunnel's little screens 1:12.9–1:18.9; Noor's console 1:52.4; the split screen's boards 2:05.9–2:08 | Correct |
+| ミスター | misutaa | "Mister" | Vault screens 0:01.5; corridor board 1:04.9 | Correct |
+| ディープ | diipu | "Deep" | Vault screens 0:00.6, 0:08–0:18; gantry board 0:32–0:38; corridor board 1:03.9–1:10; the tunnel's screen beside Juno 1:52.0; the split screen's boards 1:59.4–2:05.8 | Correct. プ (pu) must not read as ブ (bu): the ring was a blob at screen size, now an open ring (fix 3). On the gantry and corridor boards it is written downwards, where its long mark was sideways (fix 1) |
+| ウィーア | wiia | "We're" | Vault screens 0:07.5–0:14.5; gantry board 0:31–0:37; corridor board 1:05.5–1:09; Ife's CRT and the tunnel's monitor 1:58.5; the split screen's boards 2:00.2, 2:01.8 | Acceptable: a clipped spelling of "we're" by sound (the full "we are" would be ウィーアー). Long mark and small ィ fixed for downward writing (fixes 1, 2) |
+| ユーア | yuua | "You're" | Ife's CRT 1:51.25 (it is no longer on the corridor board: the word is said before the cut to it) | Acceptable, as above. Long mark fixed (fix 1) |
+| イン | in | "In" | Gantry board, corridor board, Ife's CRT and Tane's board 1:51.5, the tunnel's monitor and Noor's console 1:58.8, the split screen's boards 2:00.5, 2:02.1 | Correct |
 | オーケー | ookee | "OK" | Ife's CRT, 1:45.4 | Correct |
 | チャージ | chaaji | "Charge" | Ife's CRT while the bar fills, 1:34–1:39 | Correct |
 | テンカ | tenka | "Ignition" (点火) | Ife's CRT when the bar is full, 1:39.5 | Correct in context. (The same sounds can also be 天下 "the whole world" or 添加 "additive"; on a charge readout it reads as ignition) |
