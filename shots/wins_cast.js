@@ -2,15 +2,17 @@
 // shot counts its own from its cut. Every cut and hit is on a kick, a beat or an onset of analysis/ (engine/sync.js):
 // each shot lists its own as `marks`, and `node engine/marks.mjs shots/wins.js` holds them to the song.
 // Where the music really is (analysis/stems.json; the words from the vocal stems, by ear of faster-whisper and by
-// their envelopes): the "Trouble" chant runs on every beat to 1525; the kick is on 1495, 1505, 1515, 1525, 1535 and
-// then STOPS; the lead alone says "You're in deep trouble, mister" over the break (you're 1528, deep 1535, trouble
-// 1543, mister 1553-1568); "We're in deep" comes three times, a bar apart (we're 1574 / 1614 / 1654, deep 1594 /
-// 1633 / 1673), and the kick comes back ON the first "deep" (1594.7) and is on every beat from there to 1882.7; from
-// 1685 the chant is back on every beat to the end.
+// their envelopes; THE WORDS AND THEIR FRAMES from analysis/lyrics.json, which is the one place they are measured):
+// the choir holds the last "trouble" of the slice, chopped on every beat, to 1517; the kick is on 1495, 1505, 1515,
+// 1525, 1535 and then STOPS; the lead alone says "You're in deep trouble, mister" over the break (you're 1519, while
+// we are still with Juno; in 1525, the cut to Tane; deep 1534, trouble 1542, mister 1558); "We're in deep" comes
+// three times, a bar apart (we're 1573 / 1614 / 1653, in 1580 / 1621 / 1662, deep 1594 / 1633 / 1673), and the kick
+// comes back ON the first "deep" (1594.7) and is on every beat from there to 1882.7; the last "deep" is held, chopped
+// on every beat, until the choir's "trouble" (1749, its vowel 1752) and "trouble" again (1829, 1832), over Juno.
 //   land    1488  out of black: Juno comes down on the far side on the kick (1495), skids broadside, looks back; the
 //                 swarm comes over the gap after her on the kick (1515) and she is gone
 //   corner  1525  Tane at the dead end, three drones on him; the screens say the line to him, a word at a time
-//   crack   1553  close: "mister." He cracks his neck (1565, the bar)
+//   crack   1553  close: "trouble, mister." (mister 1558) He cracks his neck (1565, the bar)
 //   bat     1575  his foot comes down on a pipe (the fill, 1575), it is in his hands (1581); the first drone comes in
 //                 and he bats it on "deep" and the kick (1595): it goes into the roof on the next (1605)
 //   catch   1614  the second dives at his head: he takes it out of the air by the tail on the second "deep" (1634)
@@ -48,11 +50,16 @@ export const IMPACT = {
 // ---- the dead end (sets/corridor.js): a blast door shut at z = 24; Tane has his back to it -----------------------------
 export const DEAD = 24, TZ = 21.3;
 // what the screens say at song frame F
-const WORDS = [[1528, "YOU'RE", "ユーア"], [1531, "IN", "イン"], [1535, "DEEP", "ディープ"], [1543, "TROUBLE,", "トラブル"], [1553, "MISTER.", "ミスター"], [1575, "WE'RE", "ウィーア"], [1590, "IN", "イン"], [1594, "DEEP", "ディープ"],
-  [1615, "WE'RE", "ウィーア"], [1627, "IN", "イン"], [1633, "DEEP", "ディープ"], [1655, "WE'RE", "ウィーア"], [1667, "IN", "イン"], [1673, "DEEP", "ディープ"], [1700, ""]];
+// (each word on the frame it is sung on. "You're" is said at 1519, six frames before the cut to Tane, so his screens
+// come in on IN; "mister" is five frames into the close-up, which opens on TROUBLE,)
+const WORDS = [[1525, "IN", "イン"], [1534, "DEEP", "ディープ"], [1542, "TROUBLE,", "トラブル"], [1558, "MISTER.", "ミスター"], [1573, "WE'RE", "ウィーア"], [1580, "IN", "イン"], [1594, "DEEP", "ディープ"],
+  [1614, "WE'RE", "ウィーア"], [1621, "IN", "イン"], [1633, "DEEP", "ディープ"], [1653, "WE'RE", "ウィーア"], [1662, "IN", "イン"], [1673, "DEEP", "ディープ"], [1700, ""]];
 export const says = (F) => { let w = null; for (const x of WORDS) if (F >= x[0]) w = x; return { z: DEAD, text: w?.[1] ?? "", small: w?.[2] ?? "" }; };
-// the words that have an onset of the voice to be held to
-export const SAY_MARKS = (cut, end) => WORDS.filter((w) => w[1] && w[0] >= cut && w[0] < end && !["YOU'RE", "IN"].includes(w[1])).map((w) => ({ at: w[0] - cut, what: `the screens say ${w[1]}`, on: w[0] < 1570 || w[1] === "WE'RE" ? "lead_vocals" : "backing_vocals" }));
+// every word is held to the frame it is sung on
+export const SAY_MARKS = (cut, end) => WORDS.filter((w) => w[1] && w[0] >= cut && w[0] < end).map((w) => ({ at: w[0] - cut, what: `the screens say ${w[1]}`, on: "lyric", word: w[1] }));
+// the choir's "trouble" comes over Juno (1749, and again 1829): the tunnel's little screens say it from then on
+export const TROUBLE = 1749;
+export const tunnelSign = (F) => F >= TROUBLE ? { text: "TROUBLE", small: "トラブル" } : undefined;
 export const corridor = (F, o = {}) => ({ alert: 1, slabs: { 1: 1 }, doors: { 1: 0, 0: 0 }, says: says(F), ...o });
 // ---- the service tunnel (sets/tunnel.js): she goes under the door (z = 64) on 1813, at SPEED ---------------------------
 export const DOORZ = 64, SPEED = 15, UNDER = 1813;

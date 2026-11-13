@@ -1,4 +1,4 @@
-// Wins 3, 64.71-65.63 s: "...MISTER." Close on him, the screen over his shoulder saying it. He rolls his head over
+// Wins 3, 64.71-65.63 s: "...TROUBLE, MISTER." Close on him, the screen over his shoulder saying it (MISTER. on 1558, as it is said; WE'RE on 1573). He rolls his head over
 // one way, eyes shut; on the bar (1565) it snaps over the other with a crack, and his eyes are open and on them.
 // Two drawings: the second is an edit of the first, graded back to it (pipeline/match.py).
 import { FPS, CUT, TZ, startOf, corridor, ease, wob, SAY_MARKS } from "./wins_cast.js";

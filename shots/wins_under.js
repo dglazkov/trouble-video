@@ -3,7 +3,7 @@
 // grinning, as the door comes down another notch (1813): she goes under its foot. It lands on the next drum hit
 // (1818) behind her, and she is still in the picture, going away from it. Nothing of the set is ever in front of her.
 // Her two drawings are this camera's own (kits/juno hero under_drop, under_flat).
-import { FPS, CUT, CAST, J, DOORZ, UNDER, SLAM, startOf, jz, doorAt, ease, wob } from "./wins_cast.js";
+import { FPS, CUT, CAST, J, DOORZ, UNDER, SLAM, startOf, jz, doorAt, ease, wob, tunnelSign } from "./wins_cast.js";
 import { swarm } from "./wins_juno.js";
 import { sparks, smoke } from "./wins_fx.js";
 import { sfx, sfxMark } from "../engine/sfx.js";
@@ -15,7 +15,7 @@ function frame(f, sync) {
   const lag = 0.017 * Math.max(0, f - 7) ** 2, c = z + 0.3 - lag, wide = ease((f - 7) / 12);
   return { set: "tunnel",
     camera: { pos: [6.6 + shake * wob(f, 9, 14, 1), 0.66 + shake * wob(f, 11, 17, 2), c + 3.6], target: [0, 0.6, c], fov: 15.5 + 13 * wide },
-    options: { alert: 1, cut: true, door: doorAt(F), drones: swarm(F, sync), post: { ca: 0.0014 + 0.0025 * jolt, bgStreak: f < 10 ? [0.004, 0] : [0, 0] } },
+    options: { alert: 1, sign: tunnelSign(F), cut: true, door: doorAt(F), drones: swarm(F, sync), post: { ca: 0.0014 + 0.0025 * jolt, bgStreak: f < 10 ? [0.004, 0] : [0, 0] } },
     actors: [{ who: "juno", action: "wins_juno", view: "side", phase: J(f < FLAT ? 3 : 4), hero: f < FLAT ? "under_drop" : "under_flat", over: true, light: { tint: [0.98, 1.05, 0.98], fogK: 0 }, x: 0, z, y: 0 }],
     overlay(g, cam) {
       if (since < 0) return;

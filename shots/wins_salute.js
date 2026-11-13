@@ -3,7 +3,7 @@
 // the hazard stripes going out of true. She turns back, pulls her goggles down (1863), and throws it a salute over her
 // shoulder without looking (1873). The last blow, the biggest, lands on the last kick (1883): she has not looked round,
 // and on it her goggles go dark, like shades (a second drawing, the salute with its lenses edited), with a glint.
-import { FPS, CUT, CAST, J, DOORZ, HITS, BLOWS, startOf, dentsAt, ease, wob, rnd } from "./wins_cast.js";
+import { FPS, CUT, CAST, J, DOORZ, HITS, BLOWS, startOf, dentsAt, ease, wob, rnd, tunnelSign } from "./wins_cast.js";
 import { swarm } from "./wins_juno.js";
 import { sparks, shards, shardsOf } from "./wins_fx.js";
 const FRAMES = CUT.end - CUT.salute, GOGGLES = 1863 - CUT.salute, SALUTE = 1873 - CUT.salute, LAST = 1883 - CUT.salute, JZ = DOORZ + 2.5, MINE = HITS.map((h, i) => [h, i]).filter(([h]) => h >= CUT.salute);
@@ -15,7 +15,7 @@ function frame(f, sync) {
   const cel = f < GOGGLES ? 5 : f < SALUTE ? 6 : 7;
   return { set: "tunnel",
     camera: { pos: [0.02 + shake * wob(f, 9, 14, 1), 0.78 + shake * wob(f, 11, 17, 2), JZ + 3.25 - 0.3 * k], target: [0.02, 0.86, DOORZ + 1.0], fov: 40 - 2 * k },
-    options: { alert: 0.5, door: 1, dents: dentsAt(F), drones: [], post: { ca: 0.0012 + 0.005 * jolt, bloom: 0.9 + 0.3 * jolt, flash: F === 1883 ? 0.1 : 0 } },
+    options: { alert: 0.5, sign: tunnelSign(F), door: 1, dents: dentsAt(F), drones: [], post: { ca: 0.0012 + 0.005 * jolt, bloom: 0.9 + 0.3 * jolt, flash: F === 1883 ? 0.1 : 0 } },
     actors: [{ who: "juno", action: "wins_juno", view: "front34", phase: J(cel), hero: f >= LAST ? "shades" : ["sit", "goggles", "salute"][cel - 5], over: true, yaw: -52, x: -0.32, z: JZ }],
     overlay(g, cam, bodies) {      // the flip: a glint goes across the dark lenses, and a star on the corner of one
       const u = f - LAST; if (u < 0 || u > 5) return;
