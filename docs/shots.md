@@ -69,6 +69,7 @@ export default {
 | `backdrop(g, cam, bodies)` | Paints the background on a 2D canvas, when there is no set |
 | `under(g, cam, bodies)`, `overlay(g, cam, bodies)` | Painted under the characters; over everything (sound words, titles, drawn effects) |
 | `post` | Photography parameters over the set's own: `engine/post.js` `DEFAULTS` lists them (`bloom`, `flash`, `bgBlur`, `mode: 1` for an impact frame, `black: 1`) |
+| `pictures` | `["/path/a.webp", ...]`: picture files this frame draws (footage: a still, or one frame of an image sequence). They are loaded before the frame is painted, and `backdrop`, `under` and `overlay` get a fourth argument `pic(url)` that returns the image to `g.drawImage` (`stories/makingof/` is cut from these) |
 | `panels` | A split screen: several pictures, each with its own set and camera, laid in through polygons (`shots/reun_split.js`) |
 
 `sync` is the song at any frame ([song.md](song.md)). Everything must be a pure function of `f`: no `Math.random`,

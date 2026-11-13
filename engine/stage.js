@@ -17,6 +17,10 @@
 //       under(g, cam, bodies)       painted over the background, under the characters
 //       overlay(g, cam, bodies)     painted over everything, before the lens
 //       post: {...}                 engine/post.js parameters, over the set's own and options.post
+//       pictures: ["/stories/x/footage/a/0001.webp", ...]   picture files this frame draws (footage: a still, or one frame of an
+//                                   image sequence). They are loaded before the frame is painted, and backdrop, under and overlay
+//                                   get a fourth argument pic(url) -> the image, to g.drawImage. Not named, nothing is loaded:
+//                                   a shot without `pictures` is played exactly as before. (stories/makingof/ is cut from these.)
 //     } }
 // and frame(f, sync) is a pure function of the frame number. Every frame goes the same way: the set (or the backdrop)
 // is rendered with the shot's camera; each character is posed on the skeleton and its cel for that pose and view drawn
@@ -87,6 +91,18 @@ try {
     const s = sheets[i]; s.g.setTransform(1, 0, 0, 1, 0, 0); s.g.clearRect(0, 0, W, H); s.t.needsUpdate = true; return s;
   };
   let actors = {}, last = -1, take = null;
+  // Footage a frame names in `pictures`: loaded when first asked for, the least recently used let go beyond ~100 megapixels
+  // (an image sequence is asked for a frame at a time, so a long one never sits in memory whole).
+  const pics = new Map(); let picPixels = 0;
+  async function pictures(urls) {
+    for (const u of urls) {
+      let im = pics.get(u);
+      if (im) pics.delete(u); else { im = new Image(); im.src = u; try { await im.decode(); } catch { throw new Error(`${shot.name}: the picture ${u} could not be loaded`); } picPixels += im.width * im.height; }
+      pics.set(u, im);
+    }
+    for (const [u, im] of pics) { if (picPixels <= 1e8 || urls.includes(u)) break; pics.delete(u); picPixels -= im.width * im.height; }
+    return (u) => { const im = pics.get(u); if (!im) throw new Error(`${shot.name}: ${u} is drawn but not named in the frame's pictures`); return im; };
+  }
 
   // The characters of frame f: posed where the frame says, on the drawing the held frame says.
   const panelOf = (g, id) => { const o = shot.frame(g, sync), p = o.panels?.find((x, i) => (x.id ?? i) === id); return p ? { ...p.frame, take: o.take } : {}; };      // a panel's own frame at shot frame g
@@ -122,6 +138,7 @@ try {
   }
   async function render(f, sub) {
     const fr = sub ? sub.fr : shot.frame(f, sync); if (!sub && fr.panels) return renderPanels(f, fr);
+    const pic = fr.pictures ? await pictures(fr.pictures) : undefined;
     const F = f0 + f, set = fr.set ? await need(fr.set) : null, opt = fr.options ?? {}, { cam, list } = people(f, fr, sub), bodies = list.map((p) => p.body), notes = [];
     // contact shadows: one hard disc under each figure, smaller and fainter the higher it is off the floor
     const shadows = [];
@@ -133,7 +150,7 @@ try {
     }
     let params;
     if (set) { const s = set.update(fr.camera, F, sync, { ...opt, shadows }); post.capture(s.scene, s.camera, ndMaterial, { clear: s.clear }); params = { ...s.post, ...fr.post }; }
-    else { const s = sheet(0); s.g.fillStyle = "#30365e"; s.g.fillRect(0, 0, W, H); fr.backdrop?.(s.g, cam, bodies); post.paint(s.t); params = { ...PLAIN, ...opt.post, ...fr.post }; }
+    else { const s = sheet(0); s.g.fillStyle = "#30365e"; s.g.fillRect(0, 0, W, H); fr.backdrop?.(s.g, cam, bodies, pic); post.paint(s.t); params = { ...PLAIN, ...opt.post, ...fr.post }; }
     // the cels, far to near
     const cels = list.map((p) => ({ ...p, depth: cam.project([p.body.q.x, (p.body.q.y ?? 0) + 0.9, p.body.q.z]).z })).concat((fr.cels ?? []).map((c) => ({ plate: c, depth: c.depth ?? 0 }))).sort((a, b) => b.depth - a.depth);
     post.clearCels();
@@ -171,7 +188,7 @@ try {
       post.cel(s.t, layer);
       Object.assign(note, { tint: layer.tint, rim: layer.rim, fog: +layer.fog.toFixed(4), depth: +layer.depth.toFixed(3) });      // the light it was laid in (engine/motion.mjs reads it for flicker)
     });
-    const paint = (i, fn) => { if (!fn && !(i === 2 && DEBUG)) return null; const s = sheet(i); fn?.(s.g, cam, bodies); return s; };
+    const paint = (i, fn) => { if (!fn && !(i === 2 && DEBUG)) return null; const s = sheet(i); fn?.(s.g, cam, bodies, pic); return s; };
     const under = paint(1, fr.under), over = paint(2, fr.overlay);
     if (DEBUG) {
       const g = over.g; g.setTransform(1, 0, 0, 1, 0, 0);
