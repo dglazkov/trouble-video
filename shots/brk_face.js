@@ -7,7 +7,7 @@
 //   m_*                        the same screen draws the map: they look at it (relief: the other three), and are decided
 // The place behind each is its set, with a camera that puts the kid's nearest screen beside the face; what the screen
 // shows is drawn by the film on the screen's own quad (Ife's is in her drawing: the backpack's CRT).
-import { CUT, EV, W, H, PW, PH, PAL, shot, hang, quadIn, quadOf, onQuad, screenAt, screenPaint, screenGlow, ease, clamp, lerp, mix3, wob, rnd } from "./brk_cast.js";
+import { CUT, EV, W, H, PW, PH, PAL, shot, hang, quadIn, quadOf, onQuad, screenAt, screenPaint, screenGlow, ease, clamp, lerp, mix3, wob, rnd, sayMark } from "./brk_cast.js";
 import { PLACES } from "./brk_place.js";
 import { smokeBank } from "../engine/fx.js";
 
@@ -84,10 +84,10 @@ export const juno = close("juno", { who: "juno", at: [0.56, 0.47], scale: 0.7, l
 export const noor = close("noor", { who: "noor", at: [0.58, 0.5], scale: 0.7, looks: [[0, "quiet"], [look("noor") + 3, "up"]], cutOn: "beat", push: 0.0006,
   marks: [{ at: look("noor"), what: "the core's light drops: Noor's eyes go up", on: "brass" }] });
 // ---- the voice ------------------------------------------------------------------------------------------------------------------
-export const v_ife = close("v_ife", { who: "ife", at: [0.36, 0.5], scale: 0.78, looks: [[0, "fear"]], shiver: 2.5, cutOn: "lead_vocals", marks: [{ at: 0, what: "the voice is back: YOU'RE, on Ife's CRT", on: "lead_vocals" }] });
-export const v_tane = close("v_tane", { who: "tane", at: [0.38, 0.47], scale: 0.86, looks: [[0, "fear"]], shiver: 1.5, cutOn: "beat", marks: [{ at: 0, what: "DEEP, on Tane's board", on: "beat" }] });
-export const v_juno = close("v_juno", { who: "juno", at: [0.6, 0.46], scale: 0.9, looks: [[0, "fear"]], shiver: 2, cutOn: "lead_vocals", marks: [{ at: 0, what: "TROUBLE, on the tunnel's screen", on: "lead_vocals" }] });
-export const v_noor = close("v_noor", { who: "noor", at: [0.6, 0.5], scale: 0.9, looks: [[0, "up"], [3, "fear"]], cutOn: "lead_vocals", push: 0.002, marks: [{ at: 0, what: "MISTER, on the console", on: "lead_vocals" }] });
+export const v_ife = close("v_ife", { who: "ife", at: [0.36, 0.5], scale: 0.78, looks: [[0, "fear"]], shiver: 2.5, cutOn: "lead_vocals", marks: [sayMark("YOU'RE", "v_ife", "on Ife's CRT: the voice is back"), sayMark("IN", "v_ife", "on Ife's CRT")] });
+export const v_tane = close("v_tane", { who: "tane", at: [0.38, 0.47], scale: 0.86, looks: [[0, "fear"]], shiver: 1.5, cutOn: "beat", marks: [{ at: 0, what: "to Tane: his board still says IN", on: "beat" }] });
+export const v_juno = close("v_juno", { who: "juno", at: [0.6, 0.46], scale: 0.9, looks: [[0, "fear"]], shiver: 2, cutOn: "lead_vocals", marks: [sayMark("DEEP", "v_juno", "on the tunnel's screen")] });
+export const v_noor = close("v_noor", { who: "noor", at: [0.6, 0.5], scale: 0.9, looks: [[0, "up"], [3, "fear"]], cutOn: "lead_vocals", push: 0.002, marks: [sayMark("TROUBLE", "v_noor", "on the console")] });
 // ---- the map ----------------------------------------------------------------------------------------------------------------------
 export const m_ife = close("m_ife", { who: "ife", at: [0.33, 0.5], scale: 0.76, looks: [[0, "fear"], [3, "see"], [10, "set"]], cutOn: "synth", marks: [{ at: 0, what: "Ife's CRT draws the map", on: "synth" }] });
 export const m_tane = close("m_tane", { who: "tane", at: [0.36, 0.47], scale: 0.78, looks: [[0, "see"], [6, "set"]], cutOn: "strings" });

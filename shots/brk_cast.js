@@ -5,21 +5,24 @@
 // (118.03 s); it is back for good on L328, the next section's first frame. Strings alone at first (notes on L11, L30.5,
 // L36, L50, L69.5), with ONE accent of brass, keyboard and guitar on L70 and again on L75.6. The lead vocal does not
 // return at 108.9 s as the early notes had it (what is there is bleed 35 dB down): it comes in at 111.24 s, L132.5,
-// alone, and says the line it said to Tane: "You're (L132.5) in (L136) deep (L140) trouble, (L150.3) mister (L159.2)".
-// From L170 the stem holds one high note that pulses every half beat (L182.6, L194.9, L209.4 and every five frames
-// after, dying away by L290) with no words in it; drums tick under it from L224. Then "We're" (L307.5) "in" (L323),
-// and "deep" is the next section's first frame (L327.5).
+// alone, and says the line it said to Tane, slower: "You're (L131.7) in (L137.3) deep (L149.6) trouble, (L158.7)
+// mister (L175.6)" (analysis/lyrics.json, where the words are measured; the stem's onsets at L140, L150.3 and L159.2
+// are the "n" of "in", the "d" of "deep" and the "tr" of "trouble", not the three words after them as this section
+// first had it). The "-er" of "mister" is held from L181 as one high note that pulses every half beat (L182.6,
+// L194.9, L209.4 and every five frames after, dying away by L290) with no words in it; drums tick under it from
+// L224. Then "We're" (L306.3) "in" (L314.2), and "deep" is the next section's first frame (L327.8).
 //   ife     0  Ife in the clearing smoke, her CRT still saying OK: a small smile. The lamps flicker (strings, L11): she looks up
 //   tane   20  Tane, the pipe on his shoulder, grinning. The flicker (L30.5): he looks up
 //   juno   40  Juno on her board, laughing. The flicker (L50): she looks up
 //   noor   60  Noor: nothing. On the accent (L70) the core's light drops: the eyes go up, and that is all
 //   dark   76  the atrium: the lights go out deck by deck, from the top down (L76, L90, L95, L100), and the screens with them
 //   hall  108  over Tane's shoulder, down his corridor: the lamps die toward him, one module at a time, and reach him
-//   v_ife 132  in the dark, each lit by one screen, a word each: "YOU'RE IN" on Ife's own CRT
-//   v_tane 140 "DEEP" on the board beside Tane
-//   v_juno 150 "TROUBLE," on the tunnel's little screen
-//   v_noor 159 "MISTER." on the island's console: Noor's eyes are wide open for the first time in the film
+//   v_ife 132  in the dark, each lit by one screen, which says the line as it is said: "YOU'RE", "IN" (L137) on Ife's own CRT
+//   v_tane 140 "IN" still, on the board beside Tane
+//   v_juno 150 "DEEP" on the tunnel's little screen
+//   v_noor 159 "TROUBLE," on the island's console: Noor's eyes are wide open for the first time in the film
 //   w_noor 170 what they broke is leaving: the sliced enforcer drifts out of the core past Noor, slice after slice
+//              ("mister" is said here, L176: the console says it, but it is out of this picture)
 //   w_tane 182 the three wrecks at Tane's feet open an eye each (the voice's pulse) and drag themselves off
 //   w_ife  195 scorched cowls skitter away down Ife's passage
 //   w_juno 202 the red round Juno's blast door goes out, and its dents ease: what was behind it has gone
@@ -28,7 +31,7 @@
 //   m_ife  244 Ife's CRT draws a map: the station in plan, four dots, one large mass, the ways to the bridge. Relief, then resolve
 //   m_tane 259 the same map on Tane's board   m_juno 269 on the tunnel's monitor   m_noor 279 on the console
 //   go_tane 295 the pickup kick: Tane charges      go_ife 303 (drums) Ife scurries; her CRT says WE'RE (L307)
-//   go_juno 309 (strings) Juno kicks off, the monitor behind her saying it      go_noor 318 (drums) Noor walks; the console says IN (L323)
+//   go_juno 309 (strings) Juno kicks off, the monitor behind her saying it, and IN (L314)      go_noor 318 (drums) Noor walks; the console says IN
 // "Deep" and the kick's return are the reunion's first frame, which is Tane alone, coming at us (shots/reun_split.js).
 import { camera } from "../engine/body.js";
 import { kana, latin, kanaWidth, scanlines, FONT } from "../sets/sign.js";
@@ -45,9 +48,10 @@ export const wob = (f, a, b, c) => Math.sin(f * a + c) * 0.6 + Math.sin(f * b + 
 // a shot of this section
 export const shot = (name, o) => ({ name: "brk_" + name, start: startOf(name), frames: lengthOf(name), fps: FPS, ...o });
 // the events the shots hang on (section frames)
-export const EV = { look: { ife: 11, tane: 30, juno: 50, noor: 70 }, decks: [76, 90, 95, 100], voice: 132, mister: 159, quiet: 182, pulses: [183, 195, 209, 214, 219, 224, 229, 234, 239], map: 244, kick: 295, were: 307, inn: 323 };
-// what the station says, a word at a time
-export const WORDS = [[132, "YOU'RE", "ユーア"], [136, "IN", "イン"], [140, "DEEP", "ディープ"], [150, "TROUBLE,", "トラブル"], [159, "MISTER.", "ミスター"], [307, "WE'RE", "ウィーア"], [323, "IN", "イン"]];
+export const EV = { look: { ife: 11, tane: 30, juno: 50, noor: 70 }, decks: [76, 90, 95, 100], voice: 132, mister: 176, quiet: 182, pulses: [183, 195, 209, 214, 219, 224, 229, 234, 239], map: 244, kick: 295, were: 307, inn: 314 };
+// what the station says, a word at a time, each on the section frame it is sung on (analysis/lyrics.json; sayMark holds it there)
+export const WORDS = [[132, "YOU'RE", "ユーア"], [137, "IN", "イン"], [150, "DEEP", "ディープ"], [159, "TROUBLE,", "トラブル"], [176, "MISTER.", "ミスター"], [307, "WE'RE", "ウィーア"], [314, "IN", "イン"]];
+export const sayMark = (word, shot, where) => { const w = WORDS.find((x) => x[1].startsWith(word) && x[0] >= CUT[shot] && x[0] < CUT[ORDER[ORDER.indexOf(shot) + 1]]); return { at: w[0] - CUT[shot], what: `${w[1]} ${where}`, on: "lyric", word }; };
 export const wordAt = (L) => { let w = null; for (const x of WORDS) if (L >= x[0]) w = x; return w; };
 // the four, their colours on the map, and the phosphor of the screen nearest each
 export const KIDS = ["tane", "ife", "noor", "juno"], COLOUR = { tane: "#ff3b30", ife: "#5dff8c", noor: "#d9c2ff", juno: "#ff9a2e" };

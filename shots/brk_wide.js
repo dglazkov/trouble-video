@@ -5,7 +5,7 @@
 // drawings where it is not: Tane from behind, and the four launches.
 // In the dark a wreck is drawn as the effects drawings are (engine/fx.js drone2d): a shape against what light there is,
 // and its one red eye.
-import { CUT, EV, W, H, PW, PH, PAL, shot, quadIn, onQuad, screenAt, screenPaint, screenGlow, ease, clamp, lerp, mix3, wob, rnd } from "./brk_cast.js";
+import { CUT, EV, W, H, PW, PH, PAL, shot, quadIn, onQuad, screenAt, screenPaint, screenGlow, ease, clamp, lerp, mix3, wob, rnd, sayMark } from "./brk_cast.js";
 import { PLACES, NOOR, JUNO, TANE, IFE, slabs, JMON } from "./brk_place.js";
 import { camera } from "../engine/body.js";
 import { drone2d, smokeBank } from "../engine/fx.js";
@@ -48,7 +48,7 @@ export const hall = shot("hall", { cutOn: "guitar", sets: ["corridor"], plates: 
 // ---- w_noor, L 170-182: the sliced enforcer, which has hung behind Noor since the grid went through it, moves: its
 // slices close up into a line, nose to tail, their cuts hot again, and drift out of the core past them. Its eye is on.
 export const w_noor = shot("w_noor", { cutOn: "keyboard", sets: ["core"], cast: { noor: "/kits/noor" }, held: (f) => f,
-  marks: [{ at: 0, what: "the slices move", on: "keyboard" }],
+  marks: [{ at: 0, what: "the slices move", on: "keyboard" }],      // ("mister" is said on L176, here: the console is out of this picture, so no screen in it says so)
   frame(f, sync) {
     const L = CUT.w_noor + f, P = PLACES.noor, scr = screenAt(L, "noor"), glow = screenGlow(scr, PAL.violet), k = ease(f / 12), f2 = f - f % 2;
     const cc = closeCamera(2229), cam = { pos: cc.pos, target: [cc.target[0] + 0.5, cc.target[1] + 0.55, cc.target[2]], fov: cc.fov * 0.8 };
@@ -141,6 +141,6 @@ const go = (who, o = {}) => { const name = "go_" + who, K = GO[who], P = PLACES[
         post: { dark: P.dark * 0.9, bgBlur: (o.blur ?? 0.05) * (0.4 + 0.6 * e), focus: [0.5, 0.52], bloom: 0.9, flash: f === 0 ? 0.14 : f === 1 ? 0.05 : 0, ca: 0.0012 + 0.004 * Math.exp(-f / 2), vignette: 0.5, ...o.post } };
     } }); };
 export const go_tane = go("tane", { cutOn: "kick", marks: [{ at: 0, what: "the pickup: Tane goes", on: "kick" }], dz: -1.6, side: 7 });
-export const go_ife = go("ife", { cutOn: "drums", marks: [{ at: 0, what: "Ife goes", on: "drums" }, { at: EV.were - CUT.go_ife, what: "her CRT says WE'RE", on: "lead_vocals" }], dz: 1.3, bob: 8, side: 6 });
-export const go_juno = go("juno", { cutOn: "strings", marks: [{ at: 0, what: "Juno goes", on: "strings" }], dz: 1.4, bob: 3, side: -6 });
+export const go_ife = go("ife", { cutOn: "drums", marks: [{ at: 0, what: "Ife goes", on: "drums" }, sayMark("WE'RE", "go_ife", "on her CRT")], dz: 1.3, bob: 8, side: 6 });
+export const go_juno = go("juno", { cutOn: "strings", marks: [{ at: 0, what: "Juno goes", on: "strings" }, sayMark("IN", "go_juno", "on the monitor behind her")], dz: 1.4, bob: 3, side: -6 });
 export const go_noor = go("noor", { cutOn: "drums", marks: [{ at: 0, what: "Noor walks", on: "drums" }], dz: 0.5, bob: 5, warp: 2, blur: 0.012, side: -6 });
