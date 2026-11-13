@@ -1,8 +1,0 @@
-# What `nerd deploy` leaves behind when it sends the project to be built.
-.git
-.gitignore
-.claude
-.env
-node_modules
-# What cargo builds, here and in the Dockerfile.
-target
