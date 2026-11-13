@@ -21,8 +21,9 @@ const upper = (a, x) => { let lo = 0, hi = a.length; while (lo < hi) { const m =
 
 export function createSync(listen, stems, o = {}) {
   const fps = o.fps ?? stems.fps ?? 24, beats = listen.beats, sections = listen.sections, S = stems.stems;
-  // The bar line: the beat nearest `downbeat` (by default the drop, the loudest section's start) is a bar's first.
-  const downbeat = o.downbeat ?? sections[3] ?? beats[0];
+  // The bar line: the beat nearest `downbeat` is a bar's first. A song says where one is with `downbeat` (seconds) in its
+  // listen.json (analysis/song.py estimates it); the demo song's has none and takes its drop, the fourth section's start.
+  const downbeat = o.downbeat ?? listen.downbeat ?? sections[3] ?? beats[0];
   let d0 = 0; for (let i = 1; i < beats.length; i++) if (Math.abs(beats[i] - downbeat) < Math.abs(beats[d0] - downbeat)) d0 = i;
   const span = (beats[beats.length - 1] - beats[0]) / (beats.length - 1);
   const beatTime = (i) => i < 0 ? beats[0] + i * span : i >= beats.length ? beats[beats.length - 1] + (i - beats.length + 1) * span : beats[i];

@@ -1,6 +1,6 @@
 // Render a shot, or an edit of shots: node render.mjs shots/NAME.js [options]
 //   (no options)        every frame to out/NAME/frames/f0000.png, then out/NAME.mp4 (1920x1080 H.264), with the song
-//                       from the shot's `start` under it if it has one
+//                       from the shot's `start` under it if it has one (the shot's own `song`, engine/song.mjs, or the demo's)
 //   --frames 0,12,40    only these frames (stills; no video)
 //   --range 0-95        only this span (no video)
 //   --out DIR           frames go to DIR instead
@@ -9,22 +9,29 @@
 //   --debug             overlay the skeleton and which drawing each character is on             -> out/NAME_debug...
 //   --mannequin         the body's dummy instead of the kit's drawings                         -> out/NAME_mannequin...
 //   --over              nothing of the set hides a character (engine/motion.mjs compares it with a normal render)
+//   --software          no GPU: draw with Chrome's software renderer (the same as SOFTWARE=1; several times slower, and
+//                       not bit for bit what a GPU draws). Without it a machine with no usable GPU is refused, not rendered slowly.
+//   --mp4 FILE          the video goes to FILE instead of out/NAME.mp4
+// Chrome is found by pipeline/env.mjs ($CHROME overrides); Python is .venv/bin/python ($PYTHON overrides).
 // Beside the frames it writes notes.json: per frame, each character's drawing and the light it was laid in.
 //   --sheet [N]         also a contact sheet out/NAME_sheet.png of every Nth rendered frame (default: 24 evenly spaced)
 //   --crop x0,y0,x1,y1  crop for the contact sheet
 // Prints one JSON line: what was written, how long it took, and `dummies`: which characters were drawn as the posing
 // dummy because their kit has no drawing for what the shot asks (per action and view, with the frames it happened on).
 import fs from "node:fs"; import path from "node:path"; import { execFileSync } from "node:child_process";
-import { open, ROOT } from "./pipeline/browser.mjs";
+import { open, ROOT, python, ffmpeg as findFfmpeg, software } from "./pipeline/browser.mjs";
+import { songOf } from "./engine/song.mjs";
 
 const args = process.argv.slice(2), flag = (n) => { const i = args.indexOf(n); if (i < 0) return null; const v = args[i + 1] && !args[i + 1].startsWith("--") ? args.splice(i + 1, 1)[0] : true; args.splice(i, 1); return v; };
-const debug = flag("--debug"), dummy = flag("--mannequin"), sheet = flag("--sheet"), crop = flag("--crop"), only = flag("--frames"), range = flag("--range"), outDir = flag("--out"), stills = flag("--stills"), silent = flag("--silent"), over = flag("--over");
+const debug = flag("--debug"), dummy = flag("--mannequin"), sheet = flag("--sheet"), crop = flag("--crop"), only = flag("--frames"), range = flag("--range"), outDir = flag("--out"), stills = flag("--stills"), silent = flag("--silent"), over = flag("--over"), mp4Out = flag("--mp4");
+if (flag("--software")) process.env.SOFTWARE = "1";
 const shotFile = args[0];
 if (!shotFile || flag("--help")) { console.error(fs.readFileSync(new URL(import.meta.url), "utf8").split("\n").filter((l) => l.startsWith("//")).join("\n")); process.exit(2); }
+const shotModule = (await import(path.resolve(shotFile))).default, noLyrics = !songOf(shotModule).lyrics;      // (also: a song folder that is missing or unmeasured is said here, in words)
 const kits = fs.readdirSync(path.join(ROOT, "kits")).filter((k) => fs.existsSync(path.join(ROOT, "kits", k, "kit.json")));
-const { page, close } = await open(`/engine/stage.html?shot=/${path.relative(ROOT, path.resolve(shotFile))}&kits=${kits.join(",")}${debug ? "&debug=1" : ""}${dummy ? "&mannequin=1" : ""}${over ? "&over=1" : ""}`);
+const { page, close } = await open(`/engine/stage.html?shot=/${path.relative(ROOT, path.resolve(shotFile))}&kits=${kits.join(",")}${debug ? "&debug=1" : ""}${dummy ? "&mannequin=1" : ""}${over ? "&over=1" : ""}${noLyrics ? "&lyrics=0" : ""}`);
 const info = await page.evaluate("window.shotInfo");
-if (/swiftshader|llvmpipe/i.test(info.gpu)) { console.error("not a hardware GPU: " + info.gpu); await close(); process.exit(1); }
+if (/swiftshader|llvmpipe|softpipe/i.test(info.gpu) && !software()) { console.error(`Chrome is not drawing on a GPU here (${info.gpu}).\nTo render anyway, slowly, with its software renderer: add --software (or set SOFTWARE=1). node doctor.mjs says more.`); await close(); process.exit(1); }
 const name = info.name + (debug ? "_debug" : "") + (dummy ? "_mannequin" : ""), dir = outDir ? path.resolve(outDir) : path.join(ROOT, "out", name, "frames");
 let frames = [...Array(info.frames).keys()];
 if (only) frames = String(only).split(",").map(Number);
@@ -46,11 +53,13 @@ fs.writeFileSync(path.join(dir, "notes.json"), JSON.stringify(notes));
 await close();
 if (process.exitCode) process.exit(process.exitCode);
 const spans = (l) => { const o = []; for (const f of l) { const s = o[o.length - 1]; if (s && f === s[1] + 1) s[1] = f; else o.push([f, f]); } return o.map(([a, b]) => a === b ? `${a}` : `${a}-${b}`).join(","); };
-const py = path.join(ROOT, ".venv/bin/python"), rel = (p) => path.relative(ROOT, p);
+const py = python(), rel = (p) => path.relative(ROOT, p);
 const result = { shot: info.name, gpu: info.gpu, frames: frames.length, seconds: +secs.toFixed(1), fps: +(frames.length / secs).toFixed(1), dir: rel(dir), cuts: info.cuts ?? undefined, dummies: Object.fromEntries(Object.entries(dummies).map(([k, l]) => [k, spans(l)])) };
 if (whole) {
-  const ffmpeg = execFileSync(py, ["-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"]).toString().trim(), mp4 = path.join(ROOT, "out", name + ".mp4");
-  const sound = !silent && info.start !== null, audio = sound ? ["-ss", String(info.start), "-t", String(info.frames / info.fps), "-i", path.join(ROOT, "audio.wav")] : [];
+  const ffmpeg = findFfmpeg(), mp4 = mp4Out ? path.resolve(mp4Out) : path.join(ROOT, "out", name + ".mp4");
+  const track = !silent && info.start !== null ? songOf({ name: info.name, song: info.song ?? undefined }).audio : null;      // the shot's own song, or the demo's
+  const sound = !!track, audio = sound ? ["-ss", String(info.start), "-t", String(info.frames / info.fps), "-i", track] : [];
+  fs.mkdirSync(path.dirname(mp4), { recursive: true });
   execFileSync(ffmpeg, ["-y", "-loglevel", "error", "-framerate", String(info.fps), "-i", path.join(dir, "f%04d.png"), ...audio, "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p", "-crf", "14", "-preset", "slow", "-movflags", "+faststart", ...(sound ? ["-c:a", "aac", "-b:a", "256k", "-shortest"] : []), mp4]);
   result.video = rel(mp4);
 }

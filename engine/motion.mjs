@@ -28,7 +28,7 @@ import { createActor, hang } from "./cels.js";
 import { ACTIONS, actorPose, celIndex } from "./actions.js";
 import { viewOf } from "./views.js";
 import { hull } from "./mannequin.js";
-import { createSync } from "./sync.js";
+import { songOf } from "./song.mjs"; import { python } from "../pipeline/env.mjs"; import { fileURLToPath } from "node:url";
 import { floorAt as stairFloor } from "../sets/stairplan.js";
 
 export const LIMITS = {
@@ -45,7 +45,7 @@ export const LIMITS = {
 // the floor of each set that is not flat at 0: (x, z) -> its height, or null where there is none
 const FLOORS = { market: (x, z) => z > 66 && z < 76 ? null : z > 62.4 && z <= 66 && Math.abs(x) < 2.2 ? 0.85 * (z - 62.4) / 3.6 : 0 };      // sets/market.js floorAt (that module needs a renderer)
 FLOORS.stairwell = stairFloor;      // sets/stairplan.js: the tread or deck under someone at about y
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const wrap = (a) => ((a + 180) % 360 + 360) % 360 - 180;
 
 // Every frame of a shot as the stage plays it: per character the held pose, the place, the drawing and how it hangs.
@@ -79,7 +79,7 @@ export function walk(shot, sync, kits) {
         if (pick.hero) angle = { yaw: +Math.abs(wrap(pick.rel - g.cel.from.yaw)).toFixed(1), elev: +(el - g.cel.from.elev).toFixed(1) };      // a hero drawing: against its own frame's camera
         else { const V = viewOf(pick.view), ve = g.view.elev ?? V.elev ?? 5; angle = { yaw: V.yaw === null ? 0 : +Math.abs(wrap(pick.rel - (pick.mirror ? -V.yaw : V.yaw))).toFixed(1), elev: +(el - ve).toFixed(1) }; }
       }
-      row.people.push({ who: a.who, action: on.action, cel: pick.cel, view: pick.view, mirror: !!pick.mirror, dummy: !g, key: pick.hero ? pick.view : `${on.action}/${pick.view}${pick.mirror ? "*" : ""}/${pick.cel}`,
+      row.people.push({ who: a.who, action: on.action, cel: pick.cel, hold: a.drawing, view: pick.view, mirror: !!pick.mirror, dummy: !g, key: pick.hero ? pick.view : `${on.action}/${pick.view}${pick.mirror ? "*" : ""}/${pick.cel}`,
         root: [root.x, root.y], at: [q.x, q.y, q.z], scale: root.s, size: root.s * c.P.height, feet, box: [x0, y0, x1, y1].map(Math.round), angle,
         drawn: g && g.cel.head ? { head: g.at(g.cel.head), hips: g.at(g.cel.hips) } : null, bones: { head: pr(body.J.head), hips: pr(body.J.hips) }, onScreen: x1 > 0 && x0 < W && y1 > 0 && y0 < H });
     }
@@ -98,19 +98,22 @@ export function judge(shot, rows) {
     // stride: a planted foot from one drawing to the next (the start of each hold); glide: within one held drawing
     const plant = {}, close = (s2) => { const pl = plant[s2]; if (pl && pl.n > 1) add("plant", pl.r, who, pl.sum, LIMITS.plant, `${s2} foot ends ${pl.sum.toFixed(2)} m (${pl.px.toFixed(0)} px) from where it was planted, ${pl.n} drawings on from f${pl.r.f}`); plant[s2] = null; };
     let hold = null;      // the frame the current drawing came on at
+    let cutIn = false;    // an actor holding its own drawings (`drawing`) was cut to in the middle of one: when that one came on is not known
     for (let i = 0; i < seq.length; i++) {
       const b = seq[i], a = seq[i - 1];
-      if (!b.p || !a?.p || a.r.take !== b.r.take) { hold = b.p ? b : null; close("L"); close("R"); continue; }
-      const same = a.p.key === b.p.key && shot.held && (shot.held(b.r.f) === shot.held(a.r.f)) || a.p.key === b.p.key && !shot.held && (b.r.f - b.r.f % 2 === a.r.f - a.r.f % 2);
+      if (!b.p || !a?.p || a.r.take !== b.r.take) { hold = b.p ? b : null; cutIn = b.p?.hold !== undefined; close("L"); close("R"); continue; }
+      // (an actor that says which drawing it is on, `drawing: n`, is held by that and not by the shot: a run whose drawings
+      // each character changes at their own pace, on twos and threes)
+      const own = b.p.hold !== undefined, same = own ? a.p.key === b.p.key && a.p.hold === b.p.hold : a.p.key === b.p.key && shot.held && (shot.held(b.r.f) === shot.held(a.r.f)) || a.p.key === b.p.key && !shot.held && (b.r.f - b.r.f % 2 === a.r.f - a.r.f % 2);
       for (const s of ["L", "R"]) {
         if (same) {      // the same drawing, a frame on: how far it has been carried since it came on
           if (!hold?.p.feet[s] || !b.p.feet[s] || !b.p.onScreen) continue;
           const d = Math.hypot(b.p.feet[s][0] - hold.p.feet[s][0], b.p.feet[s][2] - hold.p.feet[s][2]), p0 = b.r.cam.project(hold.p.feet[s]), p1 = b.r.cam.project(b.p.feet[s]);
-          const n = b.r.f - hold.r.f, last = seq[i + 1]?.p?.key !== b.p.key || seq[i + 1]?.r.take !== b.r.take || (shot.held ? shot.held(seq[i + 1].r.f) !== shot.held(b.r.f) : (seq[i + 1].r.f % 2 === 0));
+          const n = b.r.f - hold.r.f, last = seq[i + 1]?.p?.key !== b.p.key || seq[i + 1]?.r.take !== b.r.take || (own ? seq[i + 1].p.hold !== b.p.hold : shot.held ? shot.held(seq[i + 1].r.f) !== shot.held(b.r.f) : (seq[i + 1].r.f % 2 === 0));
           if (last) add("glide", hold.r, who, d, LIMITS.glide, `${b.p.key}: one drawing with its ${s} foot down is carried ${d.toFixed(2)} m (${Math.hypot(p1.x - p0.x, p1.y - p0.y).toFixed(0)} px over the floor) in the ${n + 1} frames it is held, f${hold.r.f}-f${b.r.f}`);
         } else {         // a new drawing: against the drawing before it, where that one came on
           const h = hold;
-          if (h?.p.feet[s] && b.p.feet[s] && b.p.onScreen) {
+          if (h?.p.feet[s] && b.p.feet[s] && b.p.onScreen && !cutIn) {
             const v = [b.p.feet[s][0] - h.p.feet[s][0], b.p.feet[s][2] - h.p.feet[s][2]], d = Math.hypot(...v), p0 = b.r.cam.project([h.p.feet[s][0], b.p.feet[s][1], h.p.feet[s][2]]), p1 = b.r.cam.project(b.p.feet[s]), px = Math.hypot(p1.x - p0.x, p1.y - p0.y);      // (along the floor: a floor that has itself moved, a deck jolted under them, carries the foot with it)
             add("stride", b.r, who, px, LIMITS.stride, `${s} foot, planted, is ${px.toFixed(0)} px (${d.toFixed(2)} m) along the floor from where the drawing before put it (f${h.r.f} -> f${b.r.f})`);
             const pl = (plant[s] ??= { r: h.r, v: [0, 0], n: 1 }); pl.v[0] += v[0]; pl.v[1] += v[1]; pl.sum = Math.hypot(...pl.v); pl.n++;
@@ -118,7 +121,7 @@ export function judge(shot, rows) {
           } else close(s);
         }
       }
-      if (!same) hold = b;
+      if (!same) { hold = b; cutIn = false; }
     }
     close("L"); close("R");
     // angle: the worst per shot and drawing set
@@ -165,12 +168,12 @@ function light(shot, rows, notes) {
   return found;
 }
 
-const isMain = process.argv[1] && path.resolve(process.argv[1]) === new URL(import.meta.url).pathname;
+const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   const args = process.argv.slice(2), opt = (n) => { const i = args.indexOf(n); return i >= 0 ? args.splice(i, 2)[1] : null; }, flag = (n) => { const i = args.indexOf(n); if (i >= 0) args.splice(i, 1); return i >= 0; };
   const json = flag("--json"), all = flag("--all"), frames = opt("--frames"), over = opt("--over"), file = args.find((a) => a.endsWith(".js"));
   if (!file || flag("--help")) { console.error(fs.readFileSync(new URL(import.meta.url), "utf8").split("\n").filter((l) => l.startsWith("//")).join("\n")); process.exit(2); }
-  const shot = (await import(path.resolve(file))).default, read = (f) => JSON.parse(fs.readFileSync(path.join(ROOT, "analysis", f))), sync = createSync(read("listen.json"), read("stems.json"));
+  const shot = (await import(path.resolve(file))).default, { sync } = songOf(shot);      // the shot's own song (engine/song.mjs), or the demo's
   const kits = Object.fromEntries(fs.readdirSync(path.join(ROOT, "kits")).filter((k) => fs.existsSync(path.join(ROOT, "kits", k, "kit.json"))).map((k) => [k, JSON.parse(fs.readFileSync(path.join(ROOT, "kits", k, "kit.json")))]));
   const rows = walk(shot, sync, kits), found = judge(shot, rows);
   if (frames) {
@@ -180,7 +183,7 @@ if (isMain) {
     const plan = path.join(frames, "motion_plan.json");
     fs.writeFileSync(plan, JSON.stringify({ frames: path.resolve(frames), over: over ? path.resolve(over) : null, glitch: LIMITS.glitch, names: shot.cuts?.map((c) => c.shot) ?? [shot.name],
       rows: rows.map((r) => ({ f: r.f, take: r.take, declared: r.declared, people: r.people.filter((p) => p.onScreen).map((p) => ({ who: p.who, box: p.box })) })) }));
-    const res = JSON.parse(execFileSync(path.join(ROOT, ".venv/bin/python"), [path.join(ROOT, "engine/motion_frames.py"), plan], { maxBuffer: 1 << 28 }).toString());
+    const res = JSON.parse(execFileSync(python(), [path.join(ROOT, "engine/motion_frames.py"), plan], { maxBuffer: 1 << 28 }).toString());
     found.push(...res);
   }
   const bad = found.filter((x) => x.over);
@@ -197,5 +200,5 @@ if (isMain) {
     }
     console.log(`${found.length} measurements, ${bad.length} over their limits`);
   }
-  process.exit(bad.length ? 1 : 0);
+  process.exitCode = (bad.length ? 1 : 0);      // (not process.exit: a long --json report into a pipe would be cut short)
 }

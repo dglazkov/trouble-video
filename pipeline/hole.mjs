@@ -10,11 +10,11 @@ import fs from "node:fs"; import path from "node:path"; import { execFileSync } 
 import { proportions, solve, camera } from "../engine/body.js";
 import { createActor, hang } from "../engine/cels.js";
 import { actorPose, celIndex } from "../engine/actions.js";
-import { createSync } from "../engine/sync.js";
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), ".."), argv = process.argv.slice(2), opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 ? argv.splice(i, 2)[1] : d; };
+import { songOf, ROOT } from "../engine/song.mjs"; import { python } from "./env.mjs";
+const argv = process.argv.slice(2), opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 ? argv.splice(i, 2)[1] : d; };
 const F = Number(opt("--frame", NaN)), who = opt("--who", null), Z = Number(opt("--z", NaN)), grow = Number(opt("--grow", 0.03)), points = Number(opt("--points", 90)), floor = Number(opt("--floor", 0.08)), out = opt("--out", null), file = argv[0];
 if (!file || !who || !out || isNaN(F) || isNaN(Z) || argv.includes("--help")) { console.error(fs.readFileSync(new URL(import.meta.url), "utf8").split("\n").filter((l) => l.startsWith("//")).join("\n")); process.exit(2); }
-const read = (f) => JSON.parse(fs.readFileSync(path.join(ROOT, f))), shot = (await import(path.resolve(file))).default, sync = createSync(read("analysis/listen.json"), read("analysis/stems.json"));
+const shot = (await import(path.resolve(file))).default, { sync } = songOf(shot);
 const fr = shot.frame(F, sync), a = fr.actors.find((x) => x.who === who); if (!a) throw new Error(`${shot.name}: no "${who}" on frame ${F}`);
 const kitDir = path.join(ROOT, shot.cast[who]), kit = JSON.parse(fs.readFileSync(path.join(kitDir, "kit.json"))), W = shot.width ?? 1920, H = shot.height ?? 1080;
 const cam = camera({ fov: 30, ...fr.camera, w: W, h: H }), body = solve(proportions(kit.body), actorPose(a)), pick = createActor(kit).pick(a.action, celIndex(a.action, a.phase), body, cam, a.hero), h = hang(kit, pick, body, cam);
@@ -34,7 +34,7 @@ for _ in range(30):
     else: hi = e
 print(json.dumps((p.reshape(-1, 2) - 40).tolist()))
 `;
-const px = JSON.parse(execFileSync(path.join(ROOT, ".venv/bin/python"), ["-c", py, path.join(kitDir, h.cel.img), String(points)]).toString());
+const px = JSON.parse(execFileSync(python(), ["-c", py, path.join(kitDir, h.cel.img), String(points)]).toString());
 // back along the camera's rays onto the plane
 const f = (H / 2) / Math.tan((cam.fov ?? 30) * Math.PI / 360);
 let P = px.map((p) => { const [sx, sy] = h.at(p), d = [0, 1, 2].map((i) => cam.fwd[i] + cam.right[i] * (sx - W / 2) / f + cam.up[i] * (H / 2 - sy) / f), t = (Z - cam.pos[2]) / d[2]; return [cam.pos[0] + d[0] * t, cam.pos[1] + d[1] * t]; });

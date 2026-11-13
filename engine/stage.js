@@ -1,11 +1,13 @@
 // Plays a shot: the one page render.mjs drives. A shot is a module whose default export is
 //   { name, start (seconds into the song; frame 0 is there), frames, fps = 24, width, height,
+//     song: "stories/mine",                              the folder of the song it is cut to (engine/song.mjs); none: the demo song
 //     cast: { who: "/kits/NAME" },                       the characters' cel kits
 //     plates: { name: { src, key: "magenta" } },         single drawings (a close-up), lifted off their backdrop
 //     sets: ["corridor"],                                sets to build before the first frame (others are built when met)
 //     frame(f, sync) -> {
 //       set: "corridor" | "market" | null, camera: { pos, target, fov, up }, options: { ...the set's cues, post: {...} },
 //       actors: [{ who, action, phase, yaw, x, y, z, view, light: {...}, shadow: false, over: true, steady: 3, hero: "name",
+//                  drawing: n (only read by engine/motion.mjs: the shot holds this actor's drawings itself, and n changes when the drawing does),
 //                  layer: {...engine/post.js LAYER, over what the stage works out: a wobble of hair and cloth} }],
 //       cels: [{ plate, x, y, scale, layer: {...engine/post.js LAYER} }],      plates on the frame: centre (pixels), scale
 //                                                                              (turn: radians; flip: true: mirrored left to right)
@@ -37,7 +39,8 @@
 // really in front of, `over: true` lets nothing of the set hide it.
 // Query: ?shot=/shots/x.js &debug=1 (skeletons and which cel is on) &mannequin=1 (dummies only) &over=1 (nothing of
 // the set hides any character: against a normal render, the difference is what the set hid) &kits=a,b (the kits
-// that exist; a cast member whose kit does not is a dummy of standard build).
+// that exist; a cast member whose kit does not is a dummy of standard build) &lyrics=0 (the shot's song has no lyrics.json:
+// do not ask for it).
 import * as THREE from "three";
 import { proportions, solve, camera } from "./body.js";
 import { loadKit, createActor } from "./cels.js";
@@ -57,7 +60,7 @@ try {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, preserveDrawingBuffer: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(1); renderer.setSize(W, H, false); renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
   const gl = renderer.getContext(), dbg = gl.getExtension("WEBGL_debug_renderer_info");
-  const sync = await loadSync(), post = new Post(renderer, W, H), sets = {}, cast = {}, plates = {};
+  const sync = await loadSync(shot.song ? "/" + shot.song.replace(/^\//, "") : "/analysis", Q.get("lyrics") === "0" ? { lyrics: { words: [], phrases: [] } } : undefined), post = new Post(renderer, W, H), sets = {}, cast = {}, plates = {};
   const makers = { corridor: () => import("../sets/corridor.js").then((m) => m.createCorridor(renderer, { width: W, height: H })), market: () => import("../sets/market.js").then((m) => m.createMarket(renderer, { width: W, height: H })),
     vault: () => import("../sets/vault.js").then((m) => m.createVault(renderer, { width: W, height: H })) };
   makers.gantry = () => import("../sets/gantry.js").then((m) => m.createGantry(renderer, { width: W, height: H }));
@@ -185,6 +188,6 @@ try {
     const info = await render(f); last = f; return info;
   };
   window.capture = (type = "image/png", q) => canvas.toDataURL(type, q);
-  window.shotInfo = { name: shot.name, frames: shot.frames, fps, width: W, height: H, start: shot.start ?? null, cuts: shot.cuts ?? null, gpu: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : "?" };
+  window.shotInfo = { name: shot.name, frames: shot.frames, fps, width: W, height: H, start: shot.start ?? null, song: shot.song ?? null, cuts: shot.cuts ?? null, gpu: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : "?" };
   window.ready = true;
 } catch (e) { window.failed = String(e.stack || e); }

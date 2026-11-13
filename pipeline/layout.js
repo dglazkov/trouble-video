@@ -65,7 +65,8 @@ window.layout = (spec, action, viewName, o) => {
 // engine/motion.mjs can say how far a frame's camera has moved from it.
 // list: [{ frame, name }]; o: { W, H, cols, aspect, sheet, what, margin, stand: the figures stand on a floor (registered by their feet) }
 window.heroLayout = async (spec, shotUrl, list, o) => {
-  const shot = (await import(shotUrl)).default, sync = await loadSync(), P = proportions(spec.body), who = spec.name;
+  const shot = (await import(shotUrl)).default, sync = await loadSync(shot.song ? "/" + shot.song.replace(/^\//, "") : "/analysis", o.noLyrics ? { lyrics: { words: [], phrases: [] } } : undefined), P =      // the shot's own song (engine/song.mjs)
+  proportions(spec.body), who = spec.name;
   const { W, H } = o, cols = Math.min(o.cols, list.length), rows = Math.ceil(list.length / cols), cw = W / cols, ch = H / rows, m = o.margin ?? 0.08;
   const items = list.map(({ frame, name }) => {
     const hf = shot.held?.(frame) ?? frame - frame % 2, fr = shot.frame(frame, sync), held = hf === frame ? fr : shot.frame(hf, sync);

@@ -11,7 +11,7 @@
 //    shows one by giving its actor `hero: "leap_a"`. --stand: the figures stand on a floor (a walk): each drawing is
 //    registered by the lowest point of its feet, so a thicker sole than the mannequin's stands on the floor, not in it.
 import fs from "node:fs"; import path from "node:path";
-import { open, savePng, ROOT } from "./browser.mjs";
+import { open, savePng, ROOT } from "./browser.mjs"; import { songOf } from "../engine/song.mjs";
 
 const argv = process.argv.slice(2), opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 ? argv.splice(i, 2)[1] : d; };
 const standI = argv.indexOf("--stand"), stand = standI >= 0; if (stand) argv.splice(standI, 1);
@@ -31,7 +31,7 @@ if (JSON.stringify(kit.body) !== JSON.stringify(spec.body)) { kit.body = spec.bo
 const { page, close } = await open("/pipeline/layout.html");
 if (action === "hero" && !(shotFile && heroFrames)) { console.error("a hero sheet needs --shot shots/X.js and --frames FRAME:NAME,..."); process.exit(2); }
 const r = action === "hero"
-  ? await page.evaluate(([s, u, l, o]) => heroLayout(s, u, l, o), [spec, "/" + path.relative(ROOT, path.resolve(shotFile)), heroFrames.split(",").map((x) => { const [f, n] = x.split(":"); return { frame: Number(f), name: n }; }), { W, H, cols, aspect, sheet: view, what, stand }])
+  ? await page.evaluate(([s, u, l, o]) => heroLayout(s, u, l, o), [spec, "/" + path.relative(ROOT, path.resolve(shotFile)), heroFrames.split(",").map((x) => { const [f, n] = x.split(":"); return { frame: Number(f), name: n }; }), { W, H, cols, aspect, sheet: view, what, stand, noLyrics: !songOf((await import(path.resolve(shotFile))).default).lyrics }])
   : await page.evaluate(([s, a, v, o]) => layout(s, a, v, o), [spec, action, view, { W, H, cols, aspect, only: only ? only.split(",").map(Number) : null }]);
 await close();
 savePng(path.join(dir, stem + ".png"), r.png); savePng(path.join(dir, stem + "_map.png"), r.map);
