@@ -2,10 +2,10 @@
 // draw with the engine (layout templates, renders).
 import { chromium } from "playwright-core";
 import http from "node:http"; import fs from "node:fs"; import path from "node:path";
+import { ROOT, findChrome, chromeArgs } from "./env.mjs";
+export { ROOT, findChrome, chromeArgs, software, python, ffmpeg } from "./env.mjs";
 
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".json": "application/json", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp" };
-export const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
-
 export async function open(urlPath, { width = 1920, height = 1080 } = {}) {
   const srv = http.createServer((q, r) => {
     if (q.url === "/favicon.ico") { r.writeHead(204); return r.end(); }
@@ -14,7 +14,7 @@ export async function open(urlPath, { width = 1920, height = 1080 } = {}) {
     r.writeHead(200, { "content-type": TYPES[path.extname(f)] || "application/octet-stream", "cache-control": "no-store" });
     fs.createReadStream(f).pipe(r);
   }).listen(0);
-  const browser = await chromium.launch({ executablePath: "/usr/bin/google-chrome", args: ["--use-angle=gl", "--enable-gpu", "--ignore-gpu-blocklist"] });
+  const browser = await chromium.launch({ executablePath: findChrome(), args: chromeArgs() });
   const page = await browser.newPage({ viewport: { width, height } });
   const fail = (m) => { console.error(m); process.exitCode = 1; };
   page.on("pageerror", (e) => fail("page error: " + (e.stack || e)));

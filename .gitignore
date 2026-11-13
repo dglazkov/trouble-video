@@ -2,15 +2,19 @@
 .env
 .claude/settings.local.json
 node_modules
-# What cargo builds, here and in the Dockerfile.
-target
-# The analysis tools, local to this machine.
+# The Python tools' environment (npm run setup makes it) and what Python leaves behind.
 .venv
+__pycache__
+*.pyc
 # Downloaded tools and rendered output: large, and rebuilt from scripts.
 tools
 out
-# The stems as Suno gave them: large, and what the video reads from them is in analysis/.
+# A song's stems (one audio file per instrument): large, and what the video reads from them is in the song's
+# stems.json (analysis/ for the demo song, stories/NAME/ for yours). Keep yours wherever you like outside git.
 stems
 stems-wav
 stems.zip
 stems-wav.zip
+*.stems
+# Left from an earlier scaffold.
+target

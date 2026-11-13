@@ -1,8 +1,22 @@
 {
   "name": "trouble-video",
   "private": true,
-  "description": "A procedural anime music video, rendered frame by frame from code.",
+  "description": "A procedural anime music video, rendered frame by frame from code, and the kit it was made with: a cast of drawn characters, sets, machines and the tools to cut pictures to a song.",
   "type": "module",
+  "license": "SEE LICENSE IN README.md",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "doctor": "node scripts/doctor.mjs",
+    "hello": "node scripts/starter.mjs",
+    "starter": "node scripts/starter.mjs",
+    "render": "node render.mjs",
+    "marks": "node engine/marks.mjs",
+    "motion": "node engine/motion.mjs",
+    "film": "node render.mjs shots/film.js",
+    "cast": ".venv/bin/python scripts/cast_doc.py",
+    "test": "node scripts/test.mjs"
+  },
   "devDependencies": {
     "playwright-core": "^1.65.0",
     "three": "^0.187.0"

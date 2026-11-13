@@ -1,0 +1,14 @@
+# The Python the project's tools use, pinned to the versions it was built and verified with (Python 3.14, Linux).
+# `npm run setup` installs these into .venv; if pip has no such versions for your Python it retries without the pins.
+# Rendering needs only imageio-ffmpeg (it carries ffmpeg) and, for contact sheets and the motion check, opencv,
+# numpy and pillow. Measuring a song needs librosa, scipy, soundfile. Making drawings needs opencv, numpy, pillow, scipy.
+numpy==2.5.4
+scipy==1.18.1
+librosa==1.0.0
+soundfile==0.14.0
+opencv-python-headless==5.0.0.93
+pillow==13.0.0
+imageio-ffmpeg==0.8.1
+# Only for lyric transcription (analysis/song.py --lyrics, analysis/listen.py, analysis/lyrics.py --whisper); it
+# downloads a speech model on first use. Everything else works without it.
+faster-whisper==1.2.1

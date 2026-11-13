@@ -8,7 +8,7 @@
 //    point from which the drawing's lowest painted row is where the skeleton's lowest shoe is in that pose: the
 //    drawing stands on the ground the skeleton stands on;
 //  - each hero drawing (kit.heroes) has its file and says which shot, frame and line of sight it was drawn for.
-import fs from "node:fs"; import path from "node:path";
+import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
 import { proportions, solve, pose, runPose } from "../engine/body.js";
 import { nearest, picker, VIEWS, viewOf, viewCamera } from "../engine/views.js";
 import { ACTIONS, MANNER, celIndex, mirrored, actorPose, strideOf } from "../engine/actions.js";
@@ -16,7 +16,7 @@ import { ACTIONS, MANNER, celIndex, mirrored, actorPose, strideOf } from "../eng
 const args = process.argv.slice(2), ki = args.indexOf("--kit");
 const dirArg = ki >= 0 ? args.splice(ki, 2)[1] : null, name = args[0];
 if (!name) { console.error("usage: node pipeline/check.mjs NAME [--kit DIR]"); process.exit(2); }
-const dir = dirArg ?? path.join(path.dirname(new URL(import.meta.url).pathname), "..", "kits", name);
+const dir = dirArg ?? path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "kits", name);
 const fails = [], ok = (cond, msg) => { if (!cond) fails.push(msg); };
 const kit = JSON.parse(fs.readFileSync(path.join(dir, "kit.json"), "utf8")), P = proportions(kit.body);
 
