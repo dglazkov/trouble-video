@@ -14,6 +14,7 @@
     "marks": "node engine/marks.mjs",
     "motion": "node engine/motion.mjs",
     "film": "node render.mjs shots/film.js",
+    "makingof": "node render.mjs stories/makingof/film.js --mp4 out/makingof/makingof.mp4",
     "cast": ".venv/bin/python scripts/cast_doc.py",
     "test": "node scripts/test.mjs"
   },
