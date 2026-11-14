@@ -1,0 +1,380 @@
+{
+ "what": "The session's clock for the making-of's furniture, and the numbers it puts on screen. Written by stories/makingof/prepare.py from out/makingof/data/ (timeline.json, stats.json); minutes are from the first message, local time America/Los_Angeles.",
+ "first": "2026-11-11 19:26:10",
+ "perfect": "2026-11-12 17:32:53",
+ "sleep": "2026-11-11 22:07:15",
+ "wow": "2026-11-12 07:42:57",
+ "minutes": {
+  "perfect": 1326.72,
+  "sleep": 161.08,
+  "wow": 736.78,
+  "nightWorkEnds": 304.15
+ },
+ "commits": [
+  73.68,
+  76.25,
+  112.12,
+  121.6,
+  141.47,
+  146.48,
+  196.6,
+  203.83,
+  204.33,
+  204.53,
+  213.3,
+  224.8,
+  236.28,
+  236.3,
+  236.3,
+  241.47,
+  241.57,
+  244.45,
+  250.75,
+  252.17,
+  253.83,
+  303.43,
+  303.45,
+  303.45,
+  771.12,
+  791.22,
+  791.22,
+  791.28,
+  791.28,
+  812.23,
+  872.3,
+  876.3,
+  876.3,
+  876.38,
+  876.4,
+  882.07,
+  912.6,
+  942.53,
+  1002.17,
+  1007.5,
+  1007.75,
+  1007.78,
+  1007.78,
+  1008.78,
+  1008.78,
+  1009.1,
+  1009.1,
+  1012.37,
+  1024.23,
+  1036.7,
+  1045.22,
+  1050.78,
+  1068.78,
+  1068.78,
+  1076.48,
+  1076.72,
+  1076.8,
+  1076.8,
+  1076.85,
+  1076.85,
+  1076.85,
+  1076.87,
+  1079.98,
+  1098.13,
+  1098.13,
+  1104.28,
+  1104.63,
+  1104.78,
+  1105.48,
+  1105.92,
+  1111.08,
+  1111.23,
+  1113.32,
+  1127.88,
+  1128.92,
+  1143.13,
+  1186.42,
+  1188.67,
+  1188.67,
+  1203.42,
+  1203.43,
+  1258.63,
+  1258.63,
+  1258.63,
+  1258.63,
+  1258.63,
+  1258.63,
+  1258.63,
+  1278.18
+ ],
+ "agents": [
+  {
+   "label": "Bake-off shot in browser",
+   "start": 12.83,
+   "end": 31.9,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Bake-off shot in Blender",
+   "start": 12.83,
+   "end": 34.3,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Rigged-parts character test",
+   "start": 46.1,
+   "end": 57.02,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build framework and Juno kit",
+   "start": 74.82,
+   "end": 122.28,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Whole-drawing cel pipeline",
+   "start": 133.95,
+   "end": 139.98,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build station environments and drones",
+   "start": 138.83,
+   "end": 139.98,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Station environments and drones (restart)",
+   "start": 159.32,
+   "end": 197.17,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Whole-drawing cel pipeline (restart)",
+   "start": 159.32,
+   "end": 213.88,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Slice character art",
+   "start": 215.4,
+   "end": 254.45,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Slice shots and compositing",
+   "start": 215.4,
+   "end": 258.77,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Polish pass on the slice",
+   "start": 260.18,
+   "end": 304.15,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Market crowd v2",
+   "start": 741.38,
+   "end": 771.62,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build the opening section",
+   "start": 743.05,
+   "end": 812.98,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build section 0:30\u20130:48",
+   "start": 818.57,
+   "end": 877.22,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build section 0:20\u20130:30",
+   "start": 818.57,
+   "end": 883.12,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Repaint the atrium vista",
+   "start": 891.97,
+   "end": 943.13,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Re-time the drop to the first kick",
+   "start": 891.97,
+   "end": 940.95,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build section 1:02\u20131:19",
+   "start": 933.93,
+   "end": 1013.18,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build Noor's section 1:19\u20131:33",
+   "start": 952.42,
+   "end": 1025.08,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build Ife's section 1:33\u20131:46",
+   "start": 952.42,
+   "end": 1008.55,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Fix Juno's under-the-door shot",
+   "start": 1017.57,
+   "end": 1051.43,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Meet part, L 208-298",
+   "start": 1031.35,
+   "end": 1080.77,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Split-screen part, L 0-208",
+   "start": 1031.35,
+   "end": 1078.08,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build the reunion 1:59\u20132:26",
+   "start": 1031.35,
+   "end": 1128.53,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build the fall 2:26\u2013end",
+   "start": 1031.35,
+   "end": 1114.27,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Build the breakdown 1:46\u20131:59",
+   "start": 1031.35,
+   "end": 1107.25,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Audit wins frames for hidden faces",
+   "start": 1036.98,
+   "end": 1043.6,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Sound-effect lettering pass",
+   "start": 1052.27,
+   "end": 1121.48,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Fix Tane's shutter shot logic",
+   "start": 1147.83,
+   "end": 1187.1,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Skin the boss machine",
+   "start": 1151.92,
+   "end": 1215.93,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Fix eyes in reunion plate",
+   "start": 1172.63,
+   "end": 1180.7,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Make Noor actually walk",
+   "start": 1223.02,
+   "end": 1278.77,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Audit on-screen lyric words",
+   "start": 1226.73,
+   "end": 1279.35,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Make the repo forkable",
+   "start": 1339.02,
+   "end": 1426.82,
+   "nested": false,
+   "killed": false
+  },
+  {
+   "label": "Mine lessons from history",
+   "start": 1377.85,
+   "end": 1379.48,
+   "nested": false,
+   "killed": false
+  }
+ ],
+ "stats": {
+  "hours": 22.11,
+  "hoursAway": 9.59,
+  "messages": 67,
+  "words": 1027,
+  "assistantWords": 33908,
+  "screenshots": 8,
+  "logged": 379,
+  "rejected": 137,
+  "kept": 242,
+  "agents": 35,
+  "peak": 7,
+  "peakTopLevel": 4,
+  "frames": 3956,
+  "marks": 469,
+  "filmSeconds": 164.79,
+  "sections": {
+   "open": 478,
+   "descent": 238,
+   "gantry": 436,
+   "slice": 336,
+   "wins": 405,
+   "core": 337,
+   "boom": 308,
+   "breakdown": 328,
+   "reunion": 646,
+   "fall": 443
+  }
+ }
+}
